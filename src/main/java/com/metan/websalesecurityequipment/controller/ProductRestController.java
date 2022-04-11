@@ -1,24 +1,37 @@
 package com.metan.websalesecurityequipment.controller;
 
 import com.metan.websalesecurityequipment.model.Product;
-import com.metan.websalesecurityequipment.repository.TestRepository;
+import com.metan.websalesecurityequipment.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/product")
 public class ProductRestController {
 
-    private final TestRepository testRepository;
+    private final ProductService productService;
 
     @Autowired
-    public ProductRestController(TestRepository testRepository) {
-        this.testRepository = testRepository;
+    public ProductRestController(ProductService productService) {
+        this.productService = productService;
     }
 
     @GetMapping
     public @ResponseBody
-    Iterable<Product> findAllProducts() {
-        return testRepository.findAll();
+    List<Product> findAllProducts() {
+        return productService.findAll();
+    }
+
+    @GetMapping("/{theId}")
+    public @ResponseBody Product findProductById(@PathVariable String theId) {
+        return productService.findProductById(theId);
+    }
+
+    @PostMapping
+    public Product saveProduct(@Validated @RequestBody Product product) {
+        return productService.saveProduct(product);
     }
 }
