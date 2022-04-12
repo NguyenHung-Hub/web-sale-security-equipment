@@ -32,4 +32,9 @@ class User {
     private Cart cart;
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
+    @Column(name = "verification_code",length = 64)
+    private String verificationCode;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "auth_provider", length = 15)
+    private AuthenticationProvider authProvider;
 }
