@@ -21,7 +21,7 @@ class User {
     @Column(name = "phone_number")
     private String phoneNumber;
     private byte[] avatar;
-    private boolean admin;
+    private String role;
     private String profile;
     @Column(name = "registered_at", columnDefinition = "datetime")
     private Date registeredAt;
