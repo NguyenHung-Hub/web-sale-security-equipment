@@ -8,4 +8,5 @@ public interface UserService {
     public void updateUser(User user);
     public User getUserByEmail(String email);
     public void createNewUserAfterOAuthLoginSuccess(String email, String name, AuthenticationProvider authProvider);
+    public void updateUserAfterOAuthLoginSuccess(User user, String name, AuthenticationProvider authProvider);
 }
