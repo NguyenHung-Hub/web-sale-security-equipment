@@ -37,6 +37,12 @@ spring:
             scope:
             - email
             - profile
+          facebook:
+            client-id: 5016197031777780
+            client-secret: a7e76c1866c16b20ce32c33038ee7194
+            scope:
+              - email
+              - public_profile
 server:
   servlet:
     context-path: /metan
