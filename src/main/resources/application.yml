@@ -16,27 +16,27 @@ spring:
         dialect: org.hibernate.dialect.MySQL55Dialect
         format_sql: true
     show-sql: true
-#  mail:
-#    host: stmp.gmail.com
-#    password: 123abbddeagasgswg
-#    port: 587
-#    properties:
-#      mail:
-#        smtp:
-#          auth: true
-#          starttls:
-#            enable: true
-#    username: huyhoang14901@gmail.com
-#  security:
-#    oauth2:
-#      client:
-#        registration:
-#          google:
-#            client-id: 58807738435-ur17q0n1h8lj1722v7mv79pafmndgqaf.apps.googleusercontent.com
-#            client-secret: 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
-#            scope:
-#            - email
-#            - profile
+  mail:
+    host: stmp.gmail.com
+    password: 123abbddeagasgswg
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    username: huyhoang14901@gmail.com
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 58807738435-ur17q0n1h8lj1722v7mv79pafmndgqaf.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+            - email
+            - profile
 server:
   servlet:
     context-path: /metan

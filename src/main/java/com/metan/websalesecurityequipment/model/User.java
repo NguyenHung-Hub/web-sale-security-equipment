@@ -17,6 +17,7 @@ class User {
     private long userId;
     private String firstName;
     private String lastName;
+    @Column(unique = true)
     private String email;
     @Column(name = "phone_number")
     private String phoneNumber;
@@ -25,13 +26,14 @@ class User {
     private String profile;
     @Column(name = "registered_at", columnDefinition = "datetime")
     private Date registeredAt;
-    private String username;
     private String password;
     @OneToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
+    @Column(length = 64)
+    private String token;
     @Column(name = "verification_code",length = 64)
     private String verificationCode;
     @Enumerated(EnumType.STRING)

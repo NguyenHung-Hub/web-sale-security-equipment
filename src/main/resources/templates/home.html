@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trang chủ - Bán thiết bị bảo mật</title>
+</head>
+<body>
+  <h1>Hello [[${#request.userPrincipal.principal.fullName}]]! Welcome my home page.</h1>
+    <span class="nav-link"><a th:href="@{/logout}">Logout</a></span>
+</body>
+</html>

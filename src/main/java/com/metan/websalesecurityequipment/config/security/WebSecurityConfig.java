@@ -1,6 +1,8 @@
 package com.metan.websalesecurityequipment.config.security;
 
-import com.metan.websalesecurityequipment.service.impl.UserDetailsServiceImpl;
+import com.metan.websalesecurityequipment.config.security.oauth.CustomOAuth2UserService;
+import com.metan.websalesecurityequipment.config.security.oauth.OAuth2LoginSuccessHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -10,6 +12,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+
+import javax.sql.DataSource;
 
 /**
  * web security config
@@ -19,6 +25,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private DataSource dataSource;
 
     /**
      *  bean user details service
@@ -60,15 +69,49 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/").permitAll()
+                .antMatchers("/oauth2/**").permitAll()
                 .anyRequest().authenticated()
-                .and().formLogin()
-                .loginPage("/login")
-                .permitAll()
                 .and()
-                .logout()
-                .permitAll()
+                .formLogin()
+                    .loginPage("/login")
+                    .usernameParameter("email")
+                    .passwordParameter("password")
+                    .loginProcessingUrl("/authenticateTheUser")
+                    .permitAll()
+                    .defaultSuccessUrl("/")
                 .and()
-                .exceptionHandling().accessDeniedPage("/403");
+                .oauth2Login()
+                    .loginPage("/login")
+                    .userInfoEndpoint()
+                    .userService(oAuth2UserService)
+                    .and()
+                    .successHandler(oAuth2LoginSuccessHandler)
+                .and()
+                .logout().permitAll()
+                .and()
+                    .rememberMe()
+                    .rememberMeParameter("remember")
+                    .key("AbcDeFgHiJklmNOpqRsTU0123456789")
+                    .tokenValiditySeconds(3 * 24 * 60 * 60)
+                .and()
+                .csrf().disable();
     }
+
+    /**
+     * token name from database
+     * @return PersistentTokenRepository
+     */
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
+        tokenRepository.setDataSource(dataSource);
+
+        return tokenRepository;
+    }
+
+    @Autowired
+    private CustomOAuth2UserService oAuth2UserService;
+
+    @Autowired
+    private OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
 }

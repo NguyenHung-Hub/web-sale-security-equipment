@@ -37,18 +37,18 @@
             <div class="card border-0 shadow rounded-3 my-5">
                 <div class="card-body p-4 p-sm-5">
                     <h5 class="card-title text-center mb-5 fw-light fs-5">Sign In</h5>
-                    <form th:action="@{/login}" method="post">
+                    <form th:action="@{/authenticateTheUser}" method="post">
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                            <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
                             <label for="floatingInput">Email address</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                            <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
                             <label for="floatingPassword">Password</label>
                         </div>
 
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" value="" id="rememberPasswordCheck">
+                            <input name="remember" class="form-check-input" type="checkbox" id="rememberPasswordCheck">
                             <label class="form-check-label" for="rememberPasswordCheck">
                                 Remember password
                             </label>
@@ -59,12 +59,12 @@
                         </div>
                         <hr class="my-4">
                         <div class="d-grid mb-2">
-                            <a th:href="@{/oauth/authenrization/google}" class="btn btn-google btn-login text-uppercase fw-bold">
+                            <a th:href="@{/oauth2/authorization/google}" class="btn btn-google btn-login text-uppercase fw-bold">
                                 <i class="fab fa-google me-2"></i> Sign in with Google
                             </a>
                         </div>
                         <div class="d-grid">
-                            <a class="btn btn-facebook btn-login text-uppercase fw-bold">
+                            <a th:href="@{/oauth2/authorization/facebook}" class="btn btn-facebook btn-login text-uppercase fw-bold">
                                 <i class="fab fa-facebook-f me-2"></i> Sign in with Facebook
                             </a>
                         </div>

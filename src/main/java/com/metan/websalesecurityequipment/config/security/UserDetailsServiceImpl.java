@@ -1,4 +1,4 @@
-package com.metan.websalesecurityequipment.service.impl;
+package com.metan.websalesecurityequipment.config.security;
 
 import com.metan.websalesecurityequipment.common.MyUserDetails;
 import com.metan.websalesecurityequipment.model.User;
@@ -15,7 +15,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.getUserByUsername(username);
+        User user = userRepository.getUserByEmail(username);
 
         if (user != null) {
             return new MyUserDetails(user);
