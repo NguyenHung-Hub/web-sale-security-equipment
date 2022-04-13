@@ -55,6 +55,14 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @Override
+    public void updateUserAfterOAuthLoginSuccess(User user, String name, AuthenticationProvider authProvider) {
+        user.setFirstName(name);
+        user.setAuthProvider(authProvider);
+
+        userRepository.save(user);
+    }
+
     private void encodePassword(User user) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String pass = user.getPassword();

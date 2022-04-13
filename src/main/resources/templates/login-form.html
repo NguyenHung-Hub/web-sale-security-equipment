@@ -46,7 +46,9 @@
                             <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
                             <label for="floatingPassword">Password</label>
                         </div>
-
+                        <div th:if="${param.error}">
+                            <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}}]]</p>
+                        </div>
                         <div class="form-check mb-3">
                             <input name="remember" class="form-check-input" type="checkbox" id="rememberPasswordCheck">
                             <label class="form-check-label" for="rememberPasswordCheck">
