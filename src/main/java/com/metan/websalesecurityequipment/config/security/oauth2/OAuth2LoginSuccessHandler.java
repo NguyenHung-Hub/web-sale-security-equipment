@@ -1,4 +1,4 @@
-package com.metan.websalesecurityequipment.config.security.oauth;
+package com.metan.websalesecurityequipment.config.security.oauth2;
 
 import com.metan.websalesecurityequipment.model.AuthenticationProvider;
 import com.metan.websalesecurityequipment.model.User;

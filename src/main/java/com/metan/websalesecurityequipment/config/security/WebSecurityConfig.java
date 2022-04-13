@@ -1,7 +1,7 @@
 package com.metan.websalesecurityequipment.config.security;
 
-import com.metan.websalesecurityequipment.config.security.oauth.CustomOAuth2UserService;
-import com.metan.websalesecurityequipment.config.security.oauth.OAuth2LoginSuccessHandler;
+import com.metan.websalesecurityequipment.config.security.oauth2.CustomOAuth2UserService;
+import com.metan.websalesecurityequipment.config.security.oauth2.OAuth2LoginSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
