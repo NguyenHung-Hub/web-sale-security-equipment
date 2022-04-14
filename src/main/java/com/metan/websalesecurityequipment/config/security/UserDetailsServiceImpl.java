@@ -1,6 +1,5 @@
 package com.metan.websalesecurityequipment.config.security;
 
-import com.metan.websalesecurityequipment.common.MyUserDetails;
 import com.metan.websalesecurityequipment.model.User;
 import com.metan.websalesecurityequipment.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

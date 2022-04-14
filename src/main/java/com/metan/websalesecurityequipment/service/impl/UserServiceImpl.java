@@ -51,6 +51,7 @@ public class UserServiceImpl implements UserService {
         user.setFirstName(name);
         user.setRegisteredAt(new Date());
         user.setAuthProvider(authProvider);
+        user.setRole("USER");
 
         userRepository.save(user);
     }

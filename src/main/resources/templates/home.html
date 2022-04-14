@@ -1,11 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Trang chủ - Bán thiết bị bảo mật</title>
 </head>
 <body>
-  <h1>Hello [[${#request.userPrincipal.principal.fullName}]]! Welcome my home page.</h1>
-    <span class="nav-link"><a th:href="@{/logout}">Logout</a></span>
+    <div>
+        <h1 th:inline="text">Hello Welcome my home page.</h1>
+        <div sec:authorize="isAuthenticated()">
+            <p >[[${#request.userPrincipal.principal.fullName}]]</p>
+        </div>
+        <div sec:authorize="isAnonymous()">
+            <a th:href="@{/login}">Login</a>
+        </div>
+        <div sec:authorize="isAuthenticated()">
+            <a th:href="@{/logout}">Logout</a>
+        </div>
+    </div>
 </body>
 </html>

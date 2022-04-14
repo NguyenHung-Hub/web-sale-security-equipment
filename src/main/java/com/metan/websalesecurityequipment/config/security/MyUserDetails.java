@@ -52,7 +52,7 @@ public class MyUserDetails implements UserDetails {
         return true;
     }
 
-    public String getFullname() {
-        return user.getFirstName() + " " + user.getLastName();
+    public String getFullName() {
+        return user.getFullName();
     }
 }
