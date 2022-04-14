@@ -16,17 +16,17 @@ spring:
         dialect: org.hibernate.dialect.MySQL55Dialect
         format_sql: true
     show-sql: true
-  mail:
-    host: stmp.gmail.com
-    password: 123abbddeagasgswg
-    port: 587
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
-    username: huyhoang14901@gmail.com
+#  mail:
+#    host: stmp.gmail.com
+#    password: 123abbddeagasgswg
+#    port: 587
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          starttls:
+#            enable: true
+#    username: dohuyhoang.iuh.k15@gmail.com
   security:
     oauth2:
       client:
@@ -34,6 +34,9 @@ spring:
           google:
             client-id: 58807738435-ur17q0n1h8lj1722v7mv79pafmndgqaf.apps.googleusercontent.com
             client-secret: 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
+            redirect-uri-template: http://localhost:8080/login/oauth2/code/google
+            client-authentication: basic
+            authorization-grant-type: authorization_code
             scope:
             - email
             - profile
@@ -43,6 +46,3 @@ spring:
             scope:
               - email
               - public_profile
-server:
-  servlet:
-    context-path: /metan

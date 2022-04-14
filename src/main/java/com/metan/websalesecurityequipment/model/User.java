@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
 @Table(name = "users")
 public @Data
 @EqualsAndHashCode(of = "userId")
-class User {
+class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
@@ -32,11 +33,15 @@ class User {
     private Cart cart;
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
-    @Column(length = 64)
-    private String token;
     @Column(name = "verification_code",length = 64)
     private String verificationCode;
     @Enumerated(EnumType.STRING)
     @Column(name = "auth_provider", length = 15)
     private AuthenticationProvider authProvider;
+
+    @Transient
+    public String getFullName() {
+        return getFirstName() + " " + getLastName();
+    }
+
 }

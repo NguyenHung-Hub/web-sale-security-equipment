@@ -75,6 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/").permitAll()
                 .antMatchers("/oauth2/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -93,12 +94,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                     .successHandler(oAuth2LoginSuccessHandler)
                 .and()
-                .logout().permitAll()
+                    .logout()
+                    .deleteCookies("JSESSIONID")
+                    .invalidateHttpSession(true)
+                    .logoutSuccessUrl("/login")
+                .permitAll()
                 .and()
                     .rememberMe()
                     .rememberMeParameter("remember")
-                    .key("AbcDeFgHiJklmNOpqRsTU0123456789")
-                    .tokenValiditySeconds(3 * 24 * 60 * 60)
+                    .tokenRepository(persistentTokenRepository())
                 .and()
                 .csrf().disable();
     }
