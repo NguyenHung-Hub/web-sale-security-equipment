@@ -1,12 +1,361 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
-<head>
-    <meta charset="UTF-8">
+<head th:replace="fragments :: head">
     <title>Trang chủ - Bán thiết bị an ninh</title>
 </head>
 <body>
     <div th:replace="fragments :: header"></div>
+
+
+
+    <main class="home-container">
+        <section class="slider-container"></section>
+
+        <section class="product-container">
+            <div class="sidebar-box">
+                <div class="sidebar-showcase">
+                    <h3 class="sidebar-title">Sản phẩm bán chạy</h3>
+                    <div class="showcase">
+                        <div class="showcase-img">
+                            <img
+                                    th:src="@{/image/product/camera-ip-wifi-hilook-ipc-b120w-digione.jpg}"
+                                    alt=""
+                            />
+                        </div>
+                        <div class="showcase-content">
+                            <div class="showcase-title">
+                                Camera IP Wifi HILook IPC-B120W 1080P
+                            </div>
+                            <div class="showcase-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="showcase-price">
+                                <div class="showcase-price-new">
+                                    1,190,000 đ
+                                </div>
+                                <div class="showcase-price-old">
+                                    1,990,000 đ
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="showcase">
+                        <div class="showcase-img">
+                            <img
+                                    th:src="@{/image/product/camera-ip-wifi-hilook-ipc-b120w-digione.jpg}"
+                                    alt=""
+                            />
+                        </div>
+                        <div class="showcase-content">
+                            <div class="showcase-title">
+                                Camera IP Wifi HILook IPC-B120W 1080P
+                            </div>
+                            <div class="showcase-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="showcase-price">
+                                <div class="showcase-price-new">
+                                    1,190,000 đ
+                                </div>
+                                <div class="showcase-price-old">
+                                    1,990,000 đ
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="showcase">
+                        <div class="showcase-img">
+                            <img
+                                    th:src="@{/image/product/camera-ip-wifi-hilook-ipc-b120w-digione.jpg}"
+                                    alt=""
+                            />
+                        </div>
+                        <div class="showcase-content">
+                            <div class="showcase-title">
+                                Camera IP Wifi HILook IPC-B120W 1080P
+                            </div>
+                            <div class="showcase-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="showcase-price">
+                                <div class="showcase-price-new">
+                                    1,190,000 đ
+                                </div>
+                                <div class="showcase-price-old">
+                                    1,990,000 đ
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="showcase">
+                        <div class="showcase-img">
+                            <img
+                                    th:src="@{/image/product/camera-ip-wifi-hilook-ipc-b120w-digione.jpg}"
+                                    alt=""
+                            />
+                        </div>
+                        <div class="showcase-content">
+                            <div class="showcase-title">
+                                Camera IP Wifi HILook IPC-B120W 1080P
+                            </div>
+                            <div class="showcase-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="showcase-price">
+                                <div class="showcase-price-new">
+                                    1,190,000 đ
+                                </div>
+                                <div class="showcase-price-old">
+                                    1,990,000 đ
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-box">
+                <div class="product-grid">
+                    <div class="card-modify">
+                        <div class="card-modify-banner">
+                            <img
+                                    th:src="@{/image/product/camera-ip-wifi-hilook-ipc-b120w-digione.jpg}"
+                                    class="product-img"
+                            />
+
+                            <div class="card-modify-actions">
+                                <button class="action-btn">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                                <button class="action-btn">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-modify-content">
+                            <div class="product-title">
+                                Camera IP Wifi HILook IPC-B120W 1080P
+                            </div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="product-price">
+                                <div class="product-price-new">
+                                    1,190,000 đ
+                                </div>
+                                <div class="product-price-old">
+                                    1,990,000 đ
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-modify">
+                        <div class="card-modify-banner">
+                            <img
+                                    th:src="@{/image/product/camera-ip-wifi-hilook-ipc-b120w-digione.jpg}"
+                                    class="product-img"
+                            />
+
+                            <div class="card-modify-actions"></div>
+                        </div>
+                        <div class="card-modify-content">
+                            <div class="product-title">
+                                Camera IP Wifi HILook IPC-B120W 1080P
+                            </div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="product-price">
+                                <div class="product-price-new">
+                                    1,190,000 đ
+                                </div>
+                                <div class="product-price-old">
+                                    1,990,000 đ
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-modify">
+                        <div class="card-modify-banner">
+                            <img
+                                    th:src="@{/image/product/camera-ip-wifi-hilook-ipc-b120w-digione.jpg}"
+                                    class="product-img"
+                            />
+
+                            <div class="card-modify-actions"></div>
+                        </div>
+                        <div class="card-modify-content">
+                            <div class="product-title">
+                                Camera IP Wifi HILook IPC-B120W 1080P
+                            </div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="product-price">
+                                <div class="product-price-new">
+                                    1,190,000 đ
+                                </div>
+                                <div class="product-price-old">
+                                    1,990,000 đ
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-modify">
+                        <div class="card-modify-banner">
+                            <img
+                                    th:src="@{/image/product/camera-ip-wifi-hilook-ipc-b120w-digione.jpg}"
+                                    class="product-img"
+                            />
+
+                            <div class="card-modify-actions"></div>
+                        </div>
+                        <div class="card-modify-content">
+                            <div class="product-title">
+                                Camera IP Wifi HILook IPC-B120W 1080P
+                            </div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="product-price">
+                                <div class="product-price-new">
+                                    1,190,000 đ
+                                </div>
+                                <div class="product-price-old">
+                                    1,990,000 đ
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-modify">
+                        <div class="card-modify-banner">
+                            <img
+                                    th:src="@{/image/product/camera-ip-wifi-hilook-ipc-b120w-digione.jpg}"
+                                    class="product-img"
+                            />
+
+                            <div class="card-modify-actions"></div>
+                        </div>
+                        <div class="card-modify-content">
+                            <div class="product-title">
+                                Camera IP Wifi HILook IPC-B120W 1080P
+                            </div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="product-price">
+                                <div class="product-price-new">
+                                    1,190,000 đ
+                                </div>
+                                <div class="product-price-old">
+                                    1,990,000 đ
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-modify">
+                        <div class="card-modify-banner">
+                            <img
+                                    th:src="@{/image/product/camera-ip-wifi-hilook-ipc-b120w-digione.jpg}"
+                                    class="product-img"
+                            />
+
+                            <div class="card-modify-actions"></div>
+                        </div>
+                        <div class="card-modify-content">
+                            <div class="product-title">
+                                Camera IP Wifi HILook IPC-B120W 1080P
+                            </div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="product-price">
+                                <div class="product-price-new">
+                                    1,190,000 đ
+                                </div>
+                                <div class="product-price-old">
+                                    1,990,000 đ
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-modify">
+                        <div class="card-modify-banner">
+                            <img
+                                    th:src="@{/image/product/camera-ip-wifi-hilook-ipc-b120w-digione.jpg}"
+                                    class="product-img"
+                            />
+
+                            <div class="card-modify-actions"></div>
+                        </div>
+                        <div class="card-modify-content">
+                            <div class="product-title">
+                                Camera IP Wifi HILook IPC-B120W 1080P
+                            </div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="product-price">
+                                <div class="product-price-new">
+                                    1,190,000 đ
+                                </div>
+                                <div class="product-price-old">
+                                    1,990,000 đ
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div th:replace="fragments :: footer"></div>
+
     <div>
         <h1 th:inline="text">Hello Welcome my home page.</h1>
         <div sec:authorize="isAuthenticated()">
