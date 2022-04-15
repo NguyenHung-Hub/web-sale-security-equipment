@@ -3,7 +3,7 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Trang chủ - Bán thiết bị bảo mật</title>
+    <title>Trang chủ - Bán thiết bị an ninh</title>
 </head>
 <body>
     <div>
@@ -12,7 +12,7 @@
             <p >[[${#request.userPrincipal.principal.fullName}]]</p>
         </div>
         <div sec:authorize="isAnonymous()">
-            <a th:href="@{/login}">Login</a>
+            <a th:href="@{/account/{form-type}(form-type = ${'login'})}">Login</a>
         </div>
         <div sec:authorize="isAuthenticated()">
             <a th:href="@{/logout}">Logout</a>

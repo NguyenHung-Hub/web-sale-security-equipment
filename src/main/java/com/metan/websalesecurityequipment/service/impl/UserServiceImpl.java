@@ -27,6 +27,7 @@ public class UserServiceImpl implements UserService {
     public void registerUser(User user) {
         encodePassword(user);
         user.setRegisteredAt(new Date());
+        user.setRole("USER");
 
         String randomCode = RandomString.make(64);
         user.setVerificationCode(randomCode);
