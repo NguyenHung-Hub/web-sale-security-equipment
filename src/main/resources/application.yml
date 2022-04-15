@@ -32,9 +32,9 @@ spring:
       client:
         registration:
           google:
-            client-id: 58807738435-ur17q0n1h8lj1722v7mv79pafmndgqaf.apps.googleusercontent.com
-            client-secret: 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
-            redirect-uri-template: http://localhost:8080/account/login/oauth2/code/google
+            client-id: 58807738435-6ghspa22i6jb37mldcocvd0se2fsgg6l.apps.googleusercontent.com
+            client-secret: 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
+            redirect-uri-template: http://localhost:8080/login/oauth2/code/google
             client-authentication: basic
             authorization-grant-type: authorization_code
             scope:

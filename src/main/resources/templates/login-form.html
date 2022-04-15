@@ -9,65 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <style>
-        body {
-            background: #007bff;
-            background: linear-gradient(to right, #0062E6, #33AEFF);
-        }
-
-        .btn-login {
-            font-size: 0.9rem;
-            letter-spacing: 0.05rem;
-            padding: 0.75rem 1rem;
-        }
-
-        .btn-google {
-            color: white !important;
-            background-color: #ea4335;
-        }
-
-        .btn-facebook {
-            color: white !important;
-            background-color: #3b5998;
-        }
-
-        .hr-text {
-            line-height: 1em;
-            position: relative;
-            outline: 0;
-            border: 0;
-            color: black;
-            text-align: center;
-            height: auto;
-            background-color: transparent;
-            opacity: 0.5;
-        }
-
-        .hr-text:not([size]) {
-            height: auto;
-        }
-
-        .hr-text:before {
-            content: "";
-            background: linear-gradient(to right, transparent, #818078, transparent);
-            position: absolute;
-            left: 0;
-            top: 50%;
-            width: 100%;
-            height: 1px;
-        }
-
-        .hr-text:after {
-            content: attr(data-content);
-            position: relative;
-            display: inline-block;
-            padding: 0 0.5em;
-            line-height: 1.5em;
-            color: #818078;
-            background-color: #fcfcfa;
-        }
-
-    </style>
+    <link rel="stylesheet" th:href="@{/css/form.css}">
 </head>
 <body>
 <div class="container">
