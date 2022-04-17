@@ -21,7 +21,7 @@ class Order {
     private String content;
     @Column(columnDefinition = "decimal(13,2)")
     private Double total;
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
     @Column(name = "modified_at", columnDefinition = "datetime")
     private Date modifiedAt;

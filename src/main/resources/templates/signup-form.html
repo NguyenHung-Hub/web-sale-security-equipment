@@ -76,7 +76,7 @@
             <div class="card border-0 shadow rounded-3 my-5">
                 <div class="card-body p-4 p-sm-5">
                     <h5 class="card-title text-center mb-5 fw-light fs-5">Đăng ký</h5>
-                    <form th:action="@{/account/process-register}" method="post" th:object="${USER}">
+                    <form th:action="@{/account/register}" method="post" th:object="${USER}">
                         <div class="card-group mb-3 justify-content-between">
                             <div class="form-floating">
                                 <input name="firstName" type="text" class="form-control" id="floatingInputFirstName"

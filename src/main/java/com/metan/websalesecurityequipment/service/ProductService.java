@@ -10,4 +10,5 @@ public interface ProductService {
     public Product saveProduct(Product product);
     public void deleteProduct(Product product);
     public void deleteProductById(String theId);
+    public List<Product> findTopProduct();
 }
