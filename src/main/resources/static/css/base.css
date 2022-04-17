@@ -2,15 +2,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 :root {
-    --bg-footer: #212121;
-    --color-footer: #fff;
-
-    --bg-nav: #fff;
-    --bg-nav-hover: #fff;
-    --color-nav: #252525;
-    --color-nav-hover: #2fa1da;
     --color-primary: #2fa1da;
     --color-primary-light: #84d9fe;
+
+    --bg-header: #282a36;
+    --color-header: #fff;
+    --color-icon-header: #fff;
+
+    --bg-nav: #282a36;
+    --bg-nav-hover: #fff;
+    --color-nav: #6be9f3;
+    --color-nav-hover: #fff;
 
     --bg-card: #fff;
     --color-rating: #f7ac44;
@@ -20,6 +22,9 @@
 
     --border-grey: #ccc;
     --border-red: #f7665f;
+
+    --bg-footer: #212121;
+    --color-footer: #fff;
 }
 
 *,
@@ -39,9 +44,9 @@ li {
     list-style: none;
 }
 html {
-    font-size: 62.5%;
+    /*font-size: 62.5%;*/
 }
 body {
     font-family: "Poppins", "Roboto", sans-serif;
-    font-size: 1.6rem;
+    font-size: 1rem;
 }
