@@ -75,8 +75,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/**").permitAll()
-                .antMatchers("/account/**").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers("/account/login/**").permitAll()
                 .antMatchers("/oauth2/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -94,6 +94,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .userService(oAuth2UserService)
                     .and()
                     .successHandler(oAuth2LoginSuccessHandler)
+                    .defaultSuccessUrl("/")
                 .and()
                     .logout()
                     .deleteCookies("JSESSIONID")
