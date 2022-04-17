@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
@@ -53,4 +52,11 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProductById(String theId) {
         productRepository.deleteById(theId);
     }
+
+    @Override
+    public List<Product> findTopProduct() {
+        return productRepository.findTopProduct();
+    }
+
+
 }
