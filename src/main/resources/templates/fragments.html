@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
 <head th:fragment="head">
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -48,9 +49,18 @@
                   <div class="action-btn">
                       <i class="fas fa-heart"></i>
                   </div>
-                  <div class="action-btn">
+                  <div class="action-btn action-btn__user">
                       <i class="fas fa-user-circle"></i>
+                      <div class="user-login" sec:authorize="isAuthenticated()">
+                              [[${#request.userPrincipal.principal.fullName}]]
+                      </div>
+                      <div class="user-action-list">
+                          <div class="user-action">Tài khoản của tôi</div>
+                          <div class="user-action">Sản phẩm đã mua</div>
+                          <div class="user-action">Đăng xuất</div>
+                      </div>
                   </div>
+
               </div>
           </div>
           <nav class="desktop-nav">

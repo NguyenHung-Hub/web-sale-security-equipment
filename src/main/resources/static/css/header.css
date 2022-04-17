@@ -68,6 +68,68 @@ header {
     cursor: pointer;
 }
 
+.action-btn__user {
+    position: relative;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.action-btn__user .user-login {
+    font-size: 14px;
+    padding: 4px 8px;
+    max-width: 100px;
+    height: 28px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.action-btn__user:hover .user-action-list {
+    display: block;
+}
+
+.user-action-list {
+    display: none;
+    position: absolute;
+    top: calc(100% + 1px);
+    right: 32px;
+
+    width: 172px;
+    z-index: 2;
+
+    color: black;
+    background: #fff;
+
+    border-radius: 8px;
+
+    box-shadow: 0 0 10px rgba(50, 50, 50, 0.3);
+}
+
+.user-action-list::before {
+    content: "";
+    position: absolute;
+    top: -32px;
+    right: 10px;
+    border-width: 20px 27px;
+    border-style: solid;
+    border-color: transparent transparent rgb(255, 255, 255) transparent;
+    z-index: -1;
+}
+.user-action {
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 8px;
+}
+
+.user-action:hover {
+    background: #ccc;
+}
+
 /* Navigation */
 .desktop-nav {
 }
