@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "products")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, ignoreUnknown = true)
 public @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -55,13 +55,9 @@ class Product {
     @JoinColumn(name = "type_id")
     @JsonIgnoreProperties("products")
     private ProductType productType;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "product_attribute",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "attribute_value_id")
-    )
-    private List<AttributeValue> attributeValues;
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("product")
+    private List<ProductAttribute> productAttributes;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     @JsonIgnoreProperties("product")
     private List<ProductReview> productReviews;

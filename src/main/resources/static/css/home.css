@@ -113,7 +113,9 @@
 .card-modify-banner {
     position: relative;
     padding: 4px;
+    height: 200px;
 }
+
 .product-img {
     position: relative;
     width: 100%;
