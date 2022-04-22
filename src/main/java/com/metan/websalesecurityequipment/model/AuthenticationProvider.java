@@ -1,6 +1,6 @@
 package com.metan.websalesecurityequipment.model;
 
-public enum AuthenticationProvider {
+public enum  AuthenticationProvider {
     LOCAL("Local"), GOOGLE("Google"), FACEBOOK("Facebook");
 
     private final String clientName;

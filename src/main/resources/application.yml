@@ -6,7 +6,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/web-sale-security-equipment?useUnicode=yes&characterEncoding=UTF-8
     username: root
-    password: sapassword
+    password:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -16,6 +16,7 @@ spring:
         dialect: org.hibernate.dialect.MySQL55Dialect
         format_sql: true
     show-sql: true
+
   #  mail:
   #    host: stmp.gmail.com
   #    password: 123abbddeagasgswg
@@ -44,3 +45,9 @@ spring:
             scope:
               - email
               - public_profile
+    user:
+      name: chinh
+      password: chinh123
+      roles: USER
+server:
+  port: 9999

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface ProductRepository extends JpaRepository<Product, String> {
     public List<Product> findAllByOrderByNameAsc();
     @Query(value = "select p.*, sum(oi.quantity) as tong from products p inner join order_items oi on p.product_id = oi.product_id " +
@@ -18,4 +17,5 @@ public interface ProductRepository extends JpaRepository<Product, String> {
             "p.thumbnail, p.title, p.type_id " +
             "order by tong desc limit 5", nativeQuery = true)
     public List<Product> findTopProduct();
+
 }

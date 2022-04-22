@@ -1,8 +1,7 @@
 package com.metan.websalesecurityequipment.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,7 +9,12 @@ import java.util.List;
 @Entity
 @Table(name = "attribute_values")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public @Data
+public
+//@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(of = "valueId")
 class AttributeValue {
     @Id

@@ -1,6 +1,8 @@
 package com.metan.websalesecurityequipment.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,11 +12,12 @@ import java.util.List;
 @Entity
 @Table(name = "products")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, ignoreUnknown = true)
-public @Data
+public @Setter
+@Getter
+//@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "productId")
-@ToString(exclude = {"category", "productType", "brand"})
 class Product {
     @Id
     @Column(name = "product_id", columnDefinition = "varchar(20)")
@@ -32,10 +35,12 @@ class Product {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     @JsonIgnoreProperties("products")
+    @JsonBackReference
     private Category category;
     @ManyToOne
     @JoinColumn(name = "discount_id")
     private ProductDiscount productDiscount;
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brand_id")
     @JsonIgnoreProperties("products")
@@ -54,6 +59,7 @@ class Product {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id")
     @JsonIgnoreProperties("products")
+    @JsonBackReference
     private ProductType productType;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     @JsonIgnoreProperties("product")

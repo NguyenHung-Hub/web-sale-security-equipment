@@ -15,68 +15,73 @@
             <div class="sidebar-showcase">
                 <h3 class="sidebar-title">Sản phẩm bán chạy</h3>
                 <div th:each="product: ${TOP_PRODUCT_LIST}" class="showcase">
-                    <div class="showcase-img">
-                        <img th:src="${product.thumbnail}"/>
-                    </div>
-                    <div class="showcase-content">
-                        <div class="showcase-title">
-                            [[${product.title}]]
+                    <a th:href="@{/product/detail/(productId=${product.productId})}">
+                        <div class="showcase-img">
+                            <img th:src="${product.thumbnail}"/>
                         </div>
-                        <div class="showcase-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                        <div class="showcase-price">
-                            <div class="showcase-price-new">
-                                [[${product.price}]]
+                        <div class="showcase-content">
+                            <div class="showcase-title">
+                                [[${product.title}]]
                             </div>
-                            <div class="showcase-price-old">
-                                [[${product.price}]]
+                            <div class="showcase-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="showcase-price">
+                                <div class="showcase-price-new">
+                                    [[${product.price}]]
+                                </div>
+                                <div class="showcase-price-old">
+                                    [[${product.price}]]
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
         <div class="product-box">
             <div class="product-grid">
                 <div th:each="product: ${PRODUCT_LIST}" class="card-modify">
-                    <div class="card-modify-banner">
-                        <img th:src="${product.thumbnail}"
-                             class="product-img"/>
-                        <div class="card-modify-actions">
-                            <button class="action-btn">
-                                <i class="fas fa-heart"></i>
-                            </button>
-                            <button class="action-btn">
-                                <i class="fas fa-cart-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-modify-content">
-                        <div class="product-title">
-                            [[${product.title}]]
-                        </div>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                        <div class="product-price">
-                            <div class="product-price-new">
-                                [[${product.price}]] đ
-                            </div>
-                            <div class="product-price-old">
-                                [[${product.price}]] đ
+                    <a th:href="@{/product/detail/(productId=${product.productId})}">
+                        <div class="card-modify-banner">
+                            <img th:src="${product.thumbnail}"
+                                 class="product-img"/>
+                            <div class="card-modify-actions">
+                                <button class="action-btn">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                                <button class="action-btn">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
                             </div>
                         </div>
-                    </div>
+                        <div class="card-modify-content">
+                            <div class="product-title">
+                                [[${product.title}]]
+                            </div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="product-price">
+                                <div class="product-price-new">
+                                    [[${product.price}]] đ
+                                </div>
+                                <div class="product-price-old">
+                                    [[${product.price}]] đ
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
+
             </div>
         </div>
     </section>

@@ -2,6 +2,7 @@ package com.metan.websalesecurityequipment.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,6 +12,7 @@ import java.util.Date;
 @IdClass(OrderItemPK.class)
 public @Data
 @EqualsAndHashCode(of = {"product", "order"})
+@ToString
 class OrderItem {
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
