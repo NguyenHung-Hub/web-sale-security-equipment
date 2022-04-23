@@ -28,7 +28,7 @@ public class DetailController {
         if(product== null){
             System.out.println("không tìm thấy");
         }
-
+        //phần đầu
         double discount= product.getPrice()- product.getPrice()*product.getProductDiscount().getDiscountPercent();
         List<ProductReview> productReviews= reviewService.findByProductId(productId);
         product.setProductReviews(productReviews);
@@ -36,6 +36,8 @@ public class DetailController {
         for (ProductReview pr:productReviews){
             rating+=pr.getRating();
         }
+        //review
+        model.addAttribute("reviews",productReviews);
         model.addAttribute("rating",(double)rating/((productReviews.size()==0)?1:productReviews.size()));
         model.addAttribute("discount",discount);
         model.addAttribute("product",product);
