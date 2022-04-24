@@ -1,6 +1,8 @@
 package com.metan.websalesecurityequipment.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "products")
-@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, ignoreUnknown = true)
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,18 +33,20 @@ class Product {
     private String title;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
-    @JsonIgnoreProperties("products")
+    @JsonManagedReference
     private Category category;
     @ManyToOne
     @JoinColumn(name = "discount_id")
     private ProductDiscount productDiscount;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brand_id")
-    @JsonIgnoreProperties("products")
+    @JsonManagedReference
     private Brand brand;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<CartItem> cartItems;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<OrderItem> orderItems;
     private String slug;
     @Column(columnDefinition = "text")
@@ -53,15 +57,15 @@ class Product {
     private Date modifiedAt;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id")
-    @JsonIgnoreProperties("products")
+    @JsonManagedReference
     private ProductType productType;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("product")
+    @JsonBackReference
     private List<ProductAttribute> productAttributes;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("product")
+    @JsonBackReference
     private List<ProductReview> productReviews;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("product")
+    @JsonBackReference
     private List<ProductBackdrop> productBackdrops;
 }
