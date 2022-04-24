@@ -6,10 +6,6 @@
     --primary-color: #1070dc;
 }
 
-* {
-    box-sizing: inherit;
-}
-
 body {
     font-family: inherit;
 }
@@ -18,6 +14,10 @@ body img {
     display: block;
     max-width: 100%;
     height: auto;
+}
+
+body a:hover {
+    text-decoration: none;
 }
 
 html {
@@ -48,7 +48,7 @@ html {
 }
 
 .nav-link.active {
-    color: #fa381d !important;
+    color: var(--primary-color) !important;
 }
 
 .text-strong {
@@ -65,7 +65,7 @@ html {
     padding-right: 0;
 }
 
-.row-full > .column-container > .column-inner {
+.row-fluid > .column-container > .column-inner {
     padding-top: 35px;
 }
 
