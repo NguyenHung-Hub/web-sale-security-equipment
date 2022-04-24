@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
+<head th:replace="fragments-demo :: head">
+    <title>Trang chủ - Bán thiết bị an ninh</title>
+</head>
+<body>
+<header th:replace="fragments-demo :: header"></header>
+<main class="home-container">
+    <div class="container">
+        <div class="row">
+            <div id="content" class="column-container col-12">
+                <div class="column-inner">
+                    <div class="row row-full">
+                        <div class="content-first__category column-container col-lg-3 col-md-3 col-sm-12">
+                            <div class="column-inner">
+                                <div class="content-first__category-title">
+                                    Danh mục sản phẩm
+                                </div>
+                                <div class="content-first__category-content">
+                                    <div class="content-first__category-resmenu-container">
+
+                                    </div>
+                                    <ul id="menu-vertical-category" class="nav flex-column">
+                                        <li class="nav-item dropdown">
+                                            <a href="" class="nav-link dropdown-toggle">
+                                                        <span class="have-title">
+                                                            <span class="menu-title">
+                                                                Thiết bị camera an ninh
+                                                            </span>
+                                                        </span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <a href="" class="nav-link dropdown-toggle">
+                                                        <span class="have-title">
+                                                            <span class="menu-title">
+                                                                Thiết bị báo động báo cháy
+                                                            </span>
+                                                        </span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <a href="#" class="nav-link dropdown-toggle">
+                                                        <span class="have-title">
+                                                            <span class="menu-title">
+                                                                Thiết bị văn phòng-gia đình
+                                                            </span>
+                                                        </span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <a href="#" class="nav-link dropdown-toggle">
+                                                        <span class="have-title">
+                                                            <span class="menu-title">
+                                                                Thiết bị Kiểm soát cửa
+                                                            </span>
+                                                        </span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <a href="#" class="nav-link dropdown-toggle">
+                                                        <span class="have-title">
+                                                            <span class="menu-title">
+                                                                Thiết bị viễn thông
+                                                            </span>
+                                                        </span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <a href="#" class="nav-link dropdown-toggle">
+                                                        <span class="have-title">
+                                                            <span class="menu-title">
+                                                                Thiết bị số công nghệ
+                                                            </span>
+                                                        </span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <a href="#" class="nav-link dropdown-toggle">
+                                                        <span class="have-title">
+                                                            <span class="menu-title">
+                                                                Thiết bị điện thông minh
+                                                            </span>
+                                                        </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column-container col-lg-9 col-md-8 col-sm-12">
+                            <div class="column-inner">
+                                <div class="element">
+                                    <div class="banner-wrapper">
+                                        <div id="carouselId" class="carousel slide carousel-fade"
+                                             data-ride="carousel">
+                                            <ol class="carousel-indicators">
+                                                <li data-target="#carouselId" data-slide-to="0" class="active">
+                                                </li>
+                                                <li data-target="#carouselId" data-slide-to="1"></li>
+                                                <li data-target="#carouselId" data-slide-to="2"></li>
+                                            </ol>
+                                            <div class="carousel-inner" role="listbox">
+                                                <div class="carousel-item active">
+                                                    <div class="overlay-img"
+                                                         style="background-image: url(https://demo.wpthemego.com/themes/sw_clickboom/wp-content/uploads/2016/07/image-slide-horm3.jpg);">
+                                                    </div>
+                                                    <!-- <div class="carousel-caption d-none d-md-block">
+                                                        <h3>Title</h3>
+                                                        <p>Description</p>
+                                                    </div> -->
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <div class="overlay-img"
+                                                         style="background-image: url(https://demo.wpthemego.com/themes/sw_clickboom/wp-content/uploads/2016/07/image-slishow32.jpg);">
+                                                    </div>
+                                                    <!-- <div class="carousel-caption d-none d-md-block">
+                                                        <h3>Title</h3>
+                                                        <p>Description</p>
+                                                    </div> -->
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <div class="overlay-img"
+                                                         style="background-image: url(https://demo.wpthemego.com/themes/sw_clickboom/wp-content/uploads/2016/07/image-slishow33.jpg);">
+                                                    </div>
+                                                    <!-- <div class="carousel-caption d-none d-md-block">
+                                                        <h3>Title</h3>
+                                                        <p>Description</p>
+                                                    </div> -->
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <a class="carousel-control-prev" href="#carouselId"
+                                                   role="button" data-slide="prev">
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <a class="carousel-control-next" href="#carouselId"
+                                                   role="button" data-slide="next">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="column-container col-sm-6">
+                                        <div class="column-inner custom__1">
+                                            <div class="single-img element">
+                                                <figure class="figure">
+                                                    <a href="#">
+                                                        <img src="https://demo.wpthemego.com/themes/sw_clickboom/wp-content/uploads/2016/07/image5.jpg"
+                                                             class="figure-img img-fluid rounded" alt="">
+                                                    </a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column-container col-sm-6">
+                                        <div class="column-inner custom__2">
+                                            <div class="single-img element">
+                                                <figure class="figure">
+                                                    <a href="#">
+                                                        <img src="https://demo.wpthemego.com/themes/sw_clickboom/wp-content/uploads/2016/07/image6.jpg"
+                                                             class="figure-img img-fluid rounded" alt="">
+                                                    </a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script th:replace="fragments-demo :: sticky"></script>
+<script th:replace="fragments-demo :: jquery"></script>
+<script th:replace="fragments-demo :: bootstrap"></script>
+</body>
+</html>

@@ -29,7 +29,7 @@ public class HomeController {
         model.addAttribute("PRODUCT_LIST", products);
         model.addAttribute("TOP_PRODUCT_LIST", topProducts);
 
-        return "home";
+        return "home-demo";
     }
 
 }

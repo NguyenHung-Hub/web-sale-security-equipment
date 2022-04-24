@@ -1,6 +1,8 @@
 package com.metan.websalesecurityequipment.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -19,11 +21,11 @@ class Attribute {
     @Column(columnDefinition = "nvarchar(255)")
     private String name;
     @OneToMany(mappedBy = "attribute", fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("attribute")
+    @JsonBackReference
     private List<AttributeValue> attributeValues;
     @ManyToOne
     @JoinColumn(name = "category_id")
-    @JsonIgnoreProperties("attribute")
+    @JsonManagedReference
     private Category category;
 
 }

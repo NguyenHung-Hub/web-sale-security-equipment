@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:fragment="head">
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!--    font-awesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
 
@@ -15,17 +13,17 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <!--    css-->
-    <link rel="stylesheet" th:href="@{/css/base.css}" >
-    <link rel="stylesheet" th:href="@{/css/header.css}" >
-    <link rel="stylesheet" th:href="@{/css/home.css}" >
-    <link rel="stylesheet" th:href="@{/css/footer.css}" >
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
 </head>
 <body>
   <div th:fragment="header">
       <header>
           <div class="header-main">
               <div class="header-logo">
-                  <img th:src="@{/image/main-logo.jpg}" alt="Logo" />
+                  <img th:src="@{/imgs/main-logo.jpg}" alt="Logo" />
               </div>
               <div class="header-search">
                   <div class="search-box">
@@ -89,103 +87,103 @@
       </header>
   </div>
 
-    <div th:fragment="footer">
-        <footer class="footer-container">
-            <div class="footer-nav">
-                <ul class="footer-nav-list">
-                    <li class="footer-nav-item">
-                        <h2 class="footer-nav-title">POPULAR CATEGORIES</h2>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">Fashion</a>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">Electronic</a>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                </ul>
-                <ul class="footer-nav-list">
-                    <li class="footer-nav-item">
-                        <h2 class="footer-nav-title">PRODUCTS</h2>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                </ul>
-                <ul class="footer-nav-list">
-                    <li class="footer-nav-item">
-                        <h2 class="footer-nav-title">OUR COMPANY</h2>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                </ul>
-                <ul class="footer-nav-list">
-                    <li class="footer-nav-item">
-                        <h2 class="footer-nav-title">SERVICES</h2>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                </ul>
-                <ul class="footer-nav-list">
-                    <li class="footer-nav-item">
-                        <h2 class="footer-nav-title">CONTACT</h2>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">
-                            <i class="fas fa-map-marker-alt"></i>
-                            12 Nguyễn Văn Bảo, phường 4, quận Gò Vấp, TP HCM</a
-                        >
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">
-                            <i class="fas fa-phone-volume"></i>
-                            098 7654 321
-                        </a>
-                    </li>
+<div th:fragment="footer">
+    <footer class="footer-container">
+        <div class="footer-nav">
+            <ul class="footer-nav-list">
+                <li class="footer-nav-item">
+                    <h2 class="footer-nav-title">POPULAR CATEGORIES</h2>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">Fashion</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">Electronic</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+            </ul>
+            <ul class="footer-nav-list">
+                <li class="footer-nav-item">
+                    <h2 class="footer-nav-title">PRODUCTS</h2>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+            </ul>
+            <ul class="footer-nav-list">
+                <li class="footer-nav-item">
+                    <h2 class="footer-nav-title">OUR COMPANY</h2>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+            </ul>
+            <ul class="footer-nav-list">
+                <li class="footer-nav-item">
+                    <h2 class="footer-nav-title">SERVICES</h2>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+            </ul>
+            <ul class="footer-nav-list">
+                <li class="footer-nav-item">
+                    <h2 class="footer-nav-title">CONTACT</h2>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">
+                        <i class="fas fa-map-marker-alt"></i>
+                        12 Nguyễn Văn Bảo, phường 4, quận Gò Vấp, TP HCM</a
+                    >
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">
+                        <i class="fas fa-phone-volume"></i>
+                        098 7654 321
+                    </a>
+                </li>
 
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">
-                            <i class="fas fa-envelope"></i>
-                            example @gmail.com
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </footer>
-    </div>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">
+                        <i class="fas fa-envelope"></i>
+                        example @gmail.com
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+</div>
 </body>
 </html>

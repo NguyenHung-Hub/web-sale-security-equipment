@@ -1,5 +1,6 @@
 package com.metan.websalesecurityequipment.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,6 +20,6 @@ class ProductType {
     @Column(columnDefinition = "nvarchar(255)")
     private String name;
     @OneToMany(mappedBy = "productType", fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("productType")
+    @JsonBackReference
     private List<Product> products;
 }

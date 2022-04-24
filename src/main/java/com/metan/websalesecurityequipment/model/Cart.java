@@ -1,5 +1,6 @@
 package com.metan.websalesecurityequipment.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -23,6 +24,7 @@ class Cart {
     @Column(name = "modified_at", columnDefinition = "datetime")
     private Date modifiedAt;
     @OneToMany(mappedBy = "cart")
+    @JsonBackReference
     private List<CartItem> cartItems;
     @OneToOne(mappedBy = "cart", cascade = CascadeType.ALL)
     private User user;
