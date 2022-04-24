@@ -28,7 +28,7 @@
 
 .sidebar-title {
     padding: 16px 0;
-    font-size: 2rem;
+    font-size: 20px;
     font-family: "Roboto", serif;
     text-transform: uppercase;
 }
@@ -37,15 +37,15 @@
     display: flex;
     flex-direction: row;
 
-    margin-top: 1.6rem;
+    margin-top: 16px;
     border: 1px solid var(--border-grey);
-    border-radius: 0.8rem;
-    font-size: 1.4rem;
+    border-radius: 8px;
+    font-size: 14px;
     /* background: rgb(239, 239, 239); */
 }
 
 .showcase:hover {
-    border: 0.1rem solid var(--border-red);
+    border: 1px solid var(--border-red);
     cursor: pointer;
 }
 
@@ -64,7 +64,7 @@
     justify-content: space-around;
 }
 .showcase-title {
-    font-size: 1.4rem;
+    font-size: 14px;
 }
 .showcase-rating {
     color: var(--color-rating);
@@ -75,11 +75,11 @@
     width: 100%;
 }
 .showcase-price-new {
-    font-size: 1.6rem;
+    font-size: 16px;
     color: var(--text-red);
 }
 .showcase-price-old {
-    margin-left: 0.8rem;
+    margin-left: 8px;
     text-decoration: line-through;
 }
 
@@ -104,9 +104,9 @@
 }
 
 .card-modify:hover {
-    margin-top: -0.6rem;
-    margin-bottom: 0.6rem;
-    border: 0.1rem solid var(--border-red);
+    margin-top: -6px;
+    margin-bottom: 6px;
+    border: 1px solid var(--border-red);
     cursor: pointer;
 }
 
@@ -134,10 +134,10 @@
 }
 
 .card-modify-actions .action-btn {
-    font-size: 1.4rem;
-    padding: 0.4rem 0.8rem;
-    margin: 0.8rem;
-    border: 0.1rem solid var(--border-red);
+    font-size: 14px;
+    padding: 4px 8px;
+    margin: 8px;
+    border: 1px solid var(--border-red);
     border-radius: 4px;
     background: var(--bg-card);
 }
@@ -165,7 +165,7 @@
 .product-price-new {
     color: var(--text-red);
     font-weight: bold;
-    font-size: 1.8rem;
+    font-size: 18px;
 }
 .product-price-old {
     color: var(--text-grey);
