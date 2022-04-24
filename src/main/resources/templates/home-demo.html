@@ -11,7 +11,7 @@
         <div class="row">
             <div id="content" class="column-container col-12">
                 <div class="column-inner">
-                    <div class="row row-full">
+                    <div class="row row-fluid">
                         <div class="content-first__category column-container col-lg-3 col-md-3 col-sm-12">
                             <div class="column-inner">
                                 <div class="content-first__category-title">
@@ -166,6 +166,254 @@
                                                     </a>
                                                 </figure>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="column-container col-lg-3 col-md-3 col-sm-12">
+                            <div class="column-inner">
+                                <div class="hot-product-wrapper">
+                                    <div id="hot-product-carousel" class="hot-product-carousel carousel slide"
+                                         data-ride="carousel" data-interval="0">
+                                        <div class="box-slider-title">
+                                            <h2>
+                                                <span>Sản phẩm Hot</span>
+                                            </h2>
+                                        </div>
+                                        <div class="custom-navigation">
+                                            <a class="fa fa-angle-left" href="#hot-product-carousel"
+                                               role="button" data-slide="prev">
+                                            </a>
+                                            <a class="fa fa-angle-right" href="#hot-product-carousel"
+                                               role="button" data-slide="next">
+                                            </a>
+                                        </div>
+                                        <div class="carousel-inner" role="listbox">
+                                            <div class="carousel-item active">
+                                                <div th:each="product: ${TOP_PRODUCT_LIST}" class="item-detail d-flex">
+                                                    <div class="item-img">
+                                                        <a href="#">
+                                                            <img th:src="${product.thumbnail}"
+                                                                 sizes="(max-width: 112px) 100vw, 112px">
+                                                        </a>
+                                                    </div>
+                                                    <div class="item-content">
+                                                        <h4>
+                                                            <a href="#">[[${product.title}]]</a>
+                                                        </h4>
+                                                        <div class="rating">
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="far fa-star"></i>
+                                                        </div>
+                                                        <div class="item-price">
+                                                            <p>
+                                                                        <span>
+                                                                            [[${product.price}]]đ
+                                                                        </span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="carousel-item">
+                                                <div class="item-detail d-flex">
+                                                    <div class="item-img">
+                                                        <a href="#">
+                                                            <img src="https://demo.wpthemego.com/themes/sw_clickboom/wp-content/uploads/2016/03/5-300x300.jpg"
+                                                                 sizes="(max-width: 112px) 100vw, 112px">
+                                                        </a>
+                                                    </div>
+                                                    <div class="item-content flex-fill">
+                                                        <h4>
+                                                            <a href="#">Đồng hồ</a>
+                                                        </h4>
+                                                        <div class="rating">
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="far fa-star"></i>
+                                                        </div>
+                                                        <div class="item-price">
+                                                            <p>
+                                                                        <span>
+                                                                            $110.00
+                                                                        </span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="item-detail d-flex">
+                                                    <div class="item-img">
+                                                        <a href="#">
+                                                            <img src="https://demo.wpthemego.com/themes/sw_clickboom/wp-content/uploads/2016/03/16-112x112.jpg"
+                                                                 sizes="(max-width: 112px) 100vw, 112px">
+                                                        </a>
+                                                    </div>
+                                                    <div class="item-content flex-fill">
+                                                        <h4>
+                                                            <a href="#">Đồng hồ</a>
+                                                        </h4>
+                                                        <div class="rating">
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="far fa-star"></i>
+                                                        </div>
+                                                        <div class="item-price">
+                                                            <p>
+                                                                        <span>
+                                                                            $110.00
+                                                                        </span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="item-detail d-flex">
+                                                    <div class="item-img">
+                                                        <a href="#">
+                                                            <img src="https://demo.wpthemego.com/themes/sw_clickboom/wp-content/uploads/2016/03/12-112x112.jpg"
+                                                                 sizes="(max-width: 112px) 100vw, 112px">
+                                                        </a>
+                                                    </div>
+                                                    <div class="item-content flex-fill">
+                                                        <h4>
+                                                            <a href="#">Đồng hồ</a>
+                                                        </h4>
+                                                        <div class="rating">
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="far fa-star"></i>
+                                                        </div>
+                                                        <div class="item-price">
+                                                            <p>
+                                                                        <span>
+                                                                            $110.00
+                                                                        </span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="item-detail d-flex">
+                                                    <div class="item-img">
+                                                        <a href="#">
+                                                            <img src="https://demo.wpthemego.com/themes/sw_clickboom/wp-content/uploads/2016/03/10-112x112.jpg"
+                                                                 sizes="(max-width: 112px) 100vw, 112px">
+                                                        </a>
+                                                    </div>
+                                                    <div class="item-content flex-fill">
+                                                        <h4>
+                                                            <a href="#">Đồng hồ</a>
+                                                        </h4>
+                                                        <div class="rating">
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="far fa-star"></i>
+                                                        </div>
+                                                        <div class="item-price">
+                                                            <p>
+                                                                        <span>
+                                                                            $110.00
+                                                                        </span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column-container col-lg-9 col-md-8 col-sm-12">
+                            <div class="column-inner">
+                                <div class="product-list-wrapper">
+                                    <div class="new-arrival">
+                                        <div class="top-tab-slider clearfix">
+                                            <div class="box-slider-title">
+                                                <h2>
+                                                    <span>Sản phẩm mới</span>
+                                                </h2>
+                                            </div>
+                                            <button class="navbar-toggler d-lg-none" type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#nav-tabs-new-arrival-slider" aria-expanded="false"
+                                                    aria-controls="nav-tabs-new-arrival-slider"
+                                                    aria-label="Toggle navigation">
+                                                <span class="navbar-toggler-icon"></span>
+                                            </button>
+                                            <ul class="nav nav-tabs" id="nav-tabs-new-arrival-slider">
+                                                <li class="nav-item" role="presentation">
+                                                    <a href="#pane-camera" id="tab-camera" data-bs-toggle="pill"
+                                                       role="tab" aria-controls="pane-camera"
+                                                       class="nav-link active" aria-selected="true">Camera</a>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <a href="#pane-computer" id="tab-computer"
+                                                       data-bs-toggle="pill" role="tab"
+                                                       aria-controls="pane-computer" class="nav-link"
+                                                       aria-selected="false">Computer</a>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <a href="#pane-electronics" id="tab-electronics"
+                                                       data-bs-toggle="pill" role="tab" aria-controls=""
+                                                       class="nav-link" aria-selected="false">Electronics</a>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <a href="#" id="tab-smart-phone" data-bs-toggle="pill"
+                                                       role="tab" aria-controls="" class="nav-link"
+                                                       aria-selected="false">Smart phone</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade show active" id="pane-camera"
+                                                 role="tabpanel" aria-labelledby="tab-camera">
+                                                <div class="row">
+                                                    <div th:each="product: ${PRODUCT_LIST}"
+                                                            class="card-product column-container col-lg-3 col-md-4 col-sm-6">
+                                                        <div class="card-product-wrapper">
+                                                            <div class="card text-left">
+                                                                <div class="card-img-top">
+                                                                    <a href="#">
+                                                                        <img th:src="${product.thumbnail}"
+                                                                             alt="">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <h4 class="card-title">[[${product.title}]]</h4>
+                                                                    <span class="card-price">
+                                                                                [[${product.price}]]đ
+                                                                            </span>
+                                                                    <span class="card-price-origin">
+                                                                                [[${product.price}]]đ
+                                                                            </span>
+                                                                    <p class="card-text">
+
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="pane-computer" role="tabpanel"
+                                                 aria-labelledby="tab-computer"></div>
+                                            <div class="tab-pane fade" id="pane-electronics" role="tabpanel"
+                                                 aria-labelledby="tab-electronics"></div>
+                                            <div class="tab-pane fade" id="pane-smart-phone" role="tabpanel"
+                                                 aria-labelledby="tab-smart-phone"></div>
                                         </div>
                                     </div>
                                 </div>
