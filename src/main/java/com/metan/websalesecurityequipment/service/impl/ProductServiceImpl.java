@@ -1,4 +1,4 @@
-package com.metan.websalesecurityequipment.model.impl;
+package com.metan.websalesecurityequipment.service.impl;
 
 import com.metan.websalesecurityequipment.model.Product;
 import com.metan.websalesecurityequipment.repository.ProductRepository;

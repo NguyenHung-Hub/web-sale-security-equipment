@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="fragments :: head">
+</head>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<body>
+<div th:replace="fragments :: header"></div>
+<div class="container">
+    <div class="row">
+        <div class="search-nav-filter">
+            <div class=" filter-title">
+                <p><i class="fa-solid fa-filter icon"></i>Bộ lọc tìm kiếm</p>
+            </div>
+            <div class="filter-body">
+                <div class="group-filter">
+                    <div th:if="${categoriesFirst != null}">
+                        <div class="group-filter-header">Theo Danh Mục</div>
+                        <div class="group-filter-content" th:each="category1:${categoriesFirst}">
+                            <div class="group-filter-content-item">
+                                <input type="checkbox" name="">
+                                <label th:text="${category1.name}"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="danhMuc" class="group-filter-content-add" th:if="${categoriesLast != null}">
+                        <div th:each="category2:${categoriesLast}">
+                            <div class="group-filter-content-item">
+                                <input type="checkbox" name="">
+                                <label th:text="${category2.name}"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="them" id="themDanhMuc" onclick="displayDanhMuc()">
+                        Thêm
+                        <i class="fa-solid fa-angle-down icon">
+                        </i>
+                    </p>
+                    <p id="anbotDanhMuc" class="anbot" onclick="hiddenDanhMuc()">
+                        Ẩn bớt
+                        <i class="fa-solid fa-angle-up"></i>
+                    </p>
+                    <script>
+                            function displayDanhMuc() {
+                                document.getElementById("danhMuc").style.display = 'block';
+                                document.getElementById("themDanhMuc").style.display = 'none';
+                                document.getElementById("anbotDanhMuc").style.display = 'block';
+                            }
+                           function hiddenDanhMuc() {
+                                document.getElementById("danhMuc").style.display = 'none';
+                                document.getElementById("themDanhMuc").style.display = 'block';
+                                document.getElementById("anbotDanhMuc").style.display = 'none';
+                           }
+
+
+
+
+
+                    </script>
+                </div>
+            </div>
+
+            <div class="filter-body">
+                <div class="group-filter">
+                    <div class="group-filter-header">Đánh giá</div>
+                    <div class="group-filter-content">
+                        <div class="group-filter-content-item">
+                            <div class="filter-danhgia">
+                                <input type="checkbox">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="soLuongKetQua"> (330 kết quả)</span>
+                            </div>
+                        </div>
+                        <div class="group-filter-content-item">
+                            <div class="filter-danhgia">
+                                <input type="checkbox">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="soLuongKetQua"> (330 kết quả)</span>
+                            </div>
+                        </div>
+                        <div class="group-filter-content-item">
+                            <div class="filter-danhgia">
+                                <input type="checkbox">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="soLuongKetQua"> (330 kết quả)</span>
+                            </div>
+                        </div>
+                        <div class="group-filter-content-item">
+                            <div class="filter-danhgia">
+                                <input type="checkbox">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="soLuongKetQua"> (330 kết quả)</span>
+                            </div>
+                        </div>
+                        <div class="group-filter-content-item">
+                            <div class="filter-danhgia">
+                                <input type="checkbox" id="" name="">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="soLuongKetQua"> (330 kết quả)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-body">
+                <div class="group-filter">
+                    <div th:if="${brandsFirst != null}">
+                        <div class="group-filter-header">Thương hiệu</div>
+                        <div class="group-filter-content" th:each="brand1:${brandsFirst}">
+                            <div class="group-filter-content-item">
+                                <input type="checkbox" name="">
+                                <label th:text="${brand1.name}"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="thuongHieu" class="group-filter-content-add" th:if="${brandsLast != null}">
+                        <div th:each="brand2:${brandsLast}">
+                            <div class="group-filter-content-item">
+                                <input type="checkbox" name="">
+                                <label th:text="${brand2.name}"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="them" id="themThuongHieu" onclick="displayThuongHieu()">
+                        Thêm
+                        <i class="fa-solid fa-angle-down icon">
+                        </i>
+                    </p>
+                    <p id="anBotThuongHieu" class="anbot" onclick="hiddenThuongHieu()">
+                        Ẩn bớt
+                        <i class="fa-solid fa-angle-up"></i>
+                    </p>
+                    <script>
+                            function displayThuongHieu() {
+                                document.getElementById("thuongHieu").style.display = 'block';
+                                document.getElementById("themThuongHieu").style.display = 'none';
+                                document.getElementById("anBotThuongHieu").style.display = 'block';
+                            }
+                           function hiddenThuongHieu() {
+                                document.getElementById("thuongHieu").style.display = 'none';
+                                document.getElementById("themThuongHieu").style.display = 'block';
+                                document.getElementById("anBotThuongHieu").style.display = 'none';
+                           }
+
+
+
+
+                    </script>
+                </div>
+            </div>
+
+            <div class="filter-body">
+                <div class="group-filter">
+                    <div class="group-filter-header">Khoảng Giá</div>
+                    <div class="group-filter-content">
+                        <form action="" style="width: 100%;">
+                            <input type="text" placeholder="từ" id="fromGia" onkeypress='validate(event)'/>
+                            <span><i class="fa-solid fa-horizontal-rule"></i></span>
+                            <input type="text" placeholder="đến" id="toGia" onkeypress='validate(event)'/>
+                            <button type="submit" class="apdung">áp dụng</button>
+                        </form>
+                    </div>
+                </div>
+                <script>
+                    function validate(evt) {
+                        if (evt.keyCode != 8) {
+                            var theEvent = evt || window.event;
+                            var key = theEvent.keyCode || theEvent.which;
+                            key = String.fromCharCode(key);
+                            var regex = /[0-9]|\./;
+                            if (!regex.test(key)) {
+                                theEvent.returnValue = false;
+                                if (theEvent.preventDefault)
+                                    theEvent.preventDefault();
+                            }
+                        }
+                    }
+
+
+
+                </script>
+            </div>
+
+        </div>
+        <div class="search-content">
+            <div class="thanh-ketqua">
+                <span><i class="fa-regular fa-lightbulb"></i></span>
+                <p>Kết quả tìm kiếm cho '<span th:text="${name}"></span>'</p>
+            </div>
+            <div class="thanh-sap-xep" style="height: 60px; background-color: #00000008;">
+                <div class="nut-sap-xep">
+                        <span style="width: 130px;line-height: 34px; margin-right: 10px;">Sắp xếp
+                            theo </span>
+                    <ul id="sap-xep">
+                        <li class="btn-ss" id="btnLienQuan"><a>Liên Quan</a></li>
+                        <li class="btn-ss" id="btnMoiNhat"><a>Mới Nhất</a></li>
+                        <li class="btn-ss" id="btnBanChay"><a>Bán Chạy</a></li>
+                        <li id="btnGia"><a>Giá <span class="btn-chon-gia"><i
+                                class="fa-solid fa-chevron-down"></i></span></a>
+                            <ul>
+                                <li class="chon-gia-item" id="giaTangDan"><a>Giá: Thấp đến Cao</a></li>
+                                <li class="chon-gia-item" id="giaGiamDan"><a>Giá: Cao đến Thấp</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="chuyen-trang">
+                    <!--                    <ul>-->
+                    <span id="pageCurrent"
+                          th:text="(${param.page}?${T(java.lang.Integer).parseInt(param.page)+1}:1)+'/'+${productPage.totalPages}+' Trang'"></span>
+                    <!--                        <li class="chuyen-trang-lui"><a><i class="fa-solid fa-angle-left"></i></a></li>-->
+                    <!--                        <li class="chuyen-trang-toi"><a><i class="fa-solid fa-angle-right"></i></a></li>-->
+                    <!--                    </ul>-->
+                </div>
+            </div>
+
+            <div class="row" th:if="${!productPage.hasContent()}">
+                <div class="col">
+                    <div class="alert alert-danger" role="alert">
+                        <strong>No Product Found</strong>
+                    </div>
+                </div>
+            </div>
+            <div th:if="${productPage.hasContent()}">
+                <div id="danh-sach-san-pham" th:each="product:${productPage.content}">
+                    <div class="gallery">
+                        <a target="_blank" href="https://www.w3schools.com/css/img_5terre.jpg">
+                            <img src="https://www.w3schools.com/css/img_5terre.jpg" th:src="${product.thumbnail}"
+                                 alt="Cinque Terre">
+                        </a>
+                        <div class="desc">
+                            <div class="desc-ten" th:text="${product.name}"></div>
+                            <div class="desc-gia">
+                                <span class="desc-gia-an">
+                                    <del>
+                                        <span class="desc-gia-an-d">đ</span>
+                                        <span th:text="${product.price}"></span>
+                                    </del>
+                                </span>
+                                <span class="desc-gia-hien">
+                                    <span class="desc-gia-hien-d">đ</span>
+                                    <span th:text="${product.price}"></span>
+                                </span>
+                            </div>
+                            <div class="desc-danhgia">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="da-ban">Đã bán 216</span>
+                            </div>
+                            <div class="desc-noiban" style="color: #000000A6;">
+                                <i style="color: rgb(0, 191, 165);" class="fa-solid fa-truck-fast"></i>
+                                Metan, TP. Hồ Chí Minh
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div style="width: 20%;"></div>
+        <div class="pagination" th:if="${productPage.totalPages >0}">
+            <ul>
+                <li th:class="${0==productPage.number} ? 'active' : ''">
+                    <a th:href="@{/paginated(name=${name}, size=${productPage.size}, page=${1})}">«</a>
+                </li>
+
+                <li class="active" th:each="pageNumber:${pageNumbers}"
+                    th:if="${productPage.totalPages >0}"
+                    th:class="${pageNumber == productPage.number} ? 'active' : ''">
+                    <a id="pageNumber"
+                       th:href="@{/paginated(name=${name}, size=${productPage.size}, page=${pageNumber})}"
+                       class="page-item"
+                       th:text="${pageNumber}+1" type="button">
+                        <input id="pageNumberHidden" type="hidden" value="${pageNumber}+1">
+                    </a>
+                </li>
+
+                <li th:class="${productPage.totalPages ==productPage.number+1} ? 'active' : ''">
+                    <a th:href="@{/paginated(name=${name}, size=${productPage.size}, page=${productPage.totalPages})}">»</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+<script src="../js/search.js"></script>
+</body>
+
+</html>

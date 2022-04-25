@@ -36,7 +36,7 @@ public class SearchController {
     private CategoryService categoryService;
 
 
-    @GetMapping(value = "paginated")
+    @GetMapping(value = "search")
     public String showSearch1(ModelMap model, @RequestParam(name = "name") String name,
                               @RequestParam("page") Optional<Integer> page,
                               @RequestParam("size") Optional<Integer> size) {
