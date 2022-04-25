@@ -12,9 +12,10 @@ import java.util.List;
 @Entity
 @Table(name = "products")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-public @Data
-@AllArgsConstructor
+public @Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(of = "productId")
 @ToString(exclude = {"category", "productType", "brand"})
 class Product {

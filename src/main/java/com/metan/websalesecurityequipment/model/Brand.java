@@ -2,8 +2,7 @@ package com.metan.websalesecurityequipment.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,7 +11,10 @@ import java.util.List;
 @Entity
 @Table(name = "brands")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public @Data
+public @Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(of = {"brandId"})
 class Brand {
     @Id

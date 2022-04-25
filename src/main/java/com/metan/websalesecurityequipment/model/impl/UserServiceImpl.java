@@ -1,4 +1,4 @@
-package com.metan.websalesecurityequipment.service.impl;
+package com.metan.websalesecurityequipment.model.impl;
 
 import com.metan.websalesecurityequipment.model.AuthenticationProvider;
 import com.metan.websalesecurityequipment.model.User;

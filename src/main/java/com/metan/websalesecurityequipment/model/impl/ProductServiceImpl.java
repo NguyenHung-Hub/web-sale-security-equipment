@@ -1,9 +1,11 @@
-package com.metan.websalesecurityequipment.service.impl;
+package com.metan.websalesecurityequipment.model.impl;
 
 import com.metan.websalesecurityequipment.model.Product;
 import com.metan.websalesecurityequipment.repository.ProductRepository;
 import com.metan.websalesecurityequipment.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,6 +58,21 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> findTopProduct() {
         return productRepository.findTopProduct();
+    }
+
+    @Override
+    public List<Product> findByNameContaining(String name) {
+        return productRepository.findByNameContaining(name);
+    }
+
+    @Override
+    public Page<Product> findAll(Pageable pageable) {
+        return productRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Product> findByNameContaining(String name, Pageable pageable) {
+        return productRepository.findByNameContaining(name, pageable);
     }
 
 
