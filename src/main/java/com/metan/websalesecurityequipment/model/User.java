@@ -2,6 +2,7 @@ package com.metan.websalesecurityequipment.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;

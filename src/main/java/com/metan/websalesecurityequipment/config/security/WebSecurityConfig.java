@@ -24,7 +24,7 @@ import javax.sql.DataSource;
  * actor: Hoang
  */
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -32,7 +32,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
+
         web.ignoring().antMatchers("/imgs/**", "/js/**", "/fonts/**", "webjars/**", "/css/**", "/static/**","/**");
+
 
     }
 
@@ -64,7 +66,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService());
         authProvider.setPasswordEncoder(passwordEncoder());
-
         return authProvider;
     }
 

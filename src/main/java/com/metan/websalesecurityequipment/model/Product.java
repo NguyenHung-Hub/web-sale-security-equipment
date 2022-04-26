@@ -11,13 +11,12 @@ import java.util.List;
 
 @Entity
 @Table(name = "products")
-@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-public @Getter
-@Setter
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, ignoreUnknown = true)
+public @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "productId")
-@ToString(exclude = {"category", "productType", "brand"})
 class Product {
     @Id
     @Column(name = "product_id", columnDefinition = "varchar(20)")
@@ -34,11 +33,12 @@ class Product {
     private String title;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
-    @JsonManagedReference
+    @JsonIgnoreProperties("products")
     private Category category;
     @ManyToOne
     @JoinColumn(name = "discount_id")
     private ProductDiscount productDiscount;
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brand_id")
     @JsonManagedReference
@@ -58,7 +58,7 @@ class Product {
     private Date modifiedAt;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id")
-    @JsonManagedReference
+    @JsonIgnoreProperties("products")
     private ProductType productType;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     @JsonBackReference

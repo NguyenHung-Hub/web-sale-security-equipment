@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface ProductRepository extends JpaRepository<Product, String> {
     public List<Product> findAllByOrderByNameAsc();
 
@@ -28,4 +27,5 @@ public interface ProductRepository extends JpaRepository<Product, String> {
     public Page<Product> findAll(Pageable pageable);
 
     public Page<Product> findByNameContaining(String name, Pageable pageable);
+
 }

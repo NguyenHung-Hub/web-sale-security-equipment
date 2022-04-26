@@ -1,0 +1,182 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.checked-rating {
+    color: orange;
+}
+
+.w-50px {
+    margin-bottom: 0px;
+    width: 50px;
+    height: 5 0px;
+    border: 0px;
+    padding: 10px;
+    background-color: #f6f6f6;
+}
+
+.focus-input[type=text]:focus {
+    border: 0px solid #f6f6f6;
+    background-color: #f6f6f6;
+}
+
+.group-add {
+    width: 160px;
+    height: 50px;
+    background-color: #f6f6f6;
+}
+
+.btn-cart {
+    height: 50px;
+}
+
+.btn-cart:hover {
+    background-color: #7b7979;
+}
+
+
+/* @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css); */
+
+
+/*reset css*/
+
+
+/* div,
+label {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 20px;
+}
+
+h1 {
+    font-size: 1.5em;
+    margin: 10px;
+} */
+
+
+/****** Style Star Rating Widget *****/
+
+.rating {
+    border: none;
+    float: left;
+}
+
+.rating>input {
+    display: none;
+}
+
+
+/*ẩn input radio - vì chúng ta đã có label là GUI*/
+
+.rating>label:before {
+    margin: 5px;
+    font-size: 1.25em;
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f005";
+}
+
+
+/*1 ngôi sao*/
+
+.rating>.half:before {
+    content: "\f005";
+    position: absolute;
+}
+
+
+/*0.5 ngôi sao*/
+
+.rating>label {
+    font-size: 40px;
+    color: #ddd;
+    float: right;
+}
+
+
+/*float:right để lật ngược các ngôi sao lại đúng theo thứ tự trong thực tế*/
+
+
+/*thêm màu cho sao đã chọn và các ngôi sao phía trước*/
+
+.rating>input:checked~label,
+.rating:not(:checked)>label:hover,
+.rating:not(:checked)>label:hover~label {
+    color: #FFED85;
+}
+
+
+/* Hover vào các sao phía trước ngôi sao đã chọn*/
+
+.rating>input:checked+label:hover,
+.rating>input:checked~label:hover,
+.rating>label:hover~input:checked~label,
+.rating>input:checked~label:hover~label {
+    color: orange;
+}
+
+.container {
+    min-width: 1140px;
+}
+
+.fa-heart {
+    font-size: 25px;
+}
+
+.scale:hover {
+    transition-duration: 1s;
+    transform: scale(1.05);
+    /* phóng to 1.5 lần*/
+}
+
+.skew:hover {
+    transition-duration: 1s;
+    transform: skew(15deg, 15deg);
+}
+
+.ba-cham {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.translate:hover {
+    transition: transform 1s;
+    transform: translateY(-10px);
+}
+
+.bottom:active {
+    transform: translateX(100px);
+    transform: rotate(270deg);
+    transform-origin: top;
+}
+
+#btnTym:active>.tym {
+    transform: scale(1.4);
+    color: red;
+}
+
+#btnTym {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+}
+
+.discount {
+    padding: 5px;
+    border-radius: 0 0 999px 999px;
+    top: 5px;
+    left: 5px;
+}
+
+.mau-thong-tin {
+    color: #000000CC;
+}
+
+.mau-ten-thong-tin {
+    color: #00000066;
+}
