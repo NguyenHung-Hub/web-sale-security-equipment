@@ -5,6 +5,9 @@ import com.metan.websalesecurityequipment.model.ProductReview;
 import com.metan.websalesecurityequipment.service.ProductReviewService;
 import com.metan.websalesecurityequipment.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +26,10 @@ public class DetailController {
     @Autowired
     private ProductReviewService reviewService;
     @GetMapping(value = "detail")
-    public String showDetail(Model model, @RequestParam(name = "productId", required = false) String productId) {
+    public String showDetail(Model model, @RequestParam(name = "productId", required = false) String productId,
+                             @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
+                             @RequestParam(name = "size", required = false, defaultValue = "5") Integer size,
+                             @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
         Product product= productService.findProductById(productId);
         if(product== null){
             System.out.println("không tìm thấy");
@@ -36,8 +42,17 @@ public class DetailController {
         for (ProductReview pr:productReviews){
             rating+=pr.getRating();
         }
+        Sort sortable= null;
+        if(sort.equals("ASC")){
+            sortable= Sort.by("review_id").ascending();
+        }
+        if (sort.equals("DESC")) {
+            sortable = Sort.by("id").descending();
+        }
+        Pageable pageable= PageRequest.of(page,size,sortable);
         //review
-        model.addAttribute("reviews",productReviews);
+        model.addAttribute("reviewProduct",new ProductReview());
+        model.addAttribute("reviews",reviewService.findByProductId(productId,pageable));
         model.addAttribute("rating",(double)rating/((productReviews.size()==0)?1:productReviews.size()));
         model.addAttribute("discount",discount);
         model.addAttribute("product",product);

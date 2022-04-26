@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html  xmlns="http://www.w3.org/1999/xhtml"
-       xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -111,7 +111,7 @@
     </div>
     <!-- mô tả chi tiết, đánh giá , thông tin thêm-->
     <div class="mt-5">
-        <ul class="nav nav-tabs" role="tablist">
+        <ul id="tabs" class="nav nav-tabs" role="tablist">
             <li class="nav-item"><a data-toggle="tab" href="#ChiTiet" class="nav-link active text-dark">Chi tiết sản
                 phẩm</a></li>
             <li class="nav-item"><a data-toggle="tab" href="#Them" class="nav-link text-dark">Thông tin thêm</a></li>
@@ -157,11 +157,11 @@
             <!-- đánh giá -->
             <div id="DanhGia" class="container tab-pane fade">
                 <h2 class="bg-light p-2">ĐÁNH GIÁ SẢN PHẨM</h2>
-                <th:block th:if="${reviews.size()==0}">
-                   <div class="text-center mt-5">
-                       <img th:src="@{/image/no-review.png}" class="img-fluid">
-                       <p class="mt-3">Sản phẩm chưa có đánh giá</p>
-                   </div>
+                <th:block th:if="${reviews.getTotalElements()<=0}">
+                    <div class="text-center mt-5">
+                        <img th:src="@{/image/no-review.png}" class="img-fluid">
+                        <p class="mt-3">Sản phẩm chưa có đánh giá</p>
+                    </div>
                 </th:block>
                 <th:block th:each="review:${reviews}">
                     <div class="row mt-5 mb-3 border-bottom">
@@ -185,29 +185,45 @@
                         <hr>
                     </div>
                 </th:block>
+                <th:block th:if="${reviews.getTotalPages()>0}">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                            <th:block th:each="index: ${#numbers.sequence(0,reviews.getTotalPages())}">
+                                <li class="page-item"><a id="btnPage" type="button" class="page-link"
+                                                         th:href="@{/product/detail#DanhGia(productId=${product.productId},page=${index})}">[[${index+1}]]</a>
+                                </li>
+                            </th:block>
+                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                    </nav>
+                </th:block>
+
+
+
                 <!-- form đánh giá -->
             </div>
 
             <div id="FormDanhGia" class="mt-5">
                 <h2>THÊM ĐÁNH GIÁ MỚI</h2>
 
-                <form class="form-group" action="">
-                    <div class="rating mt-5">
-                        <input type="radio" id="star5" name="rate" value="5"/>
+                <form class="form-group"  th:action="@{/product/review}" th:object="${reviewProduct}">
+                    <div  class="rating mt-5">
+                        <input th:field="*{rating}" type="radio" id="star5" name="rate" value="5"/>
                         <label for="star5" title="text"></label>
-                        <input type="radio" id="star4" name="rate" value="4"/>
+                        <input th:field="*{rating}" type="radio" id="star4" name="rate" value="4"/>
                         <label for="star4" title="text"></label>
-                        <input type="radio" id="star3" name="rate" value="3"/>
+                        <input th:field="*{rating}" type="radio" id="star3" name="rate" value="3"/>
                         <label for="star3" title="text"></label>
-                        <input type="radio" id="star2" name="rate" value="2"/>
+                        <input th:field="*{rating}" type="radio" id="star2" name="rate" value="2"/>
                         <label for="star2" title="text"></label>
-                        <input type="radio" id="star1" name="rate" value="1"/>
+                        <input th:field="*{rating}" type="radio" id="star1" name="rate" value="1"/>
                         <label for="star1" title="text"></label>
                     </div>
-                    <input type="text" class="form-control mt-3" placeholder="Họ và tên">
+                    <input  th:field="*{tile}" type="text" class="form-control mt-3" placeholder="Tiêu đề">
                     <input type="email" class="form-control mt-3" placeholder="Email">
                     <input type="tel" class="form-control mt-3" placeholder="Số điện thoại">
-                    <textarea type="text" class="form-control mt-3" placeholder="Đánh giá"></textarea>
+                    <textarea  th:field="*{content}" type="text" class="form-control mt-3" placeholder="Đánh giá"></textarea>
                     <input type="submit" class="btn btn-dark mt-3" value="Gửi">
                 </form>
 
