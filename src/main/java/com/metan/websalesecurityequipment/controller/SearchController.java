@@ -3,8 +3,10 @@ package com.metan.websalesecurityequipment.controller;
 import com.metan.websalesecurityequipment.model.Brand;
 import com.metan.websalesecurityequipment.model.Category;
 import com.metan.websalesecurityequipment.model.Product;
+import com.metan.websalesecurityequipment.model.ProductReview;
 import com.metan.websalesecurityequipment.service.BrandService;
 import com.metan.websalesecurityequipment.service.CategoryService;
+import com.metan.websalesecurityequipment.service.ProductReviewService;
 import com.metan.websalesecurityequipment.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -34,6 +38,8 @@ public class SearchController {
     private BrandService brandService;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private ProductReviewService productReviewService;
 
 
     @GetMapping(value = "search")
@@ -82,7 +88,8 @@ public class SearchController {
         model.addAttribute("categoriesFirst", categoriesFirst);
         model.addAttribute("categoriesLast", categoriesLast);
         model.addAttribute("productPage", resultPage);
-        model.addAttribute("productPage", resultPage);
+        model.addAttribute("listRating",getAvgRating(productService.findAll()));
+        //model.addAttribute("productPage", resultPage);
 
         int totalPages = resultPage.getTotalPages() - 1;
         if (totalPages > 0) {
@@ -104,6 +111,20 @@ public class SearchController {
             model.addAttribute("pageNumbers", pageNumbers);
         }
         return "search";
+    }
+
+    public HashMap<String, Double> getAvgRating(List<Product> products) {
+        HashMap<String, Double> listRating = new HashMap<>();
+        List<ProductReview> reviews = new ArrayList<>();
+        for (Product p : products) {
+            Double avgRating = 0.0;
+            reviews = productReviewService.findByProductId(p.getProductId());
+            for (ProductReview pr : reviews) {
+                avgRating += pr.getRating();
+            }
+            listRating.put(p.getProductId(), avgRating / (reviews.size() == 0 ? 1 : reviews.size()));
+        }
+        return listRating;
     }
 
 }
