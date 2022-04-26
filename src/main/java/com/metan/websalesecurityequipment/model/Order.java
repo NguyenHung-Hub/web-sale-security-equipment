@@ -1,5 +1,6 @@
 package com.metan.websalesecurityequipment.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -27,6 +28,7 @@ class Order {
     @Column(name = "modified_at", columnDefinition = "datetime")
     private Date modifiedAt;
     @OneToMany(mappedBy = "order")
+    @JsonBackReference
     private List<OrderItem> orderItems;
     @ManyToOne
     @JoinColumn(name = "user_id")

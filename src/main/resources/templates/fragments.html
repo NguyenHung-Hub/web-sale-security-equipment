@@ -2,11 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
 <head th:fragment="head">
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!--    font-awesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
 
@@ -19,208 +17,208 @@
     />
 
     <!--    css-->
-    <link rel="stylesheet" th:href="@{/css/base.css}" >
-    <link rel="stylesheet" th:href="@{/css/header.css}" >
-    <link rel="stylesheet" th:href="@{/css/home.css}" >
-    <link rel="stylesheet" th:href="@{/css/modal_add_product.css}" >
-    <link rel="stylesheet" th:href="@{/css/footer.css}" >
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/modal_add_product.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
 </head>
 <body>
-  <div th:fragment="header">
-      <header>
-          <div class="header-main">
-              <div class="header-logo">
-                  <img th:src="@{/image/main-logo.jpg}" alt="Logo" />
-              </div>
-              <div class="header-search">
-                  <div class="search-box">
-                      <input
-                              class="search-input"
-                              type="search"
-                              placeholder="Search"
-                      />
-                      <i class="fas fa-search"></i>
-                  </div>
-              </div>
-              <div class="header-user-actions">
-                  <div class="action-btn">
-                      <i class="fas fa-cart-plus"></i>
-                  </div>
-                  <div class="action-btn">
-                      <i class="fas fa-heart"></i>
-                  </div>
-                  <div class="action-btn action-btn__user">
-                      <i class="fas fa-user-circle"></i>
-                      <div class="user-login" sec:authorize="isAuthenticated()">
-                              [[${#request.userPrincipal.principal.fullName}]]
-                      </div>
-                      <div class="user-action-list">
-                          <div class="user-action">Tài khoản của tôi</div>
-                          <div class="user-action">Sản phẩm đã mua</div>
-                          <div class="user-action">Đăng xuất</div>
-                      </div>
-                  </div>
-
-              </div>
-          </div>
-          <nav class="desktop-nav">
-              <ul class="desktop-nav-list">
-                  <li class="desktop-nav-item">
-                      <a href="#">Trang chủ</a>
-                  </li>
-                  <li class="desktop-nav-item">
-                      <a href="#"
-                      >Camera quan sát<i
-                              class="fas fa-angle-down arrow-icon-menu"
-                      ></i
-                      ></a>
-                      <ul class="desktop-subnav">
-                          <li class="desktop-nav-item">
-                              <a href="">Camera Wifi</a>
-                          </li>
-                          <li class="desktop-nav-item">
-                              <a href="">Camera siêu nhỏ</a>
-                          </li>
-                          <li class="desktop-nav-item">
-                              <a href="">Camera giá rẻ</a>
-                          </li>
-                          <li class="desktop-nav-item">
-                              <a href="">Camera IP</a>
-                          </li>
-                      </ul>
-                  </li>
-                  <li class="desktop-nav-item">
-                      <a href="#">Phụ kiện</a>
-                  </li>
-                  <li class="desktop-nav-item">
-                      <a href="#">Dịch vụ</a>
-                  </li>
-                  <li class="desktop-nav-item">
-                      <a href="#">Liên hệ</a>
-                  </li>
-              </ul>
-          </nav>
-      </header>
-  </div>
-
-    <div th:fragment="footer">
-        <footer class="footer-container">
-            <div class="footer-nav">
-                <ul class="footer-nav-list">
-                    <li class="footer-nav-item">
-                        <h2 class="footer-nav-title">POPULAR CATEGORIES</h2>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">Fashion</a>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">Electronic</a>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                </ul>
-                <ul class="footer-nav-list">
-                    <li class="footer-nav-item">
-                        <h2 class="footer-nav-title">PRODUCTS</h2>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                </ul>
-                <ul class="footer-nav-list">
-                    <li class="footer-nav-item">
-                        <h2 class="footer-nav-title">OUR COMPANY</h2>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                </ul>
-                <ul class="footer-nav-list">
-                    <li class="footer-nav-item">
-                        <h2 class="footer-nav-title">SERVICES</h2>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">footer nav nav</a>
-                    </li>
-                </ul>
-                <ul class="footer-nav-list">
-                    <li class="footer-nav-item">
-                        <h2 class="footer-nav-title">CONTACT</h2>
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">
-                            <i class="fas fa-map-marker-alt"></i>
-                            12 Nguyễn Văn Bảo, phường 4, quận Gò Vấp, TP HCM</a
-                        >
-                    </li>
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">
-                            <i class="fas fa-phone-volume"></i>
-                            098 7654 321
-                        </a>
-                    </li>
-
-                    <li class="footer-nav-item">
-                        <a href="" class="footer-nav-link">
-                            <i class="fas fa-envelope"></i>
-                            example @gmail.com
-                        </a>
-                    </li>
-                </ul>
+<div th:fragment="header">
+    <header>
+        <div class="header-main">
+            <div class="header-logo">
+                <img th:src="@{/imgs/main-logo.jpg}" alt="Logo"/>
             </div>
-        </footer>
+            <div class="header-search">
+                <div class="search-box">
+                    <input
+                            class="search-input"
+                            type="search"
+                            placeholder="Search"
+                    />
+                    <i class="fas fa-search"></i>
+                </div>
+            </div>
+            <div class="header-user-actions">
+                <div class="action-btn">
+                    <i class="fas fa-cart-plus"></i>
+                </div>
+                <div class="action-btn">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="action-btn action-btn__user">
+                    <i class="fas fa-user-circle"></i>
+                    <div class="user-login" sec:authorize="isAuthenticated()">
+                        [[${#request.userPrincipal.principal.fullName}]]
+                    </div>
+                    <div class="user-action-list">
+                        <div class="user-action">Tài khoản của tôi</div>
+                        <div class="user-action">Sản phẩm đã mua</div>
+                        <div class="user-action">Đăng xuất</div>
+                    </div>
+                </div>
 
-<!--        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>-->
-<!--        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>-->
-<!--        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" ></script>-->
-<!--        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
--->
-        <script
-                src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-                crossorigin="anonymous"
-        ></script>
-        <script
-                src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-                crossorigin="anonymous"
-        ></script>
-        <script
-                src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-                crossorigin="anonymous"
-        ></script>
-    </div>
+            </div>
+        </div>
+        <nav class="desktop-nav">
+            <ul class="desktop-nav-list">
+                <li class="desktop-nav-item">
+                    <a href="#">Trang chủ</a>
+                </li>
+                <li class="desktop-nav-item">
+                    <a href="#"
+                    >Camera quan sát<i
+                            class="fas fa-angle-down arrow-icon-menu"
+                    ></i
+                    ></a>
+                    <ul class="desktop-subnav">
+                        <li class="desktop-nav-item">
+                            <a href="">Camera Wifi</a>
+                        </li>
+                        <li class="desktop-nav-item">
+                            <a href="">Camera siêu nhỏ</a>
+                        </li>
+                        <li class="desktop-nav-item">
+                            <a href="">Camera giá rẻ</a>
+                        </li>
+                        <li class="desktop-nav-item">
+                            <a href="">Camera IP</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="desktop-nav-item">
+                    <a href="#">Phụ kiện</a>
+                </li>
+                <li class="desktop-nav-item">
+                    <a href="#">Dịch vụ</a>
+                </li>
+                <li class="desktop-nav-item">
+                    <a href="#">Liên hệ</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+</div>
+
+<div th:fragment="footer">
+    <footer class="footer-container">
+        <div class="footer-nav">
+            <ul class="footer-nav-list">
+                <li class="footer-nav-item">
+                    <h2 class="footer-nav-title">POPULAR CATEGORIES</h2>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">Fashion</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">Electronic</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+            </ul>
+            <ul class="footer-nav-list">
+                <li class="footer-nav-item">
+                    <h2 class="footer-nav-title">PRODUCTS</h2>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+            </ul>
+            <ul class="footer-nav-list">
+                <li class="footer-nav-item">
+                    <h2 class="footer-nav-title">OUR COMPANY</h2>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+            </ul>
+            <ul class="footer-nav-list">
+                <li class="footer-nav-item">
+                    <h2 class="footer-nav-title">SERVICES</h2>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">footer nav nav</a>
+                </li>
+            </ul>
+            <ul class="footer-nav-list">
+                <li class="footer-nav-item">
+                    <h2 class="footer-nav-title">CONTACT</h2>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">
+                        <i class="fas fa-map-marker-alt"></i>
+                        12 Nguyễn Văn Bảo, phường 4, quận Gò Vấp, TP HCM</a
+                    >
+                </li>
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">
+                        <i class="fas fa-phone-volume"></i>
+                        098 7654 321
+                    </a>
+                </li>
+
+                <li class="footer-nav-item">
+                    <a href="" class="footer-nav-link">
+                        <i class="fas fa-envelope"></i>
+                        example @gmail.com
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+    <!--        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>-->
+    <!--        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>-->
+    <!--        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" ></script>-->
+    <!--        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    -->
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"
+    ></script>
+    <script
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"
+    ></script>
+    <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"
+    ></script>
+</div>
 </body>
 </html>

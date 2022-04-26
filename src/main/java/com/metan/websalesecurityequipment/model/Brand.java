@@ -1,5 +1,6 @@
 package com.metan.websalesecurityequipment.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -28,6 +29,6 @@ class Brand {
     @Column(name = "modified_at", columnDefinition = "datetime")
     private Date modifiedAt;
     @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("brand")
+    @JsonBackReference
     private List<Product> products;
 }

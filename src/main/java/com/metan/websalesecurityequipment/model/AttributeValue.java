@@ -3,8 +3,11 @@ package com.metan.websalesecurityequipment.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.EqualsAndHashCode;
+
+
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "attribute_values")
@@ -22,6 +25,6 @@ class AttributeValue {
     private String valueId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "attribute_id")
-    @JsonIgnoreProperties("attributeValues")
+    @JsonManagedReference
     private Attribute attribute;
 }

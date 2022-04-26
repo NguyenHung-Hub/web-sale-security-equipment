@@ -25,5 +25,4 @@ class ProductDiscount {
     private Date createdAt;
     @Column(name = "modified_at", columnDefinition = "datetime")
     private Date modifiedAt;
-
 }

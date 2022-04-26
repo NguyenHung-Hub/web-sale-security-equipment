@@ -1,6 +1,7 @@
 package com.metan.websalesecurityequipment.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -18,12 +19,12 @@ class ProductAttribute {
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
-    @JsonIgnoreProperties("productAttributes")
+    @JsonManagedReference
     private Product product;
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "value_id", columnDefinition = "nvarchar(20)")
-    @JsonIgnoreProperties("productAttributes")
+    @JsonManagedReference
     private AttributeValue attributeValue;
     @Column(name = "created_at", columnDefinition = "datetime")
     private Date createdAt;

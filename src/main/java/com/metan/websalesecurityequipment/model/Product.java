@@ -14,7 +14,6 @@ import java.util.List;
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, ignoreUnknown = true)
 public @Setter
 @Getter
-//@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "productId")
@@ -35,7 +34,6 @@ class Product {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     @JsonIgnoreProperties("products")
-    @JsonBackReference
     private Category category;
     @ManyToOne
     @JoinColumn(name = "discount_id")
@@ -43,11 +41,13 @@ class Product {
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brand_id")
-    @JsonIgnoreProperties("products")
+    @JsonManagedReference
     private Brand brand;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<CartItem> cartItems;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<OrderItem> orderItems;
     private String slug;
     @Column(columnDefinition = "text")
@@ -59,15 +59,14 @@ class Product {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id")
     @JsonIgnoreProperties("products")
-    @JsonBackReference
     private ProductType productType;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("product")
+    @JsonBackReference
     private List<ProductAttribute> productAttributes;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("product")
+    @JsonBackReference
     private List<ProductReview> productReviews;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("product")
+    @JsonBackReference
     private List<ProductBackdrop> productBackdrops;
 }
