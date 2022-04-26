@@ -178,7 +178,7 @@
                             </div>
                             <div>
                                 <h3>[[${review.reviewId}]]</h3>
-                                <span>[[${review.tile}]]</span>
+                                <span>[[${review.title}]]</span>
                                 <p>[[${review.content}]]</p>
                             </div>
                         </div>
@@ -220,7 +220,7 @@
                         <input th:field="*{rating}" type="radio" id="star1" name="rate" value="1"/>
                         <label for="star1" title="text"></label>
                     </div>
-                    <input  th:field="*{tile}" type="text" class="form-control mt-3" placeholder="Tiêu đề">
+                    <input  th:field="*{title}" type="text" class="form-control mt-3" placeholder="Tiêu đề">
                     <input type="email" class="form-control mt-3" placeholder="Email">
                     <input type="tel" class="form-control mt-3" placeholder="Số điện thoại">
                     <textarea  th:field="*{content}" type="text" class="form-control mt-3" placeholder="Đánh giá"></textarea>
