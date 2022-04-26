@@ -6,10 +6,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Repository
+@Transactional
 public interface ProductReviewRepository extends JpaRepository<ProductReview, Long> {
 
     @Query(value = "select * from product_reviews where product_id=?1",nativeQuery = true)
