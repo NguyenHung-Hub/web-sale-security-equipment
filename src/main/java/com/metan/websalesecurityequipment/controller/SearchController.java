@@ -65,7 +65,7 @@ public class SearchController {
 
         //Nếu nguoi dung khong nhap
         int currentPage = page.orElse(0);
-        int pageSize = size.orElse(15);
+        int pageSize = size.orElse(16);
 
         Pageable pageable = PageRequest.of(currentPage, pageSize, Sort.by("name"));
         Page<Product> resultPage = null;
@@ -103,7 +103,7 @@ public class SearchController {
                     .boxed().collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
-        return "searchPaginated";
+        return "search";
     }
 
 }

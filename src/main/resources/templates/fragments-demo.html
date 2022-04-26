@@ -61,7 +61,7 @@
         <div class="header-center__search col-lg-7 col-md-6 col-sm-8 col-xs-8">
           <div class="header-center__search-wrapper">
             <div class="header-center_search-entry">
-              <form action="">
+              <!--<form action="">-->
                 <div class="d-flex">
                   <div class="header-center__category-wrapper">
                     <label>
@@ -72,13 +72,14 @@
                       </select>
                     </label>
                   </div>
+                    <form th:action="@{/search}">
                   <input type="search" class="header-center__search-input flex-fill"
-                         placeholder="Tìm kiếm sản phẩm">
+                         placeholder="Tìm kiếm sản phẩm" name="name">
                   <button type="submit" title="Search"
                           class="header-center__search-button text-uppercase text-strong">Tìm
-                    kiếm</button>
+                      kiếm</button></form>
                 </div>
-              </form>
+             <!-- </form>-->
             </div>
           </div>
         </div>

@@ -37,12 +37,12 @@
             </div>
             <div class="header-search">
                 <div class="search-box">
-                    <input
-                            class="search-input"
-                            type="search"
-                            placeholder="Search"
-                    />
-                    <i class="fas fa-search"></i>
+                    <form th:action="@{/search}">
+                        <div class="search-box">
+                            <input class="search-input" type="text" placeholder="Search" name="name" required/>
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="header-user-actions">

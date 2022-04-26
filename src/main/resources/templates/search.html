@@ -55,11 +55,6 @@
                                 document.getElementById("themDanhMuc").style.display = 'block';
                                 document.getElementById("anbotDanhMuc").style.display = 'none';
                            }
-
-
-
-
-
                     </script>
                 </div>
             </div>
@@ -166,10 +161,6 @@
                                 document.getElementById("themThuongHieu").style.display = 'block';
                                 document.getElementById("anBotThuongHieu").style.display = 'none';
                            }
-
-
-
-
                     </script>
                 </div>
             </div>
@@ -259,12 +250,12 @@
                                 <span class="desc-gia-an">
                                     <del>
                                         <span class="desc-gia-an-d">đ</span>
-                                        <span th:text="${product.price}"></span>
+                                        <span th:text="${#numbers.formatDecimal(product.price,1,'DEFAULT',0,'DEFAULT')}"></span>
                                     </del>
                                 </span>
                                 <span class="desc-gia-hien">
                                     <span class="desc-gia-hien-d">đ</span>
-                                    <span th:text="${product.price}"></span>
+                                    <span th:text="${#numbers.formatDecimal(product.price,1,'DEFAULT',0,'DEFAULT')}"></span>
                                 </span>
                             </div>
                             <div class="desc-danhgia">
@@ -290,14 +281,14 @@
         <div class="pagination" th:if="${productPage.totalPages >0}">
             <ul>
                 <li th:class="${0==productPage.number} ? 'active' : ''">
-                    <a th:href="@{/paginated(name=${name}, size=${productPage.size}, page=${1})}">«</a>
+                    <a th:href="@{/search(name=${name}, size=${productPage.size}, page=${1})}">«</a>
                 </li>
 
                 <li class="active" th:each="pageNumber:${pageNumbers}"
                     th:if="${productPage.totalPages >0}"
                     th:class="${pageNumber == productPage.number} ? 'active' : ''">
                     <a id="pageNumber"
-                       th:href="@{/paginated(name=${name}, size=${productPage.size}, page=${pageNumber})}"
+                       th:href="@{/search(name=${name}, size=${productPage.size}, page=${pageNumber})}"
                        class="page-item"
                        th:text="${pageNumber}+1" type="button">
                         <input id="pageNumberHidden" type="hidden" value="${pageNumber}+1">
@@ -305,7 +296,7 @@
                 </li>
 
                 <li th:class="${productPage.totalPages ==productPage.number+1} ? 'active' : ''">
-                    <a th:href="@{/paginated(name=${name}, size=${productPage.size}, page=${productPage.totalPages})}">»</a>
+                    <a th:href="@{/search(name=${name}, size=${productPage.size}, page=${productPage.totalPages})}">»</a>
                 </li>
             </ul>
         </div>
