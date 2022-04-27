@@ -148,7 +148,10 @@
 .single-img .figure>a {
     display: inline-block;
     vertical-align: top;
+    width: 100%;
 }
+
+.single-img .figure
 
 .single-img .figure>a:hover>img {
     opacity: 0.85;

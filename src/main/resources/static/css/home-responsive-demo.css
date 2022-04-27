@@ -1,6 +1,14 @@
 @media (max-width: 1199px) {}
 
-@media (max-width: 991px) {}
+@media (max-width: 991px) {
+    .header-center__shopping-text {
+        display: none;
+    }
+
+    .header-center__price-amount {
+        display: none;
+    }
+}
 
 
 @media (max-width: 767px) {
@@ -10,6 +18,10 @@
     }
 
     .content-first__category {
+        display: none;
+    }
+
+    .img-qc {
         display: none;
     }
 }
