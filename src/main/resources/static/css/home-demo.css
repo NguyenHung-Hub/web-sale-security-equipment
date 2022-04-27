@@ -151,8 +151,6 @@
     width: 100%;
 }
 
-.single-img .figure
-
 .single-img .figure>a:hover>img {
     opacity: 0.85;
     -webkit-transition: 0.3s;

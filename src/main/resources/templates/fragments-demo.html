@@ -17,6 +17,72 @@
 </head>
 <body>
 <header th:fragment="header" id="header" class="header">
+
+<!--  <div class="header-top">-->
+<!--    <div class="container">-->
+<!--      <div class="header-top__navbar d-flex justify-content-between">-->
+<!--        <div class="header-top__navbar-social d-flex align-items-center pull-left">-->
+<!--          <ul class="header-top__navbar-list">-->
+<!--            <li>-->
+<!--              <i class="fas fa-phone-alt fa-sm fa-fw"></i>-->
+<!--              Số điện thoại:-->
+<!--              <span class="text-strong">0-123-456-789</span>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--              <i class="fas fa-envelope fa-sm fa-fw"></i>-->
+<!--              Email:-->
+<!--              <span class="text-strong">demo@email.com</span>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </div>-->
+<!--        <div class="header-top__navbar-info">-->
+<!--          <ul class="header-top__navbar-list">-->
+<!--            <li>-->
+<!--              <i class="fas fa-heart fa-sm fa-fw"></i>-->
+<!--              Wishlist-->
+<!--            </li>-->
+<!--            <li>-->
+<!--              <i class="fas fa-user fa-sm fa-fw"></i>-->
+<!--              Tài khoản-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="header-center">-->
+<!--    <div class="container">-->
+<!--      <div class="row">-->
+<!--        <div class="col-lg-3 col-md-4 col-sm-12">-->
+<!--          <div class="header-center__logo">-->
+<!--            <a href="#">-->
+<!--              <img src="https://demo.wpthemego.com/themes/sw_clickboom/wp-content/themes/clickboom/assets/img/logo-blue.png"-->
+<!--                   alt="Logo">-->
+<!--            </a>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="header-center__search col-lg-7 col-md-6 col-sm-8 col-xs-8">-->
+<!--          <div class="header-center__search-wrapper">-->
+<!--            <div class="header-center_search-entry">-->
+<!--              &lt;!&ndash;<form action="">&ndash;&gt;-->
+<!--                <div class="d-flex">-->
+<!--                  <div class="header-center__category-wrapper">-->
+<!--                    <label>-->
+<!--                      <select name="search_category">-->
+<!--                        <option value="">Tất cả danh mục</option>-->
+<!--                        <option value="8">Camera quan sát</option>-->
+<!--                        <option value="9">Đầu ghi hình</option>-->
+<!--                      </select>-->
+<!--                    </label>-->
+<!--                  </div>-->
+<!--                    <form th:action="@{/search}">-->
+<!--                  <input type="search" class="header-center__search-input flex-fill"-->
+<!--                         placeholder="Tìm kiếm sản phẩm" name="name">-->
+<!--                  <button type="submit" title="Search"-->
+<!--                          class="header-center__search-button text-uppercase text-strong">Tìm-->
+<!--                      kiếm</button></form>-->
+<!--                </div>-->
+<!--             &lt;!&ndash; </form>&ndash;&gt;-->
     <div class="header-top">
         <div class="container">
             <div class="header-top__navbar d-flex justify-content-between">
@@ -63,7 +129,7 @@
                 <div class="header-center__search col-7">
                     <div class="header-center__search-wrapper">
                         <div class="header-center_search-entry">
-                            <form action="">
+                            <!--<form action="">-->
                                 <div class="d-flex">
                                     <div class="header-center__category-wrapper">
                                         <label>
@@ -74,14 +140,15 @@
                                             </select>
                                         </label>
                                     </div>
+                                    <form th:action="@{/search}">
                                     <input type="search" class="header-center__search-input flex-fill"
-                                           placeholder="Tìm kiếm sản phẩm">
+                                           placeholder="Tìm kiếm sản phẩm" name="name">
                                     <button type="submit" title="Search"
                                             class="header-center__search-button text-uppercase text-strong">Tìm
                                         kiếm
-                                    </button>
+                                    </button></form>
                                 </div>
-                            </form>
+                           <!-- </form>-->
                         </div>
                     </div>
                 </div>

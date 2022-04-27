@@ -45,7 +45,3 @@ spring:
             scope:
               - email
               - public_profile
-    user:
-      name: chinh
-      password: chinh123
-      roles: USER

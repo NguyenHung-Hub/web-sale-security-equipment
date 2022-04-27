@@ -18,6 +18,7 @@ public class CategoryServiceImpl implements CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
+
     @Override
     public List<Category> findAll() {
         return categoryRepository.findAll();
