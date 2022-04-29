@@ -36,6 +36,19 @@ public class HomeController {
         model.addAttribute("TOP_PRODUCT_LIST", topProducts);
         model.addAttribute("CATEGORIES", categories);
 
+        return "home";
+    }
+
+    @GetMapping("/home-demo")
+    public String showFormHomeDemo(Model model) {
+        List<Product> products = productService.findAll();
+        List<Product> topProducts = productService.findTopProduct();
+        List<Category> categories = categoryService.findAll();
+
+        model.addAttribute("PRODUCT_LIST", products);
+        model.addAttribute("TOP_PRODUCT_LIST", topProducts);
+        model.addAttribute("CATEGORIES", categories);
+
         return "home-demo";
     }
 

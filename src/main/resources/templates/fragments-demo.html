@@ -17,7 +17,7 @@
 </head>
 <body>
 <header th:fragment="header" id="header" class="header">
-    <div class="header-top">
+    <div class="header-top d-lg-block d-none">
         <div class="container">
             <div class="header-top__navbar d-flex justify-content-between">
                 <div class="header-top__navbar-social d-flex align-items-center pull-left">
@@ -49,23 +49,23 @@
             </div>
         </div>
     </div>
-    <div class="header-center">
+    <div class="header-center d-lg-block d-none">
         <div class="container">
             <div class="row">
-                <div class="col-3">
+                <div class="col-md-3">
                     <div class="header-center__logo">
                         <a href="#">
-                            <img src="https://demo.wpthemego.com/themes/sw_clickboom/wp-content/themes/clickboom/assets/img/logo-blue.png"
+                            <img src="https://vuhoangtelecom.vn/wp-content/uploads/2020/04/logo-vuhoangtelecom.svg"
                                  alt="Logo">
                         </a>
                     </div>
                 </div>
-                <div class="header-center__search col-7">
+                <div class="header-center__search col-md-7">
                     <div class="header-center__search-wrapper">
                         <div class="header-center_search-entry">
                             <form action="">
                                 <div class="d-flex">
-                                    <div class="header-center__category-wrapper">
+                                    <div class="search-category-wrapper">
                                         <label>
                                             <select name="search_category">
                                                 <option value="">Tất cả danh mục</option>
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-2">
+                <div class="col-md-2">
                     <div class="header-center__form-minicart">
                         <div class="header-center__cart-icon">
                                     <span class="header-center__cart-number">
@@ -119,7 +119,7 @@
             </div>
         </div>
     </div>
-    <div class="header-bottom">
+    <div class="header-bottom d-none">
         <div class="container">
             <div class="row">
                 <div class="header-bottom__navbar-category col-lg-3 col-md-3 col-sm-5">
@@ -214,16 +214,60 @@
         </div>
     </div>
 </header>
-<script th:fragment="sticky" th:src="@{/js/sticky.js}"></script>
+
+<div id="header-mobile" th:fragment="header-mobile" class="header-mobile d-lg-none d-block">
+    <nav class="nav-menu-mobile">
+        <div class="container-fluid">
+            <div class="header-mobile-top clearfix">
+                <button type="button" class="btn-side-nav pull-left">
+                    <i class="icon-bar"></i>
+                    <i class="icon-bar"></i>
+                    <i class="icon-bar"></i>
+                </button>
+                <a href="" class="navbar-brand pull-left">
+                    <img src="https://vuhoangtelecom.vn/wp-content/themes/vuhoangtelecom/assets/logo-white.svg"
+                         alt="Demo">
+                </a>
+                <a href="" class="navbar-cart pull-right">
+                    <div class="cart-icon-wrapper">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </a>
+            </div>
+            <div class="search-form-mobile">
+                <div class="input-group md-form form-sm form-2 pl-0">
+                    <form action="" class="search-form-header-mobile">
+                        <input id="search-input-mobile" type="search" class="form-control search-input-mobile"
+                               placeholder="Tìm kiếm sản phẩm">
+                        <div class="input-group-append">
+                            <button type="submit" title="Search"
+                                    class="">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div th:fragment="over-suggest" class="over-suggest"></div>
+
+
 <script th:fragment="glider" src="https://cdnjs.cloudflare.com/ajax/libs/glider-js/1.6.6/glider.min.js"
         integrity="sha512-RidPlemZ+Xtdq62dXb81kYFycgFQJ71CKg+YbKw+deBWB0TLIqCraOn6k0CWDH2rGvE1a8ruqMB+4E4OLVJ7Dg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script th:fragment="home" th:src="@{/js/home.js}"></script>
 <script th:fragment="jquery" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
 <script th:fragment="bootstrap" src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
         crossorigin="anonymous"></script>
+<script th:fragment="hammer" src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"
+        integrity="sha512-UXumZrZNiOwnTcZSHLOfcTs0aos2MzBWHXOHOuB0J/R44QB0dwY5JgfbvljXcklVf65Gc4El6RjZ+lnwd2az2g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script th:fragment="header-script" th:src="@{/js/header.js}"></script>
+<script th:fragment="home" th:src="@{/js/home.js}"></script>
 </body>
 </html>
