@@ -25,6 +25,7 @@ html {
     line-height: 1.6rem;
     font-family: 'Poppins', 'sans-serif';
     box-sizing: border-box;
+    color: var(--text-color);
 }
 
 @media (min-width: 1200px) {
@@ -67,6 +68,7 @@ html {
 
 .row-fluid > .column-container > .column-inner {
     padding-top: 35px;
+    padding-bottom: 35px;
 }
 
 .row > .column-container > .column-inner {
