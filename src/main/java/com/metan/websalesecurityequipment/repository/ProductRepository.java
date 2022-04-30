@@ -27,6 +27,10 @@ public interface ProductRepository extends JpaRepository<Product, String> {
     //Hao
     public List<Product> findByNameContaining(String name);
 
+    @Query(value = "select * from products p join brands b on p.brand_id = b.brand_id join categories c on c.category_id = p.category_id\n" +
+            "where concat(c.name, b.name) REGEXP '?1'", nativeQuery = true)
+    List<Product> searchByNameCateBrand(String name);
+
     public Page<Product> findAll(Pageable pageable);
 
     public Page<Product> findByNameContaining(String name, Pageable pageable);

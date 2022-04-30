@@ -32,6 +32,7 @@ import java.util.stream.IntStream;
 @RequestMapping
 public class SearchController {
 
+    private String paramName = null;
     @Autowired
     private ProductService productService;
     @Autowired
@@ -41,12 +42,16 @@ public class SearchController {
     @Autowired
     private ProductReviewService productReviewService;
 
+    public SearchController() {
+    }
+
 
     @GetMapping(value = "search")
     public String showSearch1(ModelMap model, @RequestParam(name = "name") String name,
                               @RequestParam("page") Optional<Integer> page,
                               @RequestParam("size") Optional<Integer> size) {
 
+        paramName = name;
         List<Brand> brands = brandService.findAll();
         List<Category> categories = categoryService.findAll();
 
@@ -88,7 +93,7 @@ public class SearchController {
         model.addAttribute("categoriesFirst", categoriesFirst);
         model.addAttribute("categoriesLast", categoriesLast);
         model.addAttribute("productPage", resultPage);
-        model.addAttribute("listRating",getAvgRating(productService.findAll()));
+        model.addAttribute("listRating", getAvgRating(productService.findAll()));
         //model.addAttribute("productPage", resultPage);
 
         int totalPages = resultPage.getTotalPages() - 1;
@@ -111,6 +116,15 @@ public class SearchController {
             model.addAttribute("pageNumbers", pageNumbers);
         }
         return "search";
+    }
+
+
+    @GetMapping(value = "search/filter")
+    public String showFilter(ModelMap model,@RequestParam(name = "cate", required = false) String cate ,
+                                                @RequestParam(name = "brand", required = false) String brand) {
+        String name  = (cate==null?" ":cate)+(brand==null?"":brand);
+
+        return "redirect:/search?name="+paramName;
     }
 
     public HashMap<String, Double> getAvgRating(List<Product> products) {

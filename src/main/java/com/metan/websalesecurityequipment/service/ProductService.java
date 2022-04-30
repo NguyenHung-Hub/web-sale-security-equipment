@@ -22,6 +22,8 @@ public interface ProductService {
     //Hao
     List<Product> findByNameContaining(String name);
 
+    List<Product> searchByNameCateBrand(String name);
+
     Page<Product> findAll(Pageable pageable);
 
     Page<Product> findByNameContaining(String name, Pageable pageable);

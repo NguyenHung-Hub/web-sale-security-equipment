@@ -22,7 +22,7 @@
                         <div class="group-filter-header">Theo Danh Mục</div>
                         <div class="group-filter-content" th:each="category1:${categoriesFirst}">
                             <div class="group-filter-content-item">
-                                <input type="checkbox" name="">
+                                <input type="checkbox" name="" th:onclick="window.location.href='/search/filter?cate=[[${category1.name}]]'; return false;">
                                 <label th:text="${category1.name}"></label>
                             </div>
                         </div>
@@ -30,7 +30,7 @@
                     <div id="danhMuc" class="group-filter-content-add" th:if="${categoriesLast != null}">
                         <div th:each="category2:${categoriesLast}">
                             <div class="group-filter-content-item">
-                                <input type="checkbox" name="">
+                                <input type="checkbox" name="" th:onclick="window.location.href='/search/filter?cate=[[${category2.name}]]'; return false;">
                                 <label th:text="${category2.name}"></label>
                             </div>
                         </div>
@@ -128,7 +128,7 @@
                         <div class="group-filter-header">Thương hiệu</div>
                         <div class="group-filter-content" th:each="brand1:${brandsFirst}">
                             <div class="group-filter-content-item">
-                                <input type="checkbox" name="">
+                                <input type="checkbox" name="" th:onclick="window.location.href='/search/filter?brand=[[${brand1.name}]]'; return false;">
                                 <label th:text="${brand1.name}"></label>
                             </div>
                         </div>
@@ -136,7 +136,7 @@
                     <div id="thuongHieu" class="group-filter-content-add" th:if="${brandsLast != null}">
                         <div th:each="brand2:${brandsLast}">
                             <div class="group-filter-content-item">
-                                <input type="checkbox" name="">
+                                <input type="checkbox" name="" th:onclick="window.location.href='/search/filter?brand=[[${brand2.name}]]'; return false;">
                                 <label th:text="${brand2.name}"></label>
                             </div>
                         </div>
@@ -191,9 +191,6 @@
                             }
                         }
                     }
-
-
-
                 </script>
             </div>
 
