@@ -30,8 +30,7 @@
                                         <li th:each="category: ${CATEGORIES}" class="nav-item dropdown">
                                             <a href="" class="nav-link dropdown-toggle">
                                                         <span class="have-title">
-                                                            <span class="menu-title">
-                                                                [[${category.name}]]
+                                                            <span class="menu-title" th:text="${category.name}">
                                                             </span>
                                                         </span>
                                             </a>

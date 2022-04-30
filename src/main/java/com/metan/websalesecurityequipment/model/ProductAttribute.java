@@ -14,7 +14,7 @@ import java.util.Date;
 @IdClass(ProductAttributePK.class)
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public @Data
-@EqualsAndHashCode(of = {"product", "attributeValue"})
+@EqualsAndHashCode(of = {"product", "attribute"})
 class ProductAttribute {
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
@@ -23,11 +23,12 @@ class ProductAttribute {
     private Product product;
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "value_id", columnDefinition = "nvarchar(20)")
+    @JoinColumn(name = "attribute_id", columnDefinition = "nvarchar(20)")
     @JsonManagedReference
-    private AttributeValue attributeValue;
+    private Attribute attribute;
     @Column(name = "created_at", columnDefinition = "datetime")
     private Date createdAt;
     @Column(name = "modified_at", columnDefinition = "datetime")
     private Date modifiedAt;
+    private String value;
 }
