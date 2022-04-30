@@ -10,12 +10,6 @@ body {
     font-family: inherit;
 }
 
-body img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-}
-
 body a:hover {
     text-decoration: none;
 }

@@ -23,7 +23,7 @@ class Attribute {
     private String name;
     @OneToMany(mappedBy = "attribute", fetch = FetchType.LAZY)
     @JsonBackReference
-    private List<AttributeValue> attributeValues;
+    private List<ProductAttribute> productAttributes;
     @ManyToOne
     @JoinColumn(name = "category_id")
     @JsonManagedReference
