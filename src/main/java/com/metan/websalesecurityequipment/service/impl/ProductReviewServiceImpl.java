@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,11 +17,13 @@ public class ProductReviewServiceImpl implements ProductReviewService {
     private ProductReviewRepository reviewRepository;
 
     @Override
+    @Transactional
     public List<ProductReview> findByProductId(String productId) {
         return reviewRepository.findByProductId(productId);
     }
 
     @Override
+    @Transactional
     public Page<ProductReview> findByProductId(String productId, Pageable pageable) {
         return reviewRepository.findByProductId(productId,pageable);
     }

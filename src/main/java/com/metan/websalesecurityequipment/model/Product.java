@@ -35,7 +35,7 @@ class Product {
     @JoinColumn(name = "category_id")
     @JsonIgnoreProperties("products")
     private Category category;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "discount_id")
     private ProductDiscount productDiscount;
     @JsonBackReference
@@ -63,7 +63,7 @@ class Product {
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     @JsonBackReference
     private List<ProductAttribute> productAttributes;
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product")
     @JsonBackReference
     private List<ProductReview> productReviews;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)

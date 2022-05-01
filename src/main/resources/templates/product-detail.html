@@ -104,8 +104,8 @@
                     </div>
                 </div>
                 <div class="mt-5">
-                    <p>Loại: [[${product.productType.name}]]</p>
-                    <p>Từ khóa liên quan: [[${product.productType.name}]]</p>
+                    <p>Loại: </p>
+                    <p>Từ khóa liên quan: </p>
                 </div>
             </div>
         </div>
@@ -113,9 +113,8 @@
     <!-- mô tả chi tiết, đánh giá , thông tin thêm-->
     <div class="mt-5">
         <ul id="tabs" class="nav nav-tabs" role="tablist">
-            <li class="nav-item"><a data-toggle="tab" href="#ChiTiet" class="nav-link active text-dark">Chi tiết sản
-                phẩm</a></li>
-            <li class="nav-item"><a data-toggle="tab" href="#Them" class="nav-link text-dark">Thông tin thêm</a></li>
+            <li class="nav-item"><a data-toggle="tab" href="#ChiTiet" class="nav-link active text-dark">Chi tiết sản phẩm</a></li>
+            <li class="nav-item"><a data-toggle="tab" href="#ThemThongTin" class="nav-link text-dark">Thông tin thêm</a></li>
             <li class="nav-item"><a data-toggle="tab" href="#DanhGia" class="nav-link text-dark">Đánh giá</a></li>
         </ul>
         <div class="tab-content mt-5">
@@ -155,6 +154,46 @@
                     </tbody>
                 </table>
             </div>
+            <div id="ThemThongTin" class="container tab-pane fade">
+                <h3 class="bg-light p-2">MÔ TẢ SẢN PHẨM</h3>
+                <p class="mt-5" th:text="${product.longDesc}">
+                    Lưu ý: Nhiều trường hợp do dùng thẻ nhớ không chính hãng nên camera không nhận thẻ nhớ, trong trường
+                    hợp đó shop không hỗ trợ lỗi đọc thẻ nhớ. Để được hỗ trợ tốt nhất hay mua kèm thẻ nhớ của shop.
+                    Camera Wifi C6N sử dụng trong nhà: Tùy vào phân loại thẻ
+                    nhớ thì sẽ có giá khác nhau: – Không kèm thẻ: Không lưu lại lịch sử, không xem lại được – Kèm thẻ
+                    32gb lưu tầm 1-3 ngày – Kèm thẻ 64gb lưu tầm 5-7 ngày – Kèm thẻ 128gb lưu tầm 12-20 ngày Khuyến
+                    khích nên mua từ thẻ 64Gb, shop hỗ
+                    trợ nâng cấp thẻ nhớ khi mua thẻ nhớ tại shop Phân loại camera C6N 2M và C6N 4M: – C6N 2M: Có độ
+                    phân giải HD 1080p 2 MegaPixel – C6N 4M: Có độ phân giải 2K, 4 MegaPixel, cho hình ảnh rõ nét hơn,hỗ
+                    trợ định dạng nén H265 Khi có
+                    chuyển động trong khung hình thì camera mới ghi lại nên tùy từng vào khu vực ngoài đường hay trong
+                    nhà thì sẽ ảnh hưởng đến thời gian lưu trữ của camera. C6N không có tính năng chống nước nên không
+                    được sử dụng ngoài trời, để sử
+                    dụng ngoài trời nên mua các mã C3WN, C3N, C3W, C3X, C8C, C8W Các chức năng cơ bản của camera: – Độ
+                    phân giải HD 2.0 MegaPixel/ 2K 4.0 MegaPixel – Xoay 360 độ, có chế độ tự động theo dõi người hoặc
+                    vật – Hồng ngoại 10m – Phát
+                    hiện chuyển động thông minh. – Tích hợp Micro và Loa – Hỗ trợ đàm thoại 2 chiều. – Hỗ
+                    trợ khe cắm thẻ nhớ đến 256GB. – Kết nối wifi, theo dõi camera khi có mạng Bộ sản phẩm camera
+                    gồm có: Camera, cục nguồn, dây
+                    nguồn,chân đế tròn,dây nguồn dài 3M Hướng dẫn cài đặt: – Tài ứng dụng ezviz trên Google Play cho
+                    android hoặc App Store cho iphone – Tạo tài khoản ezviz bằng số điện thoại – Quét camera, kết nối
+                    camera với mạng wifi đang sử dụng
+                    Link hướng dẫn chi tiết: https://www.youtube.com/watch?v=ePxvp6p9gCI Nếu vẫn không cài đặt được thì
+                    hay liên hệ với shop để được hỗ trợ cài đặt. Các lỗi gặp phải khi cài đặt: 1, Camera không kết nối
+                    được wifi: Do nhập mật khẩu
+                    wifi không đúng nên dẫn đến camera không kết nối được wifi, hay quên wifi ở điện thoại rồi nhập lại
+                    mật khẩu khi cài đặt camera để chắc chắn mật khẩu nhập đúng 2, Camera hỏi mật khẩu mã hóa để xem
+                    video: 6 ký tự dưới chân đế camera
+                    sau chữ Verification Code: 3, Không thấy chỗ nhét thẻ nhớ: Hãy dùng tay quay camera lên trời để nhìn
+                    thấy khe cắm thẻ nhớ 4, Camera không nhận thẻ nhớ: Hãy tắt app ezviz để vào lại để cho camera nhận
+                    thẻ nhớ Các lỗi khác có thể
+                    do lỗi nhà sản xuất, hãy liên hệ với shop để được hỗ trợ. Thông tin bảo hành: Sản phẩm được phân
+                    phối chính hãng bởi nhà phân phối Anh Ngọc, Nhà An toàn, Lê Hoàng, ADNT có địa chỉ tại HN, HCM, Đà
+                    Nẵng. Hãy liên hệ với shop để được
+                    hướng dẫn bảo hành.
+                </p>
+
+            </div>
             <!-- đánh giá -->
             <div id="DanhGia" class="container tab-pane fade">
                 <h2 class="bg-light p-2">ĐÁNH GIÁ SẢN PHẨM</h2>
@@ -178,7 +217,7 @@
                                 <span class="fa fa-star" th:classappend="${review.rating>=5}? checked-rating"></span>
                             </div>
                             <div>
-                                <h3>[[${review.reviewId}]]</h3>
+                                <h3>[[${review.user.firstName+" "+ lastName}]]</h3>
                                 <span>[[${review.title}]]</span>
                                 <p>[[${review.content}]]</p>
                             </div>
@@ -190,7 +229,7 @@
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
                             <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <th:block th:each="index: ${#numbers.sequence(0,reviews.getTotalPages())}">
+                            <th:block th:each="index: ${#numbers.sequence(0,reviews.getTotalPages()-1)}">
                                 <li class="page-item"><a id="btnPage" type="button" class="page-link"
                                                          th:href="@{/product/detail#DanhGia(productId=${product.productId},page=${index})}">[[${index+1}]]</a>
                                 </li>
@@ -221,8 +260,8 @@
                         <label for="star1" title="text"></label>
                     </div>
                     <input th:field="*{title}" type="text" class="form-control mt-3" placeholder="Tiêu đề">
-                    <input type="email" class="form-control mt-3" placeholder="Email">
-                    <input type="tel" class="form-control mt-3" placeholder="Số điện thoại">
+                    <input th:field="*{email}" type="email" class="form-control mt-3" placeholder="Email">
+                    <input th:field="*{phoneNumber}" type="tel" class="form-control mt-3" placeholder="Số điện thoại">
                     <textarea th:field="*{content}" type="text" class="form-control mt-3"
                               placeholder="Đánh giá"></textarea>
                     <input type="submit" class="btn btn-dark mt-3" value="Gửi">
@@ -232,46 +271,7 @@
 
 
         </div>
-        <div id="Them" class="container tab-pane fade">
-            <h3 class="bg-light p-2">MÔ TẢ SẢN PHẨM</h3>
-            <p class="mt-5">
-                Lưu ý: Nhiều trường hợp do dùng thẻ nhớ không chính hãng nên camera không nhận thẻ nhớ, trong trường
-                hợp đó shop không hỗ trợ lỗi đọc thẻ nhớ. Để được hỗ trợ tốt nhất hay mua kèm thẻ nhớ của shop.
-                Camera Wifi C6N sử dụng trong nhà: Tùy vào phân loại thẻ
-                nhớ thì sẽ có giá khác nhau: – Không kèm thẻ: Không lưu lại lịch sử, không xem lại được – Kèm thẻ
-                32gb lưu tầm 1-3 ngày – Kèm thẻ 64gb lưu tầm 5-7 ngày – Kèm thẻ 128gb lưu tầm 12-20 ngày Khuyến
-                khích nên mua từ thẻ 64Gb, shop hỗ
-                trợ nâng cấp thẻ nhớ khi mua thẻ nhớ tại shop Phân loại camera C6N 2M và C6N 4M: – C6N 2M: Có độ
-                phân giải HD 1080p 2 MegaPixel – C6N 4M: Có độ phân giải 2K, 4 MegaPixel, cho hình ảnh rõ nét hơn,hỗ
-                trợ định dạng nén H265 Khi có
-                chuyển động trong khung hình thì camera mới ghi lại nên tùy từng vào khu vực ngoài đường hay trong
-                nhà thì sẽ ảnh hưởng đến thời gian lưu trữ của camera. C6N không có tính năng chống nước nên không
-                được sử dụng ngoài trời, để sử
-                dụng ngoài trời nên mua các mã C3WN, C3N, C3W, C3X, C8C, C8W Các chức năng cơ bản của camera: – Độ
-                phân giải HD 2.0 MegaPixel/ 2K 4.0 MegaPixel – Xoay 360 độ, có chế độ tự động theo dõi người hoặc
-                vật – Hồng ngoại 10m – Phát
-                hiện chuyển động thông minh. – Tích hợp Micro và Loa – Hỗ trợ đàm thoại 2 chiều. – Hỗ
-                trợ khe cắm thẻ nhớ đến 256GB. – Kết nối wifi, theo dõi camera khi có mạng Bộ sản phẩm camera
-                gồm có: Camera, cục nguồn, dây
-                nguồn,chân đế tròn,dây nguồn dài 3M Hướng dẫn cài đặt: – Tài ứng dụng ezviz trên Google Play cho
-                android hoặc App Store cho iphone – Tạo tài khoản ezviz bằng số điện thoại – Quét camera, kết nối
-                camera với mạng wifi đang sử dụng
-                Link hướng dẫn chi tiết: https://www.youtube.com/watch?v=ePxvp6p9gCI Nếu vẫn không cài đặt được thì
-                hay liên hệ với shop để được hỗ trợ cài đặt. Các lỗi gặp phải khi cài đặt: 1, Camera không kết nối
-                được wifi: Do nhập mật khẩu
-                wifi không đúng nên dẫn đến camera không kết nối được wifi, hay quên wifi ở điện thoại rồi nhập lại
-                mật khẩu khi cài đặt camera để chắc chắn mật khẩu nhập đúng 2, Camera hỏi mật khẩu mã hóa để xem
-                video: 6 ký tự dưới chân đế camera
-                sau chữ Verification Code: 3, Không thấy chỗ nhét thẻ nhớ: Hãy dùng tay quay camera lên trời để nhìn
-                thấy khe cắm thẻ nhớ 4, Camera không nhận thẻ nhớ: Hãy tắt app ezviz để vào lại để cho camera nhận
-                thẻ nhớ Các lỗi khác có thể
-                do lỗi nhà sản xuất, hãy liên hệ với shop để được hỗ trợ. Thông tin bảo hành: Sản phẩm được phân
-                phối chính hãng bởi nhà phân phối Anh Ngọc, Nhà An toàn, Lê Hoàng, ADNT có địa chỉ tại HN, HCM, Đà
-                Nẵng. Hãy liên hệ với shop để được
-                hướng dẫn bảo hành.
-            </p>
 
-        </div>
     </div>
 </div>
 
