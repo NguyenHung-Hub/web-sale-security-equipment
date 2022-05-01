@@ -51,3 +51,17 @@ spring:
       roles: USER
 server:
   port: 9999
+#aws
+access:
+  key:
+    id: AKIAYYHEHMO3LILUQAGD
+    secret: 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
+s3:
+  region:
+    name: us-east-1
+  bucket:
+    name: chinh1506
+#  access.key.id=AKIAYYHEHMO3LILUQAGD
+#  access.key.secret=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
+#  s3.region.name=us-east-1
+#  s3.bucket.name=chinh1506

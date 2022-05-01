@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" lang="en">
+      xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
 
 <head>
     <meta charset="UTF-8">
@@ -200,15 +201,14 @@
                 </th:block>
 
 
-
                 <!-- form đánh giá -->
             </div>
 
             <div id="FormDanhGia" class="mt-5">
                 <h2>THÊM ĐÁNH GIÁ MỚI</h2>
 
-                <form class="form-group"  th:action="@{/product/review}" th:object="${reviewProduct}">
-                    <div  class="rating mt-5">
+                <form class="form-group" th:action="@{/product/review}" th:object="${reviewProduct}">
+                    <div class="rating mt-5">
                         <input th:field="*{rating}" type="radio" id="star5" name="rate" value="5"/>
                         <label for="star5" title="text"></label>
                         <input th:field="*{rating}" type="radio" id="star4" name="rate" value="4"/>
@@ -220,10 +220,11 @@
                         <input th:field="*{rating}" type="radio" id="star1" name="rate" value="1"/>
                         <label for="star1" title="text"></label>
                     </div>
-                    <input  th:field="*{title}" type="text" class="form-control mt-3" placeholder="Tiêu đề">
+                    <input th:field="*{title}" type="text" class="form-control mt-3" placeholder="Tiêu đề">
                     <input type="email" class="form-control mt-3" placeholder="Email">
                     <input type="tel" class="form-control mt-3" placeholder="Số điện thoại">
-                    <textarea  th:field="*{content}" type="text" class="form-control mt-3" placeholder="Đánh giá"></textarea>
+                    <textarea th:field="*{content}" type="text" class="form-control mt-3"
+                              placeholder="Đánh giá"></textarea>
                     <input type="submit" class="btn btn-dark mt-3" value="Gửi">
                 </form>
 
