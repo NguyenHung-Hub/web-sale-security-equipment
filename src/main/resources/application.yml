@@ -10,7 +10,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL55Dialect
@@ -45,10 +45,6 @@ spring:
             scope:
               - email
               - public_profile
-    user:
-      name: chinh
-      password: chinh123
-      roles: USER
 server:
   port: 9999
 #aws

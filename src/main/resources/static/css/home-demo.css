@@ -1,7 +1,3 @@
-.home-container {
-    height: 1500px;
-}
-
 .content-first__category {
     position: sticky;
     left: 0;
@@ -50,7 +46,6 @@
     padding: 0 20px;
     border: 0;
     line-height: 1.42857;
-    z-index: 1;
     cursor: pointer;
     width: 100%;
     position: relative;
@@ -66,7 +61,6 @@
     position: relative;
     padding: 15px;
     font-weight: 400;
-    text-transform: capitalize;
     transition: none;
     background: url(../imgs/icon-menu-cat.png) no-repeat left center;
 }
@@ -91,31 +85,13 @@
     border: 0;
 }
 
-.banner-wrapper .carousel-item {
-    height: 420px;
-    width: 100%;
-    color: #fff;
-    border-radius: 5px;
-}
-
-.banner-wrapper .overlay-img {
-    position: absolute;
-    border-radius: 5px;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    top: 0;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-}
-
 .banner-wrapper .carousel-indicators {
     left: 0;
     top: 100%;
     transform: matrix(1, 0, 0, 1, 30, -32);
     right: auto;
     margin: auto;
+    z-index: 1;
 }
 
 .banner-wrapper .carousel-indicators>li {
@@ -168,7 +144,7 @@
 .single-img .figure>a {
     display: inline-block;
     vertical-align: top;
-    max-width: 100%;
+    width: 100%;
 }
 
 .single-img .figure>a:hover>img {
@@ -201,7 +177,6 @@
     top: -8px;
     position: absolute;
     right: 0;
-    z-index: 3;
 }
 
 .hot-product-wrapper .custom-navigation a {
@@ -229,40 +204,36 @@
 .hot-product-wrapper .item-detail {
     margin-bottom: 20px;
     overflow: hidden;
+    border: 0;
 }
 
-.hot-product-wrapper .item-detail .item-img {
+.hot-product-wrapper .item-detail img {
     margin-right: 10px;
 }
 
-.hot-product-wrapper .item-detail .item-img:hover {
+.hot-product-wrapper .item-detail img:hover {
     border: 1px solid var(--primary-color);
 }
 
-.hot-product-wrapper .item-detail .item-img a {
-    display: block;
-    width: 98px;
-    height: 98px;
-}
-
-.hot-product-wrapper .item-detail .item-img a > img {
-    object-fit: cover;
-    object-position: center;
-    height: 100%;
-}
-
-.hot-product-wrapper .item-detail a {
-    color: var(--primary-color);
-}
-
-.hot-product-wrapper .item-content {
+/*.hot-product-wrapper .item-detail .item-img a {*/
+/*    display: block;*/
+/*    width: 98px;*/
+/*}*/
+.hot-product-wrapper .item-detail .card-body {
     padding: 5px 0;
 }
 
-.hot-product-wrapper .item-content a {
+/*.hot-product-wrapper .item-detail .card-title {*/
+/*    color: var(--primary-color);*/
+/*}*/
+
+/*.hot-product-wrapper .item-content {*/
+/*    padding: 5px 0;*/
+/*}*/
+
+.hot-product-wrapper .item-detail .card-title {
     font-size: 1.4rem;
     font-weight: 600;
-    width: 160px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -271,7 +242,7 @@
     margin: 0 10px 8px 0;
 }
 
-.hot-product-wrapper .item-content .rating {
+.hot-product-wrapper .item-detail .rating {
     display: inline-block;
     overflow: hidden;
     color: #ccc;
@@ -279,59 +250,11 @@
     margin: 0 10px 10px 0;
 }
 
-.hot-product-wrapper .item-content .item-price {
+.hot-product-wrapper .item-detail .item-price {
     color: var(--primary-color);
     font-size: 1.8rem;
     font-weight: 600;
     margin-bottom: 10px;
-}
-
-.product-list-wrapper .new-arrival {
-    position: relative;
-}
-
-.product-list-wrapper .new-arrival .nav.nav-tabs {
-    position: absolute;
-    top: 0;
-    right: 100px;
-    z-index: 5;
-    border: 0;
-}
-
-.product-list-wrapper .new-arrival .nav.nav-tabs>li {
-    margin: 0;
-    display: block;
-}
-
-.product-list-wrapper .new-arrival .nav.nav-tabs>li>a {
-    color: #222;
-    font-size: 14px;
-    text-transform: capitalize;
-    font-weight: 600;
-    padding: 0 14px;
-    margin: 0;
-    position: relative;
-    border: 1px solid transparent;
-}
-
-.product-list-wrapper .new-arrival .nav.nav-tabs>li>a:hover {
-    color: var(--primary-color);
-}
-
-.product-list-wrapper .new-arrival .nav.nav-tabs>li>a::before {
-    position: absolute;
-    content: "";
-    width: 20px;
-    height: 3px;
-    background-color: var(--primary-color);
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-}
-
-.product-list-wrapper .new-arrival .nav.nav-tabs>li>a.active::before {
-    opacity: 1;
 }
 
 .card-product {
@@ -347,7 +270,6 @@
 
 .card-product .card-product-wrapper img {
     width: 100%;
-    height: 220px;
     object-fit: cover;
     object-position: center;
     transition: transform .2s, background-color .3s ease-in-out;
@@ -370,7 +292,6 @@
     background-color: rgba(0, 0, 0, 0.3);
     transition: 0.4s;
     opacity: 0;
-    z-index: 99;
 }
 
 .card-product:hover .card-product-wrapper img,
@@ -394,10 +315,67 @@
     font-size: 1.3rem;
     font-weight: 400;
     text-decoration: line-through;
-    margin-right: 10px;
+    margin-right: 5px;
 }
 
 .card-product .card-product-wrapper .card-price {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     color: var(--primary-color);
+}
+
+.glider-contain .glider-prev,
+.glider-contain .glider-next {
+    top: -60px;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background-color: #fff;
+    color: #ddd;
+    opacity: 1;
+    font-size: 1.8rem;
+    box-shadow: none;
+    text-align: center;
+}
+
+.glider-contain .glider-prev:hover,
+.glider-contain .glider-next:hover {
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.glider-contain .glider-next {
+    right: 0;
+    left: auto;
+}
+
+.glider-contain .glider-prev {
+    right: 35px;
+    left: auto;
+}
+
+.glider-contain .glider-prev::before {
+    content: '\f104';
+}
+
+.glider-contain .glider-next::before {
+    content: '\f105';
+}
+
+.glider-contain .glider-prev::before,
+.glider-contain .glider-next::before {
+    line-height: 28px;
+    font-family: 'Font Awesome 5 Free', sans-serif;
+    font-weight: 900;
+}
+
+.new-arrival .load-more a {
+    font-size: 1.4rem;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.new-arrival .load-more a:hover {
+    color: #fff;
 }

@@ -14,8 +14,8 @@ import java.util.List;
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, ignoreUnknown = true)
 public @Setter
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(of = "productId")
 class Product {
     @Id
@@ -56,10 +56,10 @@ class Product {
     private Date createdAt;
     @Column(name = "modified_at", columnDefinition = "datetime")
     private Date modifiedAt;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "type_id")
-    @JsonIgnoreProperties("products")
-    private ProductType productType;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "type_id")
+//    @JsonIgnoreProperties("products")
+//    private ProductType productType;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     @JsonBackReference
     private List<ProductAttribute> productAttributes;
