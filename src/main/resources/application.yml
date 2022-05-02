@@ -6,7 +6,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/web-sale-security-equipment?useUnicode=yes&characterEncoding=UTF-8
     username: root
-    password: huyhoang14901
+    password:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -45,3 +45,19 @@ spring:
             scope:
               - email
               - public_profile
+server:
+  port: 9999
+#aws
+access:
+  key:
+    id: AKIAYYHEHMO3LILUQAGD
+    secret: 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
+s3:
+  region:
+    name: us-east-1
+  bucket:
+    name: chinh1506
+#  access.key.id=AKIAYYHEHMO3LILUQAGD
+#  access.key.secret=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
+#  s3.region.name=us-east-1
+#  s3.bucket.name=chinh1506
