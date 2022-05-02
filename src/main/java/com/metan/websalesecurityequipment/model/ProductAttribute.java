@@ -23,7 +23,7 @@ class ProductAttribute {
     private Product product;
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "attribute_id", columnDefinition = "nvarchar(20)")
+    @JoinColumn(name = "attribute_id")
     @JsonManagedReference
     private Attribute attribute;
     @Column(name = "created_at", columnDefinition = "datetime")
