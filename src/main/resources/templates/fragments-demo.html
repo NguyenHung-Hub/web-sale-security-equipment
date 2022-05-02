@@ -16,42 +16,38 @@
     <link rel="stylesheet" th:href="@{/css/home-responsive-demo.css}">
 </head>
 <body>
-<header th:fragment="header" id="header" class="header">
-    <!--    <div class="header-top d-lg-block d-none">-->
-    <!--        <div class="container">-->
-    <!--            <div class="header-top__navbar d-flex justify-content-between">-->
-    <!--                <div class="header-top__navbar-social d-flex align-items-center pull-left">-->
-    <!--                    <ul class="header-top__navbar-list">-->
-    <!--                        <li>-->
-    <!--                            <i class="fas fa-phone-alt fa-sm fa-fw"></i>-->
-    <!--                            Số điện thoại:-->
-    <!--                            <span class="text-strong">0-123-456-789</span>-->
-    <!--                        </li>-->
-    <!--                        <li>-->
-    <!--                            <i class="fas fa-envelope fa-sm fa-fw"></i>-->
-    <!--                            Email:-->
-    <!--                            <span class="text-strong">demo@email.com</span>-->
-    <!--                        </li>-->
-    <!--                    </ul>-->
-    <!--                </div>-->
-    <!--                <div class="header-top__navbar-info">-->
-    <!--                    <ul class="header-top__navbar-list">-->
-    <!--                        <li>-->
-    <!--                            <i class="fas fa-heart fa-sm fa-fw"></i>-->
-    <!--                            Wishlist-->
-    <!--                        </li>-->
-    <!--                        <li>-->
-    <!--                            <i class="fas fa-user fa-sm fa-fw"></i>-->
-    <!--                            Tài khoản-->
-    <!--                        </li>-->
-    <!--                    </ul>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </div>-->
+<!--/*@thymesVar id="categories" type="java.util.List<com.metan.websalesecurityequipment.model.Category>"*/-->
+<!--/*@thymesVar id="isHome" type="java.lang.Boolean"*/-->
+<header th:fragment="header" th:with="categories=${categories} ?: null, isHome=${isHome} ?: false" id="header" class="header">
     <div class="header-center d-lg-block d-none">
         <div class="container">
             <div class="row justify-content-between">
+                <div th:if="${!isHome}">
+                    <div class="header-center__category">
+                        <div class="header-center__category-wrapper">
+                            <div class="category-text pull-left">
+                                Danh mục
+                            </div>
+                            <span class="category-icon pull-right">
+                                <img src="" th:src="@{/imgs/hamburger-icon.png}" alt="">
+                            </span>
+                            <div class="category-nav">
+                                <div class="category-triangle"></div>
+                                <nav class="navbar">
+                                    <ul class="nav navbar-nav">
+                                        <li th:each="category : ${categories}" class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <img src="https://static3.industrybuying.com/navigation/1501837652security.png"
+                                                     alt="">
+                                                [[${category.name}]]
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-md-2">
                     <div class="header-center__logo">
                         <a href="#">
@@ -60,7 +56,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="header-center__search col-md-8">
+                <div class="header-center__search col-md-7">
                     <div class="header-center__search-wrapper">
                         <div class="header-center_search-entry">
                             <form action="">
@@ -84,183 +80,110 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2">
-                    <div class="header-center__right-area">
-                        <div class="header-center__form-minicart pull-left">
+                <div>
+                    <ul class="header-center__right-section pull-right">
+                        <li>
                             <a href="#">
                                 <div class="header-center__cart-icon" data-number="0">
-                                    <i class="fas fa-shopping-cart"></i>
+                                    <img th:src="@{/imgs/cart-icon.svg}" alt="" src="">
                                 </div>
                             </a>
-                            <!--                        <div class="header-center__minicart">-->
-                            <!--                            <ul class="header-center__minicart-content"></ul>-->
-                            <!--                            <div class="header-center__cart-checkout">-->
-                            <!--                                <div class="header-top__sidebar-price-total d-flex justify-content-between">-->
-                            <!--                                            <span class="header-center__label-price-total">-->
-                            <!--                                                Tổng:-->
-                            <!--                                            </span>-->
-                            <!--                                    <span class="header-center__price-amount">-->
-                            <!--                                                $0.00-->
-                            <!--                                            </span>-->
-                            <!--                                </div>-->
-                            <!--                                <div class="header-center__cart-link">-->
-                            <!--                                    <a href="#">Xem giỏ hàng</a>-->
-                            <!--                                </div>-->
-                            <!--                            </div>-->
-                            <!--                        </div>-->
-                        </div>
-                        <div class="header-center__account pull-right">
-                            <div class="btn-account dropdown-toggle" type="button" data-toggle="dropdown">
-                                <div class="sign-icon">
-                                    <i class="fas fa-user-circle fa-sm fa-fw"></i>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="header-center__sign-in-icon">
+                                    <img th:src="@{/imgs/signin-icon.svg}" alt="" src="">
                                 </div>
-                                <span class="account-name">Đăng nhập</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="header-bottom d-none">
-        <div class="container">
-            <div class="row">
-                <div class="header-bottom__navbar-category col-lg-3 col-md-3 col-sm-5">
-                    <div class="header-bottom__navbar-category-title">
-                        Danh mục sản phẩm
-                    </div>
-                    <div class="header-bottom__navbar-category-content">
-                        <div class="header-bottom__nav-category-resmenu-container">
-
-                        </div>
-                        <ul id="menu-vertical-category" class="nav flex-column">
-                            <li class="nav-item dropdown">
-                                <a href="" class="nav-link dropdown-toggle">
-                                            <span class="have-title">
-                                                <span class="menu-title">
-                                                    Thiết bị camera an ninh
-                                                </span>
-                                            </span>
-                                </a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="" class="nav-link dropdown-toggle">
-                                            <span class="have-title">
-                                                <span class="menu-title">
-                                                    Thiết bị báo động báo cháy
-                                                </span>
-                                            </span>
-                                </a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle">
-                                            <span class="have-title">
-                                                <span class="menu-title">
-                                                    Thiết bị văn phòng - Gia đình
-                                                </span>
-                                            </span>
-                                </a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle">
-                                            <span class="have-title">
-                                                <span class="menu-title">
-                                                    Thiết bị Kiểm soát cửa
-                                                </span>
-                                            </span>
-                                </a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle">
-                                            <span class="have-title">
-                                                <span class="menu-title">
-                                                    Thiết bị viễn thông
-                                                </span>
-                                            </span>
-                                </a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle">
-                                            <span class="have-title">
-                                                <span class="menu-title">
-                                                    Thiết bị số công nghệ
-                                                </span>
-                                            </span>
-                                </a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle">
-                                            <span class="have-title">
-                                                <span class="menu-title">
-                                                    Thiết bị điện thông minh
-                                                </span>
-                                            </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="header-bottom__nav-menu col-lg-8 col-md-9 col-sm-7">
-                    <ul class="nav nav-pills nav-mega">
-                        <li class="header-bottom__nav-menu-item nav-item active">
-                            <a class="header-bottom__nav-item-link nav-link" href="#">Trang chủ</a>
-                        </li>
-                        <li class="header-bottom__nav-menu-item nav-item">
-                            <a class="header-bottom__nav-item-link nav-link" href="#">Dịch vụ</a>
-                        </li>
-                        <li class="header-bottom__nav-menu-item nav-item">
-                            <a class="header-bottom__nav-item-link nav-link" href="#">Liên hệ</a>
+                                <div class="account_name">
+                                    Đăng nhập
+                                </div>
+                            </a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-</header>
-
-<div id="header-mobile" th:fragment="header-mobile" class="header-mobile d-lg-none d-block">
-    <nav class="nav-menu-mobile">
-        <div class="container-fluid">
-            <div class="header-mobile-top clearfix">
-                <button type="button" class="btn-side-nav pull-left">
-                    <i class="icon-bar"></i>
-                    <i class="icon-bar"></i>
-                    <i class="icon-bar"></i>
-                </button>
-                <a href="" class="navbar-brand pull-left">
-                    <img src="https://www.industrybuying.com/static/images/industry-buying-white-logo.png"
-                         alt="Demo">
-                </a>
-                <a href="" class="navbar-user pull-right">
-                    <div class="user-icon-wrapper">
-                        <i class="fas fa-user"></i>
+    <div class="header-mobile d-lg-none d-block">
+        <nav class="nav-menu-mobile">
+            <div class="container-fluid">
+                <div class="header-mobile-top clearfix">
+                    <button type="button" class="btn-side-nav pull-left">
+                        <i class="icon-bar"></i>
+                        <i class="icon-bar"></i>
+                        <i class="icon-bar"></i>
+                    </button>
+                    <a href="" class="navbar-brand pull-left">
+                        <img src="https://www.industrybuying.com/static/images/industry-buying-white-logo.png"
+                             alt="Demo">
+                    </a>
+                    <ul class="header-center__right-section pull-right">
+                        <li>
+                            <a href="#">
+                                <div class="header-center__cart-icon" data-number="0">
+                                    <img th:src="@{/imgs/cart-icon.svg}" alt="" src="">
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="header-center__sign-in-icon">
+                                    <img th:src="@{/imgs/signin-icon.svg}" alt="" src="">
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="search-form-mobile">
+                    <div class="input-group md-form form-sm form-2 pl-0">
+                        <form action="" class="search-form-header-mobile">
+                            <input id="search-input-mobile" type="search" class="form-control search-input-mobile"
+                                   placeholder="Tìm kiếm sản phẩm">
+                            <div class="input-group-append">
+                                <button type="submit" title="Search"
+                                        class="">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                </a>
-                <a href="" class="navbar-cart pull-right">
-                    <div class="cart-icon-wrapper">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                </a>
-            </div>
-            <div class="search-form-mobile">
-                <div class="input-group md-form form-sm form-2 pl-0">
-                    <form action="" class="search-form-header-mobile">
-                        <input id="search-input-mobile" type="search" class="form-control search-input-mobile"
-                               placeholder="Tìm kiếm sản phẩm">
-                        <div class="input-group-append">
-                            <button type="submit" title="Search"
-                                    class="">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                    </form>
                 </div>
             </div>
+        </nav>
+        <div class="sidebar-mobile">
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                    <div class="close-sidebar">
+                    </div>
+                    <h3>Danh mục</h3>
+                </div>
+                <ul class="sidebar-menu">
+                    <li th:each="category: ${categories}" class="sidebar-dropdown">
+                        <a href="#">
+                            <img src="https://static3.industrybuying.com/navigation/1501837652security.png" loading="lazy" alt="">
+                            [[${category.name}]]
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li>
+                                <a href="#">Submenu 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Submenu 2</a>
+                            </li>
+                            <li>
+                                <a href="#">Submenu 3</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
         </div>
-    </nav>
-</div>
+    </div>
+</header>
 
-<div th:fragment="over-suggest" class="over-suggest"></div>
+<div th:fragment="over-suggest" class="over-suggest d-lg-none"></div>
+
+<div th:fragment="over" class="over d-lg-none"></div>
 
 
 <script th:fragment="glider" src="https://cdnjs.cloudflare.com/ajax/libs/glider-js/1.6.6/glider.min.js"
@@ -279,3 +202,20 @@
 <script th:fragment="home" th:src="@{/js/home.js}"></script>
 </body>
 </html>
+
+<!--<div class="header-center__minicart">-->
+<!--    <ul class="header-center__minicart-content"></ul>-->
+<!--    <div class="header-center__cart-checkout">-->
+<!--        <div class="header-top__sidebar-price-total d-flex justify-content-between">-->
+<!--                                                                    <span class="header-center__label-price-total">-->
+<!--                                                                        Tổng:-->
+<!--                                                                    </span>-->
+<!--            <span class="header-center__price-amount">-->
+<!--                                                                        $0.00-->
+<!--                                                                    </span>-->
+<!--        </div>-->
+<!--        <div class="header-center__cart-link">-->
+<!--            <a href="#">Xem giỏ hàng</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->

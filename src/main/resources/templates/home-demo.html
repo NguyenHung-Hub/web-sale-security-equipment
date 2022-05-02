@@ -5,39 +5,36 @@
     <title>Trang chủ - Bán thiết bị an ninh</title>
 </head>
 <body>
-<header th:replace="fragments-demo :: header"></header>
-
-<div th:replace="fragments-demo :: header-mobile"></div>
+<header th:replace="fragments-demo :: header (categories=${CATEGORIES}, isHome=true)"></header>
 
 <div th:replace="fragments-demo :: over-suggest"></div>
 
+<div th:replace="fragments-demo :: over"></div>
+
 <main id="home-container" class="home-container">
     <div class="container">
+        <div class="home-category-nav d-lg-block d-none">
+            <nav class="navbar">
+                <ul class="nav navbar-nav">
+                    <li th:each="category : ${CATEGORIES}" class="nav-item">
+                        <a href="#" class="nav-link">
+                            <img src="https://static3.industrybuying.com/navigation/1501837652security.png"
+                                 alt="">
+                            [[${category.name}]]
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <section>
+
+        </section>
         <div class="row">
             <div id="content" class="column-container col-12">
                 <div class="column-inner">
                     <div class="row row-fluid">
                         <div class="content-first__category column-container col-xl-3 col-lg-4 d-lg-block d-none">
-                            <div class="column-inner">
-                                <div class="content-first__category-title">
-                                    Danh mục sản phẩm
-                                </div>
-                                <div class="content-first__category-content">
-                                    <div class="content-first__category-resmenu-container">
-
-                                    </div>
-                                    <ul id="menu-vertical-category" class="nav flex-column">
-                                        <li th:each="category: ${CATEGORIES}" class="nav-item dropdown">
-                                            <a href="" class="nav-link dropdown-toggle">
-                                                        <span class="have-title">
-                                                            <span class="menu-title" th:text="${category.name}">
-                                                            </span>
-                                                        </span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <div class="column-inner"></div>
                         </div>
                         <div class="column-container col-xl-9 col-lg-8 col-12">
                             <div class="column-inner">
@@ -90,36 +87,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--                                <div class="img-qc row">-->
-                                <!--                                    <div class="column-container col-sm-6">-->
-                                <!--                                        <div class="column-inner custom__1">-->
-                                <!--                                            <div class="single-img element text-sm-left text-center">-->
-                                <!--                                                <figure class="figure">-->
-                                <!--                                                    <a href="#">-->
-                                <!--                                                        <img src="https://vuhoangtelecom.vn/wp-content/uploads/2020/11/banner-lap-dat-camera-wifi-gia-re-thang-11.jpg"-->
-                                <!--                                                             class="figure-img img-fluid rounded" alt="" style="width: 100%;">-->
-                                <!--                                                    </a>-->
-                                <!--                                                </figure>-->
-                                <!--                                            </div>-->
-                                <!--                                        </div>-->
-                                <!--                                    </div>-->
-                                <!--                                    <div class="column-container col-sm-6">-->
-                                <!--                                        <div class="column-inner custom__2">-->
-                                <!--                                            <div class="single-img element text-center">-->
-                                <!--                                                <figure class="figure">-->
-                                <!--                                                    <a href="#">-->
-                                <!--                                                        <img src="https://vuhoangtelecom.vn/wp-content/uploads/2021/11/banner-may-xit-khu-khuan-247x.jpg"-->
-                                <!--                                                             class="figure-img rounded" alt="" style="width: 100%;">-->
-                                <!--                                                    </a>-->
-                                <!--                                                </figure>-->
-                                <!--                                            </div>-->
-                                <!--                                        </div>-->
-                                <!--                                    </div>-->
-                                <!--                                </div>-->
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row d-none">
                         <div class="column-container col-lg-3 col-md-12 col-sm-12">
                             <div class="column-inner">
                                 <div class="hot-product-wrapper">
