@@ -50,10 +50,12 @@ public class DetailController {
 
     @GetMapping(value = "/detail/{slug}")
     public String showDetail(Model model, @PathVariable(name = "slug", required = false) String slug) {
-        if(productId==null){
-
+        Product product = null;
+        if (productId == null) {
+            product = productService.findBySlug(slug);
+        } else {
+            product = productService.findProductById(productId);
         }
-        Product product = productService.findProductById(productId);
         List<ProductReview> productReviews = reviewService.findByProductId(productId);
         if (product == null) {
             System.out.println("không tìm thấy");
