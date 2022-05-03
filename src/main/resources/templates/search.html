@@ -254,7 +254,7 @@
                                 </span>
                                     <span class="desc-gia-hien">
                                     <span class="desc-gia-hien-d">đ</span>
-                                    <span th:text="${#numbers.formatDecimal(product.price,1,'DEFAULT',0,'DEFAULT')}"></span>
+                                    <span th:text="${#numbers.formatDecimal((product.price - product.price*product.productDiscount.discountPercent),1,'DEFAULT',0,'DEFAULT')}"></span>
                                 </span>
                                 </div>
                                 <div class="desc-danhgia">
@@ -428,7 +428,7 @@
                     </span>
                     <span class="desc-gia-hien">
                         <span class="desc-gia-hien-d">đ</span>
-                        <span>${new Intl.NumberFormat('vi-VN', {maximumSignificantDigits: 3}).format(product.price)}</span>
+                        <span>${new Intl.NumberFormat('vi-VN', {maximumSignificantDigits: 3}).format(product.price - product.price*product.productDiscount.discountPercent)}</span>
                     </span>
                 </div>
                 <div class="desc-danhgia">

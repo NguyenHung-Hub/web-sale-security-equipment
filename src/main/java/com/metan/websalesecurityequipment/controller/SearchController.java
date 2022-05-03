@@ -67,7 +67,7 @@ public class SearchController {
         System.out.println(req);
         int currentPage = page.orElse(req.getPage());
         System.out.println(req.getPage());
-        int pageSize = size.orElse(16);
+        int pageSize = size.orElse(8);
         pageable = PageRequest.of(currentPage, pageSize, Sort.by("name"));
         Page<Product> productPage = productService.searchByNameCateBrand(req ,pageable ) ;
 
@@ -123,7 +123,7 @@ public class SearchController {
 
         //Nếu nguoi dung khong nhap
         int currentPage = page.orElse(0);
-        int pageSize = size.orElse(16);
+        int pageSize = size.orElse(8);
 
         pageable = PageRequest.of(currentPage, pageSize, Sort.by("name"));
 

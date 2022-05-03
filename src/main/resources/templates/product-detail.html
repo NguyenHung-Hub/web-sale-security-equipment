@@ -73,9 +73,10 @@
                 <h2>[[${product.name}]]</h2>
                 <div>
                     <span class="text-dark"><del
-                            th:text="${#numbers.formatDecimal(discount, 1,'DEFAULT',0, 'DEFAULT')}+ đ"></del></span>
+                            th:text="${#numbers.formatDecimal(product.price, 1,'DEFAULT',0, 'DEFAULT')}+ đ"></del></span>
                     <span class="text-danger ml-1"
-                          th:text="${#numbers.formatDecimal(product.price, 1,'DEFAULT',0, 'DEFAULT')}+ đ">2.199.000 đ</span>
+                          th:text="${#numbers.formatDecimal(discount, 1,'DEFAULT',0, 'DEFAULT')}+ đ"
+                          >2.199.000 đ</span>
                     <span class="bg-warning ml-1">Giảm [[${#numbers.formatDecimal(product.productDiscount.discountPercent*100, 1,'DEFAULT',0, 'DEFAULT')}]]%</span>
                 </div>
                 <div>
