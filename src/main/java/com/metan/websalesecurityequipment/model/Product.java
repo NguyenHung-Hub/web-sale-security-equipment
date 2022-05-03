@@ -49,6 +49,7 @@ class Product {
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     @JsonBackReference
     private List<OrderItem> orderItems;
+    @Column(nullable = false, unique = true)
     private String slug;
     @Column(columnDefinition = "text")
     private String longDesc;

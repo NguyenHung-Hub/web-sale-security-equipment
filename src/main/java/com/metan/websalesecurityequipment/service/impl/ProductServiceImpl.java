@@ -75,5 +75,10 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findByNameContaining(name, pageable);
     }
 
+    @Override
+    public Product findBySlug(String slug) {
+        return productRepository.findBySlug(slug);
+    }
+
 
 }

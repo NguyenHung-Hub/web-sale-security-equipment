@@ -79,11 +79,11 @@
                     <span class="bg-warning ml-1">Giảm [[${#numbers.formatDecimal(product.productDiscount.discountPercent*100, 1,'DEFAULT',0, 'DEFAULT')}]]%</span>
                 </div>
                 <div>
-                    <span class="fa fa-star" th:classappend="${rating>=0} ? checked-rating"></span>
-                    <span class="fa fa-star" th:classappend="${rating>=2} ? checked-rating"></span>
-                    <span class="fa fa-star" th:classappend="${rating>=3} ? checked-rating"></span>
-                    <span class="fa fa-star" th:classappend="${rating>=4} ? checked-rating"></span>
-                    <span class="fa fa-star" th:classappend="${rating>=5} ? checked-rating"></span>
+                    <span class="fa fa-star" th:classappend="${rating>=0} ? 'checked-rating'"></span>
+                    <span class="fa fa-star" th:classappend="${rating>=2} ? 'checked-rating'"></span>
+                    <span class="fa fa-star" th:classappend="${rating>=3} ? 'checked-rating'"></span>
+                    <span class="fa fa-star" th:classappend="${rating>=4} ? 'checked-rating'"></span>
+                    <span class="fa fa-star" th:classappend="${rating>=5} ? 'checked-rating'"></span>
                     <span th:text="'(' +${product.productReviews.size()}+ ' đánh giá)'"></span>
                 </div>
                 <div class="mt-5">
@@ -113,8 +113,10 @@
     <!-- mô tả chi tiết, đánh giá , thông tin thêm-->
     <div class="mt-5">
         <ul id="tabs" class="nav nav-tabs" role="tablist">
-            <li class="nav-item"><a data-toggle="tab" href="#ChiTiet" class="nav-link active text-dark">Chi tiết sản phẩm</a></li>
-            <li class="nav-item"><a data-toggle="tab" href="#ThemThongTin" class="nav-link text-dark">Thông tin thêm</a></li>
+            <li class="nav-item"><a data-toggle="tab" href="#ChiTiet" class="nav-link active text-dark">Chi tiết sản
+                phẩm</a></li>
+            <li class="nav-item"><a data-toggle="tab" href="#ThemThongTin" class="nav-link text-dark">Thông tin thêm</a>
+            </li>
             <li class="nav-item"><a data-toggle="tab" href="#DanhGia" class="nav-link text-dark">Đánh giá</a></li>
         </ul>
         <div class="tab-content mt-5">
@@ -260,16 +262,13 @@
                         <label for="star1" title="text"></label>
                     </div>
                     <input th:field="*{title}" type="text" class="form-control mt-3" placeholder="Tiêu đề">
-                    <input th:field="*{email}" type="email" class="form-control mt-3" placeholder="Email">
-                    <input th:field="*{phoneNumber}" type="tel" class="form-control mt-3" placeholder="Số điện thoại">
+                    <input type="email" class="form-control mt-3" placeholder="Email">
+                    <input type="tel" class="form-control mt-3" placeholder="Số điện thoại">
                     <textarea th:field="*{content}" type="text" class="form-control mt-3"
-                              placeholder="Đánh giá"></textarea>
+                              placeholder="Đánh giá chi tiết"></textarea>
                     <input type="submit" class="btn btn-dark mt-3" value="Gửi">
                 </form>
-
             </div>
-
-
         </div>
 
     </div>

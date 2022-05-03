@@ -24,6 +24,8 @@ public interface ProductRepository extends JpaRepository<Product, String> {
             "order by tong desc limit 4", nativeQuery = true)
     public List<Product> findTopProduct();
 
+    public Product findBySlug(String slug);
+
     //Hao
     public List<Product> findByNameContaining(String name);
 
