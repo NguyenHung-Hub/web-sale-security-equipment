@@ -8,9 +8,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" th:src="@{/js/jquery.simplePagination.js}"></script>
-<!--<script src="https://pagination.js.org/dist/2.1.5/pagination.min.js"></script>-->
+
+
 
 <body>
 <div th:replace="fragments :: header"></div>
@@ -239,11 +238,11 @@
             <div id="danh-sach-san-pham" th:if="${productPage.hasContent()}">
                 <div th:each="product:${productPage.content}">
 
-                        <div class="gallery">
-                            <a>
-                                <img th:src="${product.thumbnail}" alt="Cinque Terre">
-                            </a>
-                            <a class="desc-link text-dark" th:href="@{/product/detail(productId=${product.productId})}">
+                    <div class="gallery">
+                        <a>
+                            <img th:src="${product.thumbnail}" alt="Cinque Terre">
+                        </a>
+                        <a class="desc-link text-dark" th:href="@{/product/detail(productId=${product.productId})}">
                             <div class="desc">
                                 <div class="desc-ten" th:text="${product.name}"></div>
                                 <div class="desc-gia">
@@ -276,8 +275,8 @@
                                     Metan, TP. Hồ Chí Minh
                                 </div>
                             </div>
-                            </a>
-                        </div>
+                        </a>
+                    </div>
 
                 </div>
             </div>
@@ -285,125 +284,133 @@
     </div>
     <div class="row">
         <div style="width: 20%;"></div>
-        <div class="paginationPage" th:if="${productPage.totalPages >0}">
+        <div class="paginationPage mt-5 mb-5" th:if="${productPage.totalPages >0}">
             <nav aria-label="Page navigation">
                 <ul class="pagination" id="pagination"></ul>
             </nav>
         </div>
     </div>
+
 </div>
-</div>
-<script th:inline="javascript">
-    function validate(evt) {
-        if (evt.keyCode != 8) {
-            var theEvent = evt || window.event;
-            var key = theEvent.keyCode || theEvent.which;
-            key = String.fromCharCode(key);
-            var regex = /[0-9]|\./;
-            if (!regex.test(key)) {
-                theEvent.returnValue = false;
-                if (theEvent.preventDefault)
-                    theEvent.preventDefault();
-            }
-        }
-    }
+<th:block>
+    <div th:replace="fragments :: footer"></div>
+</th:block>
+<th:block>
 
-    let currentPage = [[${productPage.getPageable().getPageNumber()}]];
-    console.log(currentPage);
-    let totalPages = [[${productPage.getTotalPages()}]];
-    let brandIds = [];
-    let categoryIds = [];
-    let maxPrice = 0;
-    let minPrice = 0;
-    let ratings = [];
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/jquery.simplePagination.js}"></script>
 
-    $(function () {
-        pagination();
-    });
-
-    function pagination() {
-        if (totalPages >= 0) {
-            $('#pagination').show();
-            $('#pagination').pagination({
-                pages: totalPages,
-                currentPage: currentPage,
-                cssStyle: '',
-                prevText: '<span class="active-link" aria-hidden="true">&laquo;</span>',
-                nextText: '<span class="active-link" aria-hidden="true">&raquo;</span>',
-                onInit: function () {
-
-                },
-                onPageClick: function (page, evt) {
-                    currentPage = page;
-                    getProducts();
-                    $('body,html').animate({scrollTop: 0}, 800);
+    <script th:inline="javascript">
+        function validate(evt) {
+            if (evt.keyCode != 8) {
+                var theEvent = evt || window.event;
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+                var regex = /[0-9]|\./;
+                if (!regex.test(key)) {
+                    theEvent.returnValue = false;
+                    if (theEvent.preventDefault)
+                        theEvent.preventDefault();
                 }
-            });
-            $('#pagination .active .current').addClass('page-link');
-            $('#pagination .ellipse .clickable').addClass('page-link');
-            $('#pagination .disabled .current.prev').addClass('page-link');
-            $('#pagination .disabled .current.next').addClass('page-link');
-        } else {
-            $('#pagination').hide();
-        }
-    }
-
-    $(document).ready(function () {
-        $(".check-brand").change(function () {
-            brandIds = $(".check-brand:checked").map(function () {
-                return $(this).val();
-            }).get();
-            currentPage = 1;
-            getProducts();
-
-        })
-        $(".check-category").change(function () {
-            categoryIds = $(".check-category:checked").map(function () {
-                return $(this).val();
-            }).get();
-            currentPage = 1;
-            getProducts();
-        })
-
-    })
-
-    function getProducts() {
-        let req = {
-            categoryIds: categoryIds,
-            brandIds: brandIds,
-            ratings: ratings,
-            minPrice: minPrice,
-            maxPrice: maxPrice,
-            page: currentPage - 1
-        }
-        let myJSON = JSON.stringify(req);
-        $.ajax({
-            url: "search/products",
-            type: "POST",
-            data: myJSON,
-            dataType: "json",
-            contentType: "application/json;charset=utf-8",
-            success: function (products) {
-                createData(products.content);
-                currentPage = products.pageable.pageNumber + 1;
-                totalPages = products.totalPages;
-                console.log("Tong page hien tai khi nhan link page:" + totalPages);
-                console.log("page hien tai khi nhan link page:" + currentPage);
-                pagination();
-                $('#pageCurrent').html(currentPage + "/" + totalPages + " Trang");
-                console.log(products.content);
             }
+        }
+
+        let currentPage = [[${productPage.getPageable().getPageNumber()}]];
+        console.log(currentPage);
+        let totalPages = [[${productPage.getTotalPages()}]];
+        let brandIds = [];
+        let categoryIds = [];
+        let maxPrice = 0;
+        let minPrice = 0;
+        let ratings = [];
+
+        $(function () {
+            pagination();
+        });
+
+        function pagination() {
+            if (totalPages >= 0) {
+                $('#pagination').show();
+                $('#pagination').pagination({
+                    pages: totalPages,
+                    currentPage: currentPage,
+                    cssStyle: '',
+                    prevText: '<span class="active-link" aria-hidden="true">&laquo;</span>',
+                    nextText: '<span class="active-link" aria-hidden="true">&raquo;</span>',
+                    onInit: function () {
+
+                    },
+                    onPageClick: function (page, evt) {
+                        currentPage = page;
+                        getProducts();
+                        $('body,html').animate({scrollTop: 0}, 800);
+                    }
+                });
+                $('#pagination .active .current').addClass('page-link');
+                $('#pagination .ellipse .clickable').addClass('page-link');
+                $('#pagination .disabled .current.prev').addClass('page-link');
+                $('#pagination .disabled .current.next').addClass('page-link');
+            } else {
+                $('#pagination').hide();
+            }
+        }
+
+        $(document).ready(function () {
+            $(".check-brand").change(function () {
+                brandIds = $(".check-brand:checked").map(function () {
+                    return $(this).val();
+                }).get();
+                currentPage = 1;
+                getProducts();
+
+            })
+            $(".check-category").change(function () {
+                categoryIds = $(".check-category:checked").map(function () {
+                    return $(this).val();
+                }).get();
+                currentPage = 1;
+                getProducts();
+            })
+
         })
-    }
 
-    let listRating = [[${listRating}]];
-    console.log(listRating);
+        function getProducts() {
+            let req = {
+                categoryIds: categoryIds,
+                brandIds: brandIds,
+                ratings: ratings,
+                minPrice: minPrice,
+                maxPrice: maxPrice,
+                page: currentPage - 1
+            }
+            let myJSON = JSON.stringify(req);
+            $.ajax({
+                url: "search/products",
+                type: "POST",
+                data: myJSON,
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                success: function (products) {
+                    createData(products.content);
+                    currentPage = products.pageable.pageNumber + 1;
+                    totalPages = products.totalPages;
+                    console.log("Tong page hien tai khi nhan link page:" + totalPages);
+                    console.log("page hien tai khi nhan link page:" + currentPage);
+                    pagination();
+                    $('#pageCurrent').html(currentPage + "/" + totalPages + " Trang");
+                    console.log(products.content);
+                }
+            })
+        }
 
-    function createData(products) {
-        let html = '';
-        if (products.length > 0) {
-            for (product of products) {
-                html += `
+        let listRating = [[${listRating}]];
+        console.log(listRating);
+
+        function createData(products) {
+            let html = '';
+            if (products.length > 0) {
+                for (product of products) {
+                    html += `
         <div class="gallery">
             <a>
                 <img src="${product.thumbnail}"
@@ -439,18 +446,19 @@
             </div>
             </a>
         </div>`;
+                }
+                $("#danh-sach-san-pham").html("");
+                $("#danh-sach-san-pham").html(html);
+            } else {
+                $("#danh-sach-san-pham").html("");
+                $('.error-null').css('display', 'flex');
             }
-            $("#danh-sach-san-pham").html("");
-            $("#danh-sach-san-pham").html(html);
-        } else {
-            $("#danh-sach-san-pham").html("");
-            $('.error-null').css('display', 'flex');
+
         }
 
-    }
 
-
-</script>
+    </script>
+</th:block>
 </body>
 
 </html>

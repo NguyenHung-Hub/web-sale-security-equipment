@@ -1,9 +1,6 @@
 package com.metan.websalesecurityequipment.controller;
 
-import com.metan.websalesecurityequipment.model.Brand;
-import com.metan.websalesecurityequipment.model.Category;
-import com.metan.websalesecurityequipment.model.Product;
-import com.metan.websalesecurityequipment.model.ProductReview;
+import com.metan.websalesecurityequipment.model.*;
 import com.metan.websalesecurityequipment.model.request.ProductRequestPageable;
 import com.metan.websalesecurityequipment.service.BrandService;
 import com.metan.websalesecurityequipment.service.CategoryService;
@@ -54,6 +51,7 @@ public class SearchController {
         List<Category> categories = categoryService.findAll();
         display(model, name, page, size, brands, categories);
 
+
         return "search";
     }
 
@@ -70,9 +68,9 @@ public class SearchController {
         int currentPage = page.orElse(req.getPage());
         System.out.println(req.getPage());
         int pageSize = size.orElse(16);
-
         pageable = PageRequest.of(currentPage, pageSize, Sort.by("name"));
         Page<Product> productPage = productService.searchByNameCateBrand(req ,pageable ) ;
+
         return productPage;
     }
 
