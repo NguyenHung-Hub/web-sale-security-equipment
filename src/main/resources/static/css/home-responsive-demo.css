@@ -1,17 +1,15 @@
-@media (max-width: 1199px) {}
+@media (max-width: 1199px) {
+}
 
-@media (max-width: 991px) {}
+@media (max-width: 991px) {
+
+}
 
 
 @media (max-width: 767px) {
 
-    .header .header-top {
-        display: none;
-    }
 
-    .content-first__category {
-        display: none;
-    }
 }
 
-@media (max-width: 575px) {}
+@media (max-width: 575px) {
+}

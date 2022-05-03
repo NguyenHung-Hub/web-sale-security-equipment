@@ -28,4 +28,6 @@ public interface ProductService {
     Page<Product> findAll(Pageable pageable);
 
     Page<Product> findByNameContaining(String name, Pageable pageable);
+
+    public Product findBySlug(String slug);
 }

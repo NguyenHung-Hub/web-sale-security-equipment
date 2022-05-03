@@ -20,9 +20,11 @@ public interface ProductRepository extends JpaRepository<Product, String> {
             "group by p.product_id, p.quantity, p.created_at, " +
             " p.modified_at, p.brand_id, p.category_id, p.discount_id, " +
             "p.long_desc, p.name, p.price, p.short_desc, p.slug, " +
-            "p.thumbnail, p.title, p.type_id " +
+            "p.thumbnail, p.title " +
             "order by tong desc limit 4", nativeQuery = true)
     public List<Product> findTopProduct();
+
+    public Product findBySlug(String slug);
 
     //Hao
     public List<Product> findByNameContaining(String name);

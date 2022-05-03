@@ -7,7 +7,7 @@ import java.util.Objects;
 @Embeddable
 public class ProductAttributePK implements Serializable {
     private String product;
-    private String attributeValue;
+    private long attribute;
 
     public ProductAttributePK() {
     }
@@ -19,14 +19,14 @@ public class ProductAttributePK implements Serializable {
 
         ProductAttributePK that = (ProductAttributePK) o;
 
-        if (!Objects.equals(product, that.product)) return false;
-        return Objects.equals(attributeValue, that.attributeValue);
+        if (attribute != that.attribute) return false;
+        return Objects.equals(product, that.product);
     }
 
     @Override
     public int hashCode() {
         int result = product != null ? product.hashCode() : 0;
-        result = 31 * result + (attributeValue != null ? attributeValue.hashCode() : 0);
+        result = 31 * result + (int) (attribute ^ (attribute >>> 32));
         return result;
     }
 }

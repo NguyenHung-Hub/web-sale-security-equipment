@@ -35,7 +35,7 @@ class Product {
     @JoinColumn(name = "category_id")
     @JsonIgnoreProperties("products")
     private Category category;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "discount_id")
     private ProductDiscount productDiscount;
     @JsonBackReference
@@ -49,6 +49,7 @@ class Product {
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     @JsonBackReference
     private List<OrderItem> orderItems;
+    @Column(nullable = false, unique = true)
     private String slug;
     @Column(columnDefinition = "text")
     private String longDesc;
@@ -56,14 +57,14 @@ class Product {
     private Date createdAt;
     @Column(name = "modified_at", columnDefinition = "datetime")
     private Date modifiedAt;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "type_id")
-    @JsonIgnoreProperties("products")
-    private ProductType productType;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "type_id")
+//    @JsonIgnoreProperties("products")
+//    private ProductType productType;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     @JsonBackReference
     private List<ProductAttribute> productAttributes;
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product")
     @JsonBackReference
     private List<ProductReview> productReviews;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
