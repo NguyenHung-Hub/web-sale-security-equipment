@@ -61,7 +61,7 @@ class Product {
 //    @JoinColumn(name = "type_id")
 //    @JsonIgnoreProperties("products")
 //    private ProductType productType;
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonBackReference
     private List<ProductAttribute> productAttributes;
     @OneToMany(mappedBy = "product")

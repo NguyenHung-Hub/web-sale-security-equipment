@@ -2,11 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head th:replace="fragments :: head">
+
 </head>
-</head>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
 
 <body>
 <div th:replace="fragments :: header"></div>
@@ -22,7 +25,7 @@
                         <div class="group-filter-header">Theo Danh Mục</div>
                         <div class="group-filter-content" th:each="category1:${categoriesFirst}">
                             <div class="group-filter-content-item">
-                                <input type="checkbox" name="">
+                                <input class="check-category" type="checkbox" th:value="${category1.categoryId}">
                                 <label th:text="${category1.name}"></label>
                             </div>
                         </div>
@@ -30,7 +33,7 @@
                     <div id="danhMuc" class="group-filter-content-add" th:if="${categoriesLast != null}">
                         <div th:each="category2:${categoriesLast}">
                             <div class="group-filter-content-item">
-                                <input type="checkbox" name="">
+                                <input class="check-category" type="checkbox" th:value="${category2.categoryId}">
                                 <label th:text="${category2.name}"></label>
                             </div>
                         </div>
@@ -45,16 +48,70 @@
                         <i class="fa-solid fa-angle-up"></i>
                     </p>
                     <script>
-                            function displayDanhMuc() {
-                                document.getElementById("danhMuc").style.display = 'block';
-                                document.getElementById("themDanhMuc").style.display = 'none';
-                                document.getElementById("anbotDanhMuc").style.display = 'block';
-                            }
-                           function hiddenDanhMuc() {
-                                document.getElementById("danhMuc").style.display = 'none';
-                                document.getElementById("themDanhMuc").style.display = 'block';
-                                document.getElementById("anbotDanhMuc").style.display = 'none';
-                           }
+                        function displayDanhMuc() {
+                            document.getElementById("danhMuc").style.display = 'block';
+                            document.getElementById("themDanhMuc").style.display = 'none';
+                            document.getElementById("anbotDanhMuc").style.display = 'block';
+                        }
+
+                        function hiddenDanhMuc() {
+                            document.getElementById("danhMuc").style.display = 'none';
+                            document.getElementById("themDanhMuc").style.display = 'block';
+                            document.getElementById("anbotDanhMuc").style.display = 'none';
+                        }
+
+
+                    </script>
+                </div>
+            </div>
+
+
+            <div class="filter-body">
+                <div class="group-filter">
+                    <div th:if="${brandsFirst != null}">
+                        <div class="group-filter-header">Thương hiệu</div>
+                        <div class="group-filter-content" th:each="brand1:${brandsFirst}">
+                            <div class="group-filter-content-item">
+                                <input class="check-brand" type="checkbox" th:value="${brand1.brandId}">
+                                <label th:text="${brand1.name}"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="thuongHieu" class="group-filter-content-add" th:if="${brandsLast != null}">
+                        <div th:each="brand2:${brandsLast}">
+                            <div class="group-filter-content-item">
+                                <input class="check-brand" type="checkbox" th:value="${brand2.brandId}">
+                                <label th:text="${brand2.name}"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="them" id="themThuongHieu" onclick="displayThuongHieu()">
+                        Thêm
+                        <i class="fa-solid fa-angle-down icon">
+                        </i>
+                    </p>
+                    <p id="anBotThuongHieu" class="anbot" onclick="hiddenThuongHieu()">
+                        Ẩn bớt
+                        <i class="fa-solid fa-angle-up"></i>
+                    </p>
+                    <!--                    document.getElementById("group-filter-content-item").onclick = function () {-->
+                    <!--                    document.getElementById("check").checked = false;-->
+                    <!--                    };-->
+                    <script>
+
+                        function displayThuongHieu() {
+                            document.getElementById("thuongHieu").style.display = 'block';
+                            document.getElementById("themThuongHieu").style.display = 'none';
+                            document.getElementById("anBotThuongHieu").style.display = 'block';
+                        }
+
+                        function hiddenThuongHieu() {
+                            document.getElementById("thuongHieu").style.display = 'none';
+                            document.getElementById("themThuongHieu").style.display = 'block';
+                            document.getElementById("anBotThuongHieu").style.display = 'none';
+                        }
+
+
                     </script>
                 </div>
             </div>
@@ -124,49 +181,6 @@
 
             <div class="filter-body">
                 <div class="group-filter">
-                    <div th:if="${brandsFirst != null}">
-                        <div class="group-filter-header">Thương hiệu</div>
-                        <div class="group-filter-content" th:each="brand1:${brandsFirst}">
-                            <div class="group-filter-content-item">
-                                <input type="checkbox" name="">
-                                <label th:text="${brand1.name}"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="thuongHieu" class="group-filter-content-add" th:if="${brandsLast != null}">
-                        <div th:each="brand2:${brandsLast}">
-                            <div class="group-filter-content-item">
-                                <input type="checkbox" name="">
-                                <label th:text="${brand2.name}"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="them" id="themThuongHieu" onclick="displayThuongHieu()">
-                        Thêm
-                        <i class="fa-solid fa-angle-down icon">
-                        </i>
-                    </p>
-                    <p id="anBotThuongHieu" class="anbot" onclick="hiddenThuongHieu()">
-                        Ẩn bớt
-                        <i class="fa-solid fa-angle-up"></i>
-                    </p>
-                    <script>
-                            function displayThuongHieu() {
-                                document.getElementById("thuongHieu").style.display = 'block';
-                                document.getElementById("themThuongHieu").style.display = 'none';
-                                document.getElementById("anBotThuongHieu").style.display = 'block';
-                            }
-                           function hiddenThuongHieu() {
-                                document.getElementById("thuongHieu").style.display = 'none';
-                                document.getElementById("themThuongHieu").style.display = 'block';
-                                document.getElementById("anBotThuongHieu").style.display = 'none';
-                           }
-                    </script>
-                </div>
-            </div>
-
-            <div class="filter-body">
-                <div class="group-filter">
                     <div class="group-filter-header">Khoảng Giá</div>
                     <div class="group-filter-content">
                         <form action="" style="width: 100%;">
@@ -177,31 +191,15 @@
                         </form>
                     </div>
                 </div>
-                <script>
-                    function validate(evt) {
-                        if (evt.keyCode != 8) {
-                            var theEvent = evt || window.event;
-                            var key = theEvent.keyCode || theEvent.which;
-                            key = String.fromCharCode(key);
-                            var regex = /[0-9]|\./;
-                            if (!regex.test(key)) {
-                                theEvent.returnValue = false;
-                                if (theEvent.preventDefault)
-                                    theEvent.preventDefault();
-                            }
-                        }
-                    }
 
-
-
-                </script>
             </div>
 
         </div>
+
         <div class="search-content">
             <div class="thanh-ketqua">
                 <span><i class="fa-regular fa-lightbulb"></i></span>
-                <p>Kết quả tìm kiếm cho '<span th:text="${name}"></span>'</p>
+                <p>Kết quả tìm kiếm cho '<span th:text="${param.name}"></span>'</p>
             </div>
             <div class="thanh-sap-xep" style="height: 60px; background-color: #00000008;">
                 <div class="nut-sap-xep">
@@ -230,80 +228,237 @@
                 </div>
             </div>
 
-            <div class="row" th:if="${!productPage.hasContent()}">
+            <div class="row error-null" th:if="${!productPage.hasContent()}">
                 <div class="col">
-                    <div class="alert alert-danger" role="alert">
+                    <div class="alert alert-danger text-center" role="alert">
                         <strong>No Product Found</strong>
                     </div>
                 </div>
             </div>
-            <div th:if="${productPage.hasContent()}">
-                <div id="danh-sach-san-pham" th:each="product:${productPage.content}">
+            <div id="danh-sach-san-pham" th:if="${productPage.hasContent()}">
+                <div th:each="product:${productPage.content}">
+
                     <div class="gallery">
-                        <a target="_blank" href="https://www.w3schools.com/css/img_5terre.jpg">
-                            <img src="https://www.w3schools.com/css/img_5terre.jpg" th:src="${product.thumbnail}"
-                                 alt="Cinque Terre">
+                        <a>
+                            <img th:src="${product.thumbnail}" alt="Cinque Terre">
                         </a>
-                        <div class="desc">
-                            <div class="desc-ten" th:text="${product.name}"></div>
-                            <div class="desc-gia">
+                        <a class="desc-link text-dark" th:href="@{/product/detail(productId=${product.productId})}">
+                            <div class="desc">
+                                <div class="desc-ten" th:text="${product.name}"></div>
+                                <div class="desc-gia">
                                 <span class="desc-gia-an">
                                     <del>
                                         <span class="desc-gia-an-d">đ</span>
                                         <span th:text="${#numbers.formatDecimal(product.price,1,'DEFAULT',0,'DEFAULT')}"></span>
                                     </del>
                                 </span>
-                                <span class="desc-gia-hien">
+                                    <span class="desc-gia-hien">
                                     <span class="desc-gia-hien-d">đ</span>
                                     <span th:text="${#numbers.formatDecimal(product.price,1,'DEFAULT',0,'DEFAULT')}"></span>
                                 </span>
+                                </div>
+                                <div class="desc-danhgia">
+                                <span class="fa fa-star"
+                                      th:classappend="${listRating.get(product.productId)>=1}? checked"></span>
+                                    <span class="fa fa-star"
+                                          th:classappend="${listRating.get(product.productId)>=2}? checked"></span>
+                                    <span class="fa fa-star"
+                                          th:classappend="${listRating.get(product.productId)>=3}? checked"></span>
+                                    <span class="fa fa-star"
+                                          th:classappend="${listRating.get(product.productId)>=4}? checked"></span>
+                                    <span class="fa fa-star"
+                                          th:classappend="${listRating.get(product.productId)>=5}? checked"></span>
+                                    <span class="da-ban">Đã bán 216</span>
+                                </div>
+                                <div class="desc-noiban" style="color: #000000A6;">
+                                    <i style="color: rgb(0, 191, 165);" class="fa-solid fa-truck-fast"></i>
+                                    Metan, TP. Hồ Chí Minh
+                                </div>
                             </div>
-                            <div class="desc-danhgia">
-                                <span class="fa fa-star" th:classappend="${listRating.get(product.productId)>=1}? checked"></span>
-                                <span class="fa fa-star" th:classappend="${listRating.get(product.productId)>=2}? checked"></span>
-                                <span class="fa fa-star" th:classappend="${listRating.get(product.productId)>=3}? checked"></span>
-                                <span class="fa fa-star" th:classappend="${listRating.get(product.productId)>=4}? checked"></span>
-                                <span class="fa fa-star" th:classappend="${listRating.get(product.productId)>=5}? checked"></span>
-                                <span class="da-ban">Đã bán 216</span>
-                            </div>
-                            <div class="desc-noiban" style="color: #000000A6;">
-                                <i style="color: rgb(0, 191, 165);" class="fa-solid fa-truck-fast"></i>
-                                Metan, TP. Hồ Chí Minh
-                            </div>
-                        </div>
+                        </a>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div style="width: 20%;"></div>
-        <div class="pagination" th:if="${productPage.totalPages >0}">
-            <ul>
-                <li th:class="${0==productPage.number} ? 'active' : ''">
-                    <a th:href="@{/search(name=${name}, size=${productPage.size}, page=${1})}">«</a>
-                </li>
-
-                <li class="active" th:each="pageNumber:${pageNumbers}"
-                    th:if="${productPage.totalPages >0}"
-                    th:class="${pageNumber == productPage.number} ? 'active' : ''">
-                    <a id="pageNumber"
-                       th:href="@{/search(name=${name}, size=${productPage.size}, page=${pageNumber})}"
-                       class="page-item"
-                       th:text="${pageNumber}+1" type="button">
-                        <input id="pageNumberHidden" type="hidden" value="${pageNumber}+1">
-                    </a>
-                </li>
-
-                <li th:class="${productPage.totalPages ==productPage.number+1} ? 'active' : ''">
-                    <a th:href="@{/search(name=${name}, size=${productPage.size}, page=${productPage.totalPages})}">»</a>
-                </li>
-            </ul>
+        <div class="paginationPage mt-5 mb-5" th:if="${productPage.totalPages >0}">
+            <nav aria-label="Page navigation">
+                <ul class="pagination" id="pagination"></ul>
+            </nav>
         </div>
     </div>
+
 </div>
-</div>
-<script src="../js/search.js"></script>
+<th:block>
+    <div th:replace="fragments :: footer"></div>
+</th:block>
+<th:block>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/jquery.simplePagination.js}"></script>
+
+    <script th:inline="javascript">
+        function validate(evt) {
+            if (evt.keyCode != 8) {
+                var theEvent = evt || window.event;
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+                var regex = /[0-9]|\./;
+                if (!regex.test(key)) {
+                    theEvent.returnValue = false;
+                    if (theEvent.preventDefault)
+                        theEvent.preventDefault();
+                }
+            }
+        }
+
+        let currentPage = [[${productPage.getPageable().getPageNumber()}]];
+        console.log(currentPage);
+        let totalPages = [[${productPage.getTotalPages()}]];
+        let brandIds = [];
+        let categoryIds = [];
+        let maxPrice = 0;
+        let minPrice = 0;
+        let ratings = [];
+
+        $(function () {
+            pagination();
+        });
+
+        function pagination() {
+            if (totalPages >= 0) {
+                $('#pagination').show();
+                $('#pagination').pagination({
+                    pages: totalPages,
+                    currentPage: currentPage,
+                    cssStyle: '',
+                    prevText: '<span class="active-link" aria-hidden="true">&laquo;</span>',
+                    nextText: '<span class="active-link" aria-hidden="true">&raquo;</span>',
+                    onInit: function () {
+
+                    },
+                    onPageClick: function (page, evt) {
+                        currentPage = page;
+                        getProducts();
+                        $('body,html').animate({scrollTop: 0}, 800);
+                    }
+                });
+                $('#pagination .active .current').addClass('page-link');
+                $('#pagination .ellipse .clickable').addClass('page-link');
+                $('#pagination .disabled .current.prev').addClass('page-link');
+                $('#pagination .disabled .current.next').addClass('page-link');
+            } else {
+                $('#pagination').hide();
+            }
+        }
+
+        $(document).ready(function () {
+            $(".check-brand").change(function () {
+                brandIds = $(".check-brand:checked").map(function () {
+                    return $(this).val();
+                }).get();
+                currentPage = 1;
+                getProducts();
+
+            })
+            $(".check-category").change(function () {
+                categoryIds = $(".check-category:checked").map(function () {
+                    return $(this).val();
+                }).get();
+                currentPage = 1;
+                getProducts();
+            })
+
+        })
+
+        function getProducts() {
+            let req = {
+                categoryIds: categoryIds,
+                brandIds: brandIds,
+                ratings: ratings,
+                minPrice: minPrice,
+                maxPrice: maxPrice,
+                page: currentPage - 1
+            }
+            let myJSON = JSON.stringify(req);
+            $.ajax({
+                url: "search/products",
+                type: "POST",
+                data: myJSON,
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                success: function (products) {
+                    createData(products.content);
+                    currentPage = products.pageable.pageNumber + 1;
+                    totalPages = products.totalPages;
+                    console.log("Tong page hien tai khi nhan link page:" + totalPages);
+                    console.log("page hien tai khi nhan link page:" + currentPage);
+                    pagination();
+                    $('#pageCurrent').html(currentPage + "/" + totalPages + " Trang");
+                    console.log(products.content);
+                }
+            })
+        }
+
+        let listRating = [[${listRating}]];
+        console.log(listRating);
+
+        function createData(products) {
+            let html = '';
+            if (products.length > 0) {
+                for (product of products) {
+                    html += `
+        <div class="gallery">
+            <a>
+                <img src="${product.thumbnail}"
+                     alt="Cinque Terre">
+            </a>
+            <a class="desc-link text-dark" href="/product/detail?productId=${product.productId}">
+            <div class="desc">
+                <div class="desc-ten">${product.name}</div>
+                <div class="desc-gia">
+                    <span class="desc-gia-an">
+                        <del>
+                            <span class="desc-gia-an-d">đ</span>
+                            <span>${new Intl.NumberFormat('vi-VN', {maximumSignificantDigits: 3}).format(product.price)}</span>
+                        </del>
+                    </span>
+                    <span class="desc-gia-hien">
+                        <span class="desc-gia-hien-d">đ</span>
+                        <span>${new Intl.NumberFormat('vi-VN', {maximumSignificantDigits: 3}).format(product.price)}</span>
+                    </span>
+                </div>
+                <div class="desc-danhgia">
+                    <span class="fa fa-star ${listRating[product.productId] >= 1 ? 'checked' : ''}"></span>
+                    <span class="fa fa-star ${listRating[product.productId] >= 2 ? 'checked' : ''}"></span>
+                    <span class="fa fa-star ${listRating[product.productId] >= 3 ? 'checked' : ''}"></span>
+                    <span class="fa fa-star ${listRating[product.productId] >= 4 ? 'checked' : ''}"></span>
+                    <span class="fa fa-star ${listRating[product.productId] >= 5 ? 'checked' : ''}"></span>
+                    <span class="da-ban">Đã bán 216</span>
+                </div>
+                <div class="desc-noiban" style="color: #000000A6;">
+                    <i style="color: rgb(0, 191, 165);" class="fa-solid fa-truck-fast"></i>
+                    Metan, TP. Hồ Chí Minh
+                </div>
+            </div>
+            </a>
+        </div>`;
+                }
+                $("#danh-sach-san-pham").html("");
+                $("#danh-sach-san-pham").html(html);
+            } else {
+                $("#danh-sach-san-pham").html("");
+                $('.error-null').css('display', 'flex');
+            }
+
+        }
+
+
+    </script>
+</th:block>
 </body>
 
 </html>

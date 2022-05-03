@@ -1,6 +1,7 @@
 package com.metan.websalesecurityequipment.service.impl;
 
 import com.metan.websalesecurityequipment.model.Product;
+import com.metan.websalesecurityequipment.model.request.ProductRequestPageable;
 import com.metan.websalesecurityequipment.repository.ProductRepository;
 import com.metan.websalesecurityequipment.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +64,22 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> findByNameContaining(String name) {
         return productRepository.findByNameContaining(name);
+    }
+
+    @Override
+    public Page<Product> searchByNameCateBrand(String name, Pageable pageable) {
+        return productRepository.searchByNameCateBrand(name, pageable);
+    }
+
+    @Override
+    public Page<Product> searchByNameCateBrand(ProductRequestPageable req, Pageable pageable) {
+        Page<Product> page = null;
+        if (req.getBrandIds().size() == 0 && req.getCategoryIds().size() == 0) {
+            page = findAll(pageable);
+        } else {
+            page = productRepository.searchByNameCateBrand(req.getCategoryIds(), req.getBrandIds(), pageable);
+        }
+        return page;
     }
 
     @Override

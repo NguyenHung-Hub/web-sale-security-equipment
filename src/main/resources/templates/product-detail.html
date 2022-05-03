@@ -67,7 +67,7 @@
             </div>
         </div>
         <!-- thông tin cơ bản -->
-        <div class="col-6">
+        <div class="col-6 desc">
 
             <div>
                 <h2>[[${product.name}]]</h2>
@@ -321,9 +321,9 @@
 
     </div>
 </div>
-<div>
-    <h1 class="text-center">FOOTER</h1>
-</div>
+
+<div th:replace="fragments :: footer"></div>
+
 
 </body>
 

@@ -19,7 +19,7 @@ public
 @EqualsAndHashCode(of = {"product", "attribute"})
 class ProductAttribute {
     @Id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     @JsonManagedReference
     private Product product;
