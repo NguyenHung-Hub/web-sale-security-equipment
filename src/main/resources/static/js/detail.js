@@ -22,4 +22,19 @@ $(document).ready(function() {
         }
     }
     $("#txtQuantity").blur(testQuantity);
+    $('.collapsible').click(function (){
+        if($('#long-desc').hasClass('shadow-inset')){
+            $('.long-desc').css('height','auto');
+            $('.long-desc').removeClass('shadow-inset');
+            $(this).addClass('mt-3')
+            $(this).html('Ẩn bớt <i class="fas fa-angle-up"></i>');
+        }else {
+            $('.long-desc').css('height','200px');
+            $('.long-desc').addClass('shadow-inset');
+            $(this).html('Xem thêm <i class="fas fa-angle-down"></i>');
+            $(this).removeClass('mt-3')
+
+        }
+    });
 });
+

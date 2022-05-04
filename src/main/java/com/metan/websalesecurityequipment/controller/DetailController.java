@@ -30,36 +30,18 @@ public class DetailController {
     private ProductReviewService reviewService;
 
     private String productId;
-    private Integer page;
-    private Integer size;
-    private String sort;
 
-    @GetMapping(value = "/detail")
-    public String getRequest(Model model, @RequestParam(name = "productId") String productId,
+    @GetMapping(value = "/detail/{slug}")
+    public String getRequest(Model model, @PathVariable(name = "slug", required = true) String slug,
                              @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
                              @RequestParam(name = "size", required = false, defaultValue = "5") Integer size,
                              @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
-        this.productId = productId;
-        this.page = page;
-        this.size = size;
-        this.sort = sort;
-        Product product = productService.findProductById(productId);
-        String s = product.getSlug();
-        return "redirect:/product/detail/" + s;
-    }
-
-    @GetMapping(value = "/detail/{slug}")
-    public String showDetail(Model model, @PathVariable(name = "slug", required = false) String slug) {
-        Product product = null;
-        if (productId == null) {
-            product = productService.findBySlug(slug);
-        } else {
-            product = productService.findProductById(productId);
-        }
+        System.out.println(slug);
+        Product product = productService.findBySlug(slug);
+        productId=product.getProductId();
         List<ProductReview> productReviews = reviewService.findByProductId(productId);
-        if (product == null) {
-            System.out.println("không tìm thấy");
-        }
+        List<Product> top4ProductsRand= productService.findTopNumberRandom(4);
+
 
         //phần đầu
         double discount = product.getPrice() - product.getPrice() * (product.getProductDiscount() == null ? 0 : product.getProductDiscount().getDiscountPercent());
@@ -81,14 +63,17 @@ public class DetailController {
             sortable = Sort.by("id").descending();
         }
         Pageable pageable = PageRequest.of(page, size, sortable);
+
         //review
         model.addAttribute("reviewProduct", new ProductReview());
         model.addAttribute("reviews", reviewService.findByProductId(productId, pageable));
         model.addAttribute("rating", (double) rating / ((productReviews.size() == 0) ? 1 : productReviews.size()));
         model.addAttribute("discount", discount);
         model.addAttribute("product", product);
+        model.addAttribute("rand4Product",top4ProductsRand);
         return "product-detail";
     }
+
 
     public void comment() {
 

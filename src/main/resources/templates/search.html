@@ -242,7 +242,7 @@
                         <a>
                             <img th:src="${product.thumbnail}" alt="Cinque Terre">
                         </a>
-                        <a class="desc-link text-dark" th:href="@{/product/detail(productId=${product.productId})}">
+                        <a class="desc-link text-dark" th:href="@{'/product/detail/'+${product.slug}}">
                             <div class="desc">
                                 <div class="desc-ten" th:text="${product.name}"></div>
                                 <div class="desc-gia">
@@ -416,7 +416,7 @@
                 <img src="${product.thumbnail}"
                      alt="Cinque Terre">
             </a>
-            <a class="desc-link text-dark" href="/product/detail?productId=${product.productId}">
+            <a class="desc-link text-dark" href="/product/detail/${product.slug}">
             <div class="desc">
                 <div class="desc-ten">${product.name}</div>
                 <div class="desc-gia">
