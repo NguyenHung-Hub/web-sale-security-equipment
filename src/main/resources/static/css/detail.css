@@ -65,8 +65,7 @@
     text-align: center;
     vertical-align: middle;
 }
-
-/* @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css); */
+@import url(//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css);
 
 
 /*reset css*/
@@ -210,4 +209,74 @@ h1 {
 
 .mau-ten-thong-tin {
     color: #00000066;
+}
+/*ul.tabs{
+    display: flex;
+    justify-content: center;
+}*/
+.nav-tabs .nav-link.active{
+    background-color: #ff9999;
+}
+.paginationPage {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.page-link {
+    margin-left: 1px;
+    display: inline-block;
+    color: #777;
+    font-size: 14px;
+}
+
+a.page-link, span.page-link {
+    display: inline-block;
+    color: #777;
+    font-size: 14px;
+}
+
+.paginationPage ul {
+    list-style-type: none;
+}
+
+.pagination li {
+    display: inline-block;
+    text-align: center;
+    transition: background-color .3s;
+    border-radius: 2px;
+}
+
+.pagination > .page-link {
+    width: 43px;
+    height: 34px;
+    text-align: center;
+    padding: 4px 16px;
+    margin: 3px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border-radius: 2px;
+}
+
+/* thiết lập style cho class active */
+.pagination li.active > .current {
+    background-color: #ff9999;
+    color: black;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.page-link:active {
+    font-size: 14px;
+
+}
+
+.pagination li.disabled > .current {
+    color: #ff9999;
+}
+
+/* thêm màu nền khi người dùng hover vào class không active */
+.pagination li:hover:not(.active) > .page-link {
+    color: #ff9999;
+    text-decoration: none;
 }

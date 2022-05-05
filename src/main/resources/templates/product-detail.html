@@ -3,20 +3,12 @@
       xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.thymeleaf.org ">
 
-<head>
+<head th:replace="fragments-demo :: head">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chi tiết sản phẩm</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" th:href="@{/css/detail.css}">
 
-    <link rel="stylesheet" th:href="@{/css/base.css}">
-    <link rel="stylesheet" th:href="@{/css/header.css}">
-    <link rel="stylesheet" th:href="@{/css/home.css}">
-    <link rel="stylesheet" th:href="@{/css/footer.css}">
 </head>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -24,7 +16,7 @@
 <script th:src="@{/js/detail.js}"></script>
 
 <body>
-<div th:replace="fragments :: header"></div>
+<div th:replace="fragments-demo :: header"></div>
 <div class="container w-75 mt-5 mb-5">
 
     <!-- ảnh và thông tin cơ bản -->
@@ -39,17 +31,17 @@
                 </ol>
                 <div class="carousel-inner scale">
 
-                    <div class="carousel-item active">
+                    <div class="carousel-item active w-75">
                         <img th:src="${product.thumbnail}"
                              class="img-fluid position-relative " alt="Los Angeles" style="width:100%;">
                     </div>
 
-                    <div class="carousel-item ">
+                    <div class="carousel-item w-75">
                         <img th:src="${product.thumbnail}"
                              class="img-fluid  position-relative " alt="Chicago" style="width:100%;">
                     </div>
 
-                    <div class="carousel-item ">
+                    <div class="carousel-item w-75">
                         <img th:src="${product.thumbnail}"
                              class="img-fluid position-relative" alt="New York" style="width:100%;">
 
@@ -104,20 +96,26 @@
                     </div>
                 </div>
                 <div class="mt-5">
-                    <p>Loại: </p>
-                    <p>Từ khóa liên quan: </p>
+                    <p>Loại: [[${product.category==null}?'':${product.category.name}]]</p>
+                    <p>Từ khóa liên quan:
+                        <th:block th:each="lq,state:${#strings.arraySplit(product.name,' ')}">
+                            [[${lq}]][[${state.last}?'':', ']]
+                        </th:block>
+                    </p>
                 </div>
             </div>
         </div>
     </div>
     <!-- mô tả chi tiết, đánh giá , thông tin thêm-->
     <div class="mt-5">
-        <ul id="tabs" class="nav nav-tabs" role="tablist">
-            <li class="nav-item"><a data-toggle="tab" href="#ChiTiet" class="nav-link active text-dark">Chi tiết sản
+        <ul id="tabs" class="nav nav-tabs tabs" role="tablist">
+            <li class="nav-item"><a data-toggle="tab" href="#ChiTiet" class="tabs nav-link active text-dark">Chi tiết
+                sản
                 phẩm</a></li>
-            <li class="nav-item"><a data-toggle="tab" href="#ThemThongTin" class="nav-link text-dark">Thông tin thêm</a>
+            <li class="nav-item"><a data-toggle="tab" href="#ThemThongTin" class="tabs nav-link text-dark">Thông tin
+                thêm</a>
             </li>
-            <li class="nav-item"><a data-toggle="tab" href="#DanhGia" class="nav-link text-dark">Đánh giá</a></li>
+            <li class="nav-item"><a data-toggle="tab" href="#DanhGia" class="tabs nav-link text-dark">Đánh giá</a></li>
         </ul>
         <div class="tab-content mt-5">
             <div id="ChiTiet" class="container tab-pane active">
@@ -182,47 +180,47 @@
             <!-- đánh giá -->
             <div id="DanhGia" class="container tab-pane fade">
                 <h2 class="bg-light p-2">ĐÁNH GIÁ SẢN PHẨM</h2>
-                <th:block th:if="${reviews.getTotalElements()<=0}">
-                    <div class="text-center mt-5">
-                        <img th:src="@{/imgs/no-review.png}" class="img-fluid">
-                        <p class="mt-3">Sản phẩm chưa có đánh giá</p>
-                    </div>
-                </th:block>
-                <th:block th:each="review:${reviews}">
-                    <div class="row mt-5 mb-3 border-bottom">
-                        <div class="col-2">
-                            <img src="assets/image/user.png" class="img-fluid w-75" alt="">
-                        </div>
-                        <div class="col-10">
-                            <div>
-                                <span class="fa fa-star" th:classappend="${review.rating>=1}? 'checked-rating'"></span>
-                                <span class="fa fa-star" th:classappend="${review.rating>=2}? 'checked-rating'"></span>
-                                <span class="fa fa-star" th:classappend="${review.rating>=3}? 'checked-rating'"></span>
-                                <span class="fa fa-star" th:classappend="${review.rating>=4}? 'checked-rating'"></span>
-                                <span class="fa fa-star" th:classappend="${review.rating>=5}? 'checked-rating'"></span>
+
+                <div class="error-null text-center mt-5">
+                    <img th:src="@{/imgs/no-review.png}" class="img-fluid">
+                    <p class="mt-3">Sản phẩm chưa có đánh giá</p>
+                </div>
+
+                <div id="danh-sach-danh-gia">
+                    <th:block th:each="review:${reviews}">
+                        <div class="row mt-5 mb-3 border-bottom">
+                            <div class="col-2">
+                                <img src="" class="img-fluid w-75" alt="">
                             </div>
-                            <div>
-                                <h3>[[${review.user.firstName+" "+ lastName}]]</h3>
-                                <span>[[${review.title}]]</span>
-                                <p>[[${review.content}]]</p>
+                            <div class="col-10">
+                                <div>
+                                    <span class="fa fa-star"
+                                          th:classappend="${review.rating>=1}? 'checked-rating'"></span>
+                                    <span class="fa fa-star"
+                                          th:classappend="${review.rating>=2}? 'checked-rating'"></span>
+                                    <span class="fa fa-star"
+                                          th:classappend="${review.rating>=3}? 'checked-rating'"></span>
+                                    <span class="fa fa-star"
+                                          th:classappend="${review.rating>=4}? 'checked-rating'"></span>
+                                    <span class="fa fa-star"
+                                          th:classappend="${review.rating>=5}? 'checked-rating'"></span>
+                                </div>
+                                <div>
+                                    <h3>[[${review.user.firstName+" "+review.user.lastName}]]</h3>
+                                    <span>[[${review.title}]]</span>
+                                    <p>[[${review.content}]]</p>
+                                </div>
                             </div>
+                            <hr>
                         </div>
-                        <hr>
-                    </div>
-                </th:block>
-                <th:block th:if="${reviews.getTotalPages()>0}">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <th:block th:each="index: ${#numbers.sequence(0,reviews.getTotalPages()-1)}">
-                                <li class="page-item"><a id="btnPage" type="button" class="page-link"
-                                                         th:href="@{/product/detail(productId=${product.productId}, page=${index})}">[[${index+1}]]</a>
-                                </li>
-                            </th:block>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul>
+                    </th:block>
+                </div>
+
+                <div class="paginationPage mt-5 mb-5" th:if="${reviews.totalPages >0}">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination" id="pagination"></ul>
                     </nav>
-                </th:block>
+                </div>
 
 
                 <!-- form đánh giá -->
@@ -262,12 +260,20 @@
             <th:block th:each="elm:${rand4Product}">
                 <a class="col-3" th:href="@{'/product/detail/'+${elm.slug}}">
                     <div class="border text-center text-dark translate position-relative">
-                        <span class="position-absolute discount bg-warning text-danger">Giảm<br th:text="(${elm.productDiscount==null}?'0':${elm.productDiscount.discountPercent*100})+'%'"></span>
+                        <span class="position-absolute discount bg-warning text-danger">Giảm<br
+                                th:text="(${elm.productDiscount==null}?'0':${#numbers.formatInteger(elm.productDiscount.discountPercent*100,1)})+'%'"></span>
                         <img th:src="${elm.thumbnail}"
-                             class="img-fluid"
+                             class="img-fluid" style="height: 200px"
                              alt="">
                         <p class="mt-3 ba-cham">[[${elm.name}]]</p>
-                        <p>[[${elm.price}]] đ</p>
+                        <p class="text-danger">[[${#numbers.formatDecimal(elm.price,1,'DEFAULT',0,'DEFAULT')}]] đ</p>
+                        <!-- <div>
+                             <span class="fa fa-star" th:classappend="${elm.productReviews.rating>=1}? 'checked-rating'"></span>
+                             <span class="fa fa-star" th:classappend="${elm.productReviews.rating>=2}? 'checked-rating'"></span>
+                             <span class="fa fa-star" th:classappend="${elm.productReviews.rating>=3}? 'checked-rating'"></span>
+                             <span class="fa fa-star" th:classappend="${elm.productReviews.rating>=4}? 'checked-rating'"></span>
+                             <span class="fa fa-star" th:classappend="${elm.productReviews.rating>=5}? 'checked-rating'"></span>
+                         </div>-->
                     </div>
                 </a>
             </th:block>
@@ -276,11 +282,121 @@
     </div>
 </div>
 
+
 <!-- sản phẩm liên quan -->
 
 
 <div th:replace="fragments :: footer"></div>
 
+<th:block>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/jquery.simplePagination.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+    <script th:inline="javascript">
+        let productId = [[${product.productId}]];
+        let totalPages = [[${reviews.getTotalPages()}]];
+        let currentPage =[[${reviews.getPageable().getPageNumber()}]];
+
+        $(function () {
+            if ([[${reviews.hasContent}]] == true) {
+                $('.error-null').css('display', 'none');
+            } else {
+                $('.error-null').css('display', 'flex');
+            }
+        })
+        $(function () {
+            pagination();
+            console.log('myproduct:'+totalPages,productId)
+        });
+
+        function pagination() {
+            if (totalPages >= 0) {
+                $('#pagination').show();
+                $('#pagination').pagination({
+                    pages: totalPages,
+                    currentPage: currentPage,
+                    cssStyle: '',
+                    prevText: '<span class="active-link" aria-hidden="true">&laquo;</span>',
+                    nextText: '<span class="active-link" aria-hidden="true">&raquo;</span>',
+                    onInit: function () {
+
+                    },
+                    onPageClick: function (page, evt) {
+                        currentPage = page;
+                        getReviews();
+                        $('body,html').animate({scrollTop: 0}, 800);
+                    }
+
+                });
+                $('#pagination .active .current').addClass('page-link');
+                $('#pagination .ellipse .clickable').addClass('page-link');
+                $('#pagination .disabled .current.prev').addClass('page-link');
+                $('#pagination .disabled .current.next').addClass('page-link');
+            }else {
+                $('#pagination').hide();
+            }
+        }
+
+        function getReviews() {
+            const req = {
+                productId: productId,
+                page: currentPage - 1
+            }
+            const myJSON = JSON.stringify(req);
+            $.ajax({
+                url: "/product/api/productReviews",
+                type: "POST",
+                data: myJSON,
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                success: function (reviews) {
+                    createData(reviews.content);
+                    currentPage = reviews.pageable.pageNumber + 1;
+                    totalPages = reviews.totalPages;
+                    console.log("Tong page hien tai khi nhan link page:" + totalPages);
+                    console.log("page hien tai khi nhan link page:" + currentPage);
+                    pagination();
+                    console.log(reviews.content);
+                }
+            })
+
+            function createData(reviews) {
+                let html = '';
+                if (reviews.length > 0) {
+                    for (review of reviews) {
+                        html += ` <div class="row mt-5 mb-3 border-bottom">
+                        <div class="col-2">
+                            <img src="" class="img-fluid w-75" alt="">
+                        </div>
+                        <div class="col-10">
+                            <div>
+                                <span class="fa fa-star ${(review.rating >= 1) ? 'checked-rating' : ''}"></span>
+                                <span class="fa fa-star ${(review.rating >= 2) ? 'checked-rating' : ''}"></span>
+                                <span class="fa fa-star ${(review.rating >= 3) ? 'checked-rating' : ''}"></span>
+                                <span class="fa fa-star ${(review.rating >= 4) ? 'checked-rating' : ''}"></span>
+                                <span class="fa fa-star ${(review.rating >= 5) ? 'checked-rating' : ''}"></span>
+                            </div>
+                            <div>
+                                <h3>${review.user.firstName + " " + review.user.lastName}</h3>
+                                <span>${review.title}</span>
+                                <p>${review.content}</p>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>`;
+                    }
+                    $("#danh-sach-danh-gia").html("");
+                    $('.error-null').css('display', 'none');
+                    $("#danh-sach-danh-gia").html(html);
+                } else {
+                    $("#danh-sach-danh-gia").html("");
+                    $('.error-null').css('display', 'flex');
+                }
+            }
+        }
+
+    </script>
+</th:block>
 
 </body>
 
