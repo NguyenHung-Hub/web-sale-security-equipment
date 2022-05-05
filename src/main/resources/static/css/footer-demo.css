@@ -1,0 +1,42 @@
+#footer .footer-top .box {
+    position: relative;
+    padding-left: 85px;
+}
+
+#footer .footer-top .box .title h4 {
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+#footer .footer-top .box .subtitle span {
+    color: #fff;
+    font-size: 1.4rem;
+}
+
+#footer .footer-top .box:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#footer .footer-top .box.box-1:before {
+    background-image: url(../imgs/icon-ft-box-1.svg);
+    width: 55px;
+    height: 65px;
+}
+
+#footer .footer-top .box.box-2:before {
+    background-image: url(../imgs/icon-ft-box-2.svg);
+    width: 55px;
+    height: 65px;
+}
+
+#footer .footer-top .box.box-3:before {
+    background-image: url(../imgs/icon-ft-box-3.svg);
+    width: 55px;
+    height: 65px;
+}

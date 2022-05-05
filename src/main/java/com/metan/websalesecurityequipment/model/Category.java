@@ -31,6 +31,8 @@ class Category {
     private Date createdAt;
     @Column(name = "modified_at", columnDefinition = "datetime")
     private Date modifiedAt;
+    @Column(name = "thumbnail")
+    private String thumbnail;
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     @JsonBackReference
     private List<Product> products;
