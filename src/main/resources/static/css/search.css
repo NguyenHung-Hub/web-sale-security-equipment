@@ -133,10 +133,10 @@ div.filter-danhgia > .checked {
 #fromPrice,
 #toPrice {
     width: 48%;
+    height: 34px;
     margin-left: 0;
     border-radius: 0.125rem;
     box-shadow: inset 0 1px 0 0 rgb(0 0 0 / 5%);
-    height: 1.875rem;
     border: 1px solid rgba(0, 0, 0, .26);
 }
 
@@ -147,7 +147,7 @@ div.filter-danhgia > .checked {
 
 .apdung {
     width: 100%;
-    height: 1.875rem;
+    height: 34px;
     margin-top: 10px;
     background-color: #ff9999;
     font-weight: 400;
@@ -306,14 +306,23 @@ div.filter-danhgia > .checked {
     max-width: 300px;
 }
 
-.danh-sach-san-pham {
+#danh-sach-san-pham {
     max-height: 1000px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
 }
-
+#danh-sach-san-pham > div.content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
 div.gallery {
+
     margin: 10px;
-    float: left;
-    width: 205px;
+    width: 218px;
     color: #000000DE;
     height: 290px;
     border-radius: 2px;
