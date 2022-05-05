@@ -22,10 +22,23 @@ html {
     color: var(--text-color);
 }
 
+img {
+    width: 100%;
+    height: auto;
+}
+
 @media (min-width: 1200px) {
     .container {
         max-width: 1200px;
     }
+
+    .container-lg {
+        max-width: 1200px;
+    }
+}
+
+.my-section {
+    margin-bottom: 30px;
 }
 
 .sticky {
@@ -58,6 +71,13 @@ html {
 .column-container {
     padding-left: 0;
     padding-right: 0;
+}
+
+@media (max-width: 991px) {
+    .column-container-md {
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
 
 .row-fluid > .column-container > .column-inner {

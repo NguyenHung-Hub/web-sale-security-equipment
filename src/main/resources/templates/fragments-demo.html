@@ -6,7 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo</title>
     <link rel="stylesheet" th:href="@{/css/font-base.css}">
-    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.css'>
+    <!--    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.css'>-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"
+          integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"
+          integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
@@ -14,11 +20,13 @@
     <link rel="stylesheet" th:href="@{/css/header-demo.css}">
     <link rel="stylesheet" th:href="@{/css/home-demo.css}">
     <link rel="stylesheet" th:href="@{/css/home-responsive-demo.css}">
+    <link rel="stylesheet" th:href="@{/css/footer-demo.css}">
 </head>
 <body>
 <!--/*@thymesVar id="categories" type="java.util.List<com.metan.websalesecurityequipment.model.Category>"*/-->
 <!--/*@thymesVar id="isHome" type="java.lang.Boolean"*/-->
-<header th:fragment="header" th:with="categories=${categories} ?: null, isHome=${isHome} ?: false" id="header" class="header">
+<header th:fragment="header" th:with="categories=${categories} ?: null, isHome=${isHome} ?: false" id="header"
+        class="header">
     <div class="header-center d-lg-block d-none">
         <div class="container">
             <div class="row justify-content-between">
@@ -95,7 +103,7 @@
                                     <img th:src="@{/imgs/signin-icon.svg}" alt="" src="">
                                 </div>
                                 <div class="account_name">
-                                    Đăng nhập
+                                    Tài khoản
                                 </div>
                             </a>
                         </li>
@@ -160,7 +168,8 @@
                 <ul class="sidebar-menu">
                     <li th:each="category: ${categories}" class="sidebar-dropdown">
                         <a href="#">
-                            <img src="https://static3.industrybuying.com/navigation/1501837652security.png" loading="lazy" alt="">
+                            <img src="https://static3.industrybuying.com/navigation/1501837652security.png"
+                                 loading="lazy" alt="">
                             [[${category.name}]]
                         </a>
                         <ul class="sidebar-submenu">
@@ -179,43 +188,103 @@
             </nav>
         </div>
     </div>
+
+    <div class="over-suggest d-lg-none"></div>
+
+    <div class="over d-lg-none"></div>
+
 </header>
 
-<div th:fragment="over-suggest" class="over-suggest d-lg-none"></div>
+<footer th:fragment="footer" id="footer" class="footer">
+    <div class="footer-top bg-danger d-md-none d-xl-block">
+        <div class="container">
+            <div class="row py-4">
+                <div class="col-md-4">
+                    <div class="box box-1">
+                        <div class="title">
+                            <h4>Chi Tiêu Hiệu Quả</h4>
+                        </div>
+                        <div class="subtitle">
+                            <span>Đa dang sản phẩm và dịch vụ</span>
+                            <span>Chất lượng cao với giá ưu đãi</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box box-2">
+                        <div class="title">
+                            <h4>An Tâm Khi Mua Sắm</h4>
+                        </div>
+                        <div class="subtitle">
+                            <span>Sản phẩm, hàng hóa chính hãng</span>
+                            <span>Thanh toán tiện lợi</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box box-3">
+                        <div class="title">
+                            <h4>Dịch Vụ Chu Đáo</h4>
+                        </div>
+                        <div class="subtitle">
+                            <span>Giao hàng nhanh trong 24h</span>
+                            <span>Hotline phục vụ cả T7 & CN</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-center">
+        <div class="container">
+            <div class="row">
+                <div class="last-child-col order-md-last d-md-none d-lg-block">
+                    <div class="title">
+                        <h4>KẾT NỐI VỚI CHÚNG TÔI</h4>
+                        <ul class="list-social">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                    <div class="content"></div>
+                </div>
+                <div class="my-col d-none d-sm-block">
 
-<div th:fragment="over" class="over d-lg-none"></div>
+                </div>
+                <div class="my-col d-none d-sm-block">
 
+                </div>
+                <div class="my-col d-none d-sm-block">
 
-<script th:fragment="glider" src="https://cdnjs.cloudflare.com/ajax/libs/glider-js/1.6.6/glider.min.js"
-        integrity="sha512-RidPlemZ+Xtdq62dXb81kYFycgFQJ71CKg+YbKw+deBWB0TLIqCraOn6k0CWDH2rGvE1a8ruqMB+4E4OLVJ7Dg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script th:fragment="jquery" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-<script th:fragment="bootstrap" src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
-        crossorigin="anonymous"></script>
-<script th:fragment="hammer" src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"
-        integrity="sha512-UXumZrZNiOwnTcZSHLOfcTs0aos2MzBWHXOHOuB0J/R44QB0dwY5JgfbvljXcklVf65Gc4El6RjZ+lnwd2az2g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script th:fragment="header-script" th:src="@{/js/header.js}"></script>
-<script th:fragment="home" th:src="@{/js/home.js}"></script>
+                </div>
+                <div class="my-col d-none d-sm-block">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--<script th:fragment="glider" src="https://cdnjs.cloudflare.com/ajax/libs/glider-js/1.6.6/glider.min.js"-->
+<!--        integrity="sha512-RidPlemZ+Xtdq62dXb81kYFycgFQJ71CKg+YbKw+deBWB0TLIqCraOn6k0CWDH2rGvE1a8ruqMB+4E4OLVJ7Dg=="-->
+<!--        crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->
+<th:block th:fragment="js">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"
+            integrity="sha512-HGOnQO9+SP1V92SrtZfjqxxtLmVzqZpjFFekvzZVWoiASSQgSr4cw9Kqd2+l8Llp4Gm0G8GIFJ4ddwZilcdb8A=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"
+            integrity="sha512-eP8DK17a+MOcKHXC5Yrqzd8WI5WKh6F1TIk5QZ/8Lbv+8ssblcz7oGC8ZmQ/ZSAPa7ZmsCU4e/hcovqR8jfJqA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script th:src="@{/js/header.js}"></script>
+    <script th:src="@{/js/home.js}"></script>
+</th:block>
 </body>
 </html>
 
-<!--<div class="header-center__minicart">-->
-<!--    <ul class="header-center__minicart-content"></ul>-->
-<!--    <div class="header-center__cart-checkout">-->
-<!--        <div class="header-top__sidebar-price-total d-flex justify-content-between">-->
-<!--                                                                    <span class="header-center__label-price-total">-->
-<!--                                                                        Tổng:-->
-<!--                                                                    </span>-->
-<!--            <span class="header-center__price-amount">-->
-<!--                                                                        $0.00-->
-<!--                                                                    </span>-->
-<!--        </div>-->
-<!--        <div class="header-center__cart-link">-->
-<!--            <a href="#">Xem giỏ hàng</a>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
