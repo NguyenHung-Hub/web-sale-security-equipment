@@ -25,9 +25,16 @@ class Order {
     private OrderStatus orderStatus;
     @Column(name = "modified_at", columnDefinition = "datetime")
     private Date modifiedAt;
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
     private List<OrderItem> orderItems;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public Order(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public Order() {
+    }
 }

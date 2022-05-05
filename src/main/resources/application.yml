@@ -2,11 +2,12 @@
 #
 # spring boot connection
 #
+server.port : 8080
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/web-sale-security-equipment?useUnicode=yes&characterEncoding=UTF-8
     username: root
-    password: huyhoang14901
+    password: sapassword
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
