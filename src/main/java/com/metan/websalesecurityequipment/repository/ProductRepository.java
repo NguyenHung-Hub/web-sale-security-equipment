@@ -38,8 +38,19 @@ public interface ProductRepository extends JpaRepository<Product, String> {
     public Page<Product> findByNameContaining(String name, Pageable pageable);
 
     @Query(value = "select * from products p join brands b on p.brand_id= b.brand_id join categories c on c.category_id = p.category_id " +
-            "where b.brand_id in ?2 " +
-            "OR c.category_id in ?1", nativeQuery = true)
-    public Page<Product> searchByNameCateBrand(List<Integer> cates,List<Integer> brands,Pageable pageable);
+            "where (b.brand_id in ?2 " +
+            "OR c.category_id in ?1" +
+            " OR (p.price >=?3 and p.price<=?4)) and p.name like %?5%", nativeQuery = true)
+    public Page<Product> searchByNameCateBrand(List<Integer> cates,List<Integer> brands,double minPrice, double maxPrice,String name,Pageable pageable);
+
+    @Query(value = "select distinct(p.product_id), p.* from products p join brands b on p.brand_id= b.brand_id join categories c \n" +
+            "on c.category_id = p.category_id join product_reviews pr on pr.product_id=p.product_id\n" +
+            " where (b.brand_id in (?2) \n" +
+            "            OR c.category_id in (?1) \n" +
+            "            or pr.rating >= ?3" +
+            " OR (p.price >=?4 and p.price<=?5)) and p.name like %?6%", nativeQuery = true)
+    public Page<Product> searchByNameCateBrandRating(List<Integer> cates,List<Integer> brands, int rating,double minPrice, double maxPrice,String name,Pageable pageable);
+
+
 
 }

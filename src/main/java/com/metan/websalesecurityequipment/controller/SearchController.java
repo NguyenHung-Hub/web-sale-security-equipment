@@ -27,7 +27,8 @@ import java.util.stream.IntStream;
 @Controller
 @RequestMapping
 public class SearchController {
-    private Pageable pageable=null;
+    private Pageable pageable = null;
+    private String name;
     private Page<Product> resultPage = null;
     @Autowired
     private ProductService productService;
@@ -46,7 +47,7 @@ public class SearchController {
     public String showSearch1(ModelMap model, @RequestParam(name = "name", required = false) String name,
                               @RequestParam("page") Optional<Integer> page,
                               @RequestParam("size") Optional<Integer> size) {
-
+        this.name = name;
         List<Brand> brands = brandService.findAll();
         List<Category> categories = categoryService.findAll();
         display(model, name, page, size, brands, categories);
@@ -57,20 +58,34 @@ public class SearchController {
 
     @PostMapping("search/products")
     @ResponseBody
-    public Page<Product> getProductsFilter(ModelMap model,@RequestBody ProductRequestPageable req,
+    public Page<Product> getProductsFilter(ModelMap model,
+                                           @RequestBody ProductRequestPageable req,
                                            @RequestParam("page") Optional<Integer> page,
                                            @RequestParam("size") Optional<Integer> size) {
-
-
-
-        //Nếu nguoi dung khong nhap
+        String ss="DESC";
+        if(req.getColumnName().equals("ascPrice")){
+            ss="ASC";
+            req.setColumnName("price");
+        }
+        if(req.getColumnName().equals("name")){
+            ss="ASC";
+        }
+        if(req.getColumnName().equals("descPrice")){
+            ss="DESC";
+            req.setColumnName("price");
+        }
         System.out.println(req);
         int currentPage = page.orElse(req.getPage());
         System.out.println(req.getPage());
         int pageSize = size.orElse(8);
-        pageable = PageRequest.of(currentPage, pageSize, Sort.by("name"));
-        Page<Product> productPage = productService.searchByNameCateBrand(req ,pageable ) ;
-
+        Sort sort;
+        if(ss.equals("DESC")) {
+            sort = Sort.by(req.getColumnName()).descending();
+        }else {
+            sort = Sort.by(req.getColumnName()).ascending();
+        }
+        pageable = PageRequest.of(currentPage, pageSize,sort);
+        Page<Product> productPage = productService.searchByNameCateBrand(req, name, pageable);
         return productPage;
     }
 
@@ -79,10 +94,8 @@ public class SearchController {
         if (StringUtils.hasText(name)) {
             resultPage = productService.findByNameContaining(name, pageable);
         } else {
-
             resultPage = productService.findAll(pageable);
         }
-
         return resultPage;
     }
 
@@ -136,28 +149,6 @@ public class SearchController {
         model.addAttribute("productPage", resultPage);
 
         model.addAttribute("listRating", getAvgRating(productService.findAll()));
-        //model.addAttribute("productPage", resultPage);
-
-        //tính số lượng page hiển thị sang giao diẹn
-        /*int totalPages = resultPage.getTotalPages() - 1;
-        if (totalPages > 0) {
-            int start = Math.max(0, currentPage - 4);
-            int end = Math.min(currentPage + 4, totalPages);
-
-            if (totalPages >= 5) {
-                if (end == totalPages) start = end - 5;
-                else if (start == 0) end = start + 5;
-            } else if (totalPages >= 3) {
-                if (end == totalPages) start = end - 3;
-                else if (start == 1) end = start + 3;
-            } else if (totalPages >= 1) {
-                if (end == totalPages) start = end - 1;
-                else if (start == 1) end = start + 1;
-            }
-            List<Integer> pageNumbers = IntStream.rangeClosed(start, end)
-                    .boxed().collect(Collectors.toList());
-            model.addAttribute("pageNumbers", pageNumbers);
-        }*/
     }
 
 }

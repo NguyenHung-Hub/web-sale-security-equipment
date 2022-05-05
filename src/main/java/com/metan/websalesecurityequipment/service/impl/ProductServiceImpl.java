@@ -72,12 +72,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<Product> searchByNameCateBrand(ProductRequestPageable req, Pageable pageable) {
+    public Page<Product> searchByNameCateBrand(ProductRequestPageable req,String name, Pageable pageable) {
         Page<Product> page = null;
-        if (req.getBrandIds().size() == 0 && req.getCategoryIds().size() == 0) {
-            page = findAll(pageable);
+        if (req.getBrandIds().size() == 0 && req.getCategoryIds().size() == 0 && req.getRating() == 0 && req.getMaxPrice() == 0 && req.getMinPrice() == 0) {
+            page = findByNameContaining(name,pageable);
         } else {
-            page = productRepository.searchByNameCateBrand(req.getCategoryIds(), req.getBrandIds(), pageable);
+            if (req.getRating() == 0) {
+                page = productRepository.searchByNameCateBrand(req.getCategoryIds(), req.getBrandIds(), req.getMinPrice(), req.getMaxPrice(),name, pageable);
+            } else {
+                page = productRepository.searchByNameCateBrandRating(req.getCategoryIds(), req.getBrandIds(), req.getRating(),req.getMinPrice(), req.getMaxPrice(),name, pageable);
+            }
         }
         return page;
     }

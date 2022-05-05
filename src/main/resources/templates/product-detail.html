@@ -213,11 +213,11 @@
                         </div>
                         <div class="col-10">
                             <div>
-                                <span class="fa fa-star" th:classappend="${review.rating>=1}? checked-rating"></span>
-                                <span class="fa fa-star" th:classappend="${review.rating>=2}? checked-rating"></span>
-                                <span class="fa fa-star" th:classappend="${review.rating>=3}? checked-rating"></span>
-                                <span class="fa fa-star" th:classappend="${review.rating>=4}? checked-rating"></span>
-                                <span class="fa fa-star" th:classappend="${review.rating>=5}? checked-rating"></span>
+                                <span class="fa fa-star" th:classappend="${review.rating>=1}? 'checked-rating'"></span>
+                                <span class="fa fa-star" th:classappend="${review.rating>=2}? 'checked-rating'"></span>
+                                <span class="fa fa-star" th:classappend="${review.rating>=3}? 'checked-rating'"></span>
+                                <span class="fa fa-star" th:classappend="${review.rating>=4}? 'checked-rating'"></span>
+                                <span class="fa fa-star" th:classappend="${review.rating>=5}? 'checked-rating'"></span>
                             </div>
                             <div>
                                 <h3>[[${review.user.firstName+" "+ lastName}]]</h3>
@@ -234,7 +234,7 @@
                             <li class="page-item"><a class="page-link" href="#">Previous</a></li>
                             <th:block th:each="index: ${#numbers.sequence(0,reviews.getTotalPages()-1)}">
                                 <li class="page-item"><a id="btnPage" type="button" class="page-link"
-                                                         th:href="@{/product/detail#DanhGia(productId=${product.productId},page=${index})}">[[${index+1}]]</a>
+                                                         th:href="@{/product/detail(productId=${product.productId},page=${index})}">[[${index+1}]]</a>
                                 </li>
                             </th:block>
                             <li class="page-item"><a class="page-link" href="#">Next</a></li>
