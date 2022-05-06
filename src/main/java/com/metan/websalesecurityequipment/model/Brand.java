@@ -1,8 +1,12 @@
 package com.metan.websalesecurityequipment.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
+
+import lombok.*;
+
 import lombok.EqualsAndHashCode;
+
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,7 +15,10 @@ import java.util.List;
 @Entity
 @Table(name = "brands")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public @Data
+public @Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(of = {"brandId"})
 class Brand {
     @Id
@@ -27,6 +34,6 @@ class Brand {
     @Column(name = "modified_at", columnDefinition = "datetime")
     private Date modifiedAt;
     @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("brand")
+    @JsonBackReference
     private List<Product> products;
 }

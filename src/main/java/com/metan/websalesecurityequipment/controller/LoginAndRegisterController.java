@@ -37,6 +37,6 @@ public class LoginAndRegisterController {
     @PostMapping("/register")
     public String processRegistration(User user) {
         userService.registerUser(user);
-        return "redirect:/login";
+        return "redirect:/account/login";
     }
 }

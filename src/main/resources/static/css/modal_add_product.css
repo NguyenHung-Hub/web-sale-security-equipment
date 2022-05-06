@@ -1,0 +1,76 @@
+.modal-body__product {
+    height: 600px !important;
+    overflow-y: scroll;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+.box-thumbnail {
+    height: 130px;
+    width: 100%;
+}
+.box-thumbnail img {
+    width: 120px;
+    object-fit: cover;
+}
+
+.box-form-product-modal {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+.box-form-product-modal form {
+    position: relative;
+    padding: 16px;
+}
+
+.box-form-product-modal form:nth-child(1) {
+    flex-grow: 2;
+}
+.box-form-product-modal form:nth-child(2) {
+    flex-grow: 1;
+}
+
+.box-form-product-modal form:not(:first-child)::after {
+    content: "";
+    position: absolute;
+    height: 80%;
+    top: 10%;
+    left: 0;
+    border-left: 1px solid #ccc;
+}
+.form-group-modify {
+    display: flex;
+    flex-direction: row;
+}
+.form-group-modify label {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    height: calc(1.5em + 0.75rem + 2px);
+    min-width: 100px;
+    padding: 0;
+
+    font-weight: bold;
+}
+.form-control-modify {
+    display: inline-block;
+    flex: 1;
+}
+
+.form-control-modify {
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+table > tbody > tr > th {
+    display: block;
+    margin-left: 50%;
+}

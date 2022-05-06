@@ -2,6 +2,7 @@ package com.metan.websalesecurityequipment.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -24,5 +25,4 @@ class ProductDiscount {
     private Date createdAt;
     @Column(name = "modified_at", columnDefinition = "datetime")
     private Date modifiedAt;
-
 }

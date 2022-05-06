@@ -2,6 +2,7 @@ package com.metan.websalesecurityequipment.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,7 +21,7 @@ class User implements Serializable {
     private String lastName;
     @Column(unique = true)
     private String email;
-    @Column(name = "phone_number")
+    @Column(name = "phone_number",unique = true)
     private String phoneNumber;
     private byte[] avatar;
     private String role;

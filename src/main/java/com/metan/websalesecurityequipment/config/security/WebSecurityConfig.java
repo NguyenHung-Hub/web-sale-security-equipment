@@ -24,7 +24,7 @@ import javax.sql.DataSource;
  * actor: Hoang
  */
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -32,7 +32,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/image/**", "/js/**", "webjars/**", "/css/**", "/static/**");
+
+        web.ignoring().antMatchers("/imgs/**", "/js/**", "/fonts/**", "webjars/**", "/css/**", "/static/**","/**");
+
+
     }
 
     /**
@@ -63,7 +66,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService());
         authProvider.setPasswordEncoder(passwordEncoder());
-
         return authProvider;
     }
 
@@ -75,8 +77,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/**").permitAll()
-                .antMatchers("/account/**").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers("/account/login/**").permitAll()
                 .antMatchers("/oauth2/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -94,10 +96,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .userService(oAuth2UserService)
                     .and()
                     .successHandler(oAuth2LoginSuccessHandler)
+                    .defaultSuccessUrl("/")
                 .and()
                     .logout()
                     .deleteCookies("JSESSIONID")
-                    .invalidateHttpSession(true)
                     .logoutSuccessUrl("/account/login")
                 .permitAll()
                 .and()

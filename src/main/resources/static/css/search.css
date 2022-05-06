@@ -1,0 +1,469 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    min-width: 1140px;
+
+}
+
+.search-nav-filter {
+    width: 20%;
+    height: 100%;
+    font-size: 14px;
+    color: rgba(0, 0, 0, .8);
+}
+
+.search-content {
+    position: relative;
+    width: 80%;
+    height: 100%;
+    padding: 4px;
+}
+
+.filter-title {
+    width: 100%;
+}
+
+.fa-solid{
+    font-size: 12px;
+}
+.fa-filter{
+    padding: 5px;
+    font-size: 16px;
+}
+
+.filter-title>p {
+    font-size: 16px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, .8);
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+.filter-body {
+    width: 100%;
+    border-bottom: 1px solid rgba(209, 19, 19, 0.09);
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.group-filter {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding-left: 2px;
+}
+
+.group-filter-header {
+    text-align: start;
+    margin-bottom: 5px;
+}
+
+.anbot{
+    cursor: pointer;
+    margin-left: 20px;
+    display:none;
+}
+.them {
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.them>i{
+    font-size: 12px;
+}
+
+.group-filter-content-item {
+    padding-left: 3px;
+    width: 100%;
+    display: flex;
+    align-content: center;  
+}
+
+.group-filter-content-item>input{
+    border: 1px solid rgba(0,0,0,.26);
+    border-radius: 2px;
+    width: 6%;
+    margin-top: 4px;
+}
+
+.group-filter-content-item>label{
+    width: 92%;
+    display: inline-block;
+    margin-left: 2px;
+    padding-left: 3px;
+}
+
+.group-filter-content-add {
+    display: none;
+}
+
+.group-filter-content-item>input,
+label {
+    cursor: pointer;
+    vertical-align: middle;
+}
+.filter-danhgia{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.filter-danhgia>.fa-star {
+    font-size: 12px;
+    margin: 1px;
+}
+.filter-danhgia>input{
+    margin-right: 5px;
+}
+.filter-danhgia>.soLuongKetQua{
+    margin-left: 5px;
+    font-size: 12px;
+}
+
+div.filter-danhgia>.checked {
+    color: orange;
+}
+
+#fromGia,
+#toGia {
+    width: 48%;
+    margin-left: 0;
+    border-radius: 0.125rem;
+    box-shadow: inset 0 1px 0 0 rgb(0 0 0 / 5%);
+    height: 1.875rem;
+    border: 1px solid rgba(0, 0, 0, .26);
+}
+
+.apdung {
+    width: 100%;
+    height: 1.875rem;
+    margin-top: 10px;
+    background-color: #ff9999;
+    font-weight: 400;
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 2px;
+    text-transform: uppercase;
+    box-shadow: 0 1px 1px 0 rgba(31, 31, 31, 0.001);
+    display: flex;
+    border: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.thanh-ketqua{
+    width: 100%;
+    height: 40px;
+    padding-left: 10px;
+    margin-left: 10px;
+    margin-right: 13px;
+
+}
+.thanh-ketqua >p{
+    font-size: 14px;
+    display: inline-block; 
+    line-height: 40px; 
+    margin-left: 5px;
+}
+.thanh-ketqua >p>span{
+    color: #ff9999;
+}
+
+.thanh-sap-xep {
+    position: relative;
+    background-color: rgb(148, 145, 145);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 14px;
+}
+.thanh-sap-xep>div{
+    position: absolute;
+}
+.nut-sap-xep{
+    left: 15px;
+}
+.chuyen-trang{
+    right: 15px;
+}
+.thanh-sap-xep a {
+    text-decoration: none;
+    color: white;
+    padding: 5px;
+    display: inline-block;
+}
+
+#sap-xep {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+#sap-xep li {
+    background-color: white;
+    display: inline-block;
+    cursor: pointer;
+}
+
+#sap-xep li:hover {
+    background-color: #ff9999;
+}
+
+#sap-xep li:hover ul {
+    display: block;
+}
+
+#sap-xep li ul {
+    position: absolute;
+    background-color: white;
+    width: 100px;
+    display: none;
+}
+
+#sap-xep li ul li {
+    width: 150px;
+    /*margin-left: -40px;*/
+}
+
+#sap-xep li ul li a {
+    width: 150px;
+    display: block !important;
+}
+
+#sap-xep li ul li:hover {
+    background-color: white;
+    color: red;
+    cursor: pointer;
+}
+
+.btn-ss {
+    width: 100px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+#btnGia {
+    display: block;
+    width: 150px;
+}
+
+#btnGia>a {
+    display: block;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.btn-chon-gia {
+    float: right;
+}
+
+.chuyen-trang {
+    display: inline;
+    height: 34px;
+}
+
+/* .chuyen-trang>ul>li {
+    width: 36px;
+    height: 34px;
+    border-radius: 2px;
+    border: 1px solid rgba(0,0,0,.09);
+    outline: none;
+    list-style: none;
+    display: inline-block;
+    text-align: center;
+    letter-spacing: 0;
+} */
+.chuyen-trang>span{
+    width: 100px; 
+    height: 34px; 
+    font-size: 14px; 
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+/* .chuyen-trang>a {
+    color: rgba(0, 0, 0, .26);
+    border-color: rgba(0, 0, 0, .09);
+    display: inline-block;
+    text-align: center;
+    outline: none;
+    width: 100%;
+    height: 100%;
+} */
+.error-null{
+    margin-top:5px;
+}
+.danh-sach-san-pham {
+    max-height: 1000px;
+}
+
+div.gallery {
+    margin: 10px;
+    float: left;
+    width: 205px;
+    color: #000000DE;
+    height: 290px;
+    border-radius: 2px;
+    box-shadow: 0 3px 5px rgb(0 0 0 / 15%);
+}
+.desc-link:hover{
+    text-decoration: none;
+}
+.desc-link:active{
+    text-decoration: none;
+}
+div.gallery:hover {
+    transform: translateY(-2px);
+    border: 1px solid #ff9999;
+}
+
+div.gallery img {
+    width: 100%;
+    height: 180px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+div.desc {
+    padding: 5px;
+    text-align: center;
+    height: 110px;
+    width: 100%;
+
+}
+
+div.desc-ten {
+    font-size: 14px;
+    height: 40px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 2px;
+}
+
+div.desc-gia {
+    height: 16px;
+    line-height: 16px;
+    display: flex;
+    align-items:center;
+}
+
+.desc-gia-an {
+    font-size: 12px;
+    color: #0000008A;
+    display: block;
+}
+
+
+.desc-gia-an-d {
+    font-size: 10px;
+    text-decoration: underline;
+    margin-right: -3px;
+    margin-left: 3px;
+    vertical-align: super;
+}
+
+span.desc-gia-hien {
+    font-size: 16px;
+    margin-left: 10px;
+    vertical-align: text-bottom;
+    padding-top: 2px;
+    color: red;
+}
+
+.desc-gia-hien-d {
+    font-size: 12px;
+    text-decoration: underline;
+    vertical-align: bottom;
+    margin-right: -4px;
+}
+
+div.desc-danhgia {
+    align-content: flex-end;
+    text-align: right;
+}
+
+.desc-danhgia>.fa-star {
+    font-size: 10px;
+}
+
+.desc-danhgia>.da-ban {
+    font-size: 12px;
+    vertical-align: bottom;
+    right: 0px;
+}
+
+div.desc-danhgia>.checked {
+    color: orange;
+}
+
+div.desc-noiban {
+    margin-top: 2px;
+    font-size: 12px;
+    text-align: right;
+}
+
+.paginationPage {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+
+}
+.page-link{
+    display: inline-block;
+    color: #777;
+    font-size: 14px;
+}
+a.page-link, span.page-link{
+    display: inline-block;
+    color: #777;
+    font-size: 14px;
+}
+.paginationPage ul{
+    list-style-type: none;
+}
+.pagination li{
+    display: inline-block;
+    text-align: center;
+    transition: background-color .3s;
+    border-radius: 2px;
+}
+
+.pagination > .page-link {
+    width: 43px;
+    height: 34px;
+    text-align: center;
+    padding: 4px 16px;
+    margin: 3px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border-radius: 2px;
+}
+
+/* thiết lập style cho class active */
+.pagination li.active > .current{
+    background-color: #ff9999;
+    color: black;
+    font-size: 14px;
+    text-decoration: none;
+}
+.page-link:active{
+    font-size: 14px;
+
+}
+
+.pagination li.disabled> .current{
+    color: #ff9999;
+}
+/* thêm màu nền khi người dùng hover vào class không active */
+.pagination li:hover:not(.active)> .page-link{
+    color: #ff9999;
+    text-decoration: none;
+}
+
+

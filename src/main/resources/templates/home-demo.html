@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
+<head th:replace="fragments-demo :: head">
+    <title>Trang chủ - Bán thiết bị an ninh</title>
+</head>
+<body>
+<header th:replace="fragments-demo :: header (categories=${CATEGORIES}, isHome=true)"></header>
+
+<div th:replace="fragments-demo :: over-suggest"></div>
+
+<div th:replace="fragments-demo :: over"></div>
+
+<main id="home-container" class="home-container">
+    <div class="container">
+        <div class="home-category-nav d-lg-block d-none">
+            <nav class="navbar">
+                <ul class="nav navbar-nav">
+                    <li th:each="category : ${CATEGORIES}" class="nav-item">
+                        <a href="#" class="nav-link">
+                            <img src="https://static3.industrybuying.com/navigation/1501837652security.png"
+                                 alt="">
+                            [[${category.name}]]
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <section>
+
+        </section>
+        <div class="row">
+            <div id="content" class="column-container col-12">
+                <div class="column-inner">
+                    <div class="row row-fluid">
+                        <div class="content-first__category column-container col-xl-3 col-lg-4 d-lg-block d-none">
+                            <div class="column-inner"></div>
+                        </div>
+                        <div class="column-container col-xl-9 col-lg-8 col-12">
+                            <div class="column-inner">
+                                <div class="element">
+                                    <div class="banner-wrapper">
+                                        <div id="carouselId" class="carousel slide"
+                                             data-ride="carousel" data-interval="8000">
+                                            <ol class="carousel-indicators">
+                                                <li data-target="#carouselId" data-slide-to="0" class="active">
+                                                </li>
+                                                <li data-target="#carouselId" data-slide-to="1"></li>
+                                                <li data-target="#carouselId" data-slide-to="2"></li>
+                                            </ol>
+                                            <div class="carousel-inner" role="listbox">
+                                                <div class="carousel-item active">
+                                                    <img src="https://vuhoangtelecom.vn/wp-content/uploads/2021/10/KM-GIAO-HANG-MIEN-PHI-TRONG-4H-711X416.jpg"
+                                                         alt="banner 1" style="width: 100%;">
+                                                    <!-- <div class="carousel-caption d-none d-md-block">
+                                                        <h3>Title</h3>
+                                                        <p>Description</p>
+                                                    </div> -->
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <img src="https://vuhoangtelecom.vn/wp-content/uploads/2022/04/Banner-ban-camera-wifi-thang-4-711x416-1.jpg"
+                                                         alt="banner 2" style="width: 100%;">
+                                                    <!-- <div class="carousel-caption d-none d-md-block">
+                                                        <h3>Title</h3>
+                                                        <p>Description</p>
+                                                    </div> -->
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <img src="https://vuhoangtelecom.vn/wp-content/uploads/2022/03/Banner-khuyen-mai-thiet-bi-y-te-711x416-1.jpg"
+                                                         alt="Banner 3" style="width: 100%;">
+                                                    <!-- <div class="carousel-caption d-none d-md-block">
+                                                        <h3>Title</h3>
+                                                        <p>Description</p>
+                                                    </div> -->
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <a class="carousel-control-prev" href="#carouselId"
+                                                   role="button" data-slide="prev">
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <a class="carousel-control-next" href="#carouselId"
+                                                   role="button" data-slide="next">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row d-none">
+                        <div class="column-container col-lg-3 col-md-12 col-sm-12">
+                            <div class="column-inner">
+                                <div class="hot-product-wrapper">
+                                    <div id="hot-product-carousel" class="hot-product-carousel carousel slide"
+                                         data-ride="carousel" data-interval="0">
+                                        <div class="box-slider-title">
+                                            <h2>
+                                                <span>Hot</span>
+                                                Product
+                                            </h2>
+                                        </div>
+                                        <div class="custom-navigation">
+                                            <a class="fa fa-angle-left" href="#hot-product-carousel"
+                                               role="button" data-slide="prev">
+                                            </a>
+                                            <a class="fa fa-angle-right" href="#hot-product-carousel"
+                                               role="button" data-slide="next">
+                                            </a>
+                                        </div>
+                                        <div class="carousel-inner" role="listbox">
+                                            <div class="carousel-item active">
+                                                <div th:each="product: ${TOP_PRODUCT_LIST}" class="card item-detail">
+                                                    <div class="row no-gutters">
+                                                        <div class="col-lg-5 col-3">
+                                                            <img class="card-img-top" th:src="${product.thumbnail}" alt="">
+                                                        </div>
+                                                        <div class="col-lg-7 col-9">
+                                                            <div class="card-body">
+                                                                <h4 class="card-title">
+                                                                    [[${product.title}]]
+                                                                </h4>
+                                                                <div class="rating">
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="far fa-star"></i>
+                                                                </div>
+                                                                <div class="item-price">
+                                                                    <p>
+                                                                        <span>
+                                                                            [[${#numbers.formatDecimal(product.price,3,'POINT',0,'POINT')}]]đ
+                                                                        </span>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="carousel-item active">
+                                                <div th:each="product: ${TOP_PRODUCT_LIST}" class="card item-detail">
+                                                    <div class="row no-gutters">
+                                                        <div class="col-lg-5 col-3">
+                                                            <img class="card-img-top" th:src="${product.thumbnail}" alt="">
+                                                        </div>
+                                                        <div class="col-lg-7 col-9">
+                                                            <div class="card-body">
+                                                                <h4 class="card-title">
+                                                                    [[${product.title}]]
+                                                                </h4>
+                                                                <div class="rating">
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="far fa-star"></i>
+                                                                </div>
+                                                                <div class="item-price">
+                                                                    <p>
+                                                                        <span>
+                                                                            [[${#numbers.formatDecimal(product.price,3,'POINT',0,'POINT')}]]đ
+                                                                        </span>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column-container col-lg-9 col-md-12 col-sm-12">
+                            <div class="column-inner">
+                                <div class="product-list-wrapper">
+                                    <div class="new-arrival">
+                                        <div class="top-tab-slider clearfix">
+                                            <div class="box-slider-title">
+                                                <h2>
+                                                    <span>New</span>
+                                                    Arrivals
+                                                </h2>
+                                            </div>
+                                        </div>
+                                        <div class="glider-contain">
+                                            <div class="glider">
+                                                <div th:each="product: ${PRODUCT_LIST}" class="card-product">
+                                                    <div class="card-product-wrapper">
+                                                        <div class="card text-left">
+                                                            <div class="card-img-top">
+                                                                <a href="#">
+                                                                    <img th:src="${product.thumbnail}"
+                                                                         alt="">
+                                                                </a>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <h4 class="card-title">[[${product.title}]]</h4>
+                                                                <span class="card-price-origin">[[${#numbers.formatDecimal(product.price,3,'POINT',0,'POINT')}]]đ</span>
+                                                                <span class="card-price">
+                                                                            [[${#numbers.formatDecimal(product.price,3,'POINT',0,'POINT')}]]đ
+                                                                        </span>
+                                                                <p class="card-text">
+
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <span role="none" aria-label="Previous" class="glider-prev"></span>
+                                            <span role="none" aria-label="Next" class="glider-next"></span>
+                                        </div>
+                                        <div class="load-more pt-4 pb-4 text-center">
+                                            <a class="btn btn-outline-primary" href="#">
+                                                Xem thêm
+                                                <i class="fas fa-angle-right"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script th:replace="fragments-demo :: glider"></script>
+<script th:replace="fragments-demo :: hammer"></script>
+<script th:replace="fragments-demo :: jquery"></script>
+<script th:replace="fragments-demo :: bootstrap"></script>
+<script th:replace="fragments-demo :: home"></script>
+<script th:replace="fragments-demo :: header-script"></script>
+</body>
+</html>

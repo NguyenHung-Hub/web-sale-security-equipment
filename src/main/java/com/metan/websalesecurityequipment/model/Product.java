@@ -1,6 +1,8 @@
 package com.metan.websalesecurityequipment.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,11 +12,11 @@ import java.util.List;
 @Entity
 @Table(name = "products")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, ignoreUnknown = true)
-public @Data
-@AllArgsConstructor
+public @Setter
+@Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(of = "productId")
-@ToString(exclude = {"category", "productType", "brand"})
 class Product {
     @Id
     @Column(name = "product_id", columnDefinition = "varchar(20)")
@@ -33,17 +35,21 @@ class Product {
     @JoinColumn(name = "category_id")
     @JsonIgnoreProperties("products")
     private Category category;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "discount_id")
     private ProductDiscount productDiscount;
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brand_id")
-    @JsonIgnoreProperties("products")
+    @JsonManagedReference
     private Brand brand;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<CartItem> cartItems;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<OrderItem> orderItems;
+    @Column(nullable = false, unique = true)
     private String slug;
     @Column(columnDefinition = "text")
     private String longDesc;
@@ -51,17 +57,17 @@ class Product {
     private Date createdAt;
     @Column(name = "modified_at", columnDefinition = "datetime")
     private Date modifiedAt;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "type_id")
-    @JsonIgnoreProperties("products")
-    private ProductType productType;
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("product")
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "type_id")
+//    @JsonIgnoreProperties("products")
+//    private ProductType productType;
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<ProductAttribute> productAttributes;
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("product")
+    @OneToMany(mappedBy = "product")
+    @JsonBackReference
     private List<ProductReview> productReviews;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("product")
+    @JsonBackReference
     private List<ProductBackdrop> productBackdrops;
 }
