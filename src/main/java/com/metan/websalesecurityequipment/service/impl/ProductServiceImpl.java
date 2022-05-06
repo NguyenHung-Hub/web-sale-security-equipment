@@ -1,6 +1,7 @@
 package com.metan.websalesecurityequipment.service.impl;
 
 import com.metan.websalesecurityequipment.model.Product;
+import com.metan.websalesecurityequipment.model.request.ProductRequestPageable;
 import com.metan.websalesecurityequipment.repository.ProductRepository;
 import com.metan.websalesecurityequipment.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +67,22 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Page<Product> searchByNameCateBrand(String name, Pageable pageable) {
+        return productRepository.searchByNameCateBrand(name, pageable);
+    }
+
+    @Override
+    public Page<Product> searchByNameCateBrand(ProductRequestPageable req, Pageable pageable) {
+        Page<Product> page = null;
+        if (req.getBrandIds().size() == 0 && req.getCategoryIds().size() == 0) {
+            page = findAll(pageable);
+        } else {
+            page = productRepository.searchByNameCateBrand(req.getCategoryIds(), req.getBrandIds(), pageable);
+        }
+        return page;
+    }
+
+    @Override
     public Page<Product> findAll(Pageable pageable) {
         return productRepository.findAll(pageable);
     }
@@ -73,6 +90,16 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Page<Product> findByNameContaining(String name, Pageable pageable) {
         return productRepository.findByNameContaining(name, pageable);
+    }
+
+    @Override
+    public Product findBySlug(String slug) {
+        return productRepository.findBySlug(slug);
+    }
+
+    @Override
+    public List<Product> findTopNumberRandom(int top) {
+        return productRepository.findTopNumberRandom(top);
     }
 
 

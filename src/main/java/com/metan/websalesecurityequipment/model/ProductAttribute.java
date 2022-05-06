@@ -2,9 +2,7 @@ package com.metan.websalesecurityequipment.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -13,11 +11,15 @@ import java.util.Date;
 @Table(name = "product_attributes")
 @IdClass(ProductAttributePK.class)
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public @Data
+public
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(of = {"product", "attribute"})
 class ProductAttribute {
     @Id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     @JsonManagedReference
     private Product product;

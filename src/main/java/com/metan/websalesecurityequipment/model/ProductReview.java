@@ -2,15 +2,17 @@ package com.metan.websalesecurityequipment.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "product_reviews")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public @Data
+public @Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 class ProductReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,12 +23,13 @@ class ProductReview {
     private String title;
     @Column(columnDefinition = "nvarchar(255)")
     private String content;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "product_id")
     @JsonManagedReference
     private Product product;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @JsonManagedReference
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private User user;
 }
