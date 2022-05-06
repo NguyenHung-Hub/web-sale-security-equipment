@@ -1,0 +1,97 @@
+#footer {
+    background-color: #1f2534;
+    color: rgba(255,255,255,0.7);
+}
+
+#footer .footer-top {
+    padding: 70px 0 30px;
+}
+
+#footer .footer-top .widget h3 {
+    color: #fff;
+    font-size: 1.8rem;
+    text-transform: capitalize;
+    position: relative;
+    line-height: 20px;
+    padding-bottom: 25px;
+    margin-bottom: 0 !important;
+}
+
+#footer .footer-top .widget h3:before {
+    background-color: #f33333;
+    position: absolute;
+    z-index: 3;
+    content: '';
+    width: 20px;
+    height: 2px;
+    font-weight: 600;
+    top: 35px;
+}
+
+#footer .footer-top .widget ul {
+    margin-left: 0;
+    list-style: none;
+}
+
+#footer .footer-top .widget .contact li {
+    color: #ccc;
+    font-size: 1.4rem;
+    line-height: 45px;
+}
+
+#footer .footer-top .widget .contact li i {
+    color: #fff;
+    margin-right: 10px;
+}
+
+#footer .footer-top .contact-us .contact-footer li.contact-phone {
+    color: #fff !important;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+#footer .footer-top .contact-us .contact-footer .social-list li {
+    display: inline-block;
+
+}
+
+#footer .footer-top .contact-us .contact-footer .social-list li + li {
+    margin-left: 10px;
+}
+
+#footer .footer-top .contact-us .contact-footer .social-list li i.fa-facebook-f:hover {
+    background-color: #3b5996;
+}
+
+#footer .footer-top .contact-us .contact-footer .social-list li i.fa-instagram:hover {
+    background: radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);
+}
+
+#footer .footer-top .contact-us .contact-footer .social-list li i.fa-twitter:hover {
+    background-color: #3D8DC9;
+}
+
+#footer .footer-top .contact-us .contact-footer .social-list li i.fa-google-plus-g:hover {
+    background-color: #D7453A;
+}
+
+#footer .footer-top .contact-us .contact-footer .social-list li i {
+    width: 36px;
+    height: 36px;
+    border-radius: 100%;
+    text-align: center;
+    line-height: 32px;
+    font-size: 1.4rem;
+    color: #fff;
+    transition: .2s all;
+    background-color: #404552;
+}
+
+#footer .footer-center {
+    background-color: #1a1f2c;
+    overflow: hidden;
+    padding: 40px 0 20px;
+    border-top: 1px solid #404552;
+    border-bottom: 1px solid #404552;
+}
+

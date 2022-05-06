@@ -1,18 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<head th:replace="fragments :: head">
-
-</head>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-
+<head th:replace="fragments :: head (title='Tìm kiếm')"></head>
 
 <body>
-<div th:replace="fragments :: header"></div>
+<div th:replace="fragments :: header (categories=${CATEGORIES})"></div>
 <div class="container">
     <div class="row">
         <div class="search-nav-filter">

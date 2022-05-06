@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
-<head th:replace="fragments-demo :: head">
-    <title>Trang chủ - Bán thiết bị an ninh</title>
-</head>
+<head th:replace="fragments :: head (title='Trang chủ - Bán Thiết bị an ninh')"></head>
 <body>
-<header th:replace="fragments-demo :: header (categories=${CATEGORIES}, isHome=true)"></header>
+<header th:replace="fragments :: header (categories=${CATEGORIES}, isHome=true)"></header>
 
 <div class="home-container">
     <main id="home-page" class="pb-5">
@@ -287,7 +285,7 @@
         </section>
     </main>
 </div>
-<footer th:replace="fragments-demo :: footer"></footer>
-<th:block th:replace="fragments-demo :: js"/>
+<footer th:replace="fragments :: footer"></footer>
+<th:block th:replace="fragments :: js"/>
 </body>
 </html>
