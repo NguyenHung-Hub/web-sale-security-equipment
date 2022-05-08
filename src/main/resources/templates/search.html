@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head th:replace="fragments-demo :: head">
+    <title>Tìm kiếm</title>
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -116,7 +117,7 @@
                             </div>
                         </div>
                         <div class="group-filter-content-item">
-                            <div class="filter-devaluate">
+                            <div class="filter-evaluate">
                                 <input type="checkbox" class="check-rating" th:value="*{2}">
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
@@ -202,8 +203,8 @@
                         <a>
                             <img th:src="${product.thumbnail}" alt="Cinque Terre">
                         </a>
-                        <a class="desc-link text-dark" th:href="@{/product/detail(productId=${product.productId})}">
-                            <div class="desc">
+                        <a class="desc-link text-dark" th:href="@{'/product/detail/'+${product.slug}}">
+                            <div class="description">
                                 <div class="desc-name" th:text="${product.name}"></div>
                                 <div class="desc-price">
                                 <span class="desc-price-hidden">
@@ -422,6 +423,7 @@
             let html = '';
 
             if (products.length > 0) {
+
                 html+=`<div class="content">`;
                     for (product of products) {
                         html += `
@@ -430,8 +432,8 @@
                                 <img src="${product.thumbnail}"
                                      alt="Cinque Terre">
                             </a>
-                            <a class="desc-link text-dark" href="/product/detail?productId=${product.productId}">
-                            <div class="desc">
+                            <a class="desc-link text-dark" th:href="@{'/product/detail/'+${product.slug}}">
+                            <div class="description">
                                 <div class="desc-name">${product.name}</div>
                                 <div class="desc-price">
                                     <span class="desc-price-hidden">

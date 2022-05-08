@@ -24,6 +24,9 @@ public interface ProductRepository extends JpaRepository<Product, String> {
             "order by tong desc limit 4", nativeQuery = true)
     public List<Product> findTopProduct();
 
+    @Query(value = "SELECT * FROM products ORDER BY RAND() LIMIT ?1", nativeQuery = true)
+    public List<Product> findTopNumberRandom(int top);
+
     public Product findBySlug(String slug);
 
     //Hao

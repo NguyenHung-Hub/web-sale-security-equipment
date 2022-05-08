@@ -358,12 +358,11 @@ div.gallery img {
     border-top-right-radius: 2px;
 }
 
-div.desc {
+div.description {
     padding: 5px;
     text-align: center;
     height: 110px;
     width: 100%;
-
 }
 
 div.desc-name {

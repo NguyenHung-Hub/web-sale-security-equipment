@@ -30,4 +30,5 @@ public interface ProductService {
     Page<Product> findByNameContaining(String name, Pageable pageable);
 
     public Product findBySlug(String slug);
+    public List<Product> findTopNumberRandom(int top);
 }

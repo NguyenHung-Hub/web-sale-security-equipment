@@ -3,21 +3,17 @@ package com.metan.websalesecurityequipment.controller;
 import com.metan.websalesecurityequipment.model.Product;
 import com.metan.websalesecurityequipment.model.ProductDiscount;
 import com.metan.websalesecurityequipment.model.ProductReview;
+import com.metan.websalesecurityequipment.model.request.ProductReviewRequest;
 import com.metan.websalesecurityequipment.service.ProductReviewService;
 import com.metan.websalesecurityequipment.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.format.annotation.NumberFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,34 +26,18 @@ public class DetailController {
     private ProductReviewService reviewService;
 
     private String productId;
-    private Integer page;
-    private Integer size;
-    private String sort;
 
-    @GetMapping(value = "/detail")
-    public String getRequest(Model model, @RequestParam(name = "productId") String productId,
+    @GetMapping(value = "/detail/{slug}")
+    public String getRequest(Model model, @PathVariable(name = "slug", required = true) String slug,
                              @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
                              @RequestParam(name = "size", required = false, defaultValue = "5") Integer size,
                              @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
-        this.productId = productId;
-        this.page = page;
-        this.size = size;
-        this.sort = sort;
-        Product product = productService.findProductById(productId);
-        String s = product.getSlug();
-        return "redirect:/product/detail/" + s;
-    }
-
-    @GetMapping(value = "/detail/{slug}")
-    public String showDetail(Model model, @PathVariable(name = "slug", required = false) String slug) {
-        if(productId==null){
-
-        }
-        Product product = productService.findProductById(productId);
+        System.out.println(slug);
+        Product product = productService.findBySlug(slug);
+        productId = product.getProductId();
         List<ProductReview> productReviews = reviewService.findByProductId(productId);
-        if (product == null) {
-            System.out.println("không tìm thấy");
-        }
+        List<Product> top4ProductsRand = productService.findTopNumberRandom(4);
+
 
         //phần đầu
         double discount = product.getPrice() - product.getPrice() * (product.getProductDiscount() == null ? 0 : product.getProductDiscount().getDiscountPercent());
@@ -76,19 +56,27 @@ public class DetailController {
             sortable = Sort.by("review_id").ascending();
         }
         if (sort.equals("DESC")) {
-            sortable = Sort.by("id").descending();
+            sortable = Sort.by("review_id").descending();
         }
         Pageable pageable = PageRequest.of(page, size, sortable);
+
         //review
         model.addAttribute("reviewProduct", new ProductReview());
         model.addAttribute("reviews", reviewService.findByProductId(productId, pageable));
-        model.addAttribute("rating", (double) rating / ((productReviews.size() == 0) ? 1 : productReviews.size()));
+        model.addAttribute("rating", (double) rating / ((productReviews.size() == 0) ? 0 : productReviews.size()));
         model.addAttribute("discount", discount);
         model.addAttribute("product", product);
+        model.addAttribute("rand4Product", top4ProductsRand);
         return "product-detail";
+
     }
 
-    public void comment() {
-
+    @PostMapping(value = "/api/productReviews")
+    @ResponseBody
+    public Page<ProductReview> getReviews(@RequestBody ProductReviewRequest req) {
+        Sort sortable = null;
+        sortable = Sort.by("review_id").descending();
+        Pageable pageable = PageRequest.of(req.getPage(), 5, sortable);
+        return reviewService.findByProductId(productId, pageable);
     }
 }

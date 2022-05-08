@@ -101,5 +101,10 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findBySlug(slug);
     }
 
+    @Override
+    public List<Product> findTopNumberRandom(int top) {
+        return productRepository.findTopNumberRandom(top);
+    }
+
 
 }
