@@ -1,25 +1,25 @@
-function displayDanhMuc() {
-    document.getElementById("danhMuc").style.display = 'block';
-    document.getElementById("themDanhMuc").style.display = 'none';
-    document.getElementById("anbotDanhMuc").style.display = 'block';
+function displayCategories() {
+    document.getElementById("categories").style.display = 'block';
+    document.getElementById("addCategories").style.display = 'none';
+    document.getElementById("hiddenCategories").style.display = 'block';
 }
 
-function hiddenDanhMuc() {
-    document.getElementById("danhMuc").style.display = 'none';
-    document.getElementById("themDanhMuc").style.display = 'block';
-    document.getElementById("anbotDanhMuc").style.display = 'none';
+function hiddenCategories() {
+    document.getElementById("categories").style.display = 'none';
+    document.getElementById("addCategories").style.display = 'block';
+    document.getElementById("hiddenCategories").style.display = 'none';
 }
 
 function displayThuongHieu() {
-    document.getElementById("thuongHieu").style.display = 'block';
-    document.getElementById("themThuongHieu").style.display = 'none';
-    document.getElementById("anBotThuongHieu").style.display = 'block';
+    document.getElementById("brands").style.display = 'block';
+    document.getElementById("addBrands").style.display = 'none';
+    document.getElementById("hiddenBrands").style.display = 'block';
 }
 
 function hiddenThuongHieu() {
-    document.getElementById("thuongHieu").style.display = 'none';
-    document.getElementById("themThuongHieu").style.display = 'block';
-    document.getElementById("anBotThuongHieu").style.display = 'none';
+    document.getElementById("brands").style.display = 'none';
+    document.getElementById("addBrands").style.display = 'block';
+    document.getElementById("hiddenBrands").style.display = 'none';
 }
 
 function validate(evt) {

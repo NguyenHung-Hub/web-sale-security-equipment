@@ -60,18 +60,18 @@
     margin-bottom: 5px;
 }
 
-.anbot {
+.hidden {
     cursor: pointer;
     margin-left: 20px;
     display: none;
 }
 
-.them {
+.add {
     cursor: pointer;
     margin-left: 20px;
 }
 
-.them > i {
+.add > i {
     font-size: 12px;
 }
 
@@ -121,12 +121,12 @@ label {
     margin-right: 5px;
 }
 
-.filter-danhgia > .soLuongKetQua {
+.filter-evaluate > .up {
     margin-left: 5px;
     font-size: 12px;
 }
 
-div.filter-danhgia > .checked {
+div.filter-evaluate > .checked {
     color: orange;
 }
 
@@ -145,7 +145,7 @@ div.filter-danhgia > .checked {
     padding: 5px;
 }
 
-.apdung {
+.submitPrice {
     width: 100%;
     height: 34px;
     margin-top: 10px;
@@ -163,7 +163,7 @@ div.filter-danhgia > .checked {
     justify-content: center;
 }
 
-.thanh-ketqua {
+.result-bar {
     width: 100%;
     height: 40px;
     padding-left: 10px;
@@ -172,18 +172,18 @@ div.filter-danhgia > .checked {
 
 }
 
-.thanh-ketqua > p {
+.result-bar > p {
     font-size: 14px;
     display: inline-block;
     line-height: 40px;
     margin-left: 5px;
 }
 
-.thanh-ketqua > p > span {
+.result-bar > p > span {
     color: #ff9999;
 }
 
-.thanh-sap-xep {
+.sort-bar {
     position: relative;
     background-color: rgb(148, 145, 145);
     display: flex;
@@ -192,63 +192,63 @@ div.filter-danhgia > .checked {
     font-size: 14px;
 }
 
-.thanh-sap-xep > div {
+.sort-bar > div {
     position: absolute;
 }
 
-.nut-sap-xep {
+.sort-button {
     left: 15px;
 }
 
-.chuyen-trang {
+.next-page {
     right: 15px;
 }
 
-.thanh-sap-xep a {
+.sort-bar a {
     text-decoration: none;
     color: white;
     padding: 5px;
     display: inline-block;
 }
 
-#sap-xep {
+#sort {
     display: inline;
     margin: 0;
     padding: 0;
 }
 
-#sap-xep li {
+#sort li {
     background-color: white;
     display: inline-block;
     cursor: pointer;
 }
 
-#sap-xep li:hover {
+#sort li:hover {
     background-color: #ff9999;
 }
 
-#sap-xep li:hover ul {
+#sort li:hover ul {
     display: block;
 }
 
-#sap-xep li ul {
+#sort li ul {
     position: absolute;
     background-color: white;
     width: 100px;
     display: none;
 }
 
-#sap-xep li ul li {
+#sort li ul li {
     width: 150px;
     /*margin-left: -40px;*/
 }
 
-#sap-xep li ul li a {
+#sort li ul li a {
     width: 150px;
     display: block !important;
 }
 
-#sap-xep li ul li:hover {
+#sort li ul li:hover {
     background-color: white;
     color: red;
     cursor: pointer;
@@ -260,7 +260,7 @@ div.filter-danhgia > .checked {
     text-align: center;
 }
 
-#sap-xep li.btn-ss-active {
+#sort li.btn-ss-active {
     background-color: #ff9999;
 }
 
@@ -269,22 +269,32 @@ div.filter-danhgia > .checked {
     width: 150px;
 }
 
-#btnGia > a {
+#btnGia>a {
     display: block;
     padding-left: 10px;
     padding-right: 10px;
 }
 
-.btn-chon-gia {
+.select-price-item{
+    margin-left: -40px;
+    text-align: center;
+}
+
+.btn-select-price {
     float: right;
 }
 
-.chuyen-trang {
+#btnGia > a {
+    display: block;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.next-page {
     display: inline;
     height: 34px;
 }
 
-.chuyen-trang > span {
+.next-page > span {
     width: 100px;
     height: 34px;
     font-size: 14px;
@@ -306,21 +316,20 @@ div.filter-danhgia > .checked {
     max-width: 300px;
 }
 
-#danh-sach-san-pham {
+#list-product {
     max-height: 1000px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
 }
-#danh-sach-san-pham > div.content {
+#list-product > div.content {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
 }
 div.gallery {
-
     margin: 10px;
     width: 218px;
     color: #000000DE;
@@ -357,7 +366,7 @@ div.desc {
 
 }
 
-div.desc-ten {
+div.desc-name {
     font-size: 14px;
     height: 40px;
     display: -webkit-box;
@@ -367,14 +376,14 @@ div.desc-ten {
     margin-bottom: 2px;
 }
 
-div.desc-gia {
+div.desc-price {
     height: 16px;
     line-height: 16px;
     display: flex;
     align-items: center;
 }
 
-.desc-gia-an {
+.desc-price-hidden {
     min-width: 40px;
     font-size: 12px;
     color: #0000008A;
@@ -382,7 +391,7 @@ div.desc-gia {
 }
 
 
-.desc-gia-an-d {
+.desc-price-hidden-d {
     font-size: 10px;
     text-decoration: underline;
     margin-right: -3px;
@@ -390,7 +399,7 @@ div.desc-gia {
 
 }
 
-span.desc-gia-hien {
+span.desc-price-display {
     font-size: 16px;
     margin-left: 10px;
     vertical-align: text-bottom;
@@ -398,33 +407,33 @@ span.desc-gia-hien {
     color: red;
 }
 
-.desc-gia-hien-d {
+.desc-price-display-d {
     font-size: 12px;
     text-decoration: underline;
     vertical-align: bottom;
     margin-right: -4px;
 }
 
-div.desc-danhgia {
+div.desc-eval {
     align-content: flex-end;
     text-align: right;
 }
 
-.desc-danhgia > .fa-star {
+.desc-eval > .fa-star {
     font-size: 10px;
 }
 
-.desc-danhgia > .da-ban {
+.desc-eval > .da-ban {
     font-size: 12px;
     vertical-align: bottom;
     right: 0px;
 }
 
-div.desc-danhgia > .checked {
+div.desc-eval > .checked {
     color: orange;
 }
 
-div.desc-noiban {
+div.desc-address {
     margin-top: 2px;
     font-size: 12px;
     text-align: right;
@@ -461,14 +470,16 @@ a.page-link, span.page-link {
 }
 
 .pagination > .page-link {
-    width: 43px;
-    height: 34px;
     text-align: center;
     padding: 4px 16px;
     margin: 3px;
     text-decoration: none;
     transition: background-color .3s;
     border-radius: 2px;
+}
+.pagination > a,.pagination > li, .pagination >span{
+    width:30px;
+    height: 30px;
 }
 
 /* thiết lập style cho class active */

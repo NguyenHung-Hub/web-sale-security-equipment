@@ -77,7 +77,7 @@ public class SearchController {
         System.out.println(req);
         int currentPage = page.orElse(req.getPage());
         System.out.println(req.getPage());
-        int pageSize = size.orElse(10);
+        int pageSize = size.orElse(12);
         Sort sort;
         if(ss.equals("DESC")) {
             sort = Sort.by(req.getColumnName()).descending();
@@ -136,7 +136,7 @@ public class SearchController {
 
         //Nếu nguoi dung khong nhap
         int currentPage = page.orElse(0);
-        int pageSize = size.orElse(10);
+        int pageSize = size.orElse(12);
 
         pageable = PageRequest.of(currentPage, pageSize, Sort.by("name"));
 
