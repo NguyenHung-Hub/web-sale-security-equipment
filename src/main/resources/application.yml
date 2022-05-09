@@ -6,7 +6,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/web-sale-security-equipment?useUnicode=yes&characterEncoding=UTF-8
     username: root
-    password: root
+    password:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -61,3 +61,4 @@ s3:
 #  access.key.secret=XhWq23UJnVC1I7PxWco01q9DwRcuAOyPxABSocAU
 #  s3.region.name=us-east-1
 #  s3.bucket.name=chinh1506
+

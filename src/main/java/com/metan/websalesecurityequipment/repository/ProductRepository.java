@@ -40,10 +40,10 @@ public interface ProductRepository extends JpaRepository<Product, String> {
 
     public Page<Product> findByNameContaining(String name, Pageable pageable);
 
-    @Query(value = "select *, sum(oi.quantity) as totalQuan from products p join brands b on p.brand_id= b.brand_id join categories c on c.category_id = p.category_id join order_items oi on oi.product_id=p.product_id " +
+    @Query(value = "select * from products p join brands b on p.brand_id= b.brand_id join categories c on c.category_id = p.category_id " +
             "where (b.brand_id in ?2 " +
             "OR c.subcategory_id in ?1" +
-            " OR (p.price >=?3 and p.price<=?4)) and p.name like %?5% group by oi.product_id", nativeQuery = true)
+            " OR (p.price >=?3 and p.price<=?4)) and p.name like %?5% ", nativeQuery = true)
     public Page<Product> searchByNameCateBrand(List<Integer> cates,List<Integer> brands,double minPrice, double maxPrice,String name,Pageable pageable);
 
     @Query(value = "select distinct(p.product_id), p.* from products p join brands b on p.brand_id= b.brand_id join categories c " +
@@ -53,6 +53,13 @@ public interface ProductRepository extends JpaRepository<Product, String> {
             "            or pr.rating >= ?3 " +
             " OR (p.price >=?4 and p.price<=?5)) and p.name like %?6% ", nativeQuery = true)
     public Page<Product> searchByNameCateBrandRating(List<Integer> cates,List<Integer> brands, int rating,double minPrice, double maxPrice,String name,Pageable pageable);
+//, sum(oi.quantity) as totalQuan
+    @Query(value = "       select products,SUM(order_items.quantity) as totalQuan from order_items LEFT OUTER JOIN  products on order_items.product_id=products.product_id  join brands on products.brand_id= brands.brand_id join categories on categories.category_id = products.category_id\n" +
+            "            where (brands.brand_id in (null)  " +
+            "            OR categories.subcategory_id in (null) " +
+            "            OR (products.price >=0 and products.price<=99999999999999)) and products.name like '% %' " +
+            "            group by products.product_id order by totalQuan desc", nativeQuery = true)
+    public Page<Product> sortByOrderDetail(List<Integer> cates,List<Integer> brands,double minPrice, double maxPrice,String name,Pageable pageable);
 
 
 

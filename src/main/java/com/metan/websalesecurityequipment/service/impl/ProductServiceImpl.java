@@ -107,5 +107,10 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findTopNumberRandom(top);
     }
 
+    @Override
+    public Page<Product> sortByOrderDetail(ProductRequestPageable req, String name, Pageable pageable) {
+        return productRepository.sortByOrderDetail(req.getCategoryIds(),req.getBrandIds(),req.getMinPrice(),req.getMaxPrice(),name,pageable);
+    }
+
 
 }

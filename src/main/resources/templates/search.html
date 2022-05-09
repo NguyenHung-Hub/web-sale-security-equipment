@@ -214,7 +214,7 @@
                                 </span>
                                     <span class="desc-price-display">
                                     <span class="desc-price-display-d">đ</span>
-                                    <span th:text="${#numbers.formatDecimal((product.price - product.price*product.productDiscount.discountPercent),1,'DEFAULT',0,'DEFAULT')}"></span>
+                                    <span th:text="${product.productDiscount!=null}? ${#numbers.formatDecimal((product.price - product.price*product.productDiscount.discountPercent),1,'DEFAULT',0,'DEFAULT')}:${product.price}"></span>
                                 </span>
                                 </div>
                                 <div class="desc-eval">
@@ -228,7 +228,17 @@
                                           th:classappend="${listRating.get(product.productId)>=4}? checked"></span>
                                     <span class="fa fa-star"
                                           th:classappend="${listRating.get(product.productId)>=5}? checked"></span>
-                                    <span class="da-ban" th:text="'  Đã bán '+${listQuantity.get(product.productId)}">Đã bán 216</span>
+                                    <th:block th:width="totalQuan=${0}" th:each="orderItem,state:${product.orderItems}">
+                                        <th:block th:width="totalQuan=${totalQuan+orderItem.quantity}" th:if="${state.last}">
+                                            <span class="da-ban" th:text="'  Đã bán '+${totalQuan}">Đã bán 216</span>
+                                        </th:block>
+
+                                    </th:block>
+                                    <th:block th:if="${product.orderItems.size()==0 || product.orderItems== null}">
+                                        <span class="da-ban" th:text="'  Đã bán '+${0}">Đã bán 216</span>
+                                    </th:block>
+
+
                                 </div>
                                 <div class="desc-address" style="color: #000000A6;">
                                     <i style="color: rgb(0, 191, 165); font-size: 12px;" class="fas fa-truck"></i>
@@ -267,7 +277,7 @@
         let totalPages = [[${productPage.getTotalPages()}]];
         let brandIds = [];
         let categoryIds = [];
-        let maxPrice = 0;
+        let maxPrice = Number.MAX_VALUE;
         let minPrice = 0;
         let ratings = [];
         let rating = 0;
@@ -416,7 +426,6 @@
         }
 
         let listRating = [[${listRating}]];
-        let listQuantity = [[${listQuantity}]];
         console.log(listRating);
 
         function createData(products) {
@@ -453,7 +462,7 @@
                                     <span class="fa fa-star ${listRating[product.productId] >= 3 ? 'checked' : ''}"></span>
                                     <span class="fa fa-star ${listRating[product.productId] >= 4 ? 'checked' : ''}"></span>
                                     <span class="fa fa-star ${listRating[product.productId] >= 5 ? 'checked' : ''}"></span>
-                                    <span class="da-ban">  Đã bán ${listQuantity[product.productId]}</span>
+                                    /* <span class="da-ban">  Đã bán ${listQuantity[product.productId]}</span>*/
                                 </div>
                                 <div class="desc-address" style="color: #000000A6;">
                                     <i style="color: rgb(0, 191, 165); font-size: 12px;" class="fas fa-truck"></i>

@@ -65,6 +65,8 @@ public class SearchController {
                                            @RequestBody ProductRequestPageable req,
                                            @RequestParam("page") Optional<Integer> page,
                                            @RequestParam("size") Optional<Integer> size) {
+        int currentPage = page.orElse(req.getPage());
+        int pageSize = size.orElse(12);
         String ss = "DESC";
         if (req.getColumnName().equals("ascPrice")) {
             ss = "ASC";
@@ -75,15 +77,9 @@ public class SearchController {
             ss = "DESC";
             req.setColumnName("price");
         } else if (req.getColumnName().equals("BanChay")) {
-            ss = "DESC";
-            req.setColumnName("orderItems");
-
+            return productService.sortByOrderDetail(req,name,PageRequest.of(currentPage, pageSize));
         }
 
-        System.out.println(req);
-        int currentPage = page.orElse(req.getPage());
-        System.out.println(req.getPage());
-        int pageSize = size.orElse(12);
         Sort sort;
 
         if (ss.equals("DESC")) {
@@ -123,16 +119,6 @@ public class SearchController {
         return listRating;
     }
 
-    public HashMap<String, Integer> getSumQuan(List<Product> products) {
-        HashMap<String, Integer> listQuantity = new HashMap<>();
-        for (Product p : products) {
-            int quantity = 0;
-            quantity = orderRepository.getSumQuantity(p.getProductId());
-            listQuantity.put(p.getProductId(), quantity);
-        }
-        return listQuantity;
-    }
-
     public void display(ModelMap model, String name,
                         Optional<Integer> page, Optional<Integer> size,
                         List<Brand> brands, List<Category> categories) {
@@ -161,13 +147,12 @@ public class SearchController {
         pageable = PageRequest.of(currentPage, pageSize, Sort.by("name"));
         //pageable = PageRequest.of(currentPage, pageSize);
         resultPage = getProductByName(name, pageable);
-
+        System.out.println("my detail"+resultPage.getContent().get(0).getOrderItems());
         model.addAttribute("brandsFirst", brandsFirst);
         model.addAttribute("brandsLast", brandsLast);
         model.addAttribute("categoriesFirst", categoriesFirst);
         model.addAttribute("categoriesLast", categoriesLast);
         model.addAttribute("productPage", resultPage);
-        model.addAttribute("listQuantity", getSumQuan(productService.findAll()));
 
         model.addAttribute("listRating", getAvgRating(productService.findAll()));
     }
