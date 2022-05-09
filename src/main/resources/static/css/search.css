@@ -25,15 +25,16 @@
     width: 100%;
 }
 
-.fa-solid{
+.fa-solid {
     font-size: 12px;
 }
-.fa-filter{
+
+.fa-filter {
     padding: 5px;
     font-size: 16px;
 }
 
-.filter-title>p {
+.filter-title > p {
     font-size: 16px;
     font-weight: 700;
     color: rgba(0, 0, 0, .8);
@@ -59,17 +60,18 @@
     margin-bottom: 5px;
 }
 
-.anbot{
+.hidden {
     cursor: pointer;
     margin-left: 20px;
-    display:none;
+    display: none;
 }
-.them {
+
+.add {
     cursor: pointer;
     margin-left: 20px;
 }
 
-.them>i{
+.add > i {
     font-size: 12px;
 }
 
@@ -77,17 +79,17 @@
     padding-left: 3px;
     width: 100%;
     display: flex;
-    align-content: center;  
+    align-content: center;
 }
 
-.group-filter-content-item>input{
-    border: 1px solid rgba(0,0,0,.26);
+.group-filter-content-item > input {
+    border: 1px solid rgba(0, 0, 0, .26);
     border-radius: 2px;
     width: 6%;
     margin-top: 4px;
 }
 
-.group-filter-content-item>label{
+.group-filter-content-item > label {
     width: 92%;
     display: inline-block;
     margin-left: 2px;
@@ -98,46 +100,54 @@
     display: none;
 }
 
-.group-filter-content-item>input,
+.group-filter-content-item > input,
 label {
     cursor: pointer;
     vertical-align: middle;
 }
-.filter-danhgia{
+
+.filter-evaluate {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.filter-danhgia>.fa-star {
+.filter-evaluate > .fa-star {
     font-size: 12px;
     margin: 1px;
 }
-.filter-danhgia>input{
+
+.filter-evaluate > input {
     margin-right: 5px;
 }
-.filter-danhgia>.soLuongKetQua{
+
+.filter-evaluate > .up {
     margin-left: 5px;
     font-size: 12px;
 }
 
-div.filter-danhgia>.checked {
+div.filter-evaluate > .checked {
     color: orange;
 }
 
-#fromGia,
-#toGia {
+#fromPrice,
+#toPrice {
     width: 48%;
+    height: 34px;
     margin-left: 0;
     border-radius: 0.125rem;
     box-shadow: inset 0 1px 0 0 rgb(0 0 0 / 5%);
-    height: 1.875rem;
     border: 1px solid rgba(0, 0, 0, .26);
 }
 
-.apdung {
+#fromPrice::placeholder,
+#toPrice::placeholder {
+    padding: 5px;
+}
+
+.submitPrice {
     width: 100%;
-    height: 1.875rem;
+    height: 34px;
     margin-top: 10px;
     background-color: #ff9999;
     font-weight: 400;
@@ -153,7 +163,7 @@ div.filter-danhgia>.checked {
     justify-content: center;
 }
 
-.thanh-ketqua{
+.result-bar {
     width: 100%;
     height: 40px;
     padding-left: 10px;
@@ -161,17 +171,19 @@ div.filter-danhgia>.checked {
     margin-right: 13px;
 
 }
-.thanh-ketqua >p{
+
+.result-bar > p {
     font-size: 14px;
-    display: inline-block; 
-    line-height: 40px; 
+    display: inline-block;
+    line-height: 40px;
     margin-left: 5px;
 }
-.thanh-ketqua >p>span{
+
+.result-bar > p > span {
     color: #ff9999;
 }
 
-.thanh-sap-xep {
+.sort-bar {
     position: relative;
     background-color: rgb(148, 145, 145);
     display: flex;
@@ -179,60 +191,64 @@ div.filter-danhgia>.checked {
     justify-content: space-around;
     font-size: 14px;
 }
-.thanh-sap-xep>div{
+
+.sort-bar > div {
     position: absolute;
 }
-.nut-sap-xep{
+
+.sort-button {
     left: 15px;
 }
-.chuyen-trang{
+
+.next-page {
     right: 15px;
 }
-.thanh-sap-xep a {
+
+.sort-bar a {
     text-decoration: none;
     color: white;
     padding: 5px;
     display: inline-block;
 }
 
-#sap-xep {
+#sort {
     display: inline;
     margin: 0;
     padding: 0;
 }
 
-#sap-xep li {
+#sort li {
     background-color: white;
     display: inline-block;
     cursor: pointer;
 }
 
-#sap-xep li:hover {
+#sort li:hover {
     background-color: #ff9999;
 }
 
-#sap-xep li:hover ul {
+#sort li:hover ul {
     display: block;
 }
 
-#sap-xep li ul {
+#sort li ul {
     position: absolute;
     background-color: white;
     width: 100px;
     display: none;
 }
 
-#sap-xep li ul li {
+#sort li ul li {
     width: 150px;
     /*margin-left: -40px;*/
 }
 
-#sap-xep li ul li a {
+#sort li ul li a {
     width: 150px;
     display: block !important;
 }
 
-#sap-xep li ul li:hover {
+#sort li ul li:hover {
     background-color: white;
     color: red;
     cursor: pointer;
@@ -242,6 +258,10 @@ div.filter-danhgia>.checked {
     width: 100px;
     margin-right: 10px;
     text-align: center;
+}
+
+#sort li.btn-ss-active {
+    background-color: #ff9999;
 }
 
 #btnGia {
@@ -255,67 +275,77 @@ div.filter-danhgia>.checked {
     padding-right: 10px;
 }
 
-.btn-chon-gia {
+.select-price-item{
+    margin-left: -40px;
+    text-align: center;
+}
+
+.btn-select-price {
     float: right;
 }
 
-.chuyen-trang {
+#btnGia > a {
+    display: block;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.next-page {
     display: inline;
     height: 34px;
 }
 
-/* .chuyen-trang>ul>li {
-    width: 36px;
+.next-page > span {
+    width: 100px;
     height: 34px;
-    border-radius: 2px;
-    border: 1px solid rgba(0,0,0,.09);
-    outline: none;
-    list-style: none;
-    display: inline-block;
-    text-align: center;
-    letter-spacing: 0;
-} */
-.chuyen-trang>span{
-    width: 100px; 
-    height: 34px; 
-    font-size: 14px; 
+    font-size: 14px;
     margin-right: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    
-}
-/* .chuyen-trang>a {
-    color: rgba(0, 0, 0, .26);
-    border-color: rgba(0, 0, 0, .09);
-    display: inline-block;
-    text-align: center;
-    outline: none;
-    width: 100%;
-    height: 100%;
-} */
-.error-null{
-    margin-top:5px;
-}
-.danh-sach-san-pham {
-    max-height: 1000px;
+
 }
 
+.error-null {
+    justify-content: center;
+    align-items: center;
+    min-height: 500px;
+    flex-direction: column;
+}
+
+.no-products img {
+    max-width: 300px;
+}
+
+#list-product {
+    max-height: 1000px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+#list-product > div.content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
 div.gallery {
     margin: 10px;
-    float: left;
-    width: 205px;
+    width: 218px;
     color: #000000DE;
     height: 290px;
     border-radius: 2px;
     box-shadow: 0 3px 5px rgb(0 0 0 / 15%);
 }
-.desc-link:hover{
+
+.desc-link:hover {
     text-decoration: none;
 }
-.desc-link:active{
+
+.desc-link:active {
     text-decoration: none;
 }
+
 div.gallery:hover {
     transform: translateY(-2px);
     border: 1px solid #ff9999;
@@ -328,15 +358,14 @@ div.gallery img {
     border-top-right-radius: 2px;
 }
 
-div.desc {
+div.description {
     padding: 5px;
     text-align: center;
     height: 110px;
     width: 100%;
-
 }
 
-div.desc-ten {
+div.desc-name {
     font-size: 14px;
     height: 40px;
     display: -webkit-box;
@@ -346,29 +375,30 @@ div.desc-ten {
     margin-bottom: 2px;
 }
 
-div.desc-gia {
+div.desc-price {
     height: 16px;
     line-height: 16px;
     display: flex;
-    align-items:center;
+    align-items: center;
 }
 
-.desc-gia-an {
+.desc-price-hidden {
+    min-width: 40px;
     font-size: 12px;
     color: #0000008A;
     display: block;
 }
 
 
-.desc-gia-an-d {
+.desc-price-hidden-d {
     font-size: 10px;
     text-decoration: underline;
     margin-right: -3px;
     margin-left: 3px;
-    vertical-align: super;
+
 }
 
-span.desc-gia-hien {
+span.desc-price-display {
     font-size: 16px;
     margin-left: 10px;
     vertical-align: text-bottom;
@@ -376,33 +406,35 @@ span.desc-gia-hien {
     color: red;
 }
 
-.desc-gia-hien-d {
+.desc-price-display-d {
     font-size: 12px;
     text-decoration: underline;
     vertical-align: bottom;
     margin-right: -4px;
 }
 
-div.desc-danhgia {
-    align-content: flex-end;
-    text-align: right;
+div.desc-eval {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
-.desc-danhgia>.fa-star {
+.desc-eval > .fa-star {
     font-size: 10px;
 }
 
-.desc-danhgia>.da-ban {
+.desc-eval > .da-ban {
     font-size: 12px;
     vertical-align: bottom;
     right: 0px;
+    margin-left: 10px;
 }
 
-div.desc-danhgia>.checked {
+div.desc-eval > .checked {
     color: orange;
 }
 
-div.desc-noiban {
+div.desc-address {
     margin-top: 2px;
     font-size: 12px;
     text-align: right;
@@ -414,20 +446,24 @@ div.desc-noiban {
     width: 80%;
 
 }
-.page-link{
+
+.page-link {
     display: inline-block;
     color: #777;
     font-size: 14px;
 }
-a.page-link, span.page-link{
+
+a.page-link, span.page-link {
     display: inline-block;
     color: #777;
     font-size: 14px;
 }
-.paginationPage ul{
+
+.paginationPage ul {
     list-style-type: none;
 }
-.pagination li{
+
+.pagination li {
     display: inline-block;
     text-align: center;
     transition: background-color .3s;
@@ -435,8 +471,6 @@ a.page-link, span.page-link{
 }
 
 .pagination > .page-link {
-    width: 43px;
-    height: 34px;
     text-align: center;
     padding: 4px 16px;
     margin: 3px;
@@ -444,24 +478,30 @@ a.page-link, span.page-link{
     transition: background-color .3s;
     border-radius: 2px;
 }
+.pagination > a,.pagination > li, .pagination >span{
+    width:30px;
+    height: 30px;
+}
 
 /* thiết lập style cho class active */
-.pagination li.active > .current{
+.pagination li.active > .current {
     background-color: #ff9999;
     color: black;
     font-size: 14px;
     text-decoration: none;
 }
-.page-link:active{
+
+.page-link:active {
     font-size: 14px;
 
 }
 
-.pagination li.disabled> .current{
+.pagination li.disabled > .current {
     color: #ff9999;
 }
+
 /* thêm màu nền khi người dùng hover vào class không active */
-.pagination li:hover:not(.active)> .page-link{
+.pagination li:hover:not(.active) > .page-link {
     color: #ff9999;
     text-decoration: none;
 }

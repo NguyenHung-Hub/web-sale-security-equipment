@@ -24,7 +24,7 @@ public interface ProductService {
     List<Product> findByNameContaining(String name);
 
     public Page<Product> searchByNameCateBrand(String name,Pageable pageable);
-    public Page<Product> searchByNameCateBrand(ProductRequestPageable req, Pageable pageable);
+    public Page<Product> searchByNameCateBrand(ProductRequestPageable req,String name, Pageable pageable);
     Page<Product> findAll(Pageable pageable);
 
     Page<Product> findByNameContaining(String name, Pageable pageable);
