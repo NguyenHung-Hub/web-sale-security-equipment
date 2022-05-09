@@ -106,18 +106,18 @@ label {
     vertical-align: middle;
 }
 
-.filter-danhgia {
+.filter-evaluate {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.filter-danhgia > .fa-star {
+.filter-evaluate > .fa-star {
     font-size: 12px;
     margin: 1px;
 }
 
-.filter-danhgia > input {
+.filter-evaluate > input {
     margin-right: 5px;
 }
 
@@ -414,8 +414,9 @@ span.desc-price-display {
 }
 
 div.desc-eval {
-    align-content: flex-end;
-    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 .desc-eval > .fa-star {
@@ -426,6 +427,7 @@ div.desc-eval {
     font-size: 12px;
     vertical-align: bottom;
     right: 0px;
+    margin-left: 10px;
 }
 
 div.desc-eval > .checked {

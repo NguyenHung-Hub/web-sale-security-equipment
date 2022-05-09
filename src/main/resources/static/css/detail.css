@@ -43,8 +43,9 @@
 .btn-cart:hover {
     background-color: #7b7979;
 }
-.long-desc{
+#long-desc{
     width: 100%;
+    height: inherit;
 }
 .shadow-inset{
     overflow: hidden;

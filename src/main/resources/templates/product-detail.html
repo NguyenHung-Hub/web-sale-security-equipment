@@ -110,14 +110,30 @@
     <!-- mô tả chi tiết, đánh giá , thông tin thêm-->
     <div class="mt-5">
         <ul id="tabs" class="nav nav-tabs tabs" role="tablist">
-            <li class="nav-item"><a data-toggle="tab" href="#ChiTiet" class="tabs nav-link active text-dark font-16">Chi tiết
-                sản
-                phẩm</a></li>
-            <li class="nav-item"><a data-toggle="tab" href="#ThemThongTin" class="tabs nav-link text-dark font-16">Thông tin
-                thêm</a>
-            </li>
+            <li class="nav-item"><a data-toggle="tab" id="information"  href="#ChiTiet" class="tabs nav-link active text-dark font-16">Chi tiết sản phẩm</a></li>
+            <li class="nav-item"><a data-toggle="tab" id="btnTabDes" href="#ThemThongTin" class="tabs nav-link text-dark font-16">Thông tin thêm</a></li>
             <li class="nav-item"><a data-toggle="tab" href="#DanhGia" class="tabs nav-link text-dark font-16">Đánh giá</a></li>
         </ul>
+        <!--<script th:inline="javascript">
+            let longDecs=[[${product.longDesc}]];
+            function checkDesHeight(){
+                $('#long-desc').text(longDecs);
+                if($('#long-desc').height()>=150){
+                    $('#btnDes').show();
+                }
+                else {
+                    $('#btnDes').hide();
+                }
+                console.log('chiều cao là: '+$('#long-desc').height());
+            }
+            $(function (){
+
+                $('#btnTabDes').click(function (){
+                    checkDesHeight();
+                });
+            })
+
+        </script>-->
         <div class="tab-content mt-5">
             <div id="ChiTiet" class="container tab-pane active">
                 <h3 class="bg-light p-2" style="margin-right: 30px">THÔNG TIN CHI TIẾT</h3>
@@ -138,7 +154,7 @@
                 </table>
             </div>
             <div id="ThemThongTin" class="container tab-pane fade">
-                <h3 class="bg-light p-2 style="margin-right: 30px"">MÔ TẢ SẢN PHẨM</h3>
+                <h3 class="bg-light p-2" style="margin-right: 30px">MÔ TẢ SẢN PHẨM</h3>
                 <div class="mt-5 long-desc font-14" style="padding-left: 30px; padding-right: 30px" id="long-desc" th:text="${product.longDesc}">
                     Lưu ý: Nhiều trường hợp do dùng thẻ nhớ không chính hãng nên camera không nhận thẻ nhớ, trong trường
                     hợp đó shop không hỗ trợ lỗi đọc thẻ nhớ. Để được hỗ trợ tốt nhất hay mua kèm thẻ nhớ của shop.
@@ -180,7 +196,7 @@
             </div>
             <!-- đánh giá -->
             <div id="DanhGia" class="container tab-pane fade">
-                <h2 class="bg-light p-2 style="margin-right: 30px"">ĐÁNH GIÁ SẢN PHẨM</h2>
+                <h2 class="bg-light p-2" style="margin-right: 30px">ĐÁNH GIÁ SẢN PHẨM</h2>
 <!--<<<<<<< HEAD-->
 <!--                <th:block th:if="${reviews.getTotalElements()<=0}">-->
 <!--                    <div class="text-center mt-5">-->

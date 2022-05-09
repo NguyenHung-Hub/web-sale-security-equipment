@@ -73,6 +73,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<Product> searchByNameCateBrand(ProductRequestPageable req,String name, Pageable pageable) {
+
         Page<Product> page = null;
         if (req.getBrandIds().size() == 0 && req.getCategoryIds().size() == 0 && req.getRating() == 0 && req.getMaxPrice() == 0 && req.getMinPrice() == 0) {
             page = findByNameContaining(name,pageable);

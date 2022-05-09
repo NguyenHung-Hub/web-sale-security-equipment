@@ -2,6 +2,7 @@ package com.metan.websalesecurityequipment.controller;
 
 import com.metan.websalesecurityequipment.model.*;
 import com.metan.websalesecurityequipment.model.request.ProductRequestPageable;
+import com.metan.websalesecurityequipment.repository.OrderRepository;
 import com.metan.websalesecurityequipment.service.BrandService;
 import com.metan.websalesecurityequipment.service.CategoryService;
 import com.metan.websalesecurityequipment.service.ProductReviewService;
@@ -39,6 +40,9 @@ public class SearchController {
     @Autowired
     private ProductReviewService productReviewService;
 
+    @Autowired
+    private OrderRepository orderRepository;
+
     public SearchController() {
     }
 
@@ -52,7 +56,6 @@ public class SearchController {
         List<Category> categories = categoryService.findAll();
         display(model, name, page, size, brands, categories);
 
-
         return "search";
     }
 
@@ -62,29 +65,35 @@ public class SearchController {
                                            @RequestBody ProductRequestPageable req,
                                            @RequestParam("page") Optional<Integer> page,
                                            @RequestParam("size") Optional<Integer> size) {
-        String ss="DESC";
-        if(req.getColumnName().equals("ascPrice")){
-            ss="ASC";
+        String ss = "DESC";
+        if (req.getColumnName().equals("ascPrice")) {
+            ss = "ASC";
             req.setColumnName("price");
-        }
-        if(req.getColumnName().equals("name")){
-            ss="ASC";
-        }
-        if(req.getColumnName().equals("descPrice")){
-            ss="DESC";
+        } else if (req.getColumnName().equals("name")) {
+            ss = "ASC";
+        } else if (req.getColumnName().equals("descPrice")) {
+            ss = "DESC";
             req.setColumnName("price");
+        } else if (req.getColumnName().equals("BanChay")) {
+            ss = "DESC";
+            req.setColumnName("orderItems");
+
         }
+
         System.out.println(req);
         int currentPage = page.orElse(req.getPage());
         System.out.println(req.getPage());
         int pageSize = size.orElse(12);
         Sort sort;
-        if(ss.equals("DESC")) {
+
+        if (ss.equals("DESC")) {
             sort = Sort.by(req.getColumnName()).descending();
-        }else {
+        } else {
             sort = Sort.by(req.getColumnName()).ascending();
         }
-        pageable = PageRequest.of(currentPage, pageSize,sort);
+
+        pageable = PageRequest.of(currentPage, pageSize, sort);
+        //pageable = PageRequest.of(currentPage, pageSize);
         Page<Product> productPage = productService.searchByNameCateBrand(req, name, pageable);
         return productPage;
     }
@@ -108,9 +117,20 @@ public class SearchController {
             for (ProductReview pr : reviews) {
                 avgRating += pr.getRating();
             }
+
             listRating.put(p.getProductId(), avgRating / (reviews.size() == 0 ? 1 : reviews.size()));
         }
         return listRating;
+    }
+
+    public HashMap<String, Integer> getSumQuan(List<Product> products) {
+        HashMap<String, Integer> listQuantity = new HashMap<>();
+        for (Product p : products) {
+            int quantity = 0;
+            quantity = orderRepository.getSumQuantity(p.getProductId());
+            listQuantity.put(p.getProductId(), quantity);
+        }
+        return listQuantity;
     }
 
     public void display(ModelMap model, String name,
@@ -139,7 +159,7 @@ public class SearchController {
         int pageSize = size.orElse(12);
 
         pageable = PageRequest.of(currentPage, pageSize, Sort.by("name"));
-
+        //pageable = PageRequest.of(currentPage, pageSize);
         resultPage = getProductByName(name, pageable);
 
         model.addAttribute("brandsFirst", brandsFirst);
@@ -147,6 +167,7 @@ public class SearchController {
         model.addAttribute("categoriesFirst", categoriesFirst);
         model.addAttribute("categoriesLast", categoriesLast);
         model.addAttribute("productPage", resultPage);
+        model.addAttribute("listQuantity", getSumQuan(productService.findAll()));
 
         model.addAttribute("listRating", getAvgRating(productService.findAll()));
     }
