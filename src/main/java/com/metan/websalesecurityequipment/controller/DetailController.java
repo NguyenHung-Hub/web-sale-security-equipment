@@ -40,12 +40,12 @@ public class DetailController {
 
 
         //phần đầu
-        double discount = product.getPrice() - product.getPrice() * (product.getProductDiscount() == null ? 0 : product.getProductDiscount().getDiscountPercent());
-        if (product.getProductDiscount() == null) {
-            ProductDiscount p = new ProductDiscount();
-            p.setDiscountPercent(0F);
-            product.setProductDiscount(p);
-        }
+//        double discount = product.getPrice() - product.getPrice() * (product.getProductDiscount() == null ? 0 : product.getProductDiscount().getDiscountPercent());
+//        if (product.getProductDiscount() == null) {
+//            ProductDiscount p = new ProductDiscount();
+//            p.setDiscountPercent(0F);
+//            product.setProductDiscount(p);
+//        }
         product.setProductReviews(productReviews);
         double rating = 0;
         for (ProductReview pr : productReviews) {
@@ -63,8 +63,7 @@ public class DetailController {
         //review
         model.addAttribute("reviewProduct", new ProductReview());
         model.addAttribute("reviews", reviewService.findByProductId(productId, pageable));
-        model.addAttribute("rating", (double) rating / ((productReviews.size() == 0) ? 0 : productReviews.size()));
-        model.addAttribute("discount", discount);
+        model.addAttribute("rating", (double) rating / ((productReviews.size() == 0) ? 1 : productReviews.size()));
         model.addAttribute("product", product);
         model.addAttribute("rand4Product", top4ProductsRand);
         return "product-detail";

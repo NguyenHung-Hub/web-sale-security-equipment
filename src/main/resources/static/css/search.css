@@ -1,11 +1,11 @@
-* {
-    font-family: Arial, Helvetica, sans-serif;
-}
+/** {*/
+/*    font-family: Arial, Helvetica, sans-serif;*/
+/*}*/
 
-.container {
-    min-width: 1140px;
+/*.container {*/
+/*    min-width: 1140px;*/
 
-}
+/*}*/
 
 .search-nav-filter {
     width: 20%;

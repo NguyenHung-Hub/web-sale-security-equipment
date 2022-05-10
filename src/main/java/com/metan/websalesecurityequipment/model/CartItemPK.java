@@ -12,6 +12,11 @@ public class CartItemPK implements Serializable {
     public CartItemPK() {
     }
 
+    public CartItemPK(String product, long cart) {
+        this.product = product;
+        this.cart = cart;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -33,6 +33,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> findProductsNew() {
+        return productRepository.findProductsNew();
+    }
+
+    @Override
     public Product findProductById(String theId) {
         Optional<Product> result = productRepository.findById(theId);
         Product product;

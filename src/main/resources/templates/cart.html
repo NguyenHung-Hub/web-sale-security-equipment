@@ -1,0 +1,201 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: headC">
+    <title>Shopping Cart</title>
+</head>
+
+<body>
+<!--<div th:replace="fragments :: header"></div>-->
+<div class="snippet-body">
+    <div th:if="${LIST_ITEMCART != null}" class="mb-5" th:with="user=${CUSTOMER}">
+        <div class="card mt-50">
+            <div class="row">
+                <div class="col-md-8 cart">
+                    <div class="title">
+                        <div class="row border-bottom">
+                            <div class="row main align-items-center">
+                                <div class="col-3">
+                                    <h4><b>Shopping Cart</b></h4>
+                                </div>
+                                <div class="col-4">
+                                </div>
+                                <div class="col d-flex">
+                                    <div class="d-flex flex-column">
+                                        <span>Đơn giá</span>
+                                    </div>
+                                </div>
+                                <div class="col d-flex">
+                                    <span>Số lượng</span>
+                                </div>
+                                <div class="col-2 d-flex">
+                                    <span>Thành tiền</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="List-product" id="style-7">
+                        <th:block th:each="ItemCart :${LIST_ITEMCART}">
+                            <div class="row border-bottom" th:id="'rowOf'+${ItemCart.product.productId}">
+                                <div class="row main align-items-center">
+                                    <div class="col-3 d-flex ">
+                                        <input type="checkbox" class="select input-cart" th:id="${ItemCart.product.productId}">
+                                        <img class="img-product" th:src="${ItemCart.product.thumbnail}">
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="row text-muted">[[${ItemCart.product.title}]]</div>
+                                        <div class="row">[[${ItemCart.product.category.name}]]</div>
+                                    </div>
+                                    <div class="col d-flex">
+                                        <div class="d-flex flex-column">
+                                            <span class="old-price">[[${ItemCart.product.price}]] ₫</span>
+                                            <span class="new-price" th:id="'newPrice'+${ItemCart.product.productId}">[[${ItemCart.product.price}]] ₫</span>
+                                        </div>
+                                    </div>
+                                    <div class="col d-flex">
+                                        <a href="" class="minus" th:productID="${ItemCart.product.productId}">-</a>
+                                        <input type="text" class="input-cart form-control quantity-product" th:value="${ItemCart.quantity}"
+                                               th:id="'quantity'+${ItemCart.product.productId}">
+                                        <a href="" class="plus" th:productID="${ItemCart.product.productId}">+</a>
+                                    </div>
+                                    <div class="col-2 d-flex justify-content-between">
+                                    <span th:id="'subtotal'+${ItemCart.product.productId}"
+                                          th:with="result=${ItemCart.product.price * ItemCart.quantity}">
+                                        <span th:text="${result}  + ' ₫'"
+                                              th:id="'subTotalPrice'+${ItemCart.product.productId}"
+                                              class="subTotal-product"></span>
+                                    </span>
+                                        <i class="fa-solid fa-trash-can delete" th:deleteId="${ItemCart.product.productId}"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </th:block>
+
+                    </div>
+                    <div class="back-to-shop"><a th:href="@{/}">&leftarrow;</a><span
+                            class="text-muted">Back to shop</span>
+                    </div>
+                </div>
+                <div class="col-md-4 summary" th:with="ItemCard=${LIST_ITEMCART}">
+                    <div class="row justify-content-between">
+                        <b class="col">Giao đến</b>
+                        <a class="col" data-bs-toggle="modal" data-bs-target="#exampleModal"><b style="margin-top: 5px;">Thay đổi</b></a>
+                    </div>
+                    <div>
+                        <div class="row mt-4">
+                            <span class="col name" id="nameReturnRest" style="border-right: 1px solid black;">[[${CUSTOMER.getFullName}]]</span>
+                            <span class="col phone" id="phoneReturnRest">[[${CUSTOMER.phoneNumber}]]</span>
+                        </div>
+                        <div class="row">
+                            <p class="col address" id="addressReturnRest" style="margin: 5px 0; font-weight: 100;">
+                                Địa chỉ: [[${CUSTOMER.profile}]]
+                            </p>
+                        </div>
+
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col" style="padding-left:0;">Tổng số Mặt hàng [[${ItemCard.size()}]]</div>
+                        <div class="col text-right TotalPrice">&euro; 132.00</div>
+                    </div>
+                    <form>
+                        <p>SHIPPING(Đang phát triển)</p> <select>
+                        <option class="text-muted">Tiêu chuẩn - 40.000Đ</option>
+                        <option class="text-muted">Giao nhanh - 100.000Đ</option>
+                        <option class="text-muted">Hỏa tốc - 200.000Đ</option>
+                    </select>
+                        <p>GIVE CODE(Đang phát triển)</p> <input class="input-cart" id="code" placeholder="Enter your code">
+                    </form>
+                    <div class="row">
+                        <div class="col">Tạm tính</div>
+                        <div class="col text-right " id="TempPrice"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col">Giảm giá</div>
+                        <div class="col text-right " id="discount">0 ₫</div>
+                    </div>
+                    <div class="row" style="border-top: 1px solid #0000001a; padding: 2vh 0;">
+                        <div class="col">Tổng</div>
+                        <div class="col text-right" id="TotalPrice"></div>
+                    </div>
+                    <form id="sel" action="/cart/checkout" method="post">
+                    </form>
+                    <button class="btn-red" type="submit" id="buy" >Mua hàng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-empty-wrap mt-50" th:unless="${LIST_ITEMCART != null}">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card-empty">
+                    <div class="card-empty-header">
+                        <h1>Giỏ hàng</h1>
+                    </div>
+                    <div class="card-empty-body cart-empty">
+                        <div class="col-sm-12 empty-cart-cls text-center">
+                            <img th:src="@{/imgs/cart/cart-empty.jpg}"
+                                 class="img-fluid mb-4 mr-3">
+                            <h2><strong>Your Cart is Empty</strong></h2>
+                            <h3>Add something to make me happy :)</h3>
+                            <a th:href="@{/}" class="btn btn-primary cart-btn-transform m-3" data-abc="true">continue
+                                shopping</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" th:with="user=${CUSTOMER}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thông tin</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form th:action="@{/api/cart/updateUser}" th:object="${employee}" method="get">
+                <div class="modal-body">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" >Họ</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+                               id="firstName" th:value="${user.firstName}"
+                        >
+                        <span class="input-group-text" >Tên</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+                               id="lastName" th:value="${user.lastName}"
+                        >
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" >Số điện thoại</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                               aria-describedby="inputGroup-sizing-sm"
+                               id="phoneNumber" th:value="${user.phoneNumber}"
+                        >
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" >Địa chỉ</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                               aria-describedby="inputGroup-sizing-sm"
+                               id="profile" th:value="${user.profile}"
+                        >
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" id="saveUser">Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments :: footer"></div>
+<script type='text/javascript'
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+
+<script th:src="@{/js/plus-minus.js}"></script>
+</body>
+
+</html>

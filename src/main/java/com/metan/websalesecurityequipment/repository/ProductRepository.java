@@ -4,6 +4,7 @@ import com.metan.websalesecurityequipment.model.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Repository;
@@ -17,12 +18,15 @@ public interface ProductRepository extends JpaRepository<Product, String> {
     public List<Product> findAllByOrderByNameAsc();
 
     @Query(value = "select p.*, sum(oi.quantity) as tong from products p inner join order_items oi on p.product_id = oi.product_id " +
-            "group by p.product_id, p.quantity, p.created_at, " +
-            " p.modified_at, p.brand_id, p.category_id, p.discount_id, " +
+            "group by p.product_id, p.discount_percent_base, p.quantity, p.created_at, " +
+            " p.modified_at, p.brand_id, p.category_id, " +
             "p.long_desc, p.name, p.price, p.short_desc, p.slug, " +
             "p.thumbnail, p.title " +
-            "order by tong desc limit 4", nativeQuery = true)
+            "order by tong desc limit 20", nativeQuery = true)
     public List<Product> findTopProduct();
+
+    @Query(value = "SELECT product_id, created_at, discount_percent_base, long_desc, modified_at, name, price, quantity, short_desc, slug, thumbnail, title, brand_id, category_id FROM(SELECT p.*, @rownum \\:= @rownum + 1 AS rn FROM products p, (SELECT @rownum \\:= 0) T1) T2 ORDER BY rn DESC", nativeQuery = true)
+    public List<Product> findProductsNew();
 
     @Query(value = "SELECT * FROM products ORDER BY RAND() LIMIT ?1", nativeQuery = true)
     public List<Product> findTopNumberRandom(int top);
@@ -66,7 +70,7 @@ public interface ProductRepository extends JpaRepository<Product, String> {
             "OR c.category in ?1 " +
             "OR (p.price >= ?3 and p.price <= ?4)) " +
             "and p.name like %?5%" +
-            " group by p.productId order by  totalQuan" )
+            " group by p.productId order by  totalQuan")
     public Page<Object[]> sortByOrderDetail(List<Integer> cates,List<Integer> brands,double minPrice, double maxPrice,String name,Pageable pageable);
 
     @Query("SELECT p, sum(o.quantity) as totalQuan FROM Product p left join p.orderItems o inner join p.brand b inner join p.category c join p.productReviews r" +
