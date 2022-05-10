@@ -11,9 +11,9 @@ import java.util.List;
 public class ProductRequestPageable {
     private List<Integer> categoryIds;
     private List<Integer> brandIds;
-    private List<Double> ratings;
-
+    private int rating;
     private Double minPrice;
     private Double maxPrice;
     private int page;
+    private String columnName;
 }

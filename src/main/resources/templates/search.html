@@ -1,28 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-
-<head th:replace="fragments :: head">
-
+<head>
+    <th:block th:replace="fragments :: base ('Tìm kiếm')"/>
+    <th:block th:replace="fragments :: search"/>
 </head>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-
-
 <body>
-<div th:replace="fragments :: header"></div>
+<div th:replace="fragments :: header (categories=${CATEGORIES})"></div>
 <div class="container">
     <div class="row">
         <div class="search-nav-filter">
             <div class=" filter-title">
-                <p><i class="fa-solid fa-filter icon"></i>Bộ lọc tìm kiếm</p>
+                <p><i class="fas fa-filter icon"></i>Bộ lọc tìm kiếm</p>
             </div>
             <div class="filter-body">
                 <div class="group-filter">
                     <div th:if="${categoriesFirst != null}">
-                        <div class="group-filter-header">Theo Danh Mục</div>
+                        <div class="group-filter-header"><b>Theo Danh Mục</b></div>
                         <div class="group-filter-content" th:each="category1:${categoriesFirst}">
                             <div class="group-filter-content-item">
                                 <input class="check-category" type="checkbox" th:value="${category1.categoryId}">
@@ -30,7 +23,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="danhMuc" class="group-filter-content-add" th:if="${categoriesLast != null}">
+                    <div id="categories" class="group-filter-content-add" th:if="${categoriesLast != null}">
                         <div th:each="category2:${categoriesLast}">
                             <div class="group-filter-content-item">
                                 <input class="check-category" type="checkbox" th:value="${category2.categoryId}">
@@ -38,38 +31,22 @@
                             </div>
                         </div>
                     </div>
-                    <p class="them" id="themDanhMuc" onclick="displayDanhMuc()">
+                    <p class="add" id="addCategories" onclick="displayCategories()">
                         Thêm
-                        <i class="fa-solid fa-angle-down icon">
+                        <i class="fas fa-angle-down icon">
                         </i>
                     </p>
-                    <p id="anbotDanhMuc" class="anbot" onclick="hiddenDanhMuc()">
+                    <p id="hiddenCategories" class="hidden" onclick="hiddenCategories()">
                         Ẩn bớt
-                        <i class="fa-solid fa-angle-up"></i>
+                        <i class="fas fa-angle-up"></i>
                     </p>
-                    <script>
-                        function displayDanhMuc() {
-                            document.getElementById("danhMuc").style.display = 'block';
-                            document.getElementById("themDanhMuc").style.display = 'none';
-                            document.getElementById("anbotDanhMuc").style.display = 'block';
-                        }
-
-                        function hiddenDanhMuc() {
-                            document.getElementById("danhMuc").style.display = 'none';
-                            document.getElementById("themDanhMuc").style.display = 'block';
-                            document.getElementById("anbotDanhMuc").style.display = 'none';
-                        }
-
-
-                    </script>
                 </div>
             </div>
-
 
             <div class="filter-body">
                 <div class="group-filter">
                     <div th:if="${brandsFirst != null}">
-                        <div class="group-filter-header">Thương hiệu</div>
+                        <div class="group-filter-header"><b>Thương hiệu</b></div>
                         <div class="group-filter-content" th:each="brand1:${brandsFirst}">
                             <div class="group-filter-content-item">
                                 <input class="check-brand" type="checkbox" th:value="${brand1.brandId}">
@@ -77,7 +54,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="thuongHieu" class="group-filter-content-add" th:if="${brandsLast != null}">
+                    <div id="brands" class="group-filter-content-add" th:if="${brandsLast != null}">
                         <div th:each="brand2:${brandsLast}">
                             <div class="group-filter-content-item">
                                 <input class="check-brand" type="checkbox" th:value="${brand2.brandId}">
@@ -85,94 +62,74 @@
                             </div>
                         </div>
                     </div>
-                    <p class="them" id="themThuongHieu" onclick="displayThuongHieu()">
+                    <p class="add" id="addBrands" onclick="displayThuongHieu()">
                         Thêm
-                        <i class="fa-solid fa-angle-down icon">
+                        <i class="fas fa-angle-down icon">
                         </i>
                     </p>
-                    <p id="anBotThuongHieu" class="anbot" onclick="hiddenThuongHieu()">
+                    <p id="hiddenBrands" class="hidden" onclick="hiddenThuongHieu()">
                         Ẩn bớt
-                        <i class="fa-solid fa-angle-up"></i>
+                        <i class="fas fa-angle-up"></i>
                     </p>
-                    <!--                    document.getElementById("group-filter-content-item").onclick = function () {-->
-                    <!--                    document.getElementById("check").checked = false;-->
-                    <!--                    };-->
-                    <script>
-
-                        function displayThuongHieu() {
-                            document.getElementById("thuongHieu").style.display = 'block';
-                            document.getElementById("themThuongHieu").style.display = 'none';
-                            document.getElementById("anBotThuongHieu").style.display = 'block';
-                        }
-
-                        function hiddenThuongHieu() {
-                            document.getElementById("thuongHieu").style.display = 'none';
-                            document.getElementById("themThuongHieu").style.display = 'block';
-                            document.getElementById("anBotThuongHieu").style.display = 'none';
-                        }
-
-
-                    </script>
                 </div>
             </div>
 
             <div class="filter-body">
                 <div class="group-filter">
-                    <div class="group-filter-header">Đánh giá</div>
+                    <div class="group-filter-header"><b>Đánh giá</b></div>
                     <div class="group-filter-content">
                         <div class="group-filter-content-item">
-                            <div class="filter-danhgia">
-                                <input type="checkbox">
+                            <div class="filter-evaluate">
+                                <input type="checkbox" class="check-rating" th:value="*{5}">
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
-                                <span class="soLuongKetQua"> (330 kết quả)</span>
                             </div>
                         </div>
                         <div class="group-filter-content-item">
-                            <div class="filter-danhgia">
-                                <input type="checkbox">
+                            <div class="filter-evaluate">
+                                <input type="checkbox" class="check-rating" th:value="*{4}">
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star"></span>
-                                <span class="soLuongKetQua"> (330 kết quả)</span>
+                                <span class="up"> trở lên</span>
                             </div>
                         </div>
                         <div class="group-filter-content-item">
-                            <div class="filter-danhgia">
-                                <input type="checkbox">
+                            <div class="filter-evaluate">
+                                <input type="checkbox" class="check-rating" th:value="*{3}">
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star"></span>
                                 <span class="fa fa-star"></span>
-                                <span class="soLuongKetQua"> (330 kết quả)</span>
+                                <span class="up"> trở lên</span>
                             </div>
                         </div>
                         <div class="group-filter-content-item">
-                            <div class="filter-danhgia">
-                                <input type="checkbox">
+                            <div class="filter-evaluate">
+                                <input type="checkbox" class="check-rating" th:value="*{2}">
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star"></span>
                                 <span class="fa fa-star"></span>
                                 <span class="fa fa-star"></span>
-                                <span class="soLuongKetQua"> (330 kết quả)</span>
+                                <span class="up"> trở lên</span>
                             </div>
                         </div>
                         <div class="group-filter-content-item">
-                            <div class="filter-danhgia">
-                                <input type="checkbox" id="" name="">
+                            <div class="filter-evaluate">
+                                <input type="checkbox" class="check-rating" th:value="*{1}">
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star"></span>
                                 <span class="fa fa-star"></span>
                                 <span class="fa fa-star"></span>
                                 <span class="fa fa-star"></span>
-                                <span class="soLuongKetQua"> (330 kết quả)</span>
+                                <span class="up"> trở lên</span>
                             </div>
                         </div>
                     </div>
@@ -181,83 +138,82 @@
 
             <div class="filter-body">
                 <div class="group-filter">
-                    <div class="group-filter-header">Khoảng Giá</div>
+                    <div class="group-filter-header"><b>Khoảng Giá</b></div>
                     <div class="group-filter-content">
-                        <form action="" style="width: 100%;">
-                            <input type="text" placeholder="từ" id="fromGia" onkeypress='validate(event)'/>
-                            <span><i class="fa-solid fa-horizontal-rule"></i></span>
-                            <input type="text" placeholder="đến" id="toGia" onkeypress='validate(event)'/>
-                            <button type="submit" class="apdung">áp dụng</button>
+                        <form style="width: 100%;">
+                            <input type="text" class="price-input" placeholder="từ" id="fromPrice"
+                                   onkeypress='validate(event)'/>
+                            <span><i class="fas fa-horizontal-rule"></i></span>
+                            <input type="text" class="price-input" placeholder="đến" id="toPrice"
+                                   onkeypress='validate(event)'/>
+                            <span id="errorMessagePrice" class="bao-loi text-danger"></span>
+                            <button type="button" class="submitPrice">áp dụng</button>
                         </form>
                     </div>
                 </div>
-
             </div>
-
         </div>
 
         <div class="search-content">
-            <div class="thanh-ketqua">
-                <span><i class="fa-regular fa-lightbulb"></i></span>
+            <div class="result-bar">
+                <span><i style="font-size: 14px;" class="fas fa-lightbulb"></i></span>
                 <p>Kết quả tìm kiếm cho '<span th:text="${param.name}"></span>'</p>
             </div>
-            <div class="thanh-sap-xep" style="height: 60px; background-color: #00000008;">
-                <div class="nut-sap-xep">
-                        <span style="width: 130px;line-height: 34px; margin-right: 10px;">Sắp xếp
-                            theo </span>
-                    <ul id="sap-xep">
-                        <li class="btn-ss" id="btnLienQuan"><a>Liên Quan</a></li>
-                        <li class="btn-ss" id="btnMoiNhat"><a>Mới Nhất</a></li>
-                        <li class="btn-ss" id="btnBanChay"><a>Bán Chạy</a></li>
-                        <li id="btnGia"><a>Giá <span class="btn-chon-gia"><i
-                                class="fa-solid fa-chevron-down"></i></span></a>
+            <div class="sort-bar" style="height: 60px; background-color: #00000008;">
+                <div class="sort-button">
+                        <span style="width: 130px;line-height: 34px; margin-right: 10px;"><b>Sắp xếp
+                            theo</b> </span>
+                    <ul id="sort">
+                        <li value="name" class="btnss btn-ss  btn-select btn-ss-active" id="btnLienQuan"><a>Liên
+                            Quan</a></li>
+                        <li value="createdAt" class="btnss btn-ss btn-select" id="btnMoiNhat"><a>Mới Nhất</a></li>
+                        <li value="BanChay" class="btnss btn-ss btn-select" id="btnBanChay"><a>Bán Chạy</a></li>
+                        <li class="btn-select" id="btnGia"><a>Giá <span class="btn-select-price"><i
+                                class="fas fa-chevron-down"></i></span></a>
                             <ul>
-                                <li class="chon-gia-item" id="giaTangDan"><a>Giá: Thấp đến Cao</a></li>
-                                <li class="chon-gia-item" id="giaGiamDan"><a>Giá: Cao đến Thấp</a></li>
+                                <li value="ascPrice" class="btnss select-price-item" id="ascPrice"><a>Giá: Thấp đến
+                                    Cao</a></li>
+                                <li value="descPrice" class=" btnss select-price-item" id="descPrice"><a>Giá: Cao đến
+                                    Thấp</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
-                <div class="chuyen-trang">
-                    <!--                    <ul>-->
+                <div class="next-page">
                     <span id="pageCurrent"
                           th:text="(${param.page}?${T(java.lang.Integer).parseInt(param.page)+1}:1)+'/'+${productPage.totalPages}+' Trang'"></span>
-                    <!--                        <li class="chuyen-trang-lui"><a><i class="fa-solid fa-angle-left"></i></a></li>-->
-                    <!--                        <li class="chuyen-trang-toi"><a><i class="fa-solid fa-angle-right"></i></a></li>-->
-                    <!--                    </ul>-->
                 </div>
             </div>
 
-            <div class="row error-null" th:if="${!productPage.hasContent()}">
-                <div class="col">
-                    <div class="alert alert-danger text-center" role="alert">
-                        <strong>No Product Found</strong>
-                    </div>
+            <div class="row error-null" style="display: none">
+                <div class="col text-center no-products">
+                    <img th:src="@{/imgs/noresultproduct.png}" alt="noresult.png">
+                    <h4>Không tìm thấy sản phẩm phù hợp</h4>
                 </div>
             </div>
-            <div id="danh-sach-san-pham" th:if="${productPage.hasContent()}">
-                <div th:each="product:${productPage.content}">
+            <div id="list-product" >
 
+                <div class="content" th:each="product:${productPage.content}">
                     <div class="gallery">
                         <a>
                             <img th:src="${product.thumbnail}" alt="Cinque Terre">
                         </a>
                         <a class="desc-link text-dark" th:href="@{'/product/detail/'+${product.slug}}">
-                            <div class="desc">
-                                <div class="desc-ten" th:text="${product.name}"></div>
-                                <div class="desc-gia">
-                                <span class="desc-gia-an">
+                            <div class="description">
+                                <div class="desc-name" th:text="${product.title}"></div>
+                                <div class="desc-price">
+                                <span class="desc-price-hidden">
                                     <del>
-                                        <span class="desc-gia-an-d">đ</span>
+                                        <span class="desc-price-hidden-d">đ</span>
                                         <span th:text="${#numbers.formatDecimal(product.price,1,'DEFAULT',0,'DEFAULT')}"></span>
                                     </del>
                                 </span>
-                                    <span class="desc-gia-hien">
-                                    <span class="desc-gia-hien-d">đ</span>
-                                    <span th:text="${#numbers.formatDecimal(product.price,1,'DEFAULT',0,'DEFAULT')}"></span>
+                                    <span class="desc-price-display">
+                                    <span class="desc-price-display-d">đ</span>
+                                    <span th:text="${#numbers.formatDecimal(product.price - (product.price * (product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent)),3,'POINT',0,'POINT') + '&nbsp;₫'}"></span>
                                 </span>
                                 </div>
-                                <div class="desc-danhgia">
+                                <div class="desc-eval">
                                 <span class="fa fa-star"
                                       th:classappend="${listRating.get(product.productId)>=1}? checked"></span>
                                     <span class="fa fa-star"
@@ -268,16 +224,25 @@
                                           th:classappend="${listRating.get(product.productId)>=4}? checked"></span>
                                     <span class="fa fa-star"
                                           th:classappend="${listRating.get(product.productId)>=5}? checked"></span>
-                                    <span class="da-ban">Đã bán 216</span>
+<!--                                    <th:block th:width="totalQuan=${0}" th:each="orderItem,state:${product.orderItems}">-->
+<!--                                        <th:block th:width="totalQuan=${totalQuan+orderItem.quantity}" th:if="${state.last}">-->
+<!--                                            <span class="da-ban" th:text="'  Đã bán '+${totalQuan}">Đã bán 216</span>-->
+<!--                                        </th:block>-->
+
+<!--                                    </th:block>-->
+                                    <th:block th:if="${product.orderItems.size()==0 || product.orderItems== null}">
+                                        <span class="da-ban" th:text="'  Đã bán '+${0}">Đã bán 216</span>
+                                    </th:block>
+
+
                                 </div>
-                                <div class="desc-noiban" style="color: #000000A6;">
-                                    <i style="color: rgb(0, 191, 165);" class="fa-solid fa-truck-fast"></i>
+                                <div class="desc-address" style="color: #000000A6;">
+                                    <i style="color: rgb(0, 191, 165); font-size: 12px;" class="fas fa-truck"></i>
                                     Metan, TP. Hồ Chí Minh
                                 </div>
                             </div>
                         </a>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -292,38 +257,33 @@
     </div>
 
 </div>
+<footer th:replace="fragments :: footer"></footer>
+<th:block th:replace="fragments :: base-js" />
+<th:block th:replace="fragments ::  search-js" />
 <th:block>
-    <div th:replace="fragments :: footer"></div>
-</th:block>
-<th:block>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" th:src="@{/js/jquery.simplePagination.js}"></script>
-
     <script th:inline="javascript">
-        function validate(evt) {
-            if (evt.keyCode != 8) {
-                var theEvent = evt || window.event;
-                var key = theEvent.keyCode || theEvent.which;
-                key = String.fromCharCode(key);
-                var regex = /[0-9]|\./;
-                if (!regex.test(key)) {
-                    theEvent.returnValue = false;
-                    if (theEvent.preventDefault)
-                        theEvent.preventDefault();
-                }
-            }
-        }
-
         let currentPage = [[${productPage.getPageable().getPageNumber()}]];
         console.log(currentPage);
         let totalPages = [[${productPage.getTotalPages()}]];
         let brandIds = [];
         let categoryIds = [];
-        let maxPrice = 0;
+        let maxPrice = Number.MAX_SAFE_INTEGER;
         let minPrice = 0;
         let ratings = [];
+        let rating = 0;
+        let columnName = 'name';
+        $(function () {
+            const b = [[${productPage.hasContent}]];
+            if (b == true) {
+                $('.error-null').css('display', 'none');
+                //$(".content").css('margin-left','auto').css('margin-right','auto');
+            } else {
+                $("#list-product").html("");
+                $('.error-null').css('display', 'flex');
 
+            }
+
+        })
         $(function () {
             pagination();
         });
@@ -362,7 +322,7 @@
                 }).get();
                 currentPage = 1;
                 getProducts();
-
+                console.log("ratingValue: " + rating)
             })
             $(".check-category").change(function () {
                 categoryIds = $(".check-category:checked").map(function () {
@@ -370,18 +330,72 @@
                 }).get();
                 currentPage = 1;
                 getProducts();
+                console.log("ratingValue: " + rating)
             })
 
+            $(".check-rating").change(function () {
+                ratings = $(".check-rating:checked").map(function () {
+                    return $(this).val();
+                }).get();
+                currentPage = 1;
+                if (!ratings.length == 0) {
+                    rating = ratings.reduce(function (accumulator, element) {
+                        return (accumulator < element) ? accumulator : element
+                    });
+                } else {
+                    rating = 0;
+                }
+                getProducts();
+                console.log("ratingValue: " + rating)
+                console.log("ratings: " + ratings)
+            })
+            $('.submitPrice').click(function () {
+                minPrice = parseFloat($('.price-input#fromPrice').val());
+                maxPrice = parseFloat($('.price-input#toPrice').val());
+
+                if (isNaN(minPrice) && isNaN(maxPrice)) {
+                    $('#errorMessagePrice').html('Khoảng giá không hợp lệ');
+                    window.location.href = '#errorMessagePrice';
+
+                } else if (minPrice > maxPrice) {
+                    $('#errorMessagePrice').html('Khoảng giá không hợp lệ');
+                    window.location.href = '#errorMessagePrice';
+
+                } else if (minPrice > 999999999999 || maxPrice > 999999999999) {
+                    $('#errorMessagePrice').html('Khoảng giá quá lớn');
+                    window.location.href = '#errorMessagePrice';
+
+                } else {
+                    console.log("minPrice: " + minPrice)
+                    console.log("maxPrice: " + maxPrice)
+                    currentPage = 1;
+                    getProducts();
+                }
+            })
+            $('.btn-select').click(function () {
+
+                $('.btn-select').css('background-color', 'white')
+                $(this).css('background-color', '#ff9999')
+            })
+
+            $('.btnss').click(function () {
+                let ss = $(this).attr('value');
+                console.log('sap xep theo: ' + ss);
+                columnName = ss;
+                currentPage = 1;
+                getProducts();
+            })
         })
 
         function getProducts() {
             let req = {
                 categoryIds: categoryIds,
                 brandIds: brandIds,
-                ratings: ratings,
+                rating: rating,
                 minPrice: minPrice,
                 maxPrice: maxPrice,
-                page: currentPage - 1
+                page: currentPage - 1,
+                columnName: columnName
             }
             let myJSON = JSON.stringify(req);
             $.ajax({
@@ -394,8 +408,6 @@
                     createData(products.content);
                     currentPage = products.pageable.pageNumber + 1;
                     totalPages = products.totalPages;
-                    console.log("Tong page hien tai khi nhan link page:" + totalPages);
-                    console.log("page hien tai khi nhan link page:" + currentPage);
                     pagination();
                     $('#pageCurrent').html(currentPage + "/" + totalPages + " Trang");
                     console.log(products.content);
@@ -408,55 +420,58 @@
 
         function createData(products) {
             let html = '';
+
             if (products.length > 0) {
-                for (product of products) {
-                    html += `
-        <div class="gallery">
-            <a>
-                <img src="${product.thumbnail}"
-                     alt="Cinque Terre">
-            </a>
-            <a class="desc-link text-dark" href="/product/detail/${product.slug}">
-            <div class="desc">
-                <div class="desc-ten">${product.name}</div>
-                <div class="desc-gia">
-                    <span class="desc-gia-an">
-                        <del>
-                            <span class="desc-gia-an-d">đ</span>
-                            <span>${new Intl.NumberFormat('vi-VN', {maximumSignificantDigits: 3}).format(product.price)}</span>
-                        </del>
-                    </span>
-                    <span class="desc-gia-hien">
-                        <span class="desc-gia-hien-d">đ</span>
-                        <span>${new Intl.NumberFormat('vi-VN', {maximumSignificantDigits: 3}).format(product.price)}</span>
-                    </span>
-                </div>
-                <div class="desc-danhgia">
-                    <span class="fa fa-star ${listRating[product.productId] >= 1 ? 'checked' : ''}"></span>
-                    <span class="fa fa-star ${listRating[product.productId] >= 2 ? 'checked' : ''}"></span>
-                    <span class="fa fa-star ${listRating[product.productId] >= 3 ? 'checked' : ''}"></span>
-                    <span class="fa fa-star ${listRating[product.productId] >= 4 ? 'checked' : ''}"></span>
-                    <span class="fa fa-star ${listRating[product.productId] >= 5 ? 'checked' : ''}"></span>
-                    <span class="da-ban">Đã bán 216</span>
-                </div>
-                <div class="desc-noiban" style="color: #000000A6;">
-                    <i style="color: rgb(0, 191, 165);" class="fa-solid fa-truck-fast"></i>
-                    Metan, TP. Hồ Chí Minh
-                </div>
-            </div>
-            </a>
-        </div>`;
-                }
-                $("#danh-sach-san-pham").html("");
-                $("#danh-sach-san-pham").html(html);
+
+                html+=`<div class="content">`;
+                    for (product of products) {
+                        html += `
+                        <div class="gallery">
+                            <a>
+                                <img src="${product.thumbnail}"
+                                     alt="Cinque Terre">
+                            </a>
+                            <a class="desc-link text-dark" th:href="@{'/product/detail/'+${product.slug}}">
+                            <div class="description">
+                                <div class="desc-name">${product.name}</div>
+                                <div class="desc-price">
+                                    <span class="desc-price-hidden">
+                                        <del>
+                                            <span class="desc-price-hidden-d">đ</span>
+                                            <span>${new Intl.NumberFormat('vi-VN', {maximumSignificantDigits: 3}).format(product.price)}</span>
+                                        </del>
+                                    </span>
+                                    <span class="desc-price-display">
+                                        <span class="desc-price-display-d">đ</span>
+                                        <span>${product.productDiscount!=null?new Intl.NumberFormat('vi-VN', {maximumSignificantDigits: 3}).format(product.price - product.price * product.productDiscount.discountPercent):new Intl.NumberFormat('vi-VN', {maximumSignificantDigits: 3}).format(product.price)}</span>
+                                    </span>
+                                </div>
+                                <div class="desc-eval">
+                                    <span class="fa fa-star ${listRating[product.productId] >= 1 ? 'checked' : ''}"></span>
+                                    <span class="fa fa-star ${listRating[product.productId] >= 2 ? 'checked' : ''}"></span>
+                                    <span class="fa fa-star ${listRating[product.productId] >= 3 ? 'checked' : ''}"></span>
+                                    <span class="fa fa-star ${listRating[product.productId] >= 4 ? 'checked' : ''}"></span>
+                                    <span class="fa fa-star ${listRating[product.productId] >= 5 ? 'checked' : ''}"></span>
+                                    <span class="da-ban">  Đã bán ${0}</span>
+                                </div>
+                                <div class="desc-address" style="color: #000000A6;">
+                                    <i style="color: rgb(0, 191, 165); font-size: 12px;" class="fas fa-truck"></i>
+                                    Metan, TP. Hồ Chí Minh
+                                </div>
+                            </div>
+                            </a>
+                        </div>`;
+                    }
+                html+=`</div>`;
+                $("#list-product").html("");
+                $('.error-null').css('display', 'none');
+                $("#list-product").html(html);
+
             } else {
-                $("#danh-sach-san-pham").html("");
+                $("#list-product").html("");
                 $('.error-null').css('display', 'flex');
             }
-
         }
-
-
     </script>
 </th:block>
 </body>
