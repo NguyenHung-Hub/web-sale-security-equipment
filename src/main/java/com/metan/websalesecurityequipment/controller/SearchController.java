@@ -148,7 +148,6 @@ public class SearchController {
         pageable = PageRequest.of(currentPage, pageSize, Sort.by("name"));
         //pageable = PageRequest.of(currentPage, pageSize);
         resultPage = getProductByName(name, pageable);
-        System.out.println("my detail"+resultPage.getContent().get(0).getOrderItems());
         model.addAttribute("brandsFirst", brandsFirst);
         model.addAttribute("brandsLast", brandsLast);
         model.addAttribute("categoriesFirst", categoriesFirst);

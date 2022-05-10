@@ -15,7 +15,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public int getSumQuantity(String productId) {
+    public Integer getSumQuantity(String productId) {
         return orderRepository.getSumQuantity(productId);
     }
 }
