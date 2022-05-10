@@ -10,6 +10,8 @@ import java.util.List;
 public interface ProductService {
     public List<Product> findAll();
 
+    public List<Product> findProductsNew();
+
     public Product findProductById(String theId);
 
     public Product saveProduct(Product product);

@@ -1,14 +1,17 @@
 #footer {
-    background-color: #1f2534;
-    color: rgba(255,255,255,0.7);
+    width: 100%;
+    float: left;
+    box-shadow: rgba(60, 64, 67, .1) 0 1px 2px 0, rgba(60, 64, 67, .15) 0 2px 6px 2px;
+    position: relative;
+    z-index: 2;
 }
 
 #footer .footer-top {
-    padding: 70px 0 30px;
+    width: 100%;
+    min-height: 100px;
 }
 
 #footer .footer-top .widget h3 {
-    color: #fff;
     font-size: 1.8rem;
     text-transform: capitalize;
     position: relative;
@@ -34,25 +37,30 @@
 }
 
 #footer .footer-top .widget .contact li {
-    color: #ccc;
     font-size: 1.4rem;
-    line-height: 45px;
+    line-height: 35px;
 }
 
 #footer .footer-top .widget .contact li i {
-    color: #fff;
     margin-right: 10px;
 }
 
 #footer .footer-top .contact-us .contact-footer li.contact-phone {
-    color: #fff !important;
+    color: #000000 !important;
     font-size: 1.8rem;
     font-weight: 600;
 }
 
+#footer .footer-top .contact-us .contact-footer li.contact-phone i {
+    font-size: 1.4rem;
+}
+
+#footer .footer-top .contact-us .contact-footer .social-list {
+    margin-top: 15px;
+}
+
 #footer .footer-top .contact-us .contact-footer .social-list li {
     display: inline-block;
-
 }
 
 #footer .footer-top .contact-us .contact-footer .social-list li + li {
@@ -80,7 +88,7 @@
     height: 36px;
     border-radius: 100%;
     text-align: center;
-    line-height: 32px;
+    line-height: 36px;
     font-size: 1.4rem;
     color: #fff;
     transition: .2s all;
@@ -88,10 +96,13 @@
 }
 
 #footer .footer-center {
-    background-color: #1a1f2c;
+    width: 100%;
+    background: #F8F8F8;
     overflow: hidden;
-    padding: 40px 0 20px;
-    border-top: 1px solid #404552;
-    border-bottom: 1px solid #404552;
+    padding: 10px 0;
 }
 
+#footer .footer-center p {
+    font-size: 1rem;
+    line-height: 2;
+}

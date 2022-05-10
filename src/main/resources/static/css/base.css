@@ -8,9 +8,11 @@
 
 body {
     font-family: inherit;
+    font-size: 1.4rem;
+    line-height: 22px;
 }
 
-body a:hover {
+a {
     text-decoration: none;
 }
 
@@ -21,17 +23,15 @@ body img {
 
 body ul {
     padding: 0;
+    margin: 0;
+    list-style: none;
 }
 
 html {
     font-size: 62.5%;
-    line-height: 1.6rem;
-    font-family: 'Poppins', 'sans-serif';
-    box-sizing: border-box;
+    font-family: sans-serif;
     color: var(--text-color);
 }
-
-
 
 @media (min-width: 1200px) {
     .container {

@@ -2,14 +2,20 @@ package com.metan.websalesecurityequipment.service.impl;
 
 import com.metan.websalesecurityequipment.model.AuthenticationProvider;
 import com.metan.websalesecurityequipment.model.User;
+import com.metan.websalesecurityequipment.repository.CartRepository;
 import com.metan.websalesecurityequipment.repository.UserRepository;
 import com.metan.websalesecurityequipment.service.UserService;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
 @Service
@@ -17,22 +23,59 @@ import java.util.Date;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final JavaMailSender mailSender;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, JavaMailSender mailSender) {
         this.userRepository = userRepository;
+        this.mailSender = mailSender;
     }
 
     @Override
-    public void registerUser(User user) {
+    public User registerUser(User user) {
         encodePassword(user);
         user.setRegisteredAt(new Date());
         user.setRole("USER");
+        user.setAuthProvider(AuthenticationProvider.LOCAL);
 
         String randomCode = RandomString.make(64);
         user.setVerificationCode(randomCode);
 
-        userRepository.save(user);
+        return userRepository.save(user);
+    }
+
+    @Override
+    public void sendVerificationEmail(User user, String siteUrl) throws MessagingException, UnsupportedEncodingException {
+        String subject = "Please verify your registration";
+        String senderName = "Metan team";
+        String mailContent = "<p>Dear " + user.getFullName() + ",</p>";
+        mailContent += "<p>Please click the link below to vefify to your registration:</p>";
+
+        String verifyUrl = siteUrl + "/account/verify?code=" + user.getVerificationCode();
+        mailContent += "<h3><a href='" + verifyUrl +"'>VERIFY</a></h3>";
+        mailContent += "<p>Thank you<br>The Metan Team</p>";
+
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+        helper.setFrom("huyhoang14901@gmail.com", senderName);
+        helper.setTo(user.getEmail());
+        helper.setSubject(subject);
+        helper.setText(mailContent, true);
+
+        mailSender.send(message);
+    }
+
+    @Override
+    public User getUserByVerificationCode(String code) {
+        User user = userRepository.findByVerificationCode(code);
+
+        if (user == null || user.isEnable()) {
+            return null;
+        } else {
+            userRepository.enable(user.getUserId());
+            return user;
+        }
     }
 
     @Override

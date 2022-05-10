@@ -4,6 +4,7 @@ import com.metan.websalesecurityequipment.model.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Repository;
@@ -17,12 +18,15 @@ public interface ProductRepository extends JpaRepository<Product, String> {
     public List<Product> findAllByOrderByNameAsc();
 
     @Query(value = "select p.*, sum(oi.quantity) as tong from products p inner join order_items oi on p.product_id = oi.product_id " +
-            "group by p.product_id, p.quantity, p.created_at, " +
-            " p.modified_at, p.brand_id, p.category_id, p.discount_id, " +
+            "group by p.product_id, p.discount_percent_base, p.quantity, p.created_at, " +
+            " p.modified_at, p.brand_id, p.category_id, " +
             "p.long_desc, p.name, p.price, p.short_desc, p.slug, " +
             "p.thumbnail, p.title " +
             "order by tong desc limit 20", nativeQuery = true)
     public List<Product> findTopProduct();
+
+    @Query(value = "SELECT product_id, created_at, discount_percent_base, long_desc, modified_at, name, price, quantity, short_desc, slug, thumbnail, title, brand_id, category_id FROM(SELECT p.*, @rownum \\:= @rownum + 1 AS rn FROM products p, (SELECT @rownum \\:= 0) T1) T2 ORDER BY rn DESC", nativeQuery = true)
+    public List<Product> findProductsNew();
 
     public Product findBySlug(String slug);
 

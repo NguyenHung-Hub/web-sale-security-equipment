@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
+<head>
+  <th:block th:replace="fragments :: base ('Thông báo')"/>
+</head>
+<body>
+  <div class="text-center">
+    <h1 th:text="${message}"></h1>
+    <a class="btn btn-primary" th:href="@{/account/login}">Trở về</a>
+  </div>
+</body>
+</html>

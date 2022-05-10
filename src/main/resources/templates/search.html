@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-
-<head th:replace="fragments :: head (title='Tìm kiếm')"></head>
-
+<head>
+    <th:block th:replace="fragments :: base ('Tìm kiếm')"/>
+    <th:block th:replace="fragments :: search"/>
+</head>
 <body>
 <div th:replace="fragments :: header (categories=${CATEGORIES})"></div>
 <div class="container">
@@ -228,10 +229,11 @@
                 </div>
             </div>
             <div id="danh-sach-san-pham" th:if="${productPage.hasContent()}">
-                <div th:each="product:${productPage.content}">
+                <div th:each="product: ${productPage.content}">
 
                     <div class="gallery">
                         <a>
+
                             <img th:src="${product.thumbnail}" alt="Cinque Terre">
                         </a>
                         <a class="desc-link text-dark" th:href="@{/product/detail(productId=${product.productId})}">
@@ -284,12 +286,9 @@
     </div>
 
 </div>
+<footer th:replace="fragments :: footer"></footer>
+<th:block th:replace="fragments :: base-js" />
 <th:block>
-    <div th:replace="fragments :: footer"></div>
-</th:block>
-<th:block>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" th:src="@{/js/jquery.simplePagination.js}"></script>
 
     <script th:inline="javascript">
