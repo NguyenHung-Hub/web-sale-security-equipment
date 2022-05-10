@@ -31,4 +31,6 @@ public interface ProductService {
 
     public Product findBySlug(String slug);
     public List<Product> findTopNumberRandom(int top);
+    public Page<Product> sortByOrderDetail(ProductRequestPageable req, String name, Pageable pageable);
+
 }

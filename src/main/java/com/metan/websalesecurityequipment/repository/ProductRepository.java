@@ -40,19 +40,35 @@ public interface ProductRepository extends JpaRepository<Product, String> {
 
     public Page<Product> findByNameContaining(String name, Pageable pageable);
 
-    @Query(value = "select *, sum(oi.quantity) as totalQuan from products p join brands b on p.brand_id= b.brand_id join categories c on c.category_id = p.category_id join order_items oi on oi.product_id=p.product_id " +
-            "where (b.brand_id in ?2 " +
-            "OR c.subcategory_id in ?1" +
-            " OR (p.price >=?3 and p.price<=?4)) and p.name like %?5% group by oi.product_id", nativeQuery = true)
+    @Query("select p from Product p join p.brand b join p.category c " +
+            "where (b.brandId in ?2 " +
+            "OR c.category in ?1" +
+            " OR (p.price >=?3 and p.price<=?4)) and p.name like %?5% ")
     public Page<Product> searchByNameCateBrand(List<Integer> cates,List<Integer> brands,double minPrice, double maxPrice,String name,Pageable pageable);
 
-    @Query(value = "select distinct(p.product_id), p.* from products p join brands b on p.brand_id= b.brand_id join categories c " +
-            "on c.category_id = p.category_id join product_reviews pr on pr.product_id=p.product_id " +
-            " where (b.brand_id in (?2) " +
-            "            OR c.subcategory_id in (?1) " +
-            "            or pr.rating >= ?3 " +
-            " OR (p.price >=?4 and p.price<=?5)) and p.name like %?6% ", nativeQuery = true)
+    @Query("select distinct(p.productId),p  from Product p join p.brand b join p.category c " +
+            "join p.productReviews r " +
+            " where (b.brandId in ?2 " +
+            "            OR c.category in ?1 " +
+            "            or r.rating >= ?3 " +
+            " OR (p.price >=?4 and p.price<=?5)) and p.name like %?6% ")
     public Page<Product> searchByNameCateBrandRating(List<Integer> cates,List<Integer> brands, int rating,double minPrice, double maxPrice,String name,Pageable pageable);
+    @Query("SELECT p, sum(o.quantity) as totalQuan FROM Product p left join p.orderItems o inner join p.brand b inner join p.category c " +
+            "where (b.brandId in ?2 " +
+            "OR c.category in ?1 " +
+            "OR (p.price >= ?3 and p.price <= ?4)) " +
+            "and p.name like %?5%" +
+            " group by p.productId order by  totalQuan" )
+    public Page<Object[]> sortByOrderDetail(List<Integer> cates,List<Integer> brands,double minPrice, double maxPrice,String name,Pageable pageable);
+
+    @Query("SELECT p, sum(o.quantity) as totalQuan FROM Product p left join p.orderItems o inner join p.brand b inner join p.category c join p.productReviews r" +
+            " where (b.brandId in ?2 " +
+            "OR c.category in ?1 " +
+            "or r.rating >= ?3 " +
+            "OR (p.price >= ?4 and p.price <= ?5)) " +
+            "and p.name like %?6%" +
+            " group by p.productId order by  totalQuan" )
+    public Page<Object[]> sortByOrderDetailWhenHaveRating(List<Integer> cates,List<Integer> brands,int rating, double minPrice, double maxPrice,String name,Pageable pageable);
 
 
 
