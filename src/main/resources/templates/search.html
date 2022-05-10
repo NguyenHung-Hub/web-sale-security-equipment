@@ -214,7 +214,7 @@
                                 </span>
                                     <span class="desc-price-display">
                                     <span class="desc-price-display-d">đ</span>
-                                    <span th:text="${product.productDiscount!=null}? ${#numbers.formatDecimal((product.price - product.price*product.productDiscount.discountPercent),1,'DEFAULT',0,'DEFAULT')}:${product.price}"></span>
+                                    <span th:text="${product.productDiscount!=null}? ${#numbers.formatDecimal((product.price - product.price*product.productDiscount.discountPercent),1,'DEFAULT',0,'DEFAULT')}:${#numbers.formatDecimal(product.price,1,'DEFAULT',0,'DEFAULT')}"></span>
                                 </span>
                                 </div>
                                 <div class="desc-eval">
@@ -277,7 +277,7 @@
         let totalPages = [[${productPage.getTotalPages()}]];
         let brandIds = [];
         let categoryIds = [];
-        let maxPrice = Number.MAX_VALUE;
+        let maxPrice = Number.MAX_SAFE_INTEGER;
         let minPrice = 0;
         let ratings = [];
         let rating = 0;
@@ -453,7 +453,7 @@
                                     </span>
                                     <span class="desc-price-display">
                                         <span class="desc-price-display-d">đ</span>
-                                        <span>${new Intl.NumberFormat('vi-VN', {maximumSignificantDigits: 3}).format(product.price - product.price * product.productDiscount.discountPercent)}</span>
+                                        <span>${product.productDiscount!=null?new Intl.NumberFormat('vi-VN', {maximumSignificantDigits: 3}).format(product.price - product.price * product.productDiscount.discountPercent):new Intl.NumberFormat('vi-VN', {maximumSignificantDigits: 3}).format(product.price)}</span>
                                     </span>
                                 </div>
                                 <div class="desc-eval">
@@ -462,7 +462,7 @@
                                     <span class="fa fa-star ${listRating[product.productId] >= 3 ? 'checked' : ''}"></span>
                                     <span class="fa fa-star ${listRating[product.productId] >= 4 ? 'checked' : ''}"></span>
                                     <span class="fa fa-star ${listRating[product.productId] >= 5 ? 'checked' : ''}"></span>
-                                    /* <span class="da-ban">  Đã bán ${listQuantity[product.productId]}</span>*/
+                                    <span class="da-ban">  Đã bán ${0}</span>
                                 </div>
                                 <div class="desc-address" style="color: #000000A6;">
                                     <i style="color: rgb(0, 191, 165); font-size: 12px;" class="fas fa-truck"></i>

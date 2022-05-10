@@ -67,6 +67,7 @@ public class SearchController {
                                            @RequestParam("size") Optional<Integer> size) {
         int currentPage = page.orElse(req.getPage());
         int pageSize = size.orElse(12);
+        System.out.println(req);
         String ss = "DESC";
         if (req.getColumnName().equals("ascPrice")) {
             ss = "ASC";

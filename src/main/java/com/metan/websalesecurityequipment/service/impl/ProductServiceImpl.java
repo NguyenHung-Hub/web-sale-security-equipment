@@ -4,12 +4,16 @@ import com.metan.websalesecurityequipment.model.Product;
 import com.metan.websalesecurityequipment.model.request.ProductRequestPageable;
 import com.metan.websalesecurityequipment.repository.ProductRepository;
 import com.metan.websalesecurityequipment.service.ProductService;
+import org.aspectj.weaver.NewConstructorTypeMunger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,16 +76,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<Product> searchByNameCateBrand(ProductRequestPageable req,String name, Pageable pageable) {
+    public Page<Product> searchByNameCateBrand(ProductRequestPageable req, String name, Pageable pageable) {
 
         Page<Product> page = null;
         if (req.getBrandIds().size() == 0 && req.getCategoryIds().size() == 0 && req.getRating() == 0 && req.getMaxPrice() == 0 && req.getMinPrice() == 0) {
-            page = findByNameContaining(name,pageable);
+            page = findByNameContaining(name, pageable);
         } else {
             if (req.getRating() == 0) {
-                page = productRepository.searchByNameCateBrand(req.getCategoryIds(), req.getBrandIds(), req.getMinPrice(), req.getMaxPrice(),name, pageable);
+                page = productRepository.searchByNameCateBrand(req.getCategoryIds(), req.getBrandIds(), req.getMinPrice(), req.getMaxPrice(), name, pageable);
             } else {
-                page = productRepository.searchByNameCateBrandRating(req.getCategoryIds(), req.getBrandIds(), req.getRating(),req.getMinPrice(), req.getMaxPrice(),name, pageable);
+                page = productRepository.searchByNameCateBrandRating(req.getCategoryIds(), req.getBrandIds(), req.getRating(), req.getMinPrice(), req.getMaxPrice(), name, pageable);
             }
         }
         return page;
@@ -109,7 +113,23 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<Product> sortByOrderDetail(ProductRequestPageable req, String name, Pageable pageable) {
-        return productRepository.sortByOrderDetail(req.getCategoryIds(),req.getBrandIds(),req.getMinPrice(),req.getMaxPrice(),name,pageable);
+        Page<Object[]> o;
+        if (req.getRating() == 0) {
+            o = productRepository.sortByOrderDetail(req.getCategoryIds(), req.getBrandIds(), req.getMinPrice(), req.getMaxPrice(), name, pageable);
+        } else {
+           o = productRepository.sortByOrderDetailWhenHaveRating(req.getCategoryIds(), req.getBrandIds(),req.getRating(), req.getMinPrice(), req.getMaxPrice(), name, pageable);
+        }
+        System.out.println(productRepository.sortByOrderDetail(req.getCategoryIds(), req.getBrandIds(), req.getMinPrice(), req.getMaxPrice(), name, pageable).getContent().size());
+        ArrayList<Product> products = new ArrayList<>();
+
+        for (Object[] objects : o) {
+            Product product = (Product) objects[0];
+            Double sumQuan = (Double) objects[1];
+            products.add(product);
+            System.out.println(product.getProductId());
+        }
+
+        return new PageImpl<>(products, pageable, o.getTotalElements());
     }
 
 
