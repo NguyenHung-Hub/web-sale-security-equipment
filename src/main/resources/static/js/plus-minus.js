@@ -11,12 +11,19 @@ $(document).ready(function () {
 
     $(".delete").on("click", function (e) {
         e.preventDefault();
-        result = confirm("Bạn có muốn xóa sản phẩm này khỏi giỏ hàng ??");
+        result = confirm("Bạn có muốn xóa sản phẩm này khỏi giỏ hàng ??")
         result ? deleteProduct($(this)) : null;
+    })
+
+    $("#saveUser").on("click", function (e) {
+        e.preventDefault();
+        saveUser();
     })
 
     initClickCheckbox()
 })
+
+var origin   = window.location.origin;
 
 var select = $('.select:checkbox');
 var selectItem = [];
@@ -44,7 +51,7 @@ function increaseQuantity(link) {
 }
 
 function updateQuantity(productID, newQty) {
-    url = "http://localhost:8080/api/cart/update/" + productID + "/" + newQty;
+    var url = origin +"/api/cart/update/" + productID + "/" + newQty;
 
     $.ajax({
         type: "POST",
@@ -60,7 +67,7 @@ function updateQuantity(productID, newQty) {
 
 function deleteProduct(link) {
     var productID = link.attr("deleteId");
-    url = "http://localhost:8080/api/cart/delete/" + productID;
+    var url = origin +"/api/cart/delete/" + productID;
     console.log(productID);
     $.ajax({
         type: "POST",
@@ -70,6 +77,28 @@ function deleteProduct(link) {
         var discount = StringToMonney($("#discount").html());
         initTotal(discount);
     });
+}
+
+function saveUser(){
+    firstName = $('#firstName').val();
+    lastName = $('#lastName').val();
+    phoneNumber = $('#phoneNumber').val();
+    profile = $('#profile').val();
+    url = origin +"/api/cart/updateUser/" + firstName+"/"+lastName+"/"+phoneNumber+"/"+profile;
+    $.ajax({
+        type: "POST",
+        url: url
+    }).done(function (newUser){
+        if(newUser === 'ok'){
+            $('#nameReturnRest').html(firstName + " " + lastName)
+            $('#phomeReturnRest').html(phoneNumber)
+            $('#addressReturnRest').html("Địa chỉ: " + profile)
+        }
+        var discount = StringToMonney($("#discount").html());
+        initTotal(discount);
+    });
+
+    $('#exampleModal').modal('hide');
 }
 
 function initTotal(discount) {

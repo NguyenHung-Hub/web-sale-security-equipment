@@ -59,13 +59,13 @@ public class CartController {
     public String showCheckout(
             @RequestParam(value="selected") String selected,
             Model model) {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String myUserDetailName = ((MyUserDetails) principal).getUsername();
-
-        User user = userService.getUserByEmail(myUserDetailName);
-        Cart cart = user.getCart();
-//        User user = userRepository.findById(2L).get();
+//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        String myUserDetailName = ((MyUserDetails) principal).getUsername();
+//
+//        User user = userService.getUserByEmail(myUserDetailName);
 //        Cart cart = user.getCart();
+        User user = userRepository.findById(3L).get();
+        Cart cart = user.getCart();
         if(selected==""){
             return "redirect:/cart";
         }
@@ -89,10 +89,10 @@ public class CartController {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String myUserDetailName = ((MyUserDetails) principal).getUsername();
 
-        User user = userService.getUserByEmail(myUserDetailName);
-        Cart cart = user.getCart();
-//        User user = userRepository.findById(2L).get();
+//        User user = userService.getUserByEmail(myUserDetailName);
 //        Cart cart = user.getCart();
+        User user = userRepository.findById(3L).get();
+        Cart cart = user.getCart();
         Order order = new Order("test 1");
         List<OrderItem> orderItems =  new ArrayList<>();
 

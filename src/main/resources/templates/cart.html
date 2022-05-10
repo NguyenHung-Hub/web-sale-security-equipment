@@ -78,31 +78,33 @@
                 </div>
                 <div class="col-md-4 summary" th:with="ItemCard=${LIST_ITEMCART}">
                     <div class="row justify-content-between">
-                        <b style="margin-top: 5px;">Giao đến</b>
-                        <a><b style="margin-top: 5px;">Thay đổi</b></a>
+                        <b class="col">Giao đến</b>
+                        <a class="col" data-bs-toggle="modal" data-bs-target="#exampleModal"><b style="margin-top: 5px;">Thay đổi</b></a>
                     </div>
                     <div>
                         <div class="row mt-4">
-                            <span class="col name" style="border-right: 1px solid black;">[[${CUSTOMER.firstName}]] [[${CUSTOMER.lastName}]]</span>
-                            <span class="col phone">[[${CUSTOMER.phoneNumber}]]</span>
+                            <span class="col name" id="nameReturnRest" style="border-right: 1px solid black;">[[${CUSTOMER.getFullName}]]</span>
+                            <span class="col phone" id="phoneReturnRest">[[${CUSTOMER.phoneNumber}]]</span>
                         </div>
                         <div class="row">
-                            <p class="col address" style="margin: 5px 0; font-weight: 100;">
-                                [[${CUSTOMER.profile}]]
+                            <p class="col address" id="addressReturnRest" style="margin: 5px 0; font-weight: 100;">
+                                Địa chỉ: [[${CUSTOMER.profile}]]
                             </p>
                         </div>
 
                     </div>
                     <hr>
                     <div class="row">
-                        <div class="col" style="padding-left:0;">ITEMS [[${ItemCard.size()}]]</div>
+                        <div class="col" style="padding-left:0;">Tổng số Mặt hàng [[${ItemCard.size()}]]</div>
                         <div class="col text-right TotalPrice">&euro; 132.00</div>
                     </div>
                     <form>
-                        <p>SHIPPING</p> <select>
-                        <option class="text-muted">Standard-Delivery- &euro;5.00</option>
+                        <p>SHIPPING(Đang phát triển)</p> <select>
+                        <option class="text-muted">Tiêu chuẩn - 40.000Đ</option>
+                        <option class="text-muted">Giao nhanh - 100.000Đ</option>
+                        <option class="text-muted">Hỏa tốc - 200.000Đ</option>
                     </select>
-                        <p>GIVE CODE</p> <input class="input-cart" id="code" placeholder="Enter your code">
+                        <p>GIVE CODE(Đang phát triển)</p> <input class="input-cart" id="code" placeholder="Enter your code">
                     </form>
                     <div class="row">
                         <div class="col">Tạm tính</div>
@@ -145,9 +147,54 @@
         </div>
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" th:with="user=${CUSTOMER}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thông tin</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form th:action="@{/api/cart/updateUser}" th:object="${employee}" method="get">
+                <div class="modal-body">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" >Họ</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+                               id="firstName" th:value="${user.firstName}"
+                        >
+                        <span class="input-group-text" >Tên</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+                               id="lastName" th:value="${user.lastName}"
+                        >
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" >Số điện thoại</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                               aria-describedby="inputGroup-sizing-sm"
+                               id="phoneNumber" th:value="${user.phoneNumber}"
+                        >
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" >Địa chỉ</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                               aria-describedby="inputGroup-sizing-sm"
+                               id="profile" th:value="${user.profile}"
+                        >
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" id="saveUser">Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <div th:replace="fragments :: footer"></div>
 <script type='text/javascript'
         src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+
 <script th:src="@{/js/plus-minus.js}"></script>
 </body>
 
