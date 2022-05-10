@@ -23,7 +23,6 @@ public interface ProductService {
     //Hao
     List<Product> findByNameContaining(String name);
 
-    public Page<Product> searchByNameCateBrand(String name,Pageable pageable);
     public Page<Product> searchByNameCateBrand(ProductRequestPageable req,String name, Pageable pageable);
     Page<Product> findAll(Pageable pageable);
 
@@ -31,6 +30,6 @@ public interface ProductService {
 
     public Product findBySlug(String slug);
     public List<Product> findTopNumberRandom(int top);
-    public Page<Product> sortByOrderDetail(ProductRequestPageable req, String name, Pageable pageable);
+
 
 }

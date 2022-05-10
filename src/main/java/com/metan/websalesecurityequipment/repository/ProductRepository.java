@@ -5,7 +5,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,48 +27,42 @@ public interface ProductRepository extends JpaRepository<Product, String> {
     public List<Product> findTopNumberRandom(int top);
 
     public Product findBySlug(String slug);
-
     //Hao
     public List<Product> findByNameContaining(String name);
 
-    @Query(value = "select * from products p join brands b on p.brand_id = b.brand_id join categories c on c.category_id = p.category_id " +
-            "where concat(c.name, b.name) REGEXP ?1", nativeQuery = true)
-    public Page<Product> searchByNameCateBrand(String name,Pageable pageable);
-
     public Page<Product> findAll(Pageable pageable);
 
+    @Query(value = "select p.*, sum(order_items.quantity) as totalQuan from (order_items) right outer join (products p) on p.product_id =order_items.product_id " +
+            "  where p.name like %?1% " +
+            " group by p.product_id ", nativeQuery = true)
     public Page<Product> findByNameContaining(String name, Pageable pageable);
 
-    @Query("select p from Product p join p.brand b join p.category c " +
-            "where (b.brandId in ?2 " +
-            "OR c.category in ?1" +
-            " OR (p.price >=?3 and p.price<=?4)) and p.name like %?5% ")
+    @Query(value = "select p.*, sum(order_items.quantity) as totalQuan from (order_items) right outer join (products p) on p.product_id =order_items.product_id join product_reviews pr on pr.product_id=p.product_id\n" +
+            "            where pr.rating >= ?1\n" +
+            "            and (p.price >=?2 and p.price<=?3) and p.name like %?4%\n" +
+            " group by p.product_id ", nativeQuery = true)
+    public Page<Product> searchByNameRating(int rating ,double minPrice, double maxPrice,String name,Pageable pageable);
+
+    @Query(value = "select distinct(p.product_id), p.*, sum(order_items.quantity) as totalQuan from (order_items) right outer join (products p) on p.product_id =order_items.product_id join (categories c) \n" +
+            "on c.category_id = p.category_id join product_reviews pr on pr.product_id=p.product_id \n" +
+            " where (p.brand_id in (?2) \n" +
+            "            OR (c.subcategory_id in (?1) or c.category_id in ?1)) \n" +
+            "            and pr.rating >= ?3 " +
+            " and (p.price >=?4 and p.price<=?5) and p.name like %?6% " +
+            " group by p.product_id ", nativeQuery = true)
+    public Page<Product> searchByNameCateBrandRating(List<Integer> cates,List<Integer> brands, int rating,double minPrice, double maxPrice,String name,Pageable pageable);
+/*?3 <= (select avg(rating) from product_reviews r where r.product_id=p.product_id)*/
+    @Query(value = "select p.*, sum(order_items.quantity) as totalQuan from (order_items) right outer join (products p) on p.product_id =order_items.product_id join (categories c) \n" +
+            "on c.category_id = p.category_id \n" +
+            " where (p.brand_id in ?2 \n" +
+            "            OR( c.subcategory_id in ?1 or c.category_id in ?1)) \n" +
+            " and (p.price >=?3 and p.price<=?4) and p.name like %?5% " +
+            "group by p.product_id ", nativeQuery = true)
     public Page<Product> searchByNameCateBrand(List<Integer> cates,List<Integer> brands,double minPrice, double maxPrice,String name,Pageable pageable);
 
-    @Query("select distinct(p.productId),p  from Product p join p.brand b join p.category c " +
-            "join p.productReviews r " +
-            " where (b.brandId in ?2 " +
-            "            OR c.category in ?1 " +
-            "            or r.rating >= ?3 " +
-            " OR (p.price >=?4 and p.price<=?5)) and p.name like %?6% ")
-    public Page<Product> searchByNameCateBrandRating(List<Integer> cates,List<Integer> brands, int rating,double minPrice, double maxPrice,String name,Pageable pageable);
-    @Query("SELECT p, sum(o.quantity) as totalQuan FROM Product p left join p.orderItems o inner join p.brand b inner join p.category c " +
-            "where (b.brandId in ?2 " +
-            "OR c.category in ?1 " +
-            "OR (p.price >= ?3 and p.price <= ?4)) " +
-            "and p.name like %?5%" +
-            " group by p.productId order by  totalQuan" )
-    public Page<Object[]> sortByOrderDetail(List<Integer> cates,List<Integer> brands,double minPrice, double maxPrice,String name,Pageable pageable);
-
-    @Query("SELECT p, sum(o.quantity) as totalQuan FROM Product p left join p.orderItems o inner join p.brand b inner join p.category c join p.productReviews r" +
-            " where (b.brandId in ?2 " +
-            "OR c.category in ?1 " +
-            "or r.rating >= ?3 " +
-            "OR (p.price >= ?4 and p.price <= ?5)) " +
-            "and p.name like %?6%" +
-            " group by p.productId order by  totalQuan" )
-    public Page<Object[]> sortByOrderDetailWhenHaveRating(List<Integer> cates,List<Integer> brands,int rating, double minPrice, double maxPrice,String name,Pageable pageable);
-
-
+    @Query(value = "select products.*, sum(order_items.quantity) as totalQuan from (order_items) right outer join (products) on products.product_id =order_items.product_id \n" +
+            "where (products.price >=?1 and products.price<=?2) and products.name like %?3% " +
+            "group by products.product_id ", nativeQuery = true)
+    public Page<Product> searchByPrice(double minPrice, double maxPrice, String name, Pageable pageable);
 
 }

@@ -171,8 +171,8 @@
                     <ul id="sort">
                         <li value="name" class="btnss btn-ss  btn-select btn-ss-active" id="btnLienQuan"><a>Liên
                             Quan</a></li>
-                        <li value="createdAt" class="btnss btn-ss btn-select" id="btnMoiNhat"><a>Mới Nhất</a></li>
-                        <li value="BanChay" class="btnss btn-ss btn-select" id="btnBanChay"><a>Bán Chạy</a></li>
+                        <li value="created_at" class="btnss btn-ss btn-select" id="btnMoiNhat"><a>Mới Nhất</a></li>
+                        <li value="totalQuan" class="btnss btn-ss btn-select" id="btnBanChay"><a>Bán Chạy</a></li>
                         <li class="btn-select" id="btnGia"><a>Giá <span class="btn-select-price"><i
                                 class="fas fa-chevron-down"></i></span></a>
                             <ul>
@@ -228,15 +228,7 @@
                                           th:classappend="${listRating.get(product.productId)>=4}? checked"></span>
                                     <span class="fa fa-star"
                                           th:classappend="${listRating.get(product.productId)>=5}? checked"></span>
-                                    <th:block th:width="totalQuan=${0}" th:each="orderItem,state:${product.orderItems}">
-                                        <th:block th:width="totalQuan=${totalQuan+orderItem.quantity}" th:if="${state.last}">
-                                            <span class="da-ban" th:text="'  Đã bán '+${totalQuan}">Đã bán 216</span>
-                                        </th:block>
-
-                                    </th:block>
-                                    <th:block th:if="${product.orderItems.size()==0 || product.orderItems== null}">
-                                        <span class="da-ban" th:text="'  Đã bán '+${0}">Đã bán 216</span>
-                                    </th:block>
+                                        <span class="da-ban" th:text=" 'Đã bán '+ (${listQuan.get(product.productId)== null}?'0':${listQuan.get(product.productId)})">Đã bán 216</span>
 
 
                                 </div>
@@ -262,7 +254,7 @@
 
 </div>
 <th:block>
-    <div th:replace="fragments-demo :: footer"></div>
+
 </th:block>
 <th:block>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -277,7 +269,7 @@
         let totalPages = [[${productPage.getTotalPages()}]];
         let brandIds = [];
         let categoryIds = [];
-        let maxPrice = Number.MAX_SAFE_INTEGER;
+        let maxPrice = 999999999999;
         let minPrice = 0;
         let ratings = [];
         let rating = 0;
@@ -290,9 +282,7 @@
             } else {
                 $("#list-product").html("");
                 $('.error-null').css('display', 'flex');
-
             }
-
         })
         $(function () {
             pagination();
@@ -366,21 +356,30 @@
                 if (isNaN(minPrice) && isNaN(maxPrice)) {
                     $('#errorMessagePrice').html('Khoảng giá không hợp lệ');
                     window.location.href = '#errorMessagePrice';
+                    minPrice=0;
+                    maxPrice=999999999999;
 
                 } else if (minPrice > maxPrice) {
                     $('#errorMessagePrice').html('Khoảng giá không hợp lệ');
                     window.location.href = '#errorMessagePrice';
+                    minPrice=0;
+                    maxPrice=999999999999;
 
                 } else if (minPrice > 999999999999 || maxPrice > 999999999999) {
                     $('#errorMessagePrice').html('Khoảng giá quá lớn');
                     window.location.href = '#errorMessagePrice';
+                    minPrice=0;
+                    maxPrice=999999999999;
 
                 } else {
                     console.log("minPrice: " + minPrice)
                     console.log("maxPrice: " + maxPrice)
                     currentPage = 1;
                     getProducts();
+                    $('#errorMessagePrice').html('');
+                    window.location.href = '#';
                 }
+
             })
             $('.btn-select').click(function () {
 
@@ -426,6 +425,7 @@
         }
 
         let listRating = [[${listRating}]];
+        let listQuantity = [[${listQuan}]];
         console.log(listRating);
 
         function createData(products) {
@@ -462,7 +462,7 @@
                                     <span class="fa fa-star ${listRating[product.productId] >= 3 ? 'checked' : ''}"></span>
                                     <span class="fa fa-star ${listRating[product.productId] >= 4 ? 'checked' : ''}"></span>
                                     <span class="fa fa-star ${listRating[product.productId] >= 5 ? 'checked' : ''}"></span>
-                                    <span class="da-ban">  Đã bán ${0}</span>
+                                    <span class="da-ban"> Đã bán ${listQuantity[product.productId]?listQuantity[product.productId]:'0'}</span>
                                 </div>
                                 <div class="desc-address" style="color: #000000A6;">
                                     <i style="color: rgb(0, 191, 165); font-size: 12px;" class="fas fa-truck"></i>
