@@ -52,13 +52,7 @@ public interface ProductRepository extends JpaRepository<Product, String> {
             "            OR c.category in ?1 " +
             "            or r.rating >= ?3 " +
             " OR (p.price >=?4 and p.price<=?5)) and p.name like %?6% ")
-    public Page<Product> searchByNameCateBrandRating(List<Integer> cates,List<Integer> brands, float rating,double minPrice, double maxPrice,String name,Pageable pageable);
-//, sum(oi.quantity) as totalQuan
-   /* @Query(value = "       select products,SUM(order_items.quantity) as totalQuan from order_items RIGHT JOIN  products on order_items.product_id=products.product_id  join brands on products.brand_id= brands.brand_id join categories on categories.category_id = products.category_id\n" +
-            "            where (brands.brand_id in (null)  " +
-            "            OR categories.subcategory_id in (null) " +
-            "            OR (products.price >=0 and products.price<=99999999999999)) and products.name like '% %' " +
-            "            group by products.product_id order by totalQuan desc", nativeQuery = true)*/
+    public Page<Product> searchByNameCateBrandRating(List<Integer> cates,List<Integer> brands, int rating,double minPrice, double maxPrice,String name,Pageable pageable);
     @Query("SELECT p, sum(o.quantity) as totalQuan FROM Product p left join p.orderItems o inner join p.brand b inner join p.category c " +
             "where (b.brandId in ?2 " +
             "OR c.category in ?1 " +
