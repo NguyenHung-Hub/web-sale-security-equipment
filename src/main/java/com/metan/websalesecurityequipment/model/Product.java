@@ -50,9 +50,6 @@ class Product {
     private Brand brand;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     @JsonBackReference
-    private List<CartItem> cartItems;
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    @JsonBackReference
     private List<OrderItem> orderItems;
     @Column(nullable = false, unique = true)
     private String slug;

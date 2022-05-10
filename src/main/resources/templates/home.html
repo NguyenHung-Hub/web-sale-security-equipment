@@ -192,7 +192,7 @@
                     <div class="list-product">
                         <div th:each="productDiscount: ${discount.productDiscounts}" class="item-product">
                             <div class="item-product__box-img">
-                                <a href="">
+                                <a th:href="@{'/product/detail/'+${productDiscount.product.slug}}">
                                     <img src="" th:src="${productDiscount.product.thumbnail}" th:alt="${productDiscount.product.name}" alt="">
                                 </a>
                             </div>
@@ -200,7 +200,7 @@
                                 <p th:text="${'Giảm ' + #numbers.formatPercent(productDiscount.discountPercent, 1, 0)}"></p>
                             </div>
                             <div class="item-product__box-name">
-                                <a href="#">
+                                <a th:href="@{'/product/detail/'+${productDiscount.product.slug}}">
                                     <p th:text="${productDiscount.product.title}"></p>
                                 </a>
                             </div>
@@ -226,7 +226,7 @@
                     <div class="list-product">
                         <div th:each="product: ${NEW_PRODUCT_LIST}" class="item-product">
                             <div class="item-product__box-img">
-                                <a href="">
+                                <a th:href="@{'/product/detail/'+${product.slug}}">
                                     <img src="" th:src="${product.thumbnail}" th:alt="${product.name}" alt="">
                                 </a>
                             </div>
@@ -234,7 +234,7 @@
                                 <p th:text="${'Giảm ' + #numbers.formatPercent((product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent), 1, 0)}"></p>
                             </div>
                             <div class="item-product__box-name">
-                                <a href="#">
+                                <a th:href="@{'/product/detail/'+${product.slug}}">
                                     <p th:text="${product.title}"></p>
                                 </a>
                             </div>
@@ -260,7 +260,7 @@
                     <div class="list-product">
                         <div th:each="product: ${PRODUCT_LIST}" class="item-product">
                             <div class="item-product__box-img">
-                                <a href="">
+                                <a th:href="@{'/product/detail/'+${product.slug}}">
                                     <img src="" th:src="${product.thumbnail}" th:alt="${product.name}" alt="">
                                 </a>
                             </div>
@@ -268,7 +268,7 @@
                                 <p th:text="${'Giảm ' + #numbers.formatPercent((product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent), 1, 0)}"></p>
                             </div>
                             <div class="item-product__box-name">
-                                <a href="#">
+                                <a th:href="@{'/product/detail/'+${product.slug}}">
                                     <p th:text="${product.title}"></p>
                                 </a>
                             </div>

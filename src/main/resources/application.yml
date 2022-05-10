@@ -13,7 +13,7 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL55Dialect
+        dialect: org.hibernate.dialect.MySQLDialect
         format_sql: false
     show-sql: true
   security:
@@ -58,3 +58,4 @@ s3:
 #  access.key.secret=XhWq23UJnVC1I7PxWco01q9DwRcuAOyPxABSocAU
 #  s3.region.name=us-east-1
 #  s3.bucket.name=chinh1506
+

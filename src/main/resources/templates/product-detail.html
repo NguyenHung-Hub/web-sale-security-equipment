@@ -2,30 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.thymeleaf.org ">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chi tiết sản phẩm</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" th:href="@{/css/detail.css}">
-
-    <link rel="stylesheet" th:href="@{/css/base.css}">
-    <link rel="stylesheet" th:href="@{/css/header.css}">
-    <link rel="stylesheet" th:href="@{/css/home.css}">
-    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <th:block th:replace="fragments :: base (title=${product.title})"/>
+    <th:block th:replace="fragments :: product-detail" />
 </head>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-<script th:src="@{/js/detail.js}"></script>
-
 <body>
-<div th:replace="fragments :: header"></div>
-<div class="container w-75 mt-5">
+<header th:replace="fragments :: header"></header>
+<div class="container w-75 mt-5 mb-5">
 
     <!-- ảnh và thông tin cơ bản -->
     <div id="Detail" class="row">
@@ -39,17 +22,17 @@
                 </ol>
                 <div class="carousel-inner scale">
 
-                    <div class="carousel-item active">
+                    <div class="carousel-item active w-75">
                         <img th:src="${product.thumbnail}"
                              class="img-fluid position-relative " alt="Los Angeles" style="width:100%;">
                     </div>
 
-                    <div class="carousel-item ">
+                    <div class="carousel-item w-75">
                         <img th:src="${product.thumbnail}"
                              class="img-fluid  position-relative " alt="Chicago" style="width:100%;">
                     </div>
 
-                    <div class="carousel-item ">
+                    <div class="carousel-item w-75">
                         <img th:src="${product.thumbnail}"
                              class="img-fluid position-relative" alt="New York" style="width:100%;">
 
@@ -71,12 +54,13 @@
 
             <div>
                 <h2>[[${product.name}]]</h2>
-                <div>
+                <div class="font-14">
                     <span class="text-dark"><del
-                            th:text="${#numbers.formatDecimal(discount, 1,'DEFAULT',0, 'DEFAULT')}+ đ"></del></span>
+                            th:text="${#numbers.formatDecimal(product.price, 1,'DEFAULT',0, 'DEFAULT')}+ đ"></del></span>
                     <span class="text-danger ml-1"
-                          th:text="${#numbers.formatDecimal(product.price, 1,'DEFAULT',0, 'DEFAULT')}+ đ">2.199.000 đ</span>
-                    <span class="bg-warning ml-1">Giảm [[${#numbers.formatDecimal(product.productDiscount.discountPercent*100, 1,'DEFAULT',0, 'DEFAULT')}]]%</span>
+                          th:text="${#numbers.formatDecimal(product.price - (product.price * (product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent)),3,'POINT',0,'POINT') + '&nbsp;₫'}"
+                    >2.199.000 đ</span>
+                    <span class="bg-warning ml-1" th:text="${'Giảm ' + #numbers.formatPercent((product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent), 1, 0)}"></span>
                 </div>
                 <div>
                     <span class="fa fa-star" th:classappend="${rating>=0} ? 'checked-rating'"></span>
@@ -86,10 +70,10 @@
                     <span class="fa fa-star" th:classappend="${rating>=5} ? 'checked-rating'"></span>
                     <span th:text="'(' +${product.productReviews.size()}+ ' đánh giá)'"></span>
                 </div>
-                <div class="mt-5">
+                <div class="mt-5 font-14">
                     <p>[[${product.shortDesc}]]</p>
                 </div>
-                <div class="row">
+                <div class="row" style="margin-left: 0px">
                     <div class="group-add">
                         <button id="btnSub" onclick="sub()" class="w-50px">-</button>
                         <input id="txtQuantity" type="text" value="1" class="w-50px focus-input text-center">
@@ -97,68 +81,78 @@
                     </div>
                     <div class="ml-2">
 
-                        <button id="btnCart" type="button" class="btn btn-dark btn-cart mb-0">THÊM VÀO GIỎ HÀNG</button>
+                        <button id="btnCart" type="button" class="btn btn-dark btn-cart mb-0 font-14">THÊM VÀO GIỎ
+                            HÀNG
+                        </button>
                     </div>
                     <div class="ml-2 ">
                         <a id="btnTym" type="button" class="btn btn-dark btn-cart"><span class="fa fa-heart tym"></span></a>
                     </div>
                 </div>
-                <div class="mt-5">
-                    <p>Loại: </p>
-                    <p>Từ khóa liên quan: </p>
+                <div class="mt-5 font-14">
+                    <p>Loại: [[${product.category==null}?'':${product.category.name}]]</p>
+                    <p>Từ khóa liên quan:
+                        <th:block th:each="lq,state:${#strings.arraySplit(product.name,' ')}">
+                            [[${lq}]][[${state.last}?'':', ']]
+                        </th:block>
+                    </p>
                 </div>
             </div>
         </div>
     </div>
     <!-- mô tả chi tiết, đánh giá , thông tin thêm-->
     <div class="mt-5">
-        <ul id="tabs" class="nav nav-tabs" role="tablist">
-            <li class="nav-item"><a data-toggle="tab" href="#ChiTiet" class="nav-link active text-dark">Chi tiết sản
-                phẩm</a></li>
-            <li class="nav-item"><a data-toggle="tab" href="#ThemThongTin" class="nav-link text-dark">Thông tin thêm</a>
-            </li>
-            <li class="nav-item"><a data-toggle="tab" href="#DanhGia" class="nav-link text-dark">Đánh giá</a></li>
+        <ul id="tabs" class="nav nav-tabs tabs" role="tablist">
+            <li class="nav-item"><a data-toggle="tab" id="information" href="#ChiTiet"
+                                    class="tabs nav-link active text-dark font-16">Chi tiết sản phẩm</a></li>
+            <li class="nav-item"><a data-toggle="tab" id="btnTabDes" href="#ThemThongTin"
+                                    class="tabs nav-link text-dark font-16">Thông tin thêm</a></li>
+            <li class="nav-item"><a data-toggle="tab" href="#DanhGia" class="tabs nav-link text-dark font-16">Đánh
+                giá</a></li>
         </ul>
+        <!--<script th:inline="javascript">
+            let longDecs=[[${product.longDesc}]];
+            function checkDesHeight(){
+                $('#long-desc').text(longDecs);
+                if($('#long-desc').height()>=150){
+                    $('#btnDes').show();
+                }
+                else {
+                    $('#btnDes').hide();
+                }
+                console.log('chiều cao là: '+$('#long-desc').height());
+            }
+            $(function (){
+
+                $('#btnTabDes').click(function (){
+                    checkDesHeight();
+                });
+            })
+
+        </script>-->
         <div class="tab-content mt-5">
             <div id="ChiTiet" class="container tab-pane active">
-                <h3 class="bg-light p-2">THÔNG TIN CHI TIẾT</h3>
-                <table class="table table-light">
+                <h3 class="bg-light p-2" style="margin-right: 30px">THÔNG TIN CHI TIẾT</h3>
+                <table class="table table-light font-14" style="padding-left: 30px; padding-right: 30px">
                     <thead>
                     <th>Tên thuộc tính</th>
                     <th>Thông tin</th>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="mau-ten-thong-tin">Tên sản phẩm</td>
-                        <td class="mau-thong-tin">Camera an ninh siêu cấp vippro
-                        </th>
-                    </tr>
-                    <tr>
-                        <td class="mau-ten-thong-tin">Dộ phân giải camera chính</td>
-                        <td class="mau-thong-tin">48 pixel
-                        </th>
-                    </tr>
-                    <tr>
-                        <td class="mau-ten-thong-tin">Bộ nhớ</td>
-                        <td class="mau-thong-tin">1 TB
-                        </th>
-                    </tr>
-                    <tr>
-                        <td class="mau-ten-thong-tin">Năm sản xuất</td>
-                        <td class="mau-thong-tin">2022
-                        </th>
-                    </tr>
-                    <tr>
-                        <td class="mau-ten-thong-tin">Nhà sản xuất</td>
-                        <td class="mau-thong-tin">Samsung
-                        </th>
-                    </tr>
+                    <th:block th:each="attribute:${product.getProductAttributes()}">
+                        <tr>
+                            <td class="mau-ten-thong-tin">[[${attribute.attribute.name}]]</td>
+                            <td class="mau-thong-tin">[[${attribute.value}]]
+                            </th>
+                        </tr>
+                    </th:block>
                     </tbody>
                 </table>
             </div>
             <div id="ThemThongTin" class="container tab-pane fade">
-                <h3 class="bg-light p-2">MÔ TẢ SẢN PHẨM</h3>
-                <p class="mt-5" th:text="${product.longDesc}">
+                <h3 class="bg-light p-2" style="margin-right: 30px">MÔ TẢ SẢN PHẨM</h3>
+                <div class="mt-5 long-desc font-14" style="padding-left: 30px; padding-right: 30px" id="long-desc"
+                     th:text="${product.longDesc}">
                     Lưu ý: Nhiều trường hợp do dùng thẻ nhớ không chính hãng nên camera không nhận thẻ nhớ, trong trường
                     hợp đó shop không hỗ trợ lỗi đọc thẻ nhớ. Để được hỗ trợ tốt nhất hay mua kèm thẻ nhớ của shop.
                     Camera Wifi C6N sử dụng trong nhà: Tùy vào phân loại thẻ
@@ -193,52 +187,75 @@
                     phối chính hãng bởi nhà phân phối Anh Ngọc, Nhà An toàn, Lê Hoàng, ADNT có địa chỉ tại HN, HCM, Đà
                     Nẵng. Hãy liên hệ với shop để được
                     hướng dẫn bảo hành.
-                </p>
+                </div>
+                <button id="btnDes" type="button" class="btn btn-outline-danger collapsible">Xem thêm <i
+                        class="fas fa-angle-down"></i></button>
             </div>
             <!-- đánh giá -->
             <div id="DanhGia" class="container tab-pane fade">
-                <h2 class="bg-light p-2">ĐÁNH GIÁ SẢN PHẨM</h2>
-                <th:block th:if="${reviews.getTotalElements()<=0}">
-                    <div class="text-center mt-5">
-                        <img th:src="@{/image/no-review.png}" class="img-fluid">
-                        <p class="mt-3">Sản phẩm chưa có đánh giá</p>
-                    </div>
-                </th:block>
-                <th:block th:each="review:${reviews}">
-                    <div class="row mt-5 mb-3 border-bottom">
-                        <div class="col-2">
-                            <img src="assets/image/user.png" class="img-fluid w-75" alt="">
-                        </div>
-                        <div class="col-10">
-                            <div>
-                                <span class="fa fa-star" th:classappend="${review.rating>=1}? checked-rating"></span>
-                                <span class="fa fa-star" th:classappend="${review.rating>=2}? checked-rating"></span>
-                                <span class="fa fa-star" th:classappend="${review.rating>=3}? checked-rating"></span>
-                                <span class="fa fa-star" th:classappend="${review.rating>=4}? checked-rating"></span>
-                                <span class="fa fa-star" th:classappend="${review.rating>=5}? checked-rating"></span>
+                <h2 class="bg-light p-2" style="margin-right: 30px">ĐÁNH GIÁ SẢN PHẨM</h2>
+                <!--<<<<<<< HEAD-->
+                <!--                <th:block th:if="${reviews.getTotalElements()<=0}">-->
+                <!--                    <div class="text-center mt-5">-->
+                <!--                        <img th:src="@{/image/no-review.png}" class="img-fluid">-->
+                <!--                        <p class="mt-3">Sản phẩm chưa có đánh giá</p>-->
+                <!--                    </div>-->
+                <!--                </th:block>-->
+                <!--                <th:block th:each="review:${reviews}">-->
+                <!--                    <div class="row mt-5 mb-3 border-bottom">-->
+                <!--                        <div class="col-2">-->
+                <!--                            <img src="assets/image/user.png" class="img-fluid w-75" alt="">-->
+                <!--                        </div>-->
+                <!--                        <div class="col-10">-->
+                <!--                            <div>-->
+                <!--                                <span class="fa fa-star" th:classappend="${review.rating>=1}? 'checked-rating'"></span>-->
+                <!--                                <span class="fa fa-star" th:classappend="${review.rating>=2}? 'checked-rating'"></span>-->
+                <!--                                <span class="fa fa-star" th:classappend="${review.rating>=3}? 'checked-rating'"></span>-->
+                <!--                                <span class="fa fa-star" th:classappend="${review.rating>=4}? 'checked-rating'"></span>-->
+                <!--                                <span class="fa fa-star" th:classappend="${review.rating>=5}? 'checked-rating'"></span>-->
+                <!--=======-->
+
+                <div class="error-null text-center mt-5" style="padding-left: 30px; padding-right: 30px">
+                    <img th:src="@{/imgs/no-review.png}" class="img-fluid">
+                    <p class="mt-3 font-14">Sản phẩm chưa có đánh giá</p>
+                </div>
+
+                <div id="danh-sach-danh-gia" style="padding-left: 30px; padding-right: 30px">
+                    <th:block th:each="review:${reviews}">
+                        <div class="row mt-5 mb-3 border-bottom">
+                            <div class="col-2">
+                                <img src="" class="img-fluid w-75" alt="">
+                                <!--&gt;>>>>>> origin/main-->
                             </div>
-                            <div>
-                                <h3>[[${review.user.firstName+" "+ lastName}]]</h3>
-                                <span>[[${review.title}]]</span>
-                                <p>[[${review.content}]]</p>
+                            <div class="col-10">
+                                <div>
+                                    <span class="fa fa-star"
+                                          th:classappend="${review.rating>=1}? 'checked-rating'"></span>
+                                    <span class="fa fa-star"
+                                          th:classappend="${review.rating>=2}? 'checked-rating'"></span>
+                                    <span class="fa fa-star"
+                                          th:classappend="${review.rating>=3}? 'checked-rating'"></span>
+                                    <span class="fa fa-star"
+                                          th:classappend="${review.rating>=4}? 'checked-rating'"></span>
+                                    <span class="fa fa-star"
+                                          th:classappend="${review.rating>=5}? 'checked-rating'"></span>
+                                </div>
+                                <div class="font-14">
+                                    <h3>[[${review.user.firstName+" "+review.user.lastName}]]</h3>
+                                    <span>[[${review.title}]]</span>
+                                    <p>[[${review.content}]]</p>
+                                </div>
                             </div>
+                            <hr>
                         </div>
-                        <hr>
-                    </div>
-                </th:block>
-                <th:block th:if="${reviews.getTotalPages()>0}">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <th:block th:each="index: ${#numbers.sequence(0,reviews.getTotalPages()-1)}">
-                                <li class="page-item"><a id="btnPage" type="button" class="page-link"
-                                                         th:href="@{/product/detail#DanhGia(productId=${product.productId},page=${index})}">[[${index+1}]]</a>
-                                </li>
-                            </th:block>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul>
+                    </th:block>
+                </div>
+
+                <div class="paginationPage mt-5 mb-5" th:if="${reviews.totalPages >0}">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination" id="pagination"></ul>
                     </nav>
-                </th:block>
+                </div>
 
 
                 <!-- form đánh giá -->
@@ -260,70 +277,159 @@
                         <input th:field="*{rating}" type="radio" id="star1" name="rate" value="1"/>
                         <label for="star1" title="text"></label>
                     </div>
-                    <input th:field="*{title}" type="text" class="form-control mt-3" placeholder="Tiêu đề">
-                    <input type="email" class="form-control mt-3" placeholder="Email">
-                    <input type="tel" class="form-control mt-3" placeholder="Số điện thoại">
-                    <textarea th:field="*{content}" type="text" class="form-control mt-3"
+                    <input th:field="*{title}" type="text" class="form-control mt-3 font-14" placeholder="Tiêu đề">
+                    <input type="email" class="form-control mt-3 font-14" placeholder="Email">
+                    <input type="tel" class="form-control mt-3 font-14" placeholder="Số điện thoại">
+                    <textarea th:field="*{content}" type="text" class="form-control mt-3 font-14"
                               placeholder="Đánh giá chi tiết"></textarea>
-                    <input type="submit" class="btn btn-dark mt-3" value="Gửi">
+                    <input type="submit" class="btn btn-dark mt-3 font-14" value="Gửi">
                 </form>
             </div>
         </div>
 
     </div>
-</div>
+    <!--    sanr phamr lien quan-->
+    <div class="mt-5">
+        <h3 class="text-center bg-light p-2">CÓ THỂ BẠN QUAN TÂM</h3>
+        <div class="row mt-5">
+            <th:block th:each="elm:${rand4Product}">
+                <a class="col-3" th:href="@{'/product/detail/'+${elm.slug}}">
+                    <div class="border text-center text-dark translate position-relative font-14">
+                        <span class="position-absolute discount bg-warning text-danger">Giảm<br
+                                th:text="${#numbers.formatPercent((product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent), 1, 0)}"></span>
+                        <img th:src="${elm.thumbnail}"
+                             class="img-fluid" style="height: 200px"
+                             alt="">
+                        <p class="mt-3 ba-cham">[[${elm.name}]]</p>
+                        <p class="text-danger">[[${#numbers.formatDecimal(elm.price,1,'DEFAULT',0,'DEFAULT')}]] đ</p>
+                        <!-- <div>
+                             <span class="fa fa-star" th:classappend="${elm.productReviews.rating>=1}? 'checked-rating'"></span>
+                             <span class="fa fa-star" th:classappend="${elm.productReviews.rating>=2}? 'checked-rating'"></span>
+                             <span class="fa fa-star" th:classappend="${elm.productReviews.rating>=3}? 'checked-rating'"></span>
+                             <span class="fa fa-star" th:classappend="${elm.productReviews.rating>=4}? 'checked-rating'"></span>
+                             <span class="fa fa-star" th:classappend="${elm.productReviews.rating>=5}? 'checked-rating'"></span>
+                         </div>-->
+                    </div>
+                </a>
+            </th:block>
 
-<!-- sản phẩm liên quan -->
-
-<div class="mt-5">
-    <h3 class="text-center bg-light p-2">CÓ THỂ BẠN QUAN TÂM</h3>
-    <div class="row mt-5">
-        <a class="col-3" href="">
-            <div class="border text-center text-dark translate position-relative">
-                <span class="position-absolute discount bg-warning text-danger">Giảm<br>50%</span>
-                <img src="https://i1.wp.com/idoltv-website.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2018/11/18111042/IDOLTV-hinh-nen-pokemon-full-hd-661561.jpg?fit=1920%2C1080&ssl=1"
-                     class="img-fluid"
-                     alt="">
-                <p class="mt-3 ba-cham">Tên sản phẩm là siêu cấp vip pro heheheheeheheheheh</p>
-                <p>1.299.000 đ</p>
-            </div>
-        </a>
-        <a class="col-3" href="">
-            <div class="border text-center text-dark translate position-relative">
-                <span class="position-absolute discount bg-warning text-danger">Giảm<br>50%</span>
-                <img src="https://i1.wp.com/idoltv-website.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2018/11/18111042/IDOLTV-hinh-nen-pokemon-full-hd-661561.jpg?fit=1920%2C1080&ssl=1"
-                     class="img-fluid"
-                     alt="">
-                <p class="mt-3 ba-cham">Tên sản phẩm là siêu cấp vip pro heheheheeheheheheh</p>
-                <p>1.299.000 đ</p>
-            </div>
-        </a>
-        <a class="col-3" href="">
-            <div class="border text-center text-dark translate position-relative">
-                <span class="position-absolute discount bg-warning text-danger">Giảm<br>50%</span>
-                <img src="https://i1.wp.com/idoltv-website.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2018/11/18111042/IDOLTV-hinh-nen-pokemon-full-hd-661561.jpg?fit=1920%2C1080&ssl=1"
-                     class="img-fluid"
-                     alt="">
-                <p class="mt-3 ba-cham">Tên sản phẩm là siêu cấp vip pro heheheheeheheheheh</p>
-                <p>1.299.000 đ</p>
-            </div>
-        </a>
-        <a class="col-3" href="">
-            <div class="border text-center text-dark translate position-relative">
-                <span class="position-absolute discount bg-warning text-danger">Giảm<br>50%</span>
-                <img src="data:image/jpeg;base64,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"
-                     class="img-fluid"
-                     alt="">
-                <p class="mt-3 ba-cham">Tên sản phẩm là siêu cấp vip pro heheheheeheheheheh</p>
-                <p>1.299.000 đ</p>
-            </div>
-        </a>
-
+        </div>
     </div>
 </div>
 
-<div th:replace="fragments :: footer"></div>
 
+<!-- sản phẩm liên quan -->
+
+
+<div th:replace="fragments :: footer"></div>
+<th:block th:replace="fragments :: base-js" />
+<th:block th:replace="fragments :: product-detail-js" />
+<th:block>
+    <script th:inline="javascript">
+        let productId = [[${product.productId}]];
+        let totalPages = [[${reviews.getTotalPages()}]];
+        let currentPage = [[${reviews.getPageable().getPageNumber()}]];
+
+        $(function () {
+            if ([[${reviews.hasContent}]] == true) {
+                $('.error-null').css('display', 'none');
+            } else {
+                $('.error-null').css('display', 'flex');
+            }
+        })
+        $(function () {
+            pagination();
+            console.log('myproduct:' + totalPages, productId)
+        });
+
+        function pagination() {
+            if (totalPages >= 0) {
+                $('#pagination').show();
+                $('#pagination').pagination({
+                    pages: totalPages,
+                    currentPage: currentPage,
+                    cssStyle: '',
+                    prevText: '<span class="active-link" aria-hidden="true">&laquo;</span>',
+                    nextText: '<span class="active-link" aria-hidden="true">&raquo;</span>',
+                    onInit: function () {
+
+                    },
+                    onPageClick: function (page, evt) {
+                        currentPage = page;
+                        getReviews();
+                        $('body,html').animate({scrollTop: 0}, 800);
+                    }
+
+                });
+                $('#pagination .active .current').addClass('page-link');
+                $('#pagination .ellipse .clickable').addClass('page-link');
+                $('#pagination .disabled .current.prev').addClass('page-link');
+                $('#pagination .disabled .current.next').addClass('page-link');
+            } else {
+                $('#pagination').hide();
+            }
+        }
+
+        function getReviews() {
+            const req = {
+                productId: productId,
+                page: currentPage - 1
+            }
+            const myJSON = JSON.stringify(req);
+            $.ajax({
+                url: "/product/api/productReviews",
+                type: "POST",
+                data: myJSON,
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                success: function (reviews) {
+                    createData(reviews.content);
+                    currentPage = reviews.pageable.pageNumber + 1;
+                    totalPages = reviews.totalPages;
+                    console.log("Tong page hien tai khi nhan link page:" + totalPages);
+                    console.log("page hien tai khi nhan link page:" + currentPage);
+                    pagination();
+                    console.log(reviews.content);
+                }
+            })
+
+            function createData(reviews) {
+                let html = '';
+                if (reviews.length > 0) {
+                    for (review of reviews) {
+                        html += ` <div class="row mt-5 mb-3 border-bottom">
+                        <div class="col-2">
+                            <img src="" class="img-fluid w-75" alt="">
+                        </div>
+                        <div class="col-10">
+                            <div>
+                                <span class="fa fa-star ${(review.rating >= 1) ? 'checked-rating' : ''}"></span>
+                                <span class="fa fa-star ${(review.rating >= 2) ? 'checked-rating' : ''}"></span>
+                                <span class="fa fa-star ${(review.rating >= 3) ? 'checked-rating' : ''}"></span>
+                                <span class="fa fa-star ${(review.rating >= 4) ? 'checked-rating' : ''}"></span>
+                                <span class="fa fa-star ${(review.rating >= 5) ? 'checked-rating' : ''}"></span>
+                            </div>
+                            <div class="font-14">
+                                <h3>${review.user.firstName + " " + review.user.lastName}</h3>
+                                <span>${review.title}</span>
+                                <p>${review.content}</p>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>`;
+                    }
+                    $("#danh-sach-danh-gia").html("");
+                    $('.error-null').css('display', 'none');
+                    $("#danh-sach-danh-gia").html(html);
+                } else {
+                    $("#danh-sach-danh-gia").html("");
+                    $('.error-null').css('display', 'flex');
+                }
+            }
+        }
+
+    </script>
+</th:block>
 
 </body>
 
