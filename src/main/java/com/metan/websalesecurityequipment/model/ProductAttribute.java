@@ -17,9 +17,10 @@ public
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = {"product", "attribute"})
+
 class ProductAttribute {
     @Id
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     @JsonManagedReference
     private Product product;

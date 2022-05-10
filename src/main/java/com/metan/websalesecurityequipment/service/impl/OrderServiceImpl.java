@@ -8,11 +8,20 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class OrderServiceImpl implements OrderService {
+
+    private final OrderRepository orderRepository;
+
     @Autowired
-    private OrderRepository orderRepository;
+    public OrderServiceImpl(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
 
     @Override
     public void save(Order order) {
-        orderRepository.save(order);
+        orderRepository.save(order);}
+
+    @Override
+    public int getSumQuantity(String productId) {
+        return orderRepository.getSumQuantity(productId);
     }
 }

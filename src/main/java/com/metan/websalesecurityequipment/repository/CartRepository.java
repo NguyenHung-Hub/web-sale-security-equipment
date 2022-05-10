@@ -21,5 +21,8 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
     @Modifying(clearAutomatically = true)
     void updateQuantity(Integer quantity,String productId,Long cartId);
 
+    @Query(value = "select c from Cart c where c.user.userId = ?1")
+    Optional<Cart> findByUser(Long aLong);
+
 //    CartItem findByProductAndCart(String productId,Long cartId);
 }

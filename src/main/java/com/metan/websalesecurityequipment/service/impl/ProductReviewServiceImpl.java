@@ -24,7 +24,6 @@ public class ProductReviewServiceImpl implements ProductReviewService {
 
     @Override
     @Transactional
-    public Page<ProductReview> findByProductId(String productId, Pageable pageable) {
-        return reviewRepository.findByProductId(productId,pageable);
+    public Page<ProductReview> findByProductId(String productId, Pageable pageable) {return reviewRepository.findByProductId(productId,pageable);
     }
 }

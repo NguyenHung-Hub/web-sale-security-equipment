@@ -17,7 +17,6 @@ class CartItem {
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
-    @JsonManagedReference
     private Product product;
     @Id
     @ManyToOne

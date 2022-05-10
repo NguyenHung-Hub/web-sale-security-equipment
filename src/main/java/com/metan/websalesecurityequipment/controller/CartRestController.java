@@ -30,13 +30,12 @@ public class CartRestController {
             @PathVariable("profile") String profile
     )
     {
-//        System.out.println(productId + " " + quantity);
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        String myUserDetailName = ((MyUserDetails) principal).getUsername();
-//
-//        User user = userService.getUserByEmail(myUserDetailName);
-//        Cart cart = user.getCart();
-        User user = userRepository.findById(3L).get();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String myUserDetailName = ((MyUserDetails) principal).getUsername();
+
+        User user = userService.getUserByEmail(myUserDetailName);
+        Cart cart = cartService.findByUser(user.getUserId());
+//        User user = userRepository.findById(3L).get();
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setPhoneNumber(phoneNumber);
@@ -51,14 +50,14 @@ public class CartRestController {
     {
 //        User user = userRepository.findById(2L).get();
 //        Cart cart = user.getCart();
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        String myUserDetailName = ((MyUserDetails) principal).getUsername();
-//
-//        User user = userService.getUserByEmail(myUserDetailName);
-//        Cart cart = user.getCart();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String myUserDetailName = ((MyUserDetails) principal).getUsername();
 
-        User user = userRepository.findById(3L).get();
+        User user = userService.getUserByEmail(myUserDetailName);
         Cart cart = user.getCart();
+
+//        User user = userRepository.findById(3L).get();
+//        Cart cart = user.getCart();
         cartService.deleteCardItem(new CartItemPK(productId, cart.getCartId()));
         return productId;
     };
@@ -68,14 +67,14 @@ public class CartRestController {
             @PathVariable("productId") String productId,
             @PathVariable("quantity") int quantity)
     {
-//        System.out.println(productId + " " + quantity);
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        String myUserDetailName = ((MyUserDetails) principal).getUsername();
-//
-//        User user = userService.getUserByEmail(myUserDetailName);
-//        Cart cart = user.getCart();
-        User user = userRepository.findById(3L).get();
+        System.out.println(productId + " " + quantity);
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String myUserDetailName = ((MyUserDetails) principal).getUsername();
+
+        User user = userService.getUserByEmail(myUserDetailName);
         Cart cart = user.getCart();
+//        User user = userRepository.findById(3L).get();
+//        Cart cart = user.getCart();
         double subtotal = cartService.updateQuantity(quantity,productId,cart.getCartId());
         return String.valueOf(subtotal);
     };

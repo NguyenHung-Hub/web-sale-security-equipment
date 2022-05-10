@@ -1,9 +1,6 @@
 package com.metan.websalesecurityequipment.service;
 
-import com.metan.websalesecurityequipment.model.Cart;
-import com.metan.websalesecurityequipment.model.CartItem;
-import com.metan.websalesecurityequipment.model.CartItemPK;
-import com.metan.websalesecurityequipment.model.Order;
+import com.metan.websalesecurityequipment.model.*;
 import org.springframework.stereotype.Service;
 
 
@@ -13,4 +10,7 @@ public interface CartService {
     CartItem findByProductAndCart(String productId, Long cartId);
 
     void deleteCardItem(CartItemPK pk);
+
+    Cart findByUser(Long id);
+    public void createCartNewUser(User user);
 }
