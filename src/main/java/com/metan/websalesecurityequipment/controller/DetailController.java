@@ -1,5 +1,6 @@
 package com.metan.websalesecurityequipment.controller;
 
+import com.metan.websalesecurityequipment.config.security.MyUserDetails;
 import com.metan.websalesecurityequipment.model.Product;
 import com.metan.websalesecurityequipment.model.ProductDiscount;
 import com.metan.websalesecurityequipment.model.ProductReview;
@@ -11,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -60,14 +63,28 @@ public class DetailController {
         }
         Pageable pageable = PageRequest.of(page, size, sortable);
 
+
+        ProductReview productReview = new ProductReview();
+        productReview.setProduct(product);
+
         //review
-        model.addAttribute("reviewProduct", new ProductReview());
+        model.addAttribute("reviewProduct",productReview);
         model.addAttribute("reviews", reviewService.findByProductId(productId, pageable));
         model.addAttribute("rating", (double) rating / ((productReviews.size() == 0) ? 1 : productReviews.size()));
         model.addAttribute("product", product);
         model.addAttribute("rand4Product", top4ProductsRand);
         return "product-detail";
 
+    }
+    @PostMapping(value = "/reviews")
+    public String addReview(@ModelAttribute("productReview") ProductReview productReview){
+        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();MyUserDetails userDetails= (MyUserDetails) authentication.getPrincipal();
+       Product product= productService.findProductById(productId);
+       productReview.setProduct(product);
+       productReview.setUser(userDetails.getUser());
+       ProductReview s = reviewService.save(productReview);
+
+       return "redirect:/product/detail/"+product.getSlug()+"?success="+!(s==null);
     }
 
     @PostMapping(value = "/api/productReviews")

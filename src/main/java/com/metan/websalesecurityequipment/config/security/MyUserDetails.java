@@ -55,4 +55,7 @@ public class MyUserDetails implements UserDetails {
     public String getFullName() {
         return user.getFullName();
     }
+    public User getUser(){
+        return this.user;
+    }
 }
