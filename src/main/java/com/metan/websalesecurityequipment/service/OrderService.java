@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service;
 
 
 public interface OrderService {
+    public Integer getSumQuantity(String productId);
     void save(Order order);
-    public int getSumQuantity(String productId);
 
+    void deleteOrder(Order order);
     String getLastId();
 }
 

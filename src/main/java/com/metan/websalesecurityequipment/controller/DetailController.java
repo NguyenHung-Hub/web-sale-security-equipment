@@ -1,9 +1,9 @@
 package com.metan.websalesecurityequipment.controller;
 
-import com.metan.websalesecurityequipment.model.Product;
-import com.metan.websalesecurityequipment.model.ProductDiscount;
-import com.metan.websalesecurityequipment.model.ProductReview;
+import com.metan.websalesecurityequipment.config.security.MyUserDetails;
+import com.metan.websalesecurityequipment.model.*;
 import com.metan.websalesecurityequipment.model.request.ProductReviewRequest;
+import com.metan.websalesecurityequipment.service.CartService;
 import com.metan.websalesecurityequipment.service.ProductReviewService;
 import com.metan.websalesecurityequipment.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +11,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -24,7 +28,8 @@ public class DetailController {
     private ProductService productService;
     @Autowired
     private ProductReviewService reviewService;
-
+    @Autowired
+    private CartService cartService;
     private String productId;
 
     @GetMapping(value = "/detail/{slug}")
@@ -60,14 +65,29 @@ public class DetailController {
         }
         Pageable pageable = PageRequest.of(page, size, sortable);
 
+
+        ProductReview productReview = new ProductReview();
+        productReview.setProduct(product);
+
         //review
-        model.addAttribute("reviewProduct", new ProductReview());
+        model.addAttribute("reviewProduct",productReview);
         model.addAttribute("reviews", reviewService.findByProductId(productId, pageable));
         model.addAttribute("rating", (double) rating / ((productReviews.size() == 0) ? 1 : productReviews.size()));
         model.addAttribute("product", product);
         model.addAttribute("rand4Product", top4ProductsRand);
         return "product-detail";
 
+    }
+    @PostMapping(value = "/reviews")
+    public String addReview(@ModelAttribute("productReview") ProductReview productReview){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+       Product product= productService.findProductById(productId);
+       productReview.setProduct(product);
+       productReview.setUser(userDetails.getUser());
+       ProductReview s = reviewService.save(productReview);
+
+       return "redirect:/product/detail/"+product.getSlug()+"?success="+!(s==null);
     }
 
     @PostMapping(value = "/api/productReviews")
@@ -77,5 +97,30 @@ public class DetailController {
         sortable = Sort.by("review_id").descending();
         Pageable pageable = PageRequest.of(req.getPage(), 5, sortable);
         return reviewService.findByProductId(productId, pageable);
+    }
+    @PostMapping(value = "/addToCart")
+    public String addToCart(@RequestParam("quantity") int quantity){Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+        MyUserDetails userDetails= (MyUserDetails) authentication.getPrincipal();
+        User user= userDetails.getUser();
+        Product product= productService.findProductById(productId);
+
+        Cart cart= user.getCart();
+        if(cart == null){
+            cartService.createCartNewUser(user);
+            cart= cartService.findByUser(user.getUserId());
+        }
+        List<CartItem> cartItems= cart.getCartItems();
+        CartItem cartItem= new CartItem();
+        cartItem.setCart(cart);
+        cartItem.setProduct(product);
+        cartItem.setQuantity(quantity);
+        cartItem.setCreatedAt(new Date());
+        cartItem.setModifiedAt(new Date());
+        cart.setTotal(10000D);
+        cartItems.add(cartItem);
+        cart.setCartItems(cartItems);
+
+        cart=cartService.saveOrUpdateCart(cart);
+        return "redirect:/cart";
     }
 }

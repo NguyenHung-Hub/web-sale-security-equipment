@@ -4,6 +4,7 @@ import com.metan.websalesecurityequipment.config.security.MyUserDetails;
 import com.metan.websalesecurityequipment.model.*;
 import com.metan.websalesecurityequipment.repository.UserRepository;
 import com.metan.websalesecurityequipment.service.CartService;
+import com.metan.websalesecurityequipment.service.OrderService;
 import com.metan.websalesecurityequipment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,6 +22,9 @@ public class CartRestController {
     private CartService cartService;
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private OrderService orderService;
     @Autowired
     private UserRepository userRepository;
 
@@ -62,6 +66,24 @@ public class CartRestController {
 //        Cart cart = user.getCart();
         cartService.deleteCardItem(new CartItemPK(productId, cart.getCartId()));
         return productId;
+    };
+
+    @PostMapping("/delete/order/{orderId}")
+    public String deleteOrder(
+            @PathVariable("orderId") String orderId)
+    {
+//        User user = userRepository.findById(2L).get();
+//        Cart cart = user.getCart();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String myUserDetailName = ((MyUserDetails) principal).getUsername();
+
+        User user = userService.getUserByEmail(myUserDetailName);
+
+//        User user = userRepository.findById(3L).get();
+//        Cart cart = user.getCart();
+//        orderService
+//        cartService.deleteCardItem(new CartItemPK(productId, cart.getCartId()));
+        return orderId;
     };
 
     @PostMapping("/update/{productId}/{quantity}")

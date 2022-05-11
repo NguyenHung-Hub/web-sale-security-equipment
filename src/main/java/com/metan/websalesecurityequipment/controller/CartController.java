@@ -111,6 +111,10 @@ public class CartController {
 
         model.addAttribute("CUSTOMER", user);
 
+        if(!type.equalsIgnoreCase("PROCESSING")){
+            model.addAttribute("type",null);
+        }
+
         if (NewOders.size() <= 0){
             model.addAttribute("LIST_ORDER",null);
         }else{

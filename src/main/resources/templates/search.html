@@ -224,15 +224,22 @@
                                           th:classappend="${listRating.get(product.productId)>=4}? checked"></span>
                                     <span class="fa fa-star"
                                           th:classappend="${listRating.get(product.productId)>=5}? checked"></span>
-<!--                                    <th:block th:width="totalQuan=${0}" th:each="orderItem,state:${product.orderItems}">-->
+
+                                    <!--<th:block th:width="totalQuan=${0}" th:each="orderItem,state:${product.orderItems}">
+                                        <th:block th:width="totalQuan=${totalQuan+orderItem.quantity}" th:if="${state.last}">
+                                            <span class="da-ban" th:text="'  Đã bán '+${totalQuan}">Đã bán 216</span>
+                                        </th:block>
+
+                                 <th:block th:width="totalQuan=${0}" th:each="orderItem,state:${product.orderItems}">-->
 <!--                                        <th:block th:width="totalQuan=${totalQuan+orderItem.quantity}" th:if="${state.last}">-->
 <!--                                            <span class="da-ban" th:text="'  Đã bán '+${totalQuan}">Đã bán 216</span>-->
 <!--                                        </th:block>-->
 
+
 <!--                                    </th:block>-->
                                     <th:block th:if="${product.orderItems.size()==0 || product.orderItems== null}">
                                         <span class="da-ban" th:text="'  Đã bán '+${0}">Đã bán 216</span>
-                                    </th:block>
+                                    </th:block>-->
 
 
                                 </div>

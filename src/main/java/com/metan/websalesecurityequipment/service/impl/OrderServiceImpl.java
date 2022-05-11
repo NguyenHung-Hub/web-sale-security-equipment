@@ -18,10 +18,16 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void save(Order order) {
-        orderRepository.save(order);}
+        orderRepository.save(order);
+    }
 
     @Override
-    public int getSumQuantity(String productId) {
+    public void deleteOrder(Order order) {
+        orderRepository.deleteById(order.getOrderId());
+    }
+
+    @Override
+    public Integer getSumQuantity(String productId) {
         return orderRepository.getSumQuantity(productId);
     }
 

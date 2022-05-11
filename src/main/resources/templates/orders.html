@@ -49,6 +49,8 @@
                     </div>
                     <div class="List-product" id="style-7">
                         <th:block th:each="Order :${LIST_ORDER}">
+                            <div class="row border-bottom" th:id="'rowOf'+${Order.orderId}">
+                            <button th:if="${type != null}" type="button" class="btn btn-danger delete" th:deleteId="${Order.orderId}">Hủy đơn</button>
                             <th:block th:each="ItemOrder :${Order.orderItems}">
                                 <div class="row border-bottom" th:id="'rowOf'+${ItemOrder.product.productId}">
                                     <div class="row main align-items-center">
@@ -83,7 +85,9 @@
                                     </div>
                                 </div>
                             </th:block>
+                            </div>
                         </th:block>
+
                     </div>
                     <div class="back-to-shop"><a th:href="@{/}">&leftarrow;</a><span
                             class="text-muted">Back to shop</span>
@@ -95,5 +99,7 @@
 </div>
 <footer th:replace="fragments :: footer"></footer>
 <th:block th:replace="fragments :: base-js"/>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script th:src="@{/js/order.js}"></script>
 </body>
 </html>

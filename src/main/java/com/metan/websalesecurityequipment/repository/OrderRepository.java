@@ -20,4 +20,7 @@ public interface OrderRepository extends JpaRepository<Order, String> {
     @Query(value = "select * from orders order by order_id desc limit 1", nativeQuery = true)
     public Order getLastId();
 
+    @Query(value = "update orders set order_status = \"CANCELLED\" where order_id =?1", nativeQuery = true)
+    public void deleteById(String id);
+
 }
