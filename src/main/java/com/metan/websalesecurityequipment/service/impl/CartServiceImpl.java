@@ -57,4 +57,9 @@ public class CartServiceImpl implements CartService {
         cart.setUser(user);
         cartRepository.save(cart);
     }
+
+    @Override
+    public Cart saveOrUpdateCart(Cart cart) {
+        return cartRepository.save(cart);
+    }
 }

@@ -24,7 +24,7 @@ class Cart {
     private Date createdAt;
     @Column(name = "modified_at", columnDefinition = "datetime")
     private Date modifiedAt;
-    @OneToMany(mappedBy = "cart")
+    @OneToMany(mappedBy = "cart" , fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonBackReference
     private List<CartItem> cartItems;
     @OneToOne

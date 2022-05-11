@@ -21,7 +21,7 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.save(order);}
 
     @Override
-    public int getSumQuantity(String productId) {
+    public Integer getSumQuantity(String productId) {
         return orderRepository.getSumQuantity(productId);
     }
 }

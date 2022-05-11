@@ -10,4 +10,6 @@ public interface ProductReviewService {
     //Chinh
     public List<ProductReview> findByProductId(String productId);
     public Page<ProductReview> findByProductId(String productId, Pageable pageable);
+
+    public ProductReview save(ProductReview productReview);
 }

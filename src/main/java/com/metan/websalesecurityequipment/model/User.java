@@ -1,8 +1,6 @@
 package com.metan.websalesecurityequipment.model;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,7 +9,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-public @Data
+public
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(of = "userId")
 class User implements Serializable {
     @Id
