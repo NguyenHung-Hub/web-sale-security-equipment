@@ -109,7 +109,8 @@ public class DetailController {
             cartService.createCartNewUser(user);
             cart= cartService.findByUser(user.getUserId());
         }
-        List<CartItem> cartItems= cart.getCartItems();
+//        List<CartItem> cartItems = cart.getCartItems();
+        List<CartItem> cartItems2 = new ArrayList<>();
         CartItem cartItem= new CartItem();
         cartItem.setCart(cart);
         cartItem.setProduct(product);
@@ -117,8 +118,8 @@ public class DetailController {
         cartItem.setCreatedAt(new Date());
         cartItem.setModifiedAt(new Date());
         cart.setTotal(10000D);
-        cartItems.add(cartItem);
-        cart.setCartItems(cartItems);
+        cartItems2.add(cartItem);
+        cart.setCartItems(cartItems2);
 
         cart=cartService.saveOrUpdateCart(cart);
         return "redirect:/cart";
