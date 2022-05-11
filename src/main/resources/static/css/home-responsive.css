@@ -75,7 +75,8 @@
         font-size: 1rem;
     }
 
-    .box-title a > h2 {
+    .box-title a > h2,
+    main.mt-home .block-hot-sale .block-hot-sale__box-title a {
         font-size: 1.8rem;
     }
 
@@ -122,7 +123,8 @@
         max-width: 955px;
     }
 
-    .box-title a > h2 {
+    .box-title a > h2,
+    main.mt-home .block-hot-sale .block-hot-sale__box-title a {
         font-size: 1.6rem;
     }
 

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-      xsi:schemaLocation="http://www.thymeleaf.org ">
+      xsi:schemaLocation="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <th:block th:replace="fragments :: base (title=${product.title})"/>
     <th:block th:replace="fragments :: product-detail"/>
@@ -76,17 +76,16 @@
                     <p>[[${product.shortDesc}]]</p>
                 </div>
                 <div class="row" style="margin-left: 0px">
-                    <form th:action="@{/product/addToCart}" method="post">
+                    <form class="form-inline" th:action="@{/product/addToCart}" method="post">
                         <div class="group-add">
-
-                            <button id="btnSub" onclick="sub()" class="w-50px">-</button>
-                            <input id="txtQuantity" type="text" name="quantity" value="1" class="w-50px focus-input text-center">
-                            <button id="btnAdd" onclick="add()" class="w-50px">+</button>
+                            <button id="btnSub" type="button" onclick="sub()" class="w-50px">-</button>
+                            <input id="txtQuantity" type="text" name="quantity" value="1"
+                                   class="w-50px focus-input text-center">
+                            <button id="btnAdd" type="button" onclick="add()" class="w-50px">+</button>
                         </div>
                         <div class="ml-2">
-
                             <button id="btnCart" type="submit"
-                               class="btn btn-dark btn-cart mb-0 font-14">THÊM VÀO GIỎ HÀNG
+                                    class="btn btn-dark btn-cart mb-0 font-14">THÊM VÀO GIỎ HÀNG
                             </button>
                         </div>
                     </form>
@@ -97,6 +96,7 @@
                 <div class="mt-5 font-14">
                     <p>Loại: [[${product.category==null}?'':${product.category.name}]]</p>
                     <p>Từ khóa liên quan:
+
                         <th:block th:each="lq,state:${#strings.arraySplit(product.name,' ')}">
                             [[${lq}]][[${state.last}?'':', ']]
                         </th:block>
@@ -109,10 +109,10 @@
     <div class="mt-5">
         <ul id="tabs" class="nav nav-tabs tabs" role="tablist">
             <li class="nav-item"><a data-toggle="tab" id="information" href="#ChiTiet"
-                                    class="tabs nav-link active text-dark font-16">Chi tiết sản phẩm</a></li>
+                                    class="tabs nav-link active text-dark font-16 p-3">Chi tiết sản phẩm</a></li>
             <li class="nav-item"><a data-toggle="tab" id="btnTabDes" href="#ThemThongTin"
-                                    class="tabs nav-link text-dark font-16">Thông tin thêm</a></li>
-            <li class="nav-item"><a data-toggle="tab" href="#DanhGia" class="tabs nav-link text-dark font-16">Đánh
+                                    class="tabs nav-link text-dark font-16 p-3">Thông tin thêm</a></li>
+            <li class="nav-item"><a data-toggle="tab" href="#DanhGia" class="tabs nav-link text-dark font-16 p-3">Đánh
                 giá</a></li>
         </ul>
         <!--<script th:inline="javascript">
@@ -286,12 +286,17 @@
                     <input type="submit" class="btn btn-dark mt-3 font-14" value="Gửi">
 
                 </form>
-                <script th:if="${param.success==true}">
-                    alert("Thêm thành công !!!");
-                </script>
-                <script th:if="${param.success==false}">
-                    alert("Đã xảy lỗi !!!");
-                </script>
+              <!--  <th:block th:if="${param}">
+                    <script>
+                        alert("Thêm thành công !!!");
+                    </script>
+                </th:block>
+                <th:block th:if="${param.success==false}">
+                    <script>
+                        alert("Đã xảy lỗi !!!");
+                    </script>
+                </th:block>-->
+
             </div>
         </div>
 

@@ -82,18 +82,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-//                .antMatchers("/").permitAll()
-                .antMatchers("/search").permitAll()
-                .antMatchers("/search/products").permitAll()
-                .antMatchers("/").permitAll()
-                .antMatchers("/message").permitAll()
-
-                .antMatchers("/account/**").permitAll()
-                .antMatchers("/oauth2/**").permitAll()
-                .antMatchers("/product/detail/**").permitAll()
+                .antMatchers("/cart/**").authenticated()
                 .antMatchers("/product/reviews").authenticated()
                 .antMatchers("/product/addToCart").authenticated()
-                .anyRequest().authenticated()
+                .antMatchers("/message").authenticated()
+                .anyRequest().permitAll()
                 .and()
                 .formLogin()
                     .loginPage("/account/login")
@@ -137,7 +130,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public PersistentTokenRepository persistentTokenRepository() {
         JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
         tokenRepository.setDataSource(dataSource);
-
         return tokenRepository;
     }
 
