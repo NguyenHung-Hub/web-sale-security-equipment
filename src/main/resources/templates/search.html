@@ -19,7 +19,7 @@
                         <div class="group-filter-content" th:each="category1:${categoriesFirst}">
                             <div class="group-filter-content-item">
                                <!-- /m${param.category==${category1.categoryId}}-->
-                                <input th:checked="${param.category == category1.categoryId}?true:false" th:id="${category1.categoryId}" class="check-category" type="checkbox" th:value="${category1.categoryId}">
+                                <input  th:id="${category1.categoryId}" class="check-category" type="checkbox" th:value="${category1.categoryId}">
                                 <label th:text="${category1.name}"></label>
                             </div>
                         </div>
@@ -279,16 +279,17 @@
             }
         })
         $(function () {
-            // let cateId=[[${param.category}]];
-            // if([[${param.category}]]){
-            //     $("#"+cateId).checked= confirm("Are you sure?");
-            // }
-            // if([[${param.category}]]){
-            //     let cateId = [[${param.category}]];
-            //     console.log( "cateId1: "+cateId);
-            //     categoryIds=categoryIds.push(cateId);
-            //     console.log("categoryIds1 : "+categoryIds);
-            // }
+            let cateId=[[${param.category}]];
+            if([[${param.category}]]){
+                $("#"+cateId).attr('checked', 'checked');
+                categoryIds = $(".check-category:checked").map(function () {
+                    return parseInt(cateId);
+                }).get();
+                currentPage = 1;
+                getProducts();
+                console.log("categoryIds: " + currentPage)
+            }
+
             pagination();
         });
 
