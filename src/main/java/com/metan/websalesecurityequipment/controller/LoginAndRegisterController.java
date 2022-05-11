@@ -34,6 +34,7 @@ public class LoginAndRegisterController {
         return "login-form";
     }
 
+
     @GetMapping("/register")
     public String showRegisterPage(Model model) {
         User user = new User();

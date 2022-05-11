@@ -86,11 +86,11 @@ public class AddProductController {
         float disPer=0;
 
 
-        Product product = new Product(p.getProductId(),p.getName(), p.getQuantity(),p.getPrice(),p.getShortDesc(),
-                p.getThumbnail(), p.getName(),category, null, disPer, brand,null,toSlug(p.getName()), p.getLongDesc(),
-                new Date(), null,null, null, null);
+//        Product product = new Product(p.getProductId(),p.getName(), p.getQuantity(),p.getPrice(),p.getShortDesc(),
+//                p.getThumbnail(), p.getName(),category, null, disPer, brand,null,toSlug(p.getName()), p.getLongDesc(),
+//                new Date(), null,null, null, null);
 
-        productService.saveProduct(product);
+//        productService.saveProduct(product);
         return "redirect:/add-product";
     }
 

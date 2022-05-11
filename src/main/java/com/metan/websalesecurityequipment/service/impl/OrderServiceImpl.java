@@ -28,9 +28,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Integer getSumQuantity(String productId) {
+        if (orderRepository.getSumQuantity(productId) == null) {
+            return 0;
+        }
         return orderRepository.getSumQuantity(productId);
     }
-
     @Override
     public String getLastId() {
         String id="";

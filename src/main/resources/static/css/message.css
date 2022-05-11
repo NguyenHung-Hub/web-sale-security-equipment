@@ -1,0 +1,45 @@
+body {
+    font-family: inherit;
+    font-size: 1.4rem;
+    line-height: 22px;
+}
+
+a {
+    text-decoration: none;
+}
+
+body img {
+    width: 100%;
+    height: auto;
+}
+
+body ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: sans-serif;
+    color: var(--text-color);
+}
+
+header.mt-header-form .mt-navbar {
+    height: 80px;
+}
+
+header.mt-header-form .mt-navbar .mt-navbar__box-main-wrapper .box-logo {
+    margin: 0 20px 0 0 !important;
+    float: left;
+}
+
+header.mt-header-form .mt-navbar .mt-navbar__box-main-wrapper .box-logo svg {
+    width: 230px;
+    height: 50px;
+}
+
+header.mt-header-form .mt-navbar .mt-navbar__box-main-wrapper .box-title h3 {
+    margin: 0;
+    font-size: 24px;
+}

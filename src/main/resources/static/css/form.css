@@ -1,21 +1,160 @@
 body {
-    background: linear-gradient(to right, #0062E6, #33AEFF);
+    font-family: inherit;
+    font-size: 1.4rem;
+    line-height: 22px;
+}
+
+a {
+    text-decoration: none;
+}
+
+body img {
+    width: 100%;
+    height: auto;
+}
+
+body ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: sans-serif;
+    color: var(--text-color);
+}
+
+header.mt-header-form .mt-navbar {
+    height: 80px;
+}
+
+header.mt-header-form .mt-navbar .mt-navbar__box-main-wrapper .box-logo {
+    margin: 0 20px 0 0 !important;
+    float: left;
+}
+
+header.mt-header-form .mt-navbar .mt-navbar__box-main-wrapper .box-logo svg {
+    width: 230px;
+    height: 50px;
+}
+
+header.mt-header-form .mt-navbar .mt-navbar__box-main-wrapper .box-title h3 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.main-form {
+    background: linear-gradient(to right, #D70018, #fa3c51);
+    padding: 50px 0;
+}
+@media (max-width: 991px) {
+    .main-form .card-test {
+        justify-content: center!important;
+    }
+}
+
+
+.main-form .form-card {
+    border-radius: 20px;
+}
+
+.main-form .form-card .card-title {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.main-form .form-card .form-control {
+    height: 50px;
+}
+
+.main-form .form-card .form-control:focus + label {
+    padding: 0.5rem;
+}
+
+.main-form .form-card .form-floating label {
+    padding: 1rem 0.75rem;
+}
+
+.main-form .form-card .form-floating a.show-pass {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    color: #666;
 }
 
 .btn-login {
-    font-size: 0.9rem;
+    font-size: 1.4rem;
     letter-spacing: 0.05rem;
     padding: 0.75rem 1rem;
 }
 
-.btn-google {
-    color: white !important;
-    background-color: #ea4335;
+.btn-authorization-wrapper {
+    flex: 1;
 }
 
-.btn-facebook {
-    color: white !important;
-    background-color: #3b5998;
+.btn-authorization .btn-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 1px;
+    flex-shrink: 0;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+
+.btn-authorization {
+    box-sizing: border-box;
+    outline: none;
+    border: 1px solid rgba(0,0,0,.26);
+    background-color: #fff;
+    color: rgba(0,0,0,.87);
+    border-radius: 2px;
+    width: 100%;
+    height: 40px;
+    font-size: 1.3rem;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: 0 8px 0 2px;
+    flex: 1;
+    margin: 0.3125rem;
+}
+
+.btn-authorization .btn-icon .social-white-fb {
+    width: 22px;
+    height: 22px;
+    background-image: url(../imgs/Facebook_22px.png);
+}
+
+.btn-authorization .btn-icon .social-white-g {
+    width: 22px;
+    height: 22px;
+    background-size: cover;
+    background-position: center;
+    background-image: url(../imgs/Google.png);
+}
+
+.background-wrapper {
+    height: 100%;
+
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.background-wrapper.background-login {
+    background-image: url(../imgs/clip-internet-security.png);
+}
+
+.background-wrapper.background-sign-up {
+    background-image: url(../imgs/clip-1062.png);
 }
 
 .hr-text {
@@ -30,26 +169,26 @@ body {
     opacity: 0.5;
 }
 
-.hr-text:not([size]) {
-    height: auto;
+.hr-text {
+    display: flex;
+    align-items: center;
+    padding-bottom: 0.875rem;
 }
 
-.hr-text:before {
-    content: "";
-    background: linear-gradient(to right, transparent, #818078, transparent);
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: 100%;
+.hr-text .hr {
     height: 1px;
+    width: 100%;
+    background-color: #dbdbdb;
+    flex: 1;
 }
 
-.hr-text:after {
-    content: attr(data-content);
-    position: relative;
-    display: inline-block;
-    padding: 0 0.5em;
-    line-height: 1.5em;
-    color: #818078;
-    background-color: #fcfcfa;
+.hr-text span {
+    color: #ccc;
+    padding: 0 1rem;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+}
+
+.group-form-row .form-floating:not(:last-child) {
+    margin-right: 0.6rem;
 }

@@ -9,6 +9,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "categories")
@@ -33,15 +34,14 @@ class Category {
     private Date modifiedAt;
     @Column(name = "thumbnail")
     private String thumbnail;
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category")
     @JsonBackReference
     private List<Product> products;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subcategory_id")
+    @JoinColumn(name = "parent_category_id")
     @JsonManagedReference
     private Category category;
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     @JsonBackReference
     private List<Category> categories;
-
 }
