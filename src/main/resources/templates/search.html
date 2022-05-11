@@ -224,6 +224,8 @@
                                           th:classappend="${listRating.get(product.productId)>=4}? checked"></span>
                                     <span class="fa fa-star"
                                           th:classappend="${listRating.get(product.productId)>=5}? checked"></span>
+
+
                                     <span class="da-ban"
                                           th:text=" 'Đã bán '+ (${listQuan.get(product.productId)== null}?'0':${listQuan.get(product.productId)})">Đã bán 216</span>
                                 </div>
