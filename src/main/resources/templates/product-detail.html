@@ -5,7 +5,7 @@
       xsi:schemaLocation="http://www.thymeleaf.org ">
 <head>
     <th:block th:replace="fragments :: base (title=${product.title})"/>
-    <th:block th:replace="fragments :: product-detail" />
+    <th:block th:replace="fragments :: product-detail"/>
 </head>
 <body>
 <header th:replace="fragments :: header"></header>
@@ -61,7 +61,8 @@
                     <span class="text-danger ml-1"
                           th:text="${#numbers.formatDecimal(product.price - (product.price * (product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent)),3,'POINT',0,'POINT') + '&nbsp;₫'}"
                     >2.199.000 đ</span>
-                    <span class="bg-warning ml-1" th:text="${'Giảm ' + #numbers.formatPercent((product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent), 1, 0)}"></span>
+                    <span class="bg-warning ml-1"
+                          th:text="${'Giảm ' + #numbers.formatPercent((product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent), 1, 0)}"></span>
                 </div>
                 <div>
                     <span class="fa fa-star" th:classappend="${rating>=0} ? 'checked-rating'"></span>
@@ -75,17 +76,20 @@
                     <p>[[${product.shortDesc}]]</p>
                 </div>
                 <div class="row" style="margin-left: 0px">
-                    <div class="group-add">
-                        <button id="btnSub" onclick="sub()" class="w-50px">-</button>
-                        <input id="txtQuantity" type="text" value="1" class="w-50px focus-input text-center">
-                        <button id="btnAdd" onclick="add()" class="w-50px">+</button>
-                    </div>
-                    <div class="ml-2">
+                    <form th:action="@{/product/addToCart}" method="post">
+                        <div class="group-add">
 
-                        <button id="btnCart" type="button" class="btn btn-dark btn-cart mb-0 font-14">THÊM VÀO GIỎ
-                            HÀNG
-                        </button>
-                    </div>
+                            <button id="btnSub" onclick="sub()" class="w-50px">-</button>
+                            <input id="txtQuantity" type="text" name="quantity" value="1" class="w-50px focus-input text-center">
+                            <button id="btnAdd" onclick="add()" class="w-50px">+</button>
+                        </div>
+                        <div class="ml-2">
+
+                            <button id="btnCart" type="submit"
+                               class="btn btn-dark btn-cart mb-0 font-14">THÊM VÀO GIỎ HÀNG
+                            </button>
+                        </div>
+                    </form>
                     <div class="ml-2 ">
                         <a id="btnTym" type="button" class="btn btn-dark btn-cart"><span class="fa fa-heart tym"></span></a>
                     </div>
@@ -213,7 +217,7 @@
                 <!--=======-->
 
                 <div id="no-review" class="no-review text-center mt-5" style="padding-left: 30px; padding-right: 30px;">
-                    <img th:src="@{/imgs/no-review.png}" class="img-fluid h-25 w-25" >
+                    <img th:src="@{/imgs/no-review.png}" class="img-fluid h-25 w-25">
                     <p class="mt-3 font-20 mau-ten-thong-tin">Sản phẩm chưa có đánh giá</p>
                 </div>
 
@@ -275,7 +279,8 @@
                         <label for="star1" title="text"></label>
                     </div>
 
-                    <input  th:field="*{title}" type="text" value="[[${product.title}]]" class="form-control mt-3 font-14" placeholder="Tiêu đề">
+                    <input th:field="*{title}" type="text" value="[[${product.title}]]"
+                           class="form-control mt-3 font-14" placeholder="Tiêu đề">
                     <textarea th:field="*{content}" type="text" class="form-control mt-3 font-14"
                               placeholder="Đánh giá chi tiết"></textarea>
                     <input type="submit" class="btn btn-dark mt-3 font-14" value="Gửi">
@@ -325,8 +330,8 @@
 
 
 <div th:replace="fragments :: footer"></div>
-<th:block th:replace="fragments :: base-js" />
-<th:block th:replace="fragments :: product-detail-js" />
+<th:block th:replace="fragments :: base-js"/>
+<th:block th:replace="fragments :: product-detail-js"/>
 <th:block>
     <script th:inline="javascript">
         let productId = [[${product.productId}]];

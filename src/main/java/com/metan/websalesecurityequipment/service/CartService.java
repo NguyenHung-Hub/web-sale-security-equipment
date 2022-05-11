@@ -13,4 +13,6 @@ public interface CartService {
 
     Cart findByUser(Long id);
     public void createCartNewUser(User user);
+
+    public Cart saveOrUpdateCart(Cart cart);
 }

@@ -1,10 +1,9 @@
 package com.metan.websalesecurityequipment.controller;
 
 import com.metan.websalesecurityequipment.config.security.MyUserDetails;
-import com.metan.websalesecurityequipment.model.Product;
-import com.metan.websalesecurityequipment.model.ProductDiscount;
-import com.metan.websalesecurityequipment.model.ProductReview;
+import com.metan.websalesecurityequipment.model.*;
 import com.metan.websalesecurityequipment.model.request.ProductReviewRequest;
+import com.metan.websalesecurityequipment.service.CartService;
 import com.metan.websalesecurityequipment.service.ProductReviewService;
 import com.metan.websalesecurityequipment.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -27,7 +28,8 @@ public class DetailController {
     private ProductService productService;
     @Autowired
     private ProductReviewService reviewService;
-
+    @Autowired
+    private CartService cartService;
     private String productId;
 
     @GetMapping(value = "/detail/{slug}")
@@ -78,7 +80,8 @@ public class DetailController {
     }
     @PostMapping(value = "/reviews")
     public String addReview(@ModelAttribute("productReview") ProductReview productReview){
-        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();MyUserDetails userDetails= (MyUserDetails) authentication.getPrincipal();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
        Product product= productService.findProductById(productId);
        productReview.setProduct(product);
        productReview.setUser(userDetails.getUser());
@@ -94,5 +97,31 @@ public class DetailController {
         sortable = Sort.by("review_id").descending();
         Pageable pageable = PageRequest.of(req.getPage(), 5, sortable);
         return reviewService.findByProductId(productId, pageable);
+    }
+    @PostMapping(value = "/addToCart")
+    public String addToCart(@RequestParam("quantity") int quantity){Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+        MyUserDetails userDetails= (MyUserDetails) authentication.getPrincipal();
+        User user= userDetails.getUser();
+        Product product= productService.findProductById(productId);
+
+        Cart cart= user.getCart();
+        if(cart == null){
+            cartService.createCartNewUser(user);
+            cart= cartService.findByUser(user.getUserId());
+        }
+        List<CartItem> cartItems= cart.getCartItems();
+        CartItem cartItem= new CartItem();
+        cartItem.setCart(cart);
+        cartItem.setProduct(product);
+        cartItem.setQuantity(quantity);
+        cartItem.setCreatedAt(new Date());
+        cartItem.setModifiedAt(new Date());
+        cart.setTotal(10000D);
+        cartItems.add(cartItem);
+        cart.setCartItems(cartItems);
+
+        System.out.println(cart);
+        cart=cartService.saveOrUpdateCart(cart);
+        return "redirect:/cart";
     }
 }
