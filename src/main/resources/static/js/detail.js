@@ -38,12 +38,6 @@ $(document).ready(function () {
 
         }
     });
-    /*$('#btnTabDes').mousedown(function (){
-
-    });
-    $('#btnTabDes').mouseup(function (){
-        checkDesHeight();
-    });*/
 });
 
 function checkDesHeight() {
@@ -55,24 +49,17 @@ function checkDesHeight() {
     console.log('chiều cao là: ' + $('#long-desc').height());
 }
 
-/*$('#tabs a').on('click', function (e) {
-    checkDesHeight();
-})*/
-/*$('a[href="#ThemThongTin"]').on('show.bs.tab',function (e) {
-    checkDesHeight();
-})*/
-
 $(function () {
-    /*$("#tabs a").on('click', function (e) {
-        e.preventDefault();
-        $(this).tab('show');
-    })*/
     $('a[data-toggle="tab"]').on('click', function (e) {
         console.log("da chay");
         switch (e.target.id) {
             case "btnTabDes": {
                 $('#ThemThongTin').show();//không, nhờ cái này
                 checkDesHeight();
+                break;
+            }
+            case "danh-gia": {
+                $('#ThemThongTin').hide();//không, nhờ cái này
                 break;
             }
         }

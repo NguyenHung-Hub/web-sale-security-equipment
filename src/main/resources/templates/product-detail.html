@@ -112,27 +112,10 @@
                                     class="tabs nav-link active text-dark font-16 p-3">Chi tiết sản phẩm</a></li>
             <li class="nav-item"><a data-toggle="tab" id="btnTabDes" href="#ThemThongTin"
                                     class="tabs nav-link text-dark font-16 p-3">Thông tin thêm</a></li>
-            <li class="nav-item"><a data-toggle="tab" href="#DanhGia" class="tabs nav-link text-dark font-16 p-3">Đánh
+            <li class="nav-item"><a id="danh-gia" data-toggle="tab" href="#DanhGia" class="tabs nav-link text-dark font-16 p-3">Đánh
                 giá</a></li>
         </ul>
-        <!--<script th:inline="javascript">
-            let longDecs=[[${product.longDesc}]];
-            function checkDesHeight(){
-                $('#long-desc').text(longDecs);
-                if($('#long-desc').height()>=150){
-                    $('#btnDes').show();
-                }
-                else {
-                    $('#btnDes').hide();
-                }
-                console.log('chiều cao là: '+$('#long-desc').height());
-            }
-            $(function (){
 
-                $('#btnTabDes').click(function (){
-                    checkDesHeight();
-                });
-            })
 
         </script>-->
         <div class="tab-content mt-5">
@@ -193,29 +176,8 @@
                         class="fas fa-angle-down"></i></button>
             </div>
             <!-- đánh giá -->
-            <div id="DanhGia" class="container tab-pane fade">
-                <h2 class="bg-light p-2" style="margin-right: 30px">ĐÁNH GIÁ SẢN PHẨM</h2>
-                <!--<<<<<<< HEAD-->
-                <!--                <th:block th:if="${reviews.getTotalElements()<=0}">-->
-                <!--                    <div class="text-center mt-5">-->
-                <!--                        <img th:src="@{/image/no-review.png}" class="img-fluid">-->
-                <!--                        <p class="mt-3">Sản phẩm chưa có đánh giá</p>-->
-                <!--                    </div>-->
-                <!--                </th:block>-->
-                <!--                <th:block th:each="review:${reviews}">-->
-                <!--                    <div class="row mt-5 mb-3 border-bottom">-->
-                <!--                        <div class="col-2">-->
-                <!--                            <img src="assets/image/user.png" class="img-fluid w-75" alt="">-->
-                <!--                        </div>-->
-                <!--                        <div class="col-10">-->
-                <!--                            <div>-->
-                <!--                                <span class="fa fa-star" th:classappend="${review.rating>=1}? 'checked-rating'"></span>-->
-                <!--                                <span class="fa fa-star" th:classappend="${review.rating>=2}? 'checked-rating'"></span>-->
-                <!--                                <span class="fa fa-star" th:classappend="${review.rating>=3}? 'checked-rating'"></span>-->
-                <!--                                <span class="fa fa-star" th:classappend="${review.rating>=4}? 'checked-rating'"></span>-->
-                <!--                                <span class="fa fa-star" th:classappend="${review.rating>=5}? 'checked-rating'"></span>-->
-                <!--=======-->
-
+            <div id="DanhGia" class="container tab-pane fade mt-1">
+                <h2 class="bg-light p-3" style="margin-right: 30px">ĐÁNH GIÁ SẢN PHẨM</h2>
                 <div id="no-review" class="no-review text-center mt-5" style="padding-left: 30px; padding-right: 30px;">
                     <img th:src="@{/imgs/no-review.png}" class="img-fluid h-25 w-25">
                     <p class="mt-3 font-20 mau-ten-thong-tin">Sản phẩm chưa có đánh giá</p>
@@ -223,7 +185,7 @@
 
                 <div id="danh-sach-danh-gia" style="padding-left: 30px; padding-right: 30px">
                     <th:block th:each="review:${reviews}">
-                        <div class="row mt-5 mb-3 border-bottom">
+                        <div class="row mb-3 border-bottom">
                             <div class="col-2">
                                 <img th:src="@{/imgs/images.png}" class="img-fluid w-75" alt="">
                                 <!--&gt;>>>>>> origin/main-->
@@ -257,11 +219,8 @@
                         <ul class="pagination" id="pagination"></ul>
                     </nav>
                 </div>
-
-
-                <!-- form đánh giá -->
             </div>
-
+            <!-- form đánh giá -->
             <div id="FormDanhGia" class="mt-5">
                 <h2>THÊM ĐÁNH GIÁ MỚI</h2>
 
@@ -410,7 +369,7 @@
                 let html = '';
                 if (reviews.length > 0) {
                     for (review of reviews) {
-                        html += ` <div class="row mt-5 mb-3 border-bottom">
+                        html += ` <div class="row mb-3 border-bottom">
                         <div class="col-2">
                             <img src="" class="img-fluid w-75" alt="">
                         </div>
