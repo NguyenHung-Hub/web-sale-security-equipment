@@ -165,6 +165,12 @@ main.mt-home .block-sliding-home .block-sliding-home__box-right a:not(:last-chil
     margin-bottom: 15.5px;
 }
 
+main.mt-home .block-sliding-home .block-sliding-home__box-right a img {
+    object-fit: cover;
+    object-position: center;
+    height: 140px;
+}
+
 main.mt-home .block-sliding-home .sliding-home .slick-list {
     border-radius: 1rem;
     -webkit-box-shadow: rgba(60, 64, 67, .1) 0 1px 2px 0, rgba(60, 64, 67, .15) 0 2px 6px 2px;
