@@ -61,10 +61,6 @@ html {
     float: right;
 }
 
-.nav-link.active {
-    color: var(--primary-color) !important;
-}
-
 .text-strong {
     font-weight: 600;
     font-size: 1.4rem;
