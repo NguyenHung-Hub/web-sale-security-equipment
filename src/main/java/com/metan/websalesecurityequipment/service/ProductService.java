@@ -12,6 +12,8 @@ public interface ProductService {
 
     public List<Product> findProductsNew();
 
+    public List<Product> findProductByNameParentCategory(String name, String otherName, int limit);
+
     public Product findProductById(String theId);
 
     public Product saveProduct(Product product);

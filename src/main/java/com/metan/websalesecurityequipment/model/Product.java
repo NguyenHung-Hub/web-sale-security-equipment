@@ -11,6 +11,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "products")
@@ -34,10 +35,6 @@ class Product {
     private String thumbnail;
     @Column(columnDefinition = "nvarchar(255)")
     private String title;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
-    @JsonIgnoreProperties("products")
-    private Category category;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @JsonManagedReference
     @JsonIncludeProperties("discountPercent")
@@ -69,4 +66,8 @@ class Product {
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     @JsonBackReference
     private List<ProductBackdrop> productBackdrops;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    @JsonIgnoreProperties("products")
+    private Category category;
 }

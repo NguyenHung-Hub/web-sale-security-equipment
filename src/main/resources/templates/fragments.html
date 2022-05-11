@@ -202,11 +202,11 @@
                                 </svg>
                             </div>
                             <div class="about__box-content">
-                                <p class="mb-0 title" sec:authorize="isAuthenticated()"
+                                <p class="mb-0 title name" sec:authorize="isAuthenticated()"
                                    th:text="${#authentication.principal.fullName}">
 
                                 </p>
-                                <p class="mb-0 title" sec:authorize="isAnonymous()">
+                                <p class="mb-0 title name" sec:authorize="isAnonymous()">
                                     Tài khoản
                                 </p>
                             </div>
@@ -252,13 +252,13 @@
                     </svg>
                 </a>
             </div>
-            <form id="form-box-search-mobile" action="">
+            <form id="form-box-search-mobile" th:action="@{/search}">
                 <div class="box-search position-relative">
                     <div class="position-relative">
                         <div class="input-group-append align-items-center float-left">
                             <i class="fas fa-search"></i>
                         </div>
-                        <input type="text" class="mt-input" placeholder="Bạn cần tìm gì?" aria-label="Bạn cần tìm gì?">
+                        <input type="text" name="name" class="mt-input" placeholder="Bạn cần tìm gì?" aria-label="Bạn cần tìm gì?" th:value="${#request.getParameter('name')}">
                     </div>
                 </div>
             </form>
@@ -406,7 +406,6 @@
             integrity="sha512-eP8DK17a+MOcKHXC5Yrqzd8WI5WKh6F1TIk5QZ/8Lbv+8ssblcz7oGC8ZmQ/ZSAPa7ZmsCU4e/hcovqR8jfJqA=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script th:src="@{/js/header.js}"></script>
-
 </th:block>
 <th:block th:fragment="home-js">
     <script th:src="@{/js/home.js}"></script>

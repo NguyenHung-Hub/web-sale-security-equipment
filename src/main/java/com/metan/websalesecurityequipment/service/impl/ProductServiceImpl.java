@@ -38,6 +38,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> findProductByNameParentCategory(String name, String otherName, int limit) {
+        return productRepository.findProductByNameParentCategory(name, otherName, limit);
+    }
+
+    @Override
     public Product findProductById(String theId) {
         Optional<Product> result = productRepository.findById(theId);
         Product product;
