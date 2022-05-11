@@ -39,6 +39,11 @@ public class HomeController {
         List<Product> newProducts = productService.findProductsNew();
         List<Category> categories = categoryService.findAll();
         Discount discount = discountService.findDiscountByName("Khuyến mãi hot").get();
+        List<Product> cctvCameraProducts = productService.findProductByNameParentCategory("CCTV Camera", "CCTV Camera", 10);
+        List<Product> dauGhiHinhProducts = productService.findProductByNameParentCategory("Đầu ghi hình", "Đầu ghi hình", 10);
+        List<Product> tbbdbcProducts = productService.findProductByNameParentCategory("Thiết bị báo trộm", "Thiết bị báo cháy", 10);
+        List<Product> ckkscProducts = productService.findProductByNameParentCategory("Chuông cửa màn hình", "Thiết bị kiểm soát cửa", 10);
+        List<Category> phuKienCategories = categoryService.findSubCategoriesByNameParentCategory("Phụ kiện");
 
 
         model.addAttribute("PRODUCT_LIST", products);
@@ -46,7 +51,11 @@ public class HomeController {
         model.addAttribute("NEW_PRODUCT_LIST", newProducts);
         model.addAttribute("CATEGORIES", categories);
         model.addAttribute("discount", discount);
-
+        model.addAttribute("CCTV_CAMERA_PRODUCTS", cctvCameraProducts);
+        model.addAttribute("DAUGHIHINH_PRODUCTS", dauGhiHinhProducts);
+        model.addAttribute("TBBD_BC_PRODUCTS", tbbdbcProducts);
+        model.addAttribute("CKKSC_PRODUCTS", ckkscProducts);
+        model.addAttribute("PHU_KIEN_CATEGORIES", phuKienCategories);
         return "home";
     }
 
