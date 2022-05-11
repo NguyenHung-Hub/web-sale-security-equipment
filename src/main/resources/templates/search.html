@@ -19,7 +19,7 @@
                         <div class="group-filter-content" th:each="category1:${categoriesFirst}">
                             <div class="group-filter-content-item">
                                <!-- /m${param.category==${category1.categoryId}}-->
-                                <input  th:id="${category1.categoryId}" class="check-category" type="checkbox" th:value="${category1.categoryId}">
+                                <input th:id="${category1.categoryId}" class="check-category" type="checkbox" th:value="${category1.categoryId}">
                                 <label th:text="${category1.name}"></label>
                             </div>
                         </div>
@@ -87,6 +87,7 @@
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
+                                <span class="up"> </span>
                             </div>
                         </div>
                         <div class="group-filter-content-item">
