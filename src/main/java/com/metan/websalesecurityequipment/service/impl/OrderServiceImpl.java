@@ -17,15 +17,27 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public void save(Order order) {
+        orderRepository.save(order);
+    }
+
+    @Override
+    public void deleteOrder(String order) {
+        orderRepository.deleteById(order);
+    }
+
+    @Override
     public Integer getSumQuantity(String productId) {
         if (orderRepository.getSumQuantity(productId) == null) {
             return 0;
         }
         return orderRepository.getSumQuantity(productId);
     }
-
-    public void save(Order order) {
-        orderRepository.save(order);
+    @Override
+    public String getLastId() {
+        String formatId = orderRepository.getLastId().getOrderId();
+        int so =Integer.parseInt(formatId.split("MT-M")[1]) + 1;
+        String id = "MT-M"+String.valueOf(so);
+        return id;
     }
-
 }

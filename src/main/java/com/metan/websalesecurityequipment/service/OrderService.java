@@ -9,5 +9,8 @@ public interface OrderService {
     public Integer getSumQuantity(String productId);
 
     void save(Order order);
+
+    void deleteOrder(String order);
+    String getLastId();
 }
 

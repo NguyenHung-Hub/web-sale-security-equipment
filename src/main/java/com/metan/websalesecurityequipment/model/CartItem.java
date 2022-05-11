@@ -10,6 +10,7 @@ import java.util.Date;
 @Table(name = "cart_items")
 @IdClass(CartItemPK.class)
 public @Getter
+@Data
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor

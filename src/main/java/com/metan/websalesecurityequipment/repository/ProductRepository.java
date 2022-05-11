@@ -1,11 +1,13 @@
 package com.metan.websalesecurityequipment.repository;
 
+import com.metan.websalesecurityequipment.model.Category;
 import com.metan.websalesecurityequipment.model.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,14 +20,17 @@ public interface ProductRepository extends JpaRepository<Product, String> {
 
     @Query(value = "select p.*, sum(oi.quantity) as tong from products p inner join order_items oi on p.product_id = oi.product_id " +
             "group by p.product_id, p.discount_percent_base, p.quantity, p.created_at, " +
-            " p.modified_at, p.brand_id, p.category_id, " +
+            " p.modified_at, p.brand_id, " +
             "p.long_desc, p.name, p.price, p.short_desc, p.slug, " +
             "p.thumbnail, p.title " +
-            "order by tong desc limit 20", nativeQuery = true)
+            "order by tong desc limit 10", nativeQuery = true)
     public List<Product> findTopProduct();
 
-    @Query(value = "SELECT product_id, created_at, discount_percent_base, long_desc, modified_at, name, price, quantity, short_desc, slug, thumbnail, title, brand_id, category_id FROM(SELECT p.*, @rownum \\:= @rownum + 1 AS rn FROM products p, (SELECT @rownum \\:= 0) T1) T2 ORDER BY rn DESC", nativeQuery = true)
+    @Query(value = "SELECT product_id, created_at, discount_percent_base, long_desc, modified_at, name, price, quantity, short_desc, slug, thumbnail, title, brand_id FROM(SELECT p.*, @rownum \\:= @rownum + 1 AS rn FROM products p, (SELECT @rownum \\:= 0) T1) T2 ORDER BY rn DESC limit 10", nativeQuery = true)
     public List<Product> findProductsNew();
+
+    @Query(value = "select p.* from products p join categories c on p.category_id = c.category_id join categories cp on c.parent_category_id = cp.category_id where cp.name = :name or cp.name = :other_name order by rand() limit :limit", nativeQuery = true)
+    public List<Product> findProductByNameParentCategory(@Param("name") String name, @Param("other_name") String otherName, @Param("limit") int limit);
 
     @Query(value = "SELECT * FROM products ORDER BY RAND() LIMIT ?1", nativeQuery = true)
     public List<Product> findTopNumberRandom(int top);

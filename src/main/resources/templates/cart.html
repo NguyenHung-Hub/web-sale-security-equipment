@@ -1,13 +1,298 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
 
+<!--th:replace="fragments :: headC"-->
 <head th:replace="fragments :: headC">
-    <title>Shopping Cart</title>
 </head>
-
 <body>
-<!--<div th:replace="fragments :: header"></div>-->
-<div class="snippet-body">
+<header class="mt-header d-lg-block d-none">
+    <nav class="mt-navbar">
+        <div class="mt-navbar__box-main fixed-top">
+            <div class="mt-navbar__box-main-wrapper container d-flex align-items-center h-100 p-0">
+                <div class="box-logo">
+                    <a th:href="@{/}">
+                        <svg width="326.25px" height="72.5px" viewBox="0 0 326.25 72.5" version="1.1"
+                             xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+                            <g id="metan" fill="#FFFFFF" transform="translate(0 0.25)">
+                                <path d="M98.432 55.424Q99.776 56.704 102.592 56.704Q103.744 56.704 105.28 56.512Q106.816 56.32 108.864 55.936L109.312 50.56Q107.84 50.56 106.848 50.464Q105.856 50.368 104.96 50.24L104.96 29.312L110.336 29.312L110.336 24L104.96 24L104.96 15.552L97.088 17.536L97.088 24L92.864 24L92.864 29.312L97.088 29.312L97.088 51.392Q97.088 54.144 98.432 55.424ZM5.184 56L5.184 24L8.896 24L10.944 27.2Q13.376 25.216 16.224 24.256Q19.072 23.296 22.464 23.296Q26.944 23.296 29.28 24.8Q30.2256 25.4088 30.7885 26.2432Q32.6718 24.968 34.784 24.256Q37.632 23.296 41.024 23.296Q45.504 23.296 47.84 24.8Q50.176 26.304 50.176 29.184L50.176 56L42.304 56L42.304 29.76L36.352 29.76Q33.6 29.76 32.608 30.464Q31.616 31.168 31.616 33.024L31.616 56L23.744 56L23.744 29.76L17.792 29.76Q15.04 29.76 14.048 30.464Q13.056 31.168 13.056 33.024L13.056 56L5.184 56ZM71.936 56.704Q68.096 56.704 65.472 55.872Q62.848 55.04 61.344 53.12Q59.84 51.2 59.136 48Q58.432 44.8 58.432 40Q58.432 33.728 59.808 30.08Q61.184 26.432 64.32 24.864Q67.456 23.296 72.768 23.296Q77.952 23.296 80.832 24.16Q83.712 25.024 84.864 27.168Q86.016 29.312 86.016 33.216Q86.016 36.416 85.28 38.432Q84.544 40.448 82.496 41.536Q80.448 42.624 76.672 43.04Q72.896 43.456 66.752 43.456L66.752 50.048Q69.056 50.688 73.088 50.688Q75.712 50.688 78.304 50.336Q80.896 49.984 84.224 49.088L85.184 54.72Q82.624 55.68 79.104 56.192Q75.584 56.704 71.936 56.704ZM126.144 56.704Q120.768 56.704 118.4 54.4Q116.032 52.096 116.032 46.784Q116.032 43.584 116.768 41.568Q117.504 39.552 119.392 38.464Q121.28 37.376 124.864 36.96Q128.448 36.544 134.208 36.544L135.424 36.544L135.424 29.952Q133.376 29.312 129.664 29.312Q127.104 29.312 124.288 29.696Q121.472 30.08 118.464 30.912L117.44 25.28Q119.232 24.64 121.44 24.192Q123.648 23.744 126.08 23.52Q128.512 23.296 130.816 23.296Q135.36 23.296 138.08 24.224Q140.8 25.152 142.048 27.232Q143.296 29.312 143.296 32.768L143.296 56L139.52 56L137.472 52.8Q132.864 56.704 126.144 56.704ZM157.056 24L153.344 24L153.344 56L161.216 56L161.216 33.024Q161.216 31.168 162.208 30.464Q163.2 29.76 165.952 29.76L172.544 29.76L172.544 56L180.416 56L180.416 29.184Q180.416 26.304 178.08 24.8Q175.744 23.296 171.264 23.296Q167.552 23.296 164.576 24.256Q161.6 25.216 159.104 27.2L157.056 24ZM66.752 32.896L66.752 38.784L73.856 38.784Q76.8 38.784 77.888 38.048Q78.976 37.312 78.976 35.264L78.976 29.504L71.872 29.504Q68.928 29.504 67.84 30.208Q66.752 30.912 66.752 32.896ZM128.256 41.216L135.424 41.216L135.424 47.552Q135.424 49.472 134.368 50.208Q133.312 50.944 130.432 50.944L123.264 50.944L123.264 44.736Q123.264 42.688 124.288 41.952Q125.312 41.216 128.256 41.216Z"/>
+                            </g>
+                            <path d="M192 0.25L326 0.25L326 72.25L192 72.25L192 0.25Z" id="Rectangle" fill="none"
+                                  fill-rule="evenodd" stroke="#FFFFFF" stroke-width="0.5"/>
+                            <g id="CH4" fill="#FFFFFF" transform="translate(192 0.25)">
+                                <path d="M31.288 13.8622Q36.984 13.8623 41.752 16.1342Q46.52 18.4063 46.52 21.3502Q46.52 22.6302 45.656 23.5262Q44.792 24.4222 43.576 24.4222Q42.36 24.4222 41.144 23.4622Q39.928 22.5023 38.808 21.3182Q37.688 20.1342 35.288 19.1742Q32.888 18.2142 29.624 18.2142Q22.328 18.2142 18.136 22.7902Q13.944 27.3662 13.944 35.2062Q13.944 43.0462 18.552 48.7422Q23.16 54.4383 30.232 54.4383Q37.304 54.4383 43.128 47.6543Q44.408 46.1182 45.016 46.1182Q45.624 46.1182 45.976 46.5342Q46.328 46.9502 46.328 47.7822Q46.328 48.6143 45.016 50.4382Q43.704 52.2622 41.496 54.1502Q39.288 56.0382 35.736 57.4142Q32.184 58.7902 28.344 58.7902Q19.896 58.7902 14.296 52.7743Q8.696 46.7582 8.696 37.2542Q8.696 27.7502 15.128 20.8062Q21.56 13.8623 31.288 13.8622ZM79.992 37.2862L68.472 36.9022Q64.824 36.9022 61.304 37.0942Q61.304 43.0462 61.592 48.8703Q61.88 54.6942 61.88 55.7183Q61.88 56.7422 61.016 57.7663Q60.152 58.7902 58.808 58.7902Q57.464 58.7902 56.6 57.7663Q55.736 56.7422 55.736 55.6222Q55.736 54.5023 55.992 48.8063Q56.248 43.1103 56.312 37.2862L55.544 37.2862Q54.52 37.2862 53.72 36.6143Q52.92 35.9422 52.92 34.7902Q52.92 33.6383 53.72 32.9662Q54.52 32.2943 55.544 32.2943L56.312 32.2943Q56.248 26.9183 55.992 22.4382Q55.736 17.9583 55.736 16.9662Q55.736 15.9743 56.6 14.9502Q57.464 13.9262 58.808 13.9262Q60.152 13.9262 61.016 14.9502Q61.88 15.9743 61.88 16.8702Q61.88 17.7663 61.624 22.3742Q61.368 26.9823 61.304 32.4862Q64.76 32.6783 68.472 32.6782L79.992 32.2943Q79.928 26.9183 79.672 22.4382Q79.416 17.9583 79.416 16.9662Q79.416 15.9743 80.28 14.9502Q81.144 13.9262 82.488 13.9262Q83.832 13.9262 84.696 14.9502Q85.56 15.9743 85.56 17.2542Q85.56 17.4462 85.272 23.1423Q84.984 28.8382 84.984 35.6862Q84.984 42.5342 85.272 48.6143Q85.56 54.6943 85.56 55.7183Q85.56 56.7422 84.696 57.7663Q83.832 58.7902 82.488 58.7902Q81.144 58.7902 80.28 57.7663Q79.416 56.7422 79.416 55.6222Q79.416 54.5023 79.672 48.8063Q79.928 43.1103 79.992 37.2862ZM95.864 44.7103L110.392 44.3903L112.696 44.3903L112.376 54.1182Q112.376 56.0382 113.304 57.4142Q114.232 58.7902 115.768 58.7902Q117.304 58.7902 118.264 57.7342Q119.224 56.6782 119.224 55.3343Q119.224 53.9902 118.296 52.1982Q117.368 50.4063 117.144 49.1263Q116.92 47.8463 116.792 44.5182L121.72 44.7103Q122.744 44.7103 123.384 44.0382Q124.024 43.3662 124.024 42.3422Q124.024 41.3182 123.384 40.6782Q122.744 40.0382 122.04 40.0382Q121.336 40.0382 116.728 40.2943L116.728 37.2222Q116.728 26.1503 117.048 22.1182L117.56 22.1182Q118.776 22.1183 119.544 21.3182Q120.312 20.5182 120.312 19.3662Q120.312 17.0622 117.752 17.0622Q114.552 17.0623 110.552 19.8142Q106.552 22.5662 103.16 26.6622Q99.768 30.7583 96.664 35.7503Q93.56 40.7422 93.56 42.0542Q93.56 43.3662 94.2 44.0382Q94.84 44.7103 95.864 44.7103ZM110.392 40.4222L97.464 40.1022Q104.76 26.7903 112.504 23.2702Q112.76 32.2302 112.76 37.2222L112.76 40.4222L110.392 40.4222Z"/>
+                            </g>
+                        </svg>
+                    </a>
+                </div>
+                <form id="form-box-search" class="position-relative flex-fill" th:action="@{/search}">
+                    <div class="box-search position-relative">
+                        <div class="position-relative d-flex">
+                            <div class="input-group-append align-items-center float-left">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <input name="name" type="text" class="mt-input" placeholder="Bạn cần tìm gì?"
+                                   aria-label="Bạn cần tìm gì?" th:value="${#request.getParameter('name')}">
+                        </div>
+                    </div>
+                </form>
+                <div class="box-about">
+                    <a class="item-about" href="#">
+                        <div class="about__box-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.83 30.94" width="24"
+                                 height="24">
+                                <defs>
+                                    <style>.cls-1 {
+                                        fill: none;
+                                        stroke: #fff;
+                                        stroke-linecap: round;
+                                        stroke-linejoin: round;
+                                        stroke-width: 1.8px;
+                                    }</style>
+                                </defs>
+                                <g id="Layer_2" data-name="Layer 2">
+                                    <g id="Layer_1-2" data-name="Layer 1">
+                                        <path class="cls-1"
+                                              d="M6.78,20.27a31,31,0,0,0,10.29,8.06A15.91,15.91,0,0,0,22.82,30h.41a4.77,4.77,0,0,0,3.7-1.59,0,0,0,0,0,0,0,14.62,14.62,0,0,1,1.17-1.2c.28-.28.57-.56.85-.85A2.91,2.91,0,0,0,29,22L25.33,18.4a2.94,2.94,0,0,0-2.13-1,3.07,3.07,0,0,0-2.15,1l-2.16,2.17c-.2-.12-.4-.22-.6-.32a6.74,6.74,0,0,1-.66-.36,22.82,22.82,0,0,1-5.47-5A13.11,13.11,0,0,1,10.32,12c.56-.52,1.09-1.05,1.61-1.58l.55-.56a3.07,3.07,0,0,0,1-2.17,3.08,3.08,0,0,0-1-2.18l-1.8-1.8L10.07,3c-.4-.41-.82-.83-1.23-1.21A3,3,0,0,0,6.72.9a3.07,3.07,0,0,0-2.15.94L2.31,4.09a4.64,4.64,0,0,0-1.38,3,11.09,11.09,0,0,0,.84,4.83,28.11,28.11,0,0,0,5,8.37Z"></path>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="about__box-content">
+                            <p class="mb-0 title">
+                                Gọi mua hàng
+                                <br>
+                                <strong>1800.1234</strong>
+                            </p>
+                        </div>
+                    </a>
+                    <a class="item-about" href="#">
+                        <div class="about__box-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44.22 25.85" height="24">
+                                <defs>
+                                    <style>.cls-1, .cls-2, .cls-3 {
+                                        fill: none;
+                                        stroke: #fff;
+                                        stroke-linecap: round;
+                                        stroke-linejoin: round;
+                                    }
+
+                                    .cls-1 {
+                                        stroke-width: 1.66px;
+                                    }
+
+                                    .cls-2 {
+                                        stroke-width: 1.66px;
+                                    }
+
+                                    .cls-3 {
+                                        stroke-width: 1.8px;
+                                    }</style>
+                                </defs>
+                                <g id="Layer_2" data-name="Layer 2">
+                                    <g id="Layer_1-2" data-name="Layer 1">
+                                        <circle class="cls-1" cx="7.66" cy="22.02" r="3"></circle>
+                                        <circle class="cls-2" cx="24.79" cy="22.02" r="3"></circle>
+                                        <path class="cls-3" d="M28.61,22h4.13a1.44,1.44,0,0,0,1.44-1.44v-6"></path>
+                                        <path class="cls-3"
+                                              d="M27.12.9H14.82a1.44,1.44,0,0,0-1.44,1.44V20.58A1.44,1.44,0,0,0,14.82,22h6.29"></path>
+                                        <path class="cls-3"
+                                              d="M10.27,5.92H6.75A2.65,2.65,0,0,0,4.54,7.11L1.33,12A2.64,2.64,0,0,0,.9,13.47v6.46A2.1,2.1,0,0,0,3,22h.75"></path>
+                                        <path class="cls-3"
+                                              d="M34.18,3.47V2.34A1.44,1.44,0,0,0,32.74.9H25.08"></path>
+                                        <line class="cls-3" x1="43.32" y1="6.97" x2="32.57" y2="6.97"></line>
+                                        <line class="cls-3" x1="40.5" y1="11.05" x2="32.57" y2="11.05"></line>
+                                        <line class="cls-3" x1="42.09" y1="16.33" x2="38.07" y2="16.33"></line>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="about__box-content">
+                            <p class="mb-0 title">
+                                Tra cứu
+                                <br>
+                                đơn hàng
+                            </p>
+                        </div>
+                    </a>
+                    <a class="item-about" href="#">
+                        <div class="about__box-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28.95 35.07" width="25"
+                                 height="25">
+                                <defs>
+                                    <style>.cls-1 {
+                                        fill: none;
+                                        stroke: #fff;
+                                        stroke-linecap: round;
+                                        stroke-linejoin: round;
+                                        stroke-width: 1.8px;
+                                    }</style>
+                                </defs>
+                                <g id="Layer_2" data-name="Layer 2">
+                                    <g id="Layer_1-2" data-name="Layer 1">
+                                        <path class="cls-1"
+                                              d="M10,10.54V5.35A4.44,4.44,0,0,1,14.47.9h0a4.45,4.45,0,0,1,4.45,4.45v5.19"></path>
+                                        <path class="cls-1"
+                                              d="M23.47,34.17h-18A4.58,4.58,0,0,1,.91,29.24L2.5,8.78A1.44,1.44,0,0,1,3.94,7.46H25a1.43,1.43,0,0,1,1.43,1.32L28,29.24A4.57,4.57,0,0,1,23.47,34.17Z"></path>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="about__box-content">
+                            <p class="mb-0 title">
+                                Giỏ
+                                <br>
+                                hàng
+                            </p>
+                        </div>
+                    </a>
+                    <div class="item-about about-account">
+                        <div class="about__box-icon">
+                            <svg id="icon-smember" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 560"
+                                 width="20">
+                                <defs>
+                                    <style>#icon-smember .cls-1 {
+                                        fill: none;
+                                        stroke: #fff;
+                                        stroke-width: 30px;
+                                    }</style>
+                                </defs>
+                                <title>Asset 1</title>
+                                <g id="Layer_2" data-name="Layer 2">
+                                    <g id="Layer_1-2" data-name="Layer 1">
+                                        <circle class="cls-1" cx="280" cy="280" r="265"></circle>
+                                        <circle class="cls-1" cx="280" cy="210" r="115"></circle>
+                                        <path class="cls-1"
+                                              d="M86.82,461.4C124.71,354.71,241.91,298.93,348.6,336.82A205,205,0,0,1,473.18,461.4"></path>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="about__box-content">
+                            <p class="mb-0 title" sec:authorize="isAuthenticated()"
+                               th:text="${#authentication.principal.fullName}">
+                            </p>
+                            <p class="mb-0 title" sec:authorize="isAnonymous()">
+                                Tài khoản
+                            </p>
+                        </div>
+                        <div class="about__box-menu">
+                            <div class="menu-triangle"></div>
+                            <div class="menu-content">
+                                <ul>
+                                    <li sec:authorize="isAnonymous()"><a th:href="@{/account/login}">Đăng nhập</a>
+                                    </li>
+                                    <li sec:authorize="isAnonymous()"><a th:href="@{/account/register}">Đăng ký</a>
+                                    </li>
+                                    <li sec:authorize="isAuthenticated()"><a th:href="@{/}">Hồ sơ của tôi</a></li>
+                                    <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Đăng xuất</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </nav>
+</header>
+<header id="mt-header-mobile" class="mt-header-mobile full d-lg-none d-table">
+    <nav class="mt-navbar fixed-top">
+        <button type="button" class="btn-side-nav">
+            <i class="icon-bar"></i>
+            <i class="icon-bar"></i>
+            <i class="icon-bar"></i>
+        </button>
+        <div class="box-logo-full">
+            <a th:href="@{/}">
+                <svg width="180" height="35" viewBox="0 0 326.25 72.5" version="1.1"
+                     xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+                    <g id="metan" fill="#FFFFFF" transform="translate(0 0.25)">
+                        <path d="M98.432 55.424Q99.776 56.704 102.592 56.704Q103.744 56.704 105.28 56.512Q106.816 56.32 108.864 55.936L109.312 50.56Q107.84 50.56 106.848 50.464Q105.856 50.368 104.96 50.24L104.96 29.312L110.336 29.312L110.336 24L104.96 24L104.96 15.552L97.088 17.536L97.088 24L92.864 24L92.864 29.312L97.088 29.312L97.088 51.392Q97.088 54.144 98.432 55.424ZM5.184 56L5.184 24L8.896 24L10.944 27.2Q13.376 25.216 16.224 24.256Q19.072 23.296 22.464 23.296Q26.944 23.296 29.28 24.8Q30.2256 25.4088 30.7885 26.2432Q32.6718 24.968 34.784 24.256Q37.632 23.296 41.024 23.296Q45.504 23.296 47.84 24.8Q50.176 26.304 50.176 29.184L50.176 56L42.304 56L42.304 29.76L36.352 29.76Q33.6 29.76 32.608 30.464Q31.616 31.168 31.616 33.024L31.616 56L23.744 56L23.744 29.76L17.792 29.76Q15.04 29.76 14.048 30.464Q13.056 31.168 13.056 33.024L13.056 56L5.184 56ZM71.936 56.704Q68.096 56.704 65.472 55.872Q62.848 55.04 61.344 53.12Q59.84 51.2 59.136 48Q58.432 44.8 58.432 40Q58.432 33.728 59.808 30.08Q61.184 26.432 64.32 24.864Q67.456 23.296 72.768 23.296Q77.952 23.296 80.832 24.16Q83.712 25.024 84.864 27.168Q86.016 29.312 86.016 33.216Q86.016 36.416 85.28 38.432Q84.544 40.448 82.496 41.536Q80.448 42.624 76.672 43.04Q72.896 43.456 66.752 43.456L66.752 50.048Q69.056 50.688 73.088 50.688Q75.712 50.688 78.304 50.336Q80.896 49.984 84.224 49.088L85.184 54.72Q82.624 55.68 79.104 56.192Q75.584 56.704 71.936 56.704ZM126.144 56.704Q120.768 56.704 118.4 54.4Q116.032 52.096 116.032 46.784Q116.032 43.584 116.768 41.568Q117.504 39.552 119.392 38.464Q121.28 37.376 124.864 36.96Q128.448 36.544 134.208 36.544L135.424 36.544L135.424 29.952Q133.376 29.312 129.664 29.312Q127.104 29.312 124.288 29.696Q121.472 30.08 118.464 30.912L117.44 25.28Q119.232 24.64 121.44 24.192Q123.648 23.744 126.08 23.52Q128.512 23.296 130.816 23.296Q135.36 23.296 138.08 24.224Q140.8 25.152 142.048 27.232Q143.296 29.312 143.296 32.768L143.296 56L139.52 56L137.472 52.8Q132.864 56.704 126.144 56.704ZM157.056 24L153.344 24L153.344 56L161.216 56L161.216 33.024Q161.216 31.168 162.208 30.464Q163.2 29.76 165.952 29.76L172.544 29.76L172.544 56L180.416 56L180.416 29.184Q180.416 26.304 178.08 24.8Q175.744 23.296 171.264 23.296Q167.552 23.296 164.576 24.256Q161.6 25.216 159.104 27.2L157.056 24ZM66.752 32.896L66.752 38.784L73.856 38.784Q76.8 38.784 77.888 38.048Q78.976 37.312 78.976 35.264L78.976 29.504L71.872 29.504Q68.928 29.504 67.84 30.208Q66.752 30.912 66.752 32.896ZM128.256 41.216L135.424 41.216L135.424 47.552Q135.424 49.472 134.368 50.208Q133.312 50.944 130.432 50.944L123.264 50.944L123.264 44.736Q123.264 42.688 124.288 41.952Q125.312 41.216 128.256 41.216Z"/>
+                    </g>
+                    <path d="M192 0.25L326 0.25L326 72.25L192 72.25L192 0.25Z" id="Rectangle" fill="none"
+                          fill-rule="evenodd" stroke="#FFFFFF" stroke-width="0.5"/>
+                    <g id="CH4" fill="#FFFFFF" transform="translate(192 0.25)">
+                        <path d="M31.288 13.8622Q36.984 13.8623 41.752 16.1342Q46.52 18.4063 46.52 21.3502Q46.52 22.6302 45.656 23.5262Q44.792 24.4222 43.576 24.4222Q42.36 24.4222 41.144 23.4622Q39.928 22.5023 38.808 21.3182Q37.688 20.1342 35.288 19.1742Q32.888 18.2142 29.624 18.2142Q22.328 18.2142 18.136 22.7902Q13.944 27.3662 13.944 35.2062Q13.944 43.0462 18.552 48.7422Q23.16 54.4383 30.232 54.4383Q37.304 54.4383 43.128 47.6543Q44.408 46.1182 45.016 46.1182Q45.624 46.1182 45.976 46.5342Q46.328 46.9502 46.328 47.7822Q46.328 48.6143 45.016 50.4382Q43.704 52.2622 41.496 54.1502Q39.288 56.0382 35.736 57.4142Q32.184 58.7902 28.344 58.7902Q19.896 58.7902 14.296 52.7743Q8.696 46.7582 8.696 37.2542Q8.696 27.7502 15.128 20.8062Q21.56 13.8623 31.288 13.8622ZM79.992 37.2862L68.472 36.9022Q64.824 36.9022 61.304 37.0942Q61.304 43.0462 61.592 48.8703Q61.88 54.6942 61.88 55.7183Q61.88 56.7422 61.016 57.7663Q60.152 58.7902 58.808 58.7902Q57.464 58.7902 56.6 57.7663Q55.736 56.7422 55.736 55.6222Q55.736 54.5023 55.992 48.8063Q56.248 43.1103 56.312 37.2862L55.544 37.2862Q54.52 37.2862 53.72 36.6143Q52.92 35.9422 52.92 34.7902Q52.92 33.6383 53.72 32.9662Q54.52 32.2943 55.544 32.2943L56.312 32.2943Q56.248 26.9183 55.992 22.4382Q55.736 17.9583 55.736 16.9662Q55.736 15.9743 56.6 14.9502Q57.464 13.9262 58.808 13.9262Q60.152 13.9262 61.016 14.9502Q61.88 15.9743 61.88 16.8702Q61.88 17.7663 61.624 22.3742Q61.368 26.9823 61.304 32.4862Q64.76 32.6783 68.472 32.6782L79.992 32.2943Q79.928 26.9183 79.672 22.4382Q79.416 17.9583 79.416 16.9662Q79.416 15.9743 80.28 14.9502Q81.144 13.9262 82.488 13.9262Q83.832 13.9262 84.696 14.9502Q85.56 15.9743 85.56 17.2542Q85.56 17.4462 85.272 23.1423Q84.984 28.8382 84.984 35.6862Q84.984 42.5342 85.272 48.6143Q85.56 54.6943 85.56 55.7183Q85.56 56.7422 84.696 57.7663Q83.832 58.7902 82.488 58.7902Q81.144 58.7902 80.28 57.7663Q79.416 56.7422 79.416 55.6222Q79.416 54.5023 79.672 48.8063Q79.928 43.1103 79.992 37.2862ZM95.864 44.7103L110.392 44.3903L112.696 44.3903L112.376 54.1182Q112.376 56.0382 113.304 57.4142Q114.232 58.7902 115.768 58.7902Q117.304 58.7902 118.264 57.7342Q119.224 56.6782 119.224 55.3343Q119.224 53.9902 118.296 52.1982Q117.368 50.4063 117.144 49.1263Q116.92 47.8463 116.792 44.5182L121.72 44.7103Q122.744 44.7103 123.384 44.0382Q124.024 43.3662 124.024 42.3422Q124.024 41.3182 123.384 40.6782Q122.744 40.0382 122.04 40.0382Q121.336 40.0382 116.728 40.2943L116.728 37.2222Q116.728 26.1503 117.048 22.1182L117.56 22.1182Q118.776 22.1183 119.544 21.3182Q120.312 20.5182 120.312 19.3662Q120.312 17.0622 117.752 17.0622Q114.552 17.0623 110.552 19.8142Q106.552 22.5662 103.16 26.6622Q99.768 30.7583 96.664 35.7503Q93.56 40.7422 93.56 42.0542Q93.56 43.3662 94.2 44.0382Q94.84 44.7103 95.864 44.7103ZM110.392 40.4222L97.464 40.1022Q104.76 26.7903 112.504 23.2702Q112.76 32.2302 112.76 37.2222L112.76 40.4222L110.392 40.4222Z"/>
+                    </g>
+                </svg>
+            </a>
+        </div>
+        <form id="form-box-search-mobile" action="">
+            <div class="box-search position-relative">
+                <div class="position-relative">
+                    <div class="input-group-append align-items-center float-left">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <input type="text" class="mt-input" placeholder="Bạn cần tìm gì?" aria-label="Bạn cần tìm gì?">
+                </div>
+            </div>
+        </form>
+        <div class="box-about">
+            <a href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28.95 35.07" width="25"
+                     height="25">
+                    <defs>
+                        <style>.cls-1 {
+                            fill: none;
+                            stroke: #fff;
+                            stroke-linecap: round;
+                            stroke-linejoin: round;
+                            stroke-width: 1.8px;
+                        }</style>
+                    </defs>
+                    <g id="Layer_2" data-name="Layer 2">
+                        <g id="Layer_1-2" data-name="Layer 1">
+                            <path class="cls-1"
+                                  d="M10,10.54V5.35A4.44,4.44,0,0,1,14.47.9h0a4.45,4.45,0,0,1,4.45,4.45v5.19"></path>
+                            <path class="cls-1"
+                                  d="M23.47,34.17h-18A4.58,4.58,0,0,1,.91,29.24L2.5,8.78A1.44,1.44,0,0,1,3.94,7.46H25a1.43,1.43,0,0,1,1.43,1.32L28,29.24A4.57,4.57,0,0,1,23.47,34.17Z"></path>
+                        </g>
+                    </g>
+                </svg>
+            </a>
+            <a href="#">
+                <svg id="icon-member-mobile" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 560"
+                     width="25">
+                    <defs>
+                        <style>#icon-member-mobile .cls-1 {
+                            fill: none;
+                            stroke: #fff;
+                            stroke-width: 30px;
+                        }</style>
+                    </defs>
+                    <title>Asset 1</title>
+                    <g id="Layer_2" data-name="Layer 2">
+                        <g id="Layer_1-2" data-name="Layer 1">
+                            <circle class="cls-1" cx="280" cy="280" r="265"></circle>
+                            <circle class="cls-1" cx="280" cy="210" r="115"></circle>
+                            <path class="cls-1"
+                                  d="M86.82,461.4C124.71,354.71,241.91,298.93,348.6,336.82A205,205,0,0,1,473.18,461.4"></path>
+                        </g>
+                    </g>
+                </svg>
+            </a>
+        </div>
+    </nav>
+    <div class="clear"></div>
+    <nav class="mt-sidebar position-fixed">
+        <div class="sidebar-header">
+            <div class="close-sidebar">
+            </div>
+            <h3>Danh mục</h3>
+        </div>
+    </nav>
+</header>
+
+<!--<div class="clear d-lg-none d-block"></div>-->
+<!--<div class="over-suggest d-lg-none"></div>-->
+<!--<div class="over d-lg-none"></div>-->
+<!--<div class="loader-wrapper">-->
+<!--    <span class="loader"></span>-->
+<!--</div>-->
+
+<!--<div th:replace="fragments :: header (categories=${CATEGORIES})"></div>-->
+<div class="snippet-body container">
     <div th:if="${LIST_ITEMCART != null}" class="mb-5" th:with="user=${CUSTOMER}">
         <div class="card mt-50">
             <div class="row">
@@ -39,7 +324,8 @@
                             <div class="row border-bottom" th:id="'rowOf'+${ItemCart.product.productId}">
                                 <div class="row main align-items-center">
                                     <div class="col-3 d-flex ">
-                                        <input type="checkbox" class="select input-cart" th:id="${ItemCart.product.productId}">
+                                        <input type="checkbox" class="select input-cart"
+                                               th:id="${ItemCart.product.productId}">
                                         <img class="img-product" th:src="${ItemCart.product.thumbnail}">
                                     </div>
                                     <div class="col-4">
@@ -54,7 +340,8 @@
                                     </div>
                                     <div class="col d-flex">
                                         <a href="" class="minus" th:productID="${ItemCart.product.productId}">-</a>
-                                        <input type="text" class="input-cart form-control quantity-product" th:value="${ItemCart.quantity}"
+                                        <input type="text" class="input-cart form-control quantity-product"
+                                               th:value="${ItemCart.quantity}"
                                                th:id="'quantity'+${ItemCart.product.productId}">
                                         <a href="" class="plus" th:productID="${ItemCart.product.productId}">+</a>
                                     </div>
@@ -65,7 +352,8 @@
                                               th:id="'subTotalPrice'+${ItemCart.product.productId}"
                                               class="subTotal-product"></span>
                                     </span>
-                                        <i class="fa-solid fa-trash-can delete" th:deleteId="${ItemCart.product.productId}"></i>
+                                        <i class="fa-solid fa-trash-can delete"
+                                           th:deleteId="${ItemCart.product.productId}"></i>
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +367,8 @@
                 <div class="col-md-4 summary" th:with="ItemCard=${LIST_ITEMCART}">
                     <div class="row justify-content-between">
                         <b class="col">Giao đến</b>
-                        <a class="col" data-bs-toggle="modal" data-bs-target="#exampleModal"><b style="margin-top: 5px;">Thay đổi</b></a>
+                        <a class="col" data-bs-toggle="modal" data-bs-target="#exampleModal"><b
+                                style="margin-top: 5px;">Thay đổi</b></a>
                     </div>
                     <div>
                         <div class="row mt-4">
@@ -104,7 +393,8 @@
                         <option class="text-muted">Giao nhanh - 100.000Đ</option>
                         <option class="text-muted">Hỏa tốc - 200.000Đ</option>
                     </select>
-                        <p>GIVE CODE(Đang phát triển)</p> <input class="input-cart" id="code" placeholder="Enter your code">
+                        <p>GIVE CODE(Đang phát triển)</p> <input class="input-cart" id="code"
+                                                                 placeholder="Enter your code">
                     </form>
                     <div class="row">
                         <div class="col">Tạm tính</div>
@@ -120,7 +410,7 @@
                     </div>
                     <form id="sel" action="/cart/checkout" method="post">
                     </form>
-                    <button class="btn-red" type="submit" id="buy" >Mua hàng</button>
+                    <button class="btn-red" type="submit" id="buy">Mua hàng</button>
                 </div>
             </div>
         </div>
@@ -148,7 +438,8 @@
     </div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" th:with="user=${CUSTOMER}">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+     th:with="user=${CUSTOMER}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -158,24 +449,26 @@
             <form th:action="@{/api/cart/updateUser}" th:object="${employee}" method="get">
                 <div class="modal-body">
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" >Họ</span>
-                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+                        <span class="input-group-text">Họ</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                               aria-describedby="inputGroup-sizing-sm"
                                id="firstName" th:value="${user.firstName}"
                         >
-                        <span class="input-group-text" >Tên</span>
-                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+                        <span class="input-group-text">Tên</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                               aria-describedby="inputGroup-sizing-sm"
                                id="lastName" th:value="${user.lastName}"
                         >
                     </div>
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" >Số điện thoại</span>
+                        <span class="input-group-text">Số điện thoại</span>
                         <input type="text" class="form-control" aria-label="Sizing example input"
                                aria-describedby="inputGroup-sizing-sm"
                                id="phoneNumber" th:value="${user.phoneNumber}"
                         >
                     </div>
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" >Địa chỉ</span>
+                        <span class="input-group-text">Địa chỉ</span>
                         <input type="text" class="form-control" aria-label="Sizing example input"
                                aria-describedby="inputGroup-sizing-sm"
                                id="profile" th:value="${user.profile}"
@@ -191,10 +484,9 @@
     </div>
 </div>
 <div th:replace="fragments :: footer"></div>
-<script type='text/javascript'
-        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<!--<script type='text/javascript'-->
+<!--        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>-->
 <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-
 <script th:src="@{/js/plus-minus.js}"></script>
 </body>
 

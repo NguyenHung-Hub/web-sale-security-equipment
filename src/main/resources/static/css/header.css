@@ -91,6 +91,14 @@ header.mt-header .mt-navbar .mt-navbar__box-main .mt-navbar__box-main-wrapper .b
     color: #ffffff;
 }
 
+header.mt-header .mt-navbar .mt-navbar__box-main .mt-navbar__box-main-wrapper .box-about .item-about .about__box-content .name {
+    width: 56px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
 header.mt-header .mt-navbar .mt-navbar__box-main .mt-navbar__box-main-wrapper .box-about .item-about .about__box-content .title strong {
     font-size: 1.4rem;
     line-height: 1.4;
