@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-      xsi:schemaLocation="http://www.thymeleaf.org ">
+      xsi:schemaLocation="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <th:block th:replace="fragments :: base (title=${product.title})"/>
     <th:block th:replace="fragments :: product-detail"/>
@@ -286,7 +286,7 @@
                     <input type="submit" class="btn btn-dark mt-3 font-14" value="Gửi">
 
                 </form>
-                <th:block th:if="${param}">
+              <!--  <th:block th:if="${param}">
                     <script>
                         alert("Thêm thành công !!!");
                     </script>
@@ -295,7 +295,7 @@
                     <script>
                         alert("Đã xảy lỗi !!!");
                     </script>
-                </th:block>
+                </th:block>-->
 
             </div>
         </div>

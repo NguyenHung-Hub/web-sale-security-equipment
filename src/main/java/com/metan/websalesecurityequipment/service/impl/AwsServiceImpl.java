@@ -41,7 +41,7 @@ public class AwsServiceImpl implements AwsService {
 		try {
 			final File file = convertMultiPartFileToFile(multipartFile);
 			final String fileName = LocalDateTime.now() + "_" + file.getName();
-			final PutObjectRequest putObjectRequest = new PutObjectRequest(s3BucketName,"image/"+ fileName, file)
+			final PutObjectRequest putObjectRequest = new PutObjectRequest(s3BucketName, fileName, file)
 					.withCannedAcl(CannedAccessControlList.PublicRead);
 			amazonS3.putObject(putObjectRequest);
 			Files.delete(file.toPath());// Remove the file locally created in the project folder

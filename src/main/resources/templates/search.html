@@ -237,7 +237,7 @@
 
 
 <!--                                    </th:block>-->
-                                    <th:block th:if="${product.orderItems.size()==0 || product.orderItems== null}">
+                                    <th:block th:if="${product.orderItems== null || product.orderItems.size()==0}">
                                         <span class="da-ban" th:text="'  Đã bán '+${0}">Đã bán 216</span>
                                     </th:block>-->
 
