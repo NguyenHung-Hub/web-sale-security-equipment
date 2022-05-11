@@ -49,10 +49,11 @@
                     </div>
                     <div class="List-product" id="style-7">
                         <th:block th:each="Order :${LIST_ORDER}">
-                            <div class="row border-bottom" th:id="'rowOf'+${Order.orderId}">
+                            <div class="border-bottom" th:id="'rowOf'+${Order.orderId}">
                             <button th:if="${type != null}" type="button" class="btn btn-danger delete" th:deleteId="${Order.orderId}">Hủy đơn</button>
+                                <Span th:if="${type == null}"  th:text="'Mã đơn hàng: ' + ${Order.orderId}"></Span>
                             <th:block th:each="ItemOrder :${Order.orderItems}">
-                                <div class="row border-bottom" th:id="'rowOf'+${ItemOrder.product.productId}">
+                                <div class="row" th:id="'rowOf'+${ItemOrder.product.productId}">
                                     <div class="row main align-items-center">
                                         <div class="col-3 d-flex ">
                                             <img class="img-product" th:src="${ItemOrder.product.thumbnail}">

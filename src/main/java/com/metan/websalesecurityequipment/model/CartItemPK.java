@@ -12,6 +12,22 @@ public class CartItemPK implements Serializable {
     public CartItemPK() {
     }
 
+    public String getProduct() {
+        return product;
+    }
+
+    public void setProduct(String product) {
+        this.product = product;
+    }
+
+    public long getCart() {
+        return cart;
+    }
+
+    public void setCart(long cart) {
+        this.cart = cart;
+    }
+
     public CartItemPK(String product, long cart) {
         this.product = product;
         this.cart = cart;

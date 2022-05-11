@@ -152,7 +152,6 @@ public class CartController {
     @PostMapping("/checkout/confirm")
     public String confirmCheckout(
             @RequestParam(value="selected") String selected) {
-        System.out.println("sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String myUserDetailName = ((MyUserDetails) principal).getUsername();
 
