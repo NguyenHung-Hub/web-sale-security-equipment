@@ -17,4 +17,7 @@ public interface OrderRepository extends JpaRepository<Order, String> {
             "where oi.product_id  = ?1 and o.order_status = 'completed'", nativeQuery = true)
     public int getSumQuantity(String productId);
 
+    @Query(value = "select * from orders order by order_id desc limit 1", nativeQuery = true)
+    public Order getLastId();
+
 }

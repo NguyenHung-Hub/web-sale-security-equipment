@@ -24,4 +24,12 @@ public class OrderServiceImpl implements OrderService {
     public int getSumQuantity(String productId) {
         return orderRepository.getSumQuantity(productId);
     }
+
+    @Override
+    public String getLastId() {
+        String formatId = orderRepository.getLastId().getOrderId();
+        int so =Integer.parseInt(formatId.split("MT-M")[1]) + 1;
+        String id = "MT-M"+String.valueOf(so);
+        return id;
+    }
 }

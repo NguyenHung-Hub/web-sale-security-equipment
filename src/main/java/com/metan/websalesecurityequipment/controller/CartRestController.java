@@ -1,15 +1,17 @@
 package com.metan.websalesecurityequipment.controller;
 
 import com.metan.websalesecurityequipment.config.security.MyUserDetails;
-import com.metan.websalesecurityequipment.model.Cart;
-import com.metan.websalesecurityequipment.model.CartItemPK;
-import com.metan.websalesecurityequipment.model.User;
+import com.metan.websalesecurityequipment.model.*;
 import com.metan.websalesecurityequipment.repository.UserRepository;
 import com.metan.websalesecurityequipment.service.CartService;
 import com.metan.websalesecurityequipment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 @RestController
 @RequestMapping("/api/cart")
@@ -34,7 +36,7 @@ public class CartRestController {
         String myUserDetailName = ((MyUserDetails) principal).getUsername();
 
         User user = userService.getUserByEmail(myUserDetailName);
-        Cart cart = cartService.findByUser(user.getUserId());
+        Cart cart = user.getCart();;
 //        User user = userRepository.findById(3L).get();
         user.setFirstName(firstName);
         user.setLastName(lastName);
@@ -77,5 +79,23 @@ public class CartRestController {
 //        Cart cart = user.getCart();
         double subtotal = cartService.updateQuantity(quantity,productId,cart.getCartId());
         return String.valueOf(subtotal);
+    };
+
+    @GetMapping("/order/{type}")
+    public List<Order> getOrderStatus(
+            @PathVariable("type") String type)
+    {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String myUserDetailName = ((MyUserDetails) principal).getUsername();
+
+        User user = userService.getUserByEmail(myUserDetailName);
+        List<Order> Oders = user.getOrders();
+        List<Order> NewOders = new ArrayList<>();
+        for(int i = 0 ;i< Oders.size();i++){
+            if (Oders.get(i).getOrderStatus().getStatus() == type.toLowerCase()){
+                NewOders.add(Oders.get(i));
+            }
+        }
+        return NewOders;
     };
 }
