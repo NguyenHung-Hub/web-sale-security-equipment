@@ -38,7 +38,7 @@ public class OrderServiceImpl implements OrderService {
         String id="";
         try{
             String formatId = orderRepository.getLastId().getOrderId();
-            int so =Integer.parseInt(formatId.split("MT-M")[1]) + 1;
+            int so = Integer.parseInt(formatId.split("MT-M")[1]) + 1;
             id = "MT-M"+String.valueOf(so);
         }catch (Exception e){
             id = "MT-M1";

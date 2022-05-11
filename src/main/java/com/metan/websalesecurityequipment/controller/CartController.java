@@ -160,6 +160,7 @@ public class CartController {
 //        User user = userRepository.findById(3L).get();
 //        Cart cart = user.getCart();
         String id = orderService.getLastId();
+        System.out.println(id);
         Order order = new Order(id);
         List<OrderItem> orderItems =  new ArrayList<>();
 
