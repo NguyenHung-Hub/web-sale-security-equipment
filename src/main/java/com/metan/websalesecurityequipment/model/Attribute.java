@@ -22,9 +22,6 @@ class Attribute {
     private long attributeId;
     @Column(columnDefinition = "nvarchar(255)")
     private String name;
-    @OneToMany(mappedBy = "attribute", fetch = FetchType.LAZY)
-    @JsonBackReference
-    private List<ProductAttribute> productAttributes;
     @ManyToOne
     @JoinColumn(name = "category_id")
     @JsonManagedReference

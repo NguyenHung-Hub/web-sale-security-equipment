@@ -20,8 +20,4 @@ class ProductBackdrop {
     private long backdropId;
     @Column(name = "file_path")
     private String filePath;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
-    @JsonManagedReference
-    private Product product;
 }

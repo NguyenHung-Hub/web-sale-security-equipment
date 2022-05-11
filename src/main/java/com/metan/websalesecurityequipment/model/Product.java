@@ -60,11 +60,11 @@ class Product {
     @LazyCollection(LazyCollectionOption.FALSE)
     @JsonBackReference
     private List<ProductAttribute> productAttributes;
-    @OneToMany(mappedBy = "product")
-    @JsonBackReference
+    @OneToMany
+    @JoinColumn(name = "review_id")
     private List<ProductReview> productReviews;
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    @JsonBackReference
+    @OneToMany
+    @JoinColumn(name = "backdrop_id")
     private List<ProductBackdrop> productBackdrops;
     @ManyToOne
     @JoinColumn(name = "category_id")

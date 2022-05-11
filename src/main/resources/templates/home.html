@@ -2,11 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
 <head>
-    <th:block th:replace="fragments :: base ('Trang chủ - Bán thiết bị an ninh')"/>
+    <th:block th:replace="fragments :: base ('Metan - Thiết bị an ninh')"/>
     <th:block th:replace="fragments :: home"/>
 </head>
 <body>
-<th:block th:replace="fragments :: header (categories=${CATEGORIES}, isHome=true)"/>
+<th:block th:replace="fragments :: header (categories=${CATEGORIES})"/>
 
 <main class="mt-home">
     <div class="std">

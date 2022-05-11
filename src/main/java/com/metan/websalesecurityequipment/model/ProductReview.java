@@ -23,10 +23,6 @@ class ProductReview {
     private String title;
     @Column(columnDefinition = "LONGTEXT")
     private String content;
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    @JsonManagedReference
-    private Product product;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @JsonManagedReference
