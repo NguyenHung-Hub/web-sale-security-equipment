@@ -81,8 +81,7 @@ public class CartRestController {
 
 //        User user = userRepository.findById(3L).get();
 //        Cart cart = user.getCart();
-//        orderService
-//        cartService.deleteCardItem(new CartItemPK(productId, cart.getCartId()));
+        orderService.deleteOrder(orderId);
         return orderId;
     };
 
