@@ -61,10 +61,9 @@ class Product {
     @JsonBackReference
     private List<ProductAttribute> productAttributes;
     @OneToMany(mappedBy = "product")
-    @JsonBackReference
     private List<ProductReview> productReviews;
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    @JsonBackReference
+    @OneToMany
+    @JoinColumn(name = "product_id")
     private List<ProductBackdrop> productBackdrops;
     @ManyToOne
     @JoinColumn(name = "category_id")
