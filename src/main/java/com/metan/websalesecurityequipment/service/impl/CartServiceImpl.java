@@ -40,7 +40,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void deleteCardItem(CartItemPK pk) {
-        cartItemRepository.deleteById(pk);
+        cartItemRepository.deleteById(pk.getProduct(),pk.getCart());
     }
 
     @Override

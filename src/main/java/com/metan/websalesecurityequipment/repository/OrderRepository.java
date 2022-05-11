@@ -2,6 +2,7 @@ package com.metan.websalesecurityequipment.repository;
 
 import com.metan.websalesecurityequipment.model.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +15,14 @@ public interface OrderRepository extends JpaRepository<Order, String> {
     <S extends Order> S save(S entity);
     //lấy số lượng đã bán
     @Query(value = "SELECT sum(oi.quantity) FROM orders o join order_items oi on oi.order_id = o.order_id\n" +
-            "where oi.product_id  = ?1 and o.order_status = 'completed'", nativeQuery = true)
-    public int getSumQuantity(String productId);
+            "where oi.product_id  = ?1 and o.order_status = 'COMPLETED'", nativeQuery = true)
+    public Integer getSumQuantity(String productId);
+
+    @Query(value = "select * from orders order by order_id desc limit 1", nativeQuery = true)
+    public Order getLastId();
+
+    @Modifying
+    @Query(value = "update orders set order_status = \"CANCELLED\" where order_id =?1", nativeQuery = true)
+    public void deleteById(String id);
 
 }

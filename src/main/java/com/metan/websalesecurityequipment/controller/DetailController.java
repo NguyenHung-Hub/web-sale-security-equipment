@@ -120,7 +120,6 @@ public class DetailController {
         cartItems.add(cartItem);
         cart.setCartItems(cartItems);
 
-        System.out.println(cart);
         cart=cartService.saveOrUpdateCart(cart);
         return "redirect:/cart";
     }

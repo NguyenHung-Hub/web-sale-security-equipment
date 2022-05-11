@@ -615,6 +615,42 @@ main.mt-home .block-filter .filter__block-list-cate .block-list-cate .list-cate 
     box-shadow: rgba(60, 64, 67, .1) 0 1px 2px 0, rgba(60, 64, 67, .15) 0 2px 6px 2px;
 }
 
+main.mt-home .block-filter .filter__block-list-cate .block-list-cate .list-cate a:nth-child(2n) {
+    background-color: #FDA4AF;
+}
+
+main.mt-home .block-filter .filter__block-list-cate .block-list-cate .list-cate a:nth-child(3n) {
+    background-color: #F9A8D4;
+}
+
+main.mt-home .block-filter .filter__block-list-cate .block-list-cate .list-cate a:nth-child(4n) {
+    background-color: #C4B5FD;
+}
+
+main.mt-home .block-filter .filter__block-list-cate .block-list-cate .list-cate a:nth-child(5n) {
+    background-color: #A5B4FC;
+}
+
+main.mt-home .block-filter .filter__block-list-cate .block-list-cate .list-cate a:nth-child(6n) {
+    background-color: #93C5FD;
+}
+
+main.mt-home .block-filter .filter__block-list-cate .block-list-cate .list-cate a:nth-child(7n) {
+    background-color: #6EE7B7;
+}
+
+main.mt-home .block-filter .filter__block-list-cate .block-list-cate .list-cate a:nth-child(8n) {
+    background-color: #FCD34D;
+}
+
+main.mt-home .block-filter .filter__block-list-cate .block-list-cate .list-cate a:nth-child(9n) {
+    background-color: #FDBA74;
+}
+
+main.mt-home .block-filter .filter__block-list-cate .block-list-cate .list-cate a:nth-child(10n) {
+    background-color: #D1D5DB;
+}
+
 main.mt-home .block-filter .filter__block-list-cate .block-list-cate .list-cate a:not(:nth-of-type(10n)) {
     margin-right: 1rem;
 }

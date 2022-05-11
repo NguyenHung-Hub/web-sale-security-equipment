@@ -115,7 +115,7 @@
                 <div class="category__block-list-cate">
                     <div class="block-list-cate">
                         <div class="list-cate row no-gutters">
-                            <a class="col-sm-2" th:each="category: ${CATEGORIES}" href="#">
+                            <a class="col-sm-2" th:each="category: ${CATEGORIES}" th:href="@{/search(category=${category.categoryId})}">
                                 <img th:src="${category.thumbnail}" src="" th:alt="${category.name}" alt="">
                                 <p th:text="${category.name}"></p>
                             </a>
@@ -196,7 +196,7 @@
                                     <img src="" th:src="${productDiscount.product.thumbnail}" th:alt="${productDiscount.product.name}" alt="">
                                 </a>
                             </div>
-                            <div class="item-product__sticker-percent">
+                            <div th:if="${productDiscount.discountPercent != 0}" class="item-product__sticker-percent">
                                 <p th:text="${'Giảm ' + #numbers.formatPercent(productDiscount.discountPercent, 1, 0)}"></p>
                             </div>
                             <div class="item-product__box-name">
@@ -230,7 +230,7 @@
                                     <img src="" th:src="${product.thumbnail}" th:alt="${product.name}" alt="">
                                 </a>
                             </div>
-                            <div class="item-product__sticker-percent">
+                            <div th:if="${(product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent) != 0}" class="item-product__sticker-percent">
                                 <p th:text="${'Giảm ' + #numbers.formatPercent((product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent), 1, 0)}"></p>
                             </div>
                             <div class="item-product__box-name">
@@ -258,13 +258,13 @@
                 </div>
                 <div class="box-product">
                     <div class="list-product">
-                        <div th:each="product: ${PRODUCT_LIST}" class="item-product">
+                        <div th:each="product: ${TOP_PRODUCT_LIST}" class="item-product">
                             <div class="item-product__box-img">
                                 <a th:href="@{'/product/detail/'+${product.slug}}">
                                     <img src="" th:src="${product.thumbnail}" th:alt="${product.name}" alt="">
                                 </a>
                             </div>
-                            <div class="item-product__sticker-percent">
+                            <div th:if="${(product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent) != 0}" class="item-product__sticker-percent">
                                 <p th:text="${'Giảm ' + #numbers.formatPercent((product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent), 1, 0)}"></p>
                             </div>
                             <div class="item-product__box-name">
@@ -292,23 +292,23 @@
                 </div>
                 <div class="box-product">
                     <div class="list-product">
-                        <div th:each="product: ${PRODUCT_LIST}" class="item-product">
+                        <div th:each="product: ${CCTV_CAMERA_PRODUCTS}" class="item-product">
                             <div class="item-product__box-img">
-                                <a href="">
+                                <a th:href="@{'/product/detail/'+${product.slug}}">
                                     <img src="" th:src="${product.thumbnail}" th:alt="${product.name}" alt="">
                                 </a>
                             </div>
-                            <div class="item-product__sticker-percent">
-                                <p th:text="${'Giảm ' + #numbers.formatPercent(product.discountPercentBase, 1, 0)}"></p>
+                            <div th:if="${(product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent) != 0}" class="item-product__sticker-percent">
+                                <p th:text="${'Giảm ' + #numbers.formatPercent((product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent), 1, 0)}"></p>
                             </div>
                             <div class="item-product__box-name">
-                                <a href="#">
+                                <a th:href="@{'/product/detail/'+${product.slug}}">
                                     <p th:text="${product.title}"></p>
                                 </a>
                             </div>
                             <div class="item-product__box-price">
                                 <p class="special-price"
-                                   th:text="${#numbers.formatDecimal(product.price,3,'POINT',0,'POINT') + '&nbsp;₫'}"></p>
+                                   th:text="${#numbers.formatDecimal(product.price - (product.price * (product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent)),3,'POINT',0,'POINT') + '&nbsp;₫'}"></p>
                                 <p class="old-price"
                                    th:text="${#numbers.formatDecimal(product.price,3,'POINT',0,'POINT') + '&nbsp;₫'}"></p>
                             </div>
@@ -326,23 +326,23 @@
                 </div>
                 <div class="box-product">
                     <div class="list-product">
-                        <div th:each="product: ${PRODUCT_LIST}" class="item-product">
+                        <div th:each="product: ${DAUGHIHINH_PRODUCTS}" class="item-product">
                             <div class="item-product__box-img">
-                                <a href="">
+                                <a th:href="@{'/product/detail/'+${product.slug}}">
                                     <img src="" th:src="${product.thumbnail}" th:alt="${product.name}" alt="">
                                 </a>
                             </div>
-                            <div class="item-product__sticker-percent">
-                                <p th:text="${'Giảm ' + #numbers.formatPercent(product.discountPercentBase, 1, 0)}"></p>
+                            <div th:if="${(product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent) != 0}" class="item-product__sticker-percent">
+                                <p th:text="${'Giảm ' + #numbers.formatPercent((product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent), 1, 0)}"></p>
                             </div>
                             <div class="item-product__box-name">
-                                <a href="#">
+                                <a th:href="@{'/product/detail/'+${product.slug}}">
                                     <p th:text="${product.title}"></p>
                                 </a>
                             </div>
                             <div class="item-product__box-price">
                                 <p class="special-price"
-                                   th:text="${#numbers.formatDecimal(product.price,3,'POINT',0,'POINT') + '&nbsp;₫'}"></p>
+                                   th:text="${#numbers.formatDecimal(product.price - (product.price * (product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent)),3,'POINT',0,'POINT') + '&nbsp;₫'}"></p>
                                 <p class="old-price"
                                    th:text="${#numbers.formatDecimal(product.price,3,'POINT',0,'POINT') + '&nbsp;₫'}"></p>
                             </div>
@@ -360,23 +360,23 @@
                 </div>
                 <div class="box-product">
                     <div class="list-product">
-                        <div th:each="product: ${PRODUCT_LIST}" class="item-product">
+                        <div th:each="product: ${TBBD_BC_PRODUCTS}" class="item-product">
                             <div class="item-product__box-img">
-                                <a href="">
+                                <a th:href="@{'/product/detail/'+${product.slug}}">
                                     <img src="" th:src="${product.thumbnail}" th:alt="${product.name}" alt="">
                                 </a>
                             </div>
-                            <div class="item-product__sticker-percent">
-                                <p th:text="${'Giảm ' + #numbers.formatPercent(product.discountPercentBase, 1, 0)}"></p>
+                            <div th:if="${(product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent) != 0}" class="item-product__sticker-percent">
+                                <p th:text="${'Giảm ' + #numbers.formatPercent((product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent), 1, 0)}"></p>
                             </div>
                             <div class="item-product__box-name">
-                                <a href="#">
+                                <a th:href="@{'/product/detail/'+${product.slug}}">
                                     <p th:text="${product.title}"></p>
                                 </a>
                             </div>
                             <div class="item-product__box-price">
                                 <p class="special-price"
-                                   th:text="${#numbers.formatDecimal(product.price,3,'POINT',0,'POINT') + '&nbsp;₫'}"></p>
+                                   th:text="${#numbers.formatDecimal(product.price - (product.price * (product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent)),3,'POINT',0,'POINT') + '&nbsp;₫'}"></p>
                                 <p class="old-price"
                                    th:text="${#numbers.formatDecimal(product.price,3,'POINT',0,'POINT') + '&nbsp;₫'}"></p>
                             </div>
@@ -394,23 +394,23 @@
                 </div>
                 <div class="box-product">
                     <div class="list-product">
-                        <div th:each="product: ${PRODUCT_LIST}" class="item-product">
+                        <div th:each="product: ${CKKSC_PRODUCTS}" class="item-product">
                             <div class="item-product__box-img">
-                                <a href="">
+                                <a th:href="@{'/product/detail/'+${product.slug}}">
                                     <img src="" th:src="${product.thumbnail}" th:alt="${product.name}" alt="">
                                 </a>
                             </div>
-                            <div class="item-product__sticker-percent">
-                                <p th:text="${'Giảm ' + #numbers.formatPercent(product.discountPercentBase, 1, 0)}"></p>
+                            <div th:if="${(product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent) != 0}" class="item-product__sticker-percent">
+                                <p th:text="${'Giảm ' + #numbers.formatPercent((product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent), 1, 0)}"></p>
                             </div>
                             <div class="item-product__box-name">
-                                <a href="#">
+                                <a th:href="@{'/product/detail/'+${product.slug}}">
                                     <p th:text="${product.title}"></p>
                                 </a>
                             </div>
                             <div class="item-product__box-price">
                                 <p class="special-price"
-                                   th:text="${#numbers.formatDecimal(product.price,3,'POINT',0,'POINT') + '&nbsp;₫'}"></p>
+                                   th:text="${#numbers.formatDecimal(product.price - (product.price * (product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent)),3,'POINT',0,'POINT') + '&nbsp;₫'}"></p>
                                 <p class="old-price"
                                    th:text="${#numbers.formatDecimal(product.price,3,'POINT',0,'POINT') + '&nbsp;₫'}"></p>
                             </div>
@@ -429,65 +429,8 @@
                     </div>
                     <div class="block-list-cate">
                         <div class="list-cate">
-                            <a href="#">
-                                <p>Độc quyền</p>
-                            </a>
-                            <a href="#">
-                                <p>Độc quyền</p>
-                            </a>
-                            <a href="#">
-                                <p>Độc quyền</p>
-                            </a>
-                            <a href="#">
-                                <p>Độc quyền</p>
-                            </a>
-                            <a href="#">
-                                <p>Độc quyền</p>
-                            </a>
-                            <a href="#">
-                                <p>Độc quyền</p>
-                            </a>
-                            <a href="#">
-                                <p>Độc quyền</p>
-                            </a>
-                            <a href="#">
-                                <p>Độc quyền</p>
-                            </a>
-                            <a href="#">
-                                <p>Độc quyền</p>
-                            </a>
-                            <a href="#">
-                                <p>Độc quyền</p>
-                            </a>
-                            <a href="#">
-                                <p>Độc quyền</p>
-                            </a>
-                            <a href="#">
-                                <p>Độc quyền</p>
-                            </a>
-                            <a href="#">
-                                <p>Độc quyền</p>
-                            </a>
-                            <a href="#">
-                                <p>Độc quyền</p>
-                            </a>
-                            <a href="#">
-                                <p>Độc quyền</p>
-                            </a>
-                            <a href="#">
-                                <p>Độc quyền</p>
-                            </a>
-                            <a href="#">
-                                <p>Độc quyền</p>
-                            </a>
-                            <a href="#">
-                                <p>Độc quyền</p>
-                            </a>
-                            <a href="#">
-                                <p>Độc quyền</p>
-                            </a>
-                            <a href="#">
-                                <p>Độc quyền</p>
+                            <a th:each="category : ${PHU_KIEN_CATEGORIES}" href="#">
+                                <p th:text="${category.name}"></p>
                             </a>
                         </div>
                     </div>
