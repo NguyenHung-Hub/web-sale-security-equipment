@@ -1,16 +1,21 @@
 * {
     font-family: Arial, Helvetica, sans-serif;
 }
+
 .font-14{
     font-size: 14px;
 }
 .font-16{
     font-size: 16px;
 }
+.font-20{
+     font-size: 20px;
+}
 .checked-rating {
     color: orange;
 }
 
+@import url(//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css);
 .desc{
     margin-left: 0px;
     margin-right: -20px;
@@ -107,17 +112,17 @@ h1 {
 
 .rating>label:before {
     margin: 5px;
-    font-size: 1.25em;
-    font-family: FontAwesome;
+    font-size: 30px;
+    font-family: 'Font Awesome 5 Free';
     display: inline-block;
-    content: "\f762";
+    content: "\f005";
 }
 
 
 /*1 ngôi sao*/
 
 .rating>.half:before {
-    content: "\f762";
+    content: "\f005";
     position: absolute;
 }
 
@@ -284,3 +289,9 @@ a.page-link, span.page-link {
     color: #ff9999;
     text-decoration: none;
 }
+.no-review{
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+

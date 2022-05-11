@@ -1,8 +1,6 @@
 package com.metan.websalesecurityequipment.model;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,7 +9,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-public @Data
+public
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(of = "userId")
 class User implements Serializable {
     @Id
@@ -23,22 +25,23 @@ class User implements Serializable {
     private String email;
     @Column(name = "phone_number",unique = true)
     private String phoneNumber;
-    private byte[] avatar;
     private String role;
     private String profile;
     @Column(name = "registered_at", columnDefinition = "datetime")
     private Date registeredAt;
     private String password;
-    @OneToOne
-    @JoinColumn(name = "cart_id")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Cart cart;
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
     @Column(name = "verification_code",length = 64)
     private String verificationCode;
+    private boolean enable;
     @Enumerated(EnumType.STRING)
     @Column(name = "auth_provider", length = 15)
     private AuthenticationProvider authProvider;
+    @Embedded
+    private Address address;
 
     @Transient
     public String getFullName() {

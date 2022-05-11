@@ -4,6 +4,7 @@ import com.metan.websalesecurityequipment.model.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,12 +17,15 @@ public interface ProductRepository extends JpaRepository<Product, String> {
     public List<Product> findAllByOrderByNameAsc();
 
     @Query(value = "select p.*, sum(oi.quantity) as tong from products p inner join order_items oi on p.product_id = oi.product_id " +
-            "group by p.product_id, p.quantity, p.created_at, " +
-            " p.modified_at, p.brand_id, p.category_id, p.discount_id, " +
+            "group by p.product_id, p.discount_percent_base, p.quantity, p.created_at, " +
+            " p.modified_at, p.brand_id, p.category_id, " +
             "p.long_desc, p.name, p.price, p.short_desc, p.slug, " +
             "p.thumbnail, p.title " +
-            "order by tong desc limit 4", nativeQuery = true)
+            "order by tong desc limit 20", nativeQuery = true)
     public List<Product> findTopProduct();
+
+    @Query(value = "SELECT product_id, created_at, discount_percent_base, long_desc, modified_at, name, price, quantity, short_desc, slug, thumbnail, title, brand_id, category_id FROM(SELECT p.*, @rownum \\:= @rownum + 1 AS rn FROM products p, (SELECT @rownum \\:= 0) T1) T2 ORDER BY rn DESC", nativeQuery = true)
+    public List<Product> findProductsNew();
 
     @Query(value = "SELECT * FROM products ORDER BY RAND() LIMIT ?1", nativeQuery = true)
     public List<Product> findTopNumberRandom(int top);
@@ -44,9 +48,9 @@ public interface ProductRepository extends JpaRepository<Product, String> {
     public Page<Product> searchByNameRating(int rating ,double minPrice, double maxPrice,String name,Pageable pageable);
 
     @Query(value = "select distinct(p.product_id), p.*, sum(order_items.quantity) as totalQuan from (order_items) right outer join (products p) on p.product_id =order_items.product_id join (categories c) \n" +
-            "on c.category_id = p.category_id join product_reviews pr on pr.product_id=p.product_id \n" +
+            "on c.category_id = p.category_id join (product_reviews pr) on pr.product_id=p.product_id \n" +
             " where (p.brand_id in (?2) \n" +
-            "            OR (c.subcategory_id in (?1) or c.category_id in ?1)) \n" +
+            "            OR (c.parent_category_id in (?1) or c.category_id in (?1) )) \n" +
             "            and pr.rating >= ?3 " +
             " and (p.price >=?4 and p.price<=?5) and p.name like %?6% " +
             " group by p.product_id ", nativeQuery = true)
@@ -55,7 +59,7 @@ public interface ProductRepository extends JpaRepository<Product, String> {
     @Query(value = "select p.*, sum(order_items.quantity) as totalQuan from (order_items) right outer join (products p) on p.product_id =order_items.product_id join (categories c) \n" +
             "on c.category_id = p.category_id \n" +
             " where (p.brand_id in ?2 \n" +
-            "            OR( c.subcategory_id in ?1 or c.category_id in ?1)) \n" +
+            "            OR( c.parent_category_id in ?1 or c.category_id in ?1)) \n" +
             " and (p.price >=?3 and p.price<=?4) and p.name like %?5% " +
             "group by p.product_id ", nativeQuery = true)
     public Page<Product> searchByNameCateBrand(List<Integer> cates,List<Integer> brands,double minPrice, double maxPrice,String name,Pageable pageable);
@@ -64,5 +68,11 @@ public interface ProductRepository extends JpaRepository<Product, String> {
             "where (products.price >=?1 and products.price<=?2) and products.name like %?3% " +
             "group by products.product_id ", nativeQuery = true)
     public Page<Product> searchByPrice(double minPrice, double maxPrice, String name, Pageable pageable);
+
+    @Query(value = "select p.*, sum(order_items.quantity) as totalQuan from (order_items) right outer join (products p) on p.product_id =order_items.product_id join (categories c) \n" +
+            "on c.category_id = p.category_id \n" +
+            " where c.parent_category_id in ?1 or c.category_id in ?1 \n" +
+            " group by p.product_id ", nativeQuery = true)
+    public Page<Product> searchByCategory(List<Integer> cateId, Pageable pageable);
 
 }

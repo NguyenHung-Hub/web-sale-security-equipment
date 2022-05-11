@@ -21,10 +21,9 @@ import javax.sql.DataSource;
 /**
  * web security config
  * user from database and used hibernate jpa
- * actor: Hoang
  */
 @Configuration
-//@EnableWebSecurity
+@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -33,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
 
-        web.ignoring().antMatchers("/imgs/**", "/js/**", "/fonts/**", "webjars/**", "/css/**", "/static/**","/**");
+        web.ignoring().antMatchers("/imgs/**", "/js/**", "/fonts/**", "webjars/**", "/css/**", "/static/**");
 
 
     }
@@ -77,9 +76,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/account/login/**").permitAll()
+//                .antMatchers("/").permitAll()
+                .antMatchers("/search").permitAll()
+                .antMatchers("/search/products").permitAll()
+                .antMatchers("/account/**").permitAll()
                 .antMatchers("/oauth2/**").permitAll()
+                .antMatchers("/product/detail/**").permitAll()
+                .antMatchers("/product/reviews").authenticated()
+                .antMatchers("/product/addToCart").authenticated()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -91,7 +95,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .defaultSuccessUrl("/")
                 .and()
                 .oauth2Login()
-                    .loginPage("/account/login")
+                    .loginPage("/")
                     .userInfoEndpoint()
                     .userService(oAuth2UserService)
                     .and()
@@ -127,4 +131,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
+
+
 }

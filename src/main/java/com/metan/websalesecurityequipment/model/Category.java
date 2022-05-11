@@ -31,11 +31,13 @@ class Category {
     private Date createdAt;
     @Column(name = "modified_at", columnDefinition = "datetime")
     private Date modifiedAt;
+    @Column(name = "thumbnail")
+    private String thumbnail;
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     @JsonBackReference
     private List<Product> products;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subcategory_id")
+    @JoinColumn(name = "parent_category_id")
     @JsonManagedReference
     private Category category;
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)

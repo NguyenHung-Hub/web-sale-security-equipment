@@ -2,6 +2,7 @@
 #
 # spring boot connection
 #
+server.port : 8080
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/web-sale-security-equipment?useUnicode=yes&characterEncoding=UTF-8
@@ -16,18 +17,6 @@ spring:
         dialect: org.hibernate.dialect.MySQL55Dialect
         format_sql: false
     show-sql: true
-
-  #  mail:
-  #    host: stmp.gmail.com
-  #    password: 123abbddeagasgswg
-  #    port: 587
-  #    properties:
-  #      mail:
-  #        smtp:
-  #          auth: true
-  #          starttls:
-  #            enable: true
-  #    username: dohuyhoang.iuh.k15@gmail.com
   security:
     oauth2:
       client:
@@ -35,7 +24,6 @@ spring:
           google:
             client-id: 278048724465-sro60cm4e4m92fdboc77tjhvj6gdb67q.apps.googleusercontent.com
             client-secret: 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
-            login_hint: dohuyhoang.iuh.k15@gmail.com
             scope:
               - email
               - profile
@@ -45,8 +33,17 @@ spring:
             scope:
               - email
               - public_profile
-server:
-  port: 9999
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: huyhoang14901@gmail.com
+    password: huyhoang123
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 #aws
 access:
   key:

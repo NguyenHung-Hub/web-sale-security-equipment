@@ -1,11 +1,11 @@
-* {
-    font-family: Arial, Helvetica, sans-serif;
-}
+/** {*/
+/*    font-family: Arial, Helvetica, sans-serif;*/
+/*}*/
 
-.container {
-    min-width: 1140px;
+/*.container {*/
+/*    min-width: 1140px;*/
 
-}
+/*}*/
 
 .search-nav-filter {
     width: 20%;
@@ -276,7 +276,7 @@ div.filter-evaluate > .checked {
 }
 
 .select-price-item{
-    margin-left: -40px;
+    margin-left: 0px;
     text-align: center;
 }
 
@@ -484,6 +484,8 @@ a.page-link, span.page-link {
 
 /* thiết lập style cho class active */
 .pagination li.active > .current {
+    width:30px;
+    height: 30px;
     background-color: #ff9999;
     color: black;
     font-size: 14px;

@@ -1,17 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-
-<head th:replace="fragments-demo :: head">
-    <title>Tìm kiếm</title>
+<head>
+    <th:block th:replace="fragments :: base ('Tìm kiếm')"/>
+    <th:block th:replace="fragments :: search"/>
 </head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script th:src="@{/js/search.js}"></script>
-
 <body>
-<div th:replace="fragments-demo :: header"></div>
-<div class="container">
+<div th:replace="fragments :: header (categories=${CATEGORIES})"></div>
+<div class="container" style="min-width: 1200px">
     <div class="row">
         <div class="search-nav-filter">
             <div class=" filter-title">
@@ -23,7 +18,8 @@
                         <div class="group-filter-header"><b>Theo Danh Mục</b></div>
                         <div class="group-filter-content" th:each="category1:${categoriesFirst}">
                             <div class="group-filter-content-item">
-                                <input class="check-category" type="checkbox" th:value="${category1.categoryId}">
+                               <!-- /m${param.category==${category1.categoryId}}-->
+                                <input th:checked="${param.category == category1.categoryId}?true:false" th:id="${category1.categoryId}" class="check-category" type="checkbox" th:value="${category1.categoryId}">
                                 <label th:text="${category1.name}"></label>
                             </div>
                         </div>
@@ -31,7 +27,7 @@
                     <div id="categories" class="group-filter-content-add" th:if="${categoriesLast != null}">
                         <div th:each="category2:${categoriesLast}">
                             <div class="group-filter-content-item">
-                                <input class="check-category" type="checkbox" th:value="${category2.categoryId}">
+                                <input th:id="${category2.categoryId}" class="check-category" type="checkbox" th:value="${category2.categoryId}">
                                 <label th:text="${category2.name}"></label>
                             </div>
                         </div>
@@ -196,7 +192,7 @@
                     <h4>Không tìm thấy sản phẩm phù hợp</h4>
                 </div>
             </div>
-            <div id="list-product" >
+            <div id="list-product">
                 <div class="content" th:each="product:${productPage.content}">
                     <div class="gallery">
                         <a>
@@ -204,7 +200,7 @@
                         </a>
                         <a class="desc-link text-dark" th:href="@{'/product/detail/'+${product.slug}}">
                             <div class="description">
-                                <div class="desc-name" th:text="${product.name}"></div>
+                                <div class="desc-name" th:text="${product.title}"></div>
                                 <div class="desc-price">
                                 <span class="desc-price-hidden">
                                     <del>
@@ -214,7 +210,7 @@
                                 </span>
                                     <span class="desc-price-display">
                                     <span class="desc-price-display-d">đ</span>
-                                    <span th:text="${product.productDiscount!=null}? ${#numbers.formatDecimal((product.price - product.price*product.productDiscount.discountPercent),1,'DEFAULT',0,'DEFAULT')}:${#numbers.formatDecimal(product.price,1,'DEFAULT',0,'DEFAULT')}"></span>
+                                    <span th:text="${#numbers.formatDecimal(product.price - (product.price * (product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent)),3,'POINT',0,'POINT') + '&nbsp;'}"></span>
                                 </span>
                                 </div>
                                 <div class="desc-eval">
@@ -228,9 +224,8 @@
                                           th:classappend="${listRating.get(product.productId)>=4}? checked"></span>
                                     <span class="fa fa-star"
                                           th:classappend="${listRating.get(product.productId)>=5}? checked"></span>
-                                        <span class="da-ban" th:text=" 'Đã bán '+ (${listQuan.get(product.productId)== null}?'0':${listQuan.get(product.productId)})">Đã bán 216</span>
-
-
+                                    <span class="da-ban"
+                                          th:text=" 'Đã bán '+ (${listQuan.get(product.productId)== null}?'0':${listQuan.get(product.productId)})">Đã bán 216</span>
                                 </div>
                                 <div class="desc-address" style="color: #000000A6;">
                                     <i style="color: rgb(0, 191, 165); font-size: 12px;" class="fas fa-truck"></i>
@@ -251,19 +246,18 @@
             </nav>
         </div>
     </div>
-
 </div>
+<footer th:replace="fragments :: footer"></footer>
+<th:block th:replace="fragments :: base-js"/>
+<th:block th:replace="fragments ::  search-js"/>
 <th:block>
 
 </th:block>
 <th:block>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" th:src="@{/js/jquery.simplePagination.js}"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
     <script th:inline="javascript">
-
-
         let currentPage = [[${productPage.getPageable().getPageNumber()}]];
         console.log(currentPage);
         let totalPages = [[${productPage.getTotalPages()}]];
@@ -274,6 +268,7 @@
         let ratings = [];
         let rating = 0;
         let columnName = 'name';
+
         $(function () {
             const b = [[${productPage.hasContent}]];
             if (b == true) {
@@ -284,6 +279,16 @@
             }
         })
         $(function () {
+            // let cateId=[[${param.category}]];
+            // if([[${param.category}]]){
+            //     $("#"+cateId).checked= confirm("Are you sure?");
+            // }
+            // if([[${param.category}]]){
+            //     let cateId = [[${param.category}]];
+            //     console.log( "cateId1: "+cateId);
+            //     categoryIds=categoryIds.push(cateId);
+            //     console.log("categoryIds1 : "+categoryIds);
+            // }
             pagination();
         });
 
@@ -297,10 +302,10 @@
                     prevText: '<span class="active-link" aria-hidden="true">&laquo;</span>',
                     nextText: '<span class="active-link" aria-hidden="true">&raquo;</span>',
                     onInit: function () {
-
                     },
                     onPageClick: function (page, evt) {
                         currentPage = page;
+                        console.log("categoryIds2 : "+categoryIds);
                         getProducts();
                         $('body,html').animate({scrollTop: 0}, 800);
                     }
@@ -329,7 +334,7 @@
                 }).get();
                 currentPage = 1;
                 getProducts();
-                console.log("ratingValue: " + rating)
+                console.log("cate: " + categoryIds)
             })
 
             $(".check-rating").change(function () {
@@ -348,28 +353,25 @@
                 console.log("ratingValue: " + rating)
                 console.log("ratings: " + ratings)
             })
+
             $('.submitPrice').click(function () {
                 minPrice = parseFloat($('.price-input#fromPrice').val());
                 maxPrice = parseFloat($('.price-input#toPrice').val());
-
                 if (isNaN(minPrice) && isNaN(maxPrice)) {
                     $('#errorMessagePrice').html('Khoảng giá không hợp lệ');
                     window.location.href = '#errorMessagePrice';
-                    minPrice=0;
-                    maxPrice=999999999999;
-
+                    minPrice = 0;
+                    maxPrice = 999999999999;
                 } else if (minPrice > maxPrice) {
                     $('#errorMessagePrice').html('Khoảng giá không hợp lệ');
                     window.location.href = '#errorMessagePrice';
-                    minPrice=0;
-                    maxPrice=999999999999;
-
+                    minPrice = 0;
+                    maxPrice = 999999999999;
                 } else if (minPrice > 999999999999 || maxPrice > 999999999999) {
                     $('#errorMessagePrice').html('Khoảng giá quá lớn');
                     window.location.href = '#errorMessagePrice';
-                    minPrice=0;
-                    maxPrice=999999999999;
-
+                    minPrice = 0;
+                    maxPrice = 999999999999;
                 } else {
                     console.log("minPrice: " + minPrice)
                     console.log("maxPrice: " + maxPrice)
@@ -378,7 +380,6 @@
                     $('#errorMessagePrice').html('');
                     window.location.href = '#';
                 }
-
             })
             $('.btn-select').click(function () {
 
@@ -405,6 +406,7 @@
                 page: currentPage - 1,
                 columnName: columnName
             }
+            console.log("categoryIds3 : "+categoryIds);
             let myJSON = JSON.stringify(req);
             $.ajax({
                 url: "search/products",
@@ -422,19 +424,15 @@
                 }
             })
         }
-
         let listRating = [[${listRating}]];
         let listQuantity = [[${listQuan}]];
         console.log(listRating);
-
         function createData(products) {
             let html = '';
-
             if (products.length > 0) {
-
-                html+=`<div class="content">`;
-                    for (product of products) {
-                        html += `
+                html += `<div class="content">`;
+                for (product of products) {
+                    html += `
                         <div class="gallery">
                             <a>
                                 <img src="${product.thumbnail}"
@@ -452,7 +450,7 @@
                                     </span>
                                     <span class="desc-price-display">
                                         <span class="desc-price-display-d">đ</span>
-                                        <span>${product.productDiscount!=null?new Intl.NumberFormat('vi-VN', {maximumSignificantDigits: 3}).format(product.price - product.price * product.productDiscount.discountPercent):new Intl.NumberFormat('vi-VN', {maximumSignificantDigits: 3}).format(product.price)}</span>
+                                        <span>${product.productDiscount != null ? new Intl.NumberFormat('vi-VN', {maximumSignificantDigits: 3}).format(product.price - product.price * product.productDiscount.discountPercent) : new Intl.NumberFormat('vi-VN', {maximumSignificantDigits: 3}).format(product.price)}</span>
                                     </span>
                                 </div>
                                 <div class="desc-eval">
@@ -461,7 +459,7 @@
                                     <span class="fa fa-star ${listRating[product.productId] >= 3 ? 'checked' : ''}"></span>
                                     <span class="fa fa-star ${listRating[product.productId] >= 4 ? 'checked' : ''}"></span>
                                     <span class="fa fa-star ${listRating[product.productId] >= 5 ? 'checked' : ''}"></span>
-                                    <span class="da-ban"> Đã bán ${listQuantity[product.productId]?listQuantity[product.productId]:'0'}</span>
+                                    <span class="da-ban"> Đã bán ${listQuantity[product.productId] ? listQuantity[product.productId] : '0'}</span>
                                 </div>
                                 <div class="desc-address" style="color: #000000A6;">
                                     <i style="color: rgb(0, 191, 165); font-size: 12px;" class="fas fa-truck"></i>
@@ -470,12 +468,11 @@
                             </div>
                             </a>
                         </div>`;
-                    }
-                html+=`</div>`;
+                }
+                html += `</div>`;
                 $("#list-product").html("");
                 $('.error-null').css('display', 'none');
                 $("#list-product").html(html);
-
             } else {
                 $("#list-product").html("");
                 $('.error-null').css('display', 'flex');

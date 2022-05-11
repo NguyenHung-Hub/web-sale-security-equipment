@@ -15,10 +15,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -45,13 +42,15 @@ public class SearchController {
 
 
     @GetMapping(value = "search")
-    public String showSearch1(ModelMap model, @RequestParam(name = "name", required = false) String name,
+    public String showSearch1(ModelMap model,  @RequestParam(name = "name",defaultValue = "",required = false) String name,
                               @RequestParam("page") Optional<Integer> page,
                               @RequestParam("size") Optional<Integer> size) {
+
         this.name = name;
         List<Brand> brands = brandService.findAll();
         List<Category> categories = categoryService.findAll();
         display(model, name, page, size, brands, categories);
+        model.addAttribute("CATEGORIES", categories);
 
         return "search";
     }
@@ -137,8 +136,14 @@ public class SearchController {
         int pageSize = size.orElse(12);
 
         pageable = PageRequest.of(currentPage, pageSize, Sort.by("name"));
-        resultPage = getProductByName(name, pageable);
-        //System.out.println("my detail"+resultPage.getContent().get(0).getOrderItems());
+//        if(cateId!=-1){
+//            System.out.println("cate1");
+//            resultPage = productService.searchByCategory(Arrays.asList(cateId), pageable);
+//        }else{
+            resultPage = getProductByName(name, pageable);
+//        }
+
+
         model.addAttribute("brandsFirst", brandsFirst);
         model.addAttribute("brandsLast", brandsLast);
         model.addAttribute("categoriesFirst", categoriesFirst);

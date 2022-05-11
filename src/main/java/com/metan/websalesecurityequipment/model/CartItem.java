@@ -1,9 +1,7 @@
 package com.metan.websalesecurityequipment.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,13 +9,15 @@ import java.util.Date;
 @Entity
 @Table(name = "cart_items")
 @IdClass(CartItemPK.class)
-public @Data
+public @Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(of = {"product", "cart"})
 class CartItem {
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
-    @JsonManagedReference
     private Product product;
     @Id
     @ManyToOne

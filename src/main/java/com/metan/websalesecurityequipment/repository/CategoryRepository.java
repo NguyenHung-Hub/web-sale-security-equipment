@@ -12,6 +12,6 @@ import java.util.List;
 @Transactional
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
-    @Query(value = "SELECT * FROM `web-sale-security-equipment`.categories where subcategory_id is null", nativeQuery = true)
+    @Query(value = "SELECT * FROM `web-sale-security-equipment`.categories where parent_category_id is null", nativeQuery = true)
     public List<Category> findAll();
 }

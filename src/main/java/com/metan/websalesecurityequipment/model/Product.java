@@ -2,8 +2,11 @@ package com.metan.websalesecurityequipment.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -35,17 +38,16 @@ class Product {
     @JoinColumn(name = "category_id")
     @JsonIgnoreProperties("products")
     private Category category;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "discount_id")
-    private ProductDiscount productDiscount;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @JsonIncludeProperties("discountPercent")
+    private List<ProductDiscount> productDiscounts;
+    private float discountPercentBase;
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brand_id")
     @JsonManagedReference
     private Brand brand;
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    @JsonBackReference
-    private List<CartItem> cartItems;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     @JsonBackReference
     private List<OrderItem> orderItems;
@@ -57,11 +59,8 @@ class Product {
     private Date createdAt;
     @Column(name = "modified_at", columnDefinition = "datetime")
     private Date modifiedAt;
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "type_id")
-//    @JsonIgnoreProperties("products")
-//    private ProductType productType;
-    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JsonBackReference
     private List<ProductAttribute> productAttributes;
     @OneToMany(mappedBy = "product")

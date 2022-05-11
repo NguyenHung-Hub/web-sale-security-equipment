@@ -1,53 +1,107 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-
 :root {
-    --color-primary: #2fa1da;
-    --color-primary-light: #84d9fe;
-
-    --bg-header: #282a36;
-    --color-header: #fff;
-    --color-icon-header: #fff;
-
-    --bg-nav: #282a36;
-    --bg-nav-hover: #fff;
-    --color-nav: #6be9f3;
-    --color-nav-hover: #fff;
-
-    --bg-card: #fff;
-    --color-rating: #f7ac44;
-    --text-grey: #a1a1a1;
-    --text-red: #ff0000;
-    --text-black: #2d2d2d;
-
-    --border-grey: #ccc;
-    --border-red: #f7665f;
-
-    --bg-footer: #212121;
-    --color-footer: #fff;
+    --white-color: #fff;
+    --black-color: #000;
+    --text-color: #333;
+    --header-color: #666;
+    --primary-color: #1070dc;
 }
 
-*,
-*::before,
-*::after {
-    margin: 0;
-    padding: 0;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+body {
+    font-family: inherit;
+    font-size: 1.4rem;
+    line-height: 22px;
 }
 
 a {
     text-decoration: none;
 }
 
-li {
-    list-style: none;
-}
-html {
-    /*font-size: 62.5%;*/
+body img {
+    width: 100%;
+    height: auto;
 }
 
-body {
-    font-family: "Poppins", "Roboto", sans-serif;
-    font-size: 1rem;
+body ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: sans-serif;
+    color: var(--text-color);
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1200px;
+    }
+
+    .container-lg {
+        max-width: 1200px;
+    }
+}
+
+.my-section {
+    margin-bottom: 30px;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
+.nav-link.active {
+    color: var(--primary-color) !important;
+}
+
+.text-strong {
+    font-weight: 600;
+    font-size: 1.4rem;
+}
+
+.row-full {
+    box-sizing: border-box;
+}
+
+.column-container {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+@media (max-width: 991px) {
+    .column-container-md {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.row-fluid > .column-container > .column-inner {
+    padding-top: 35px;
+    padding-bottom: 35px;
+}
+
+.row > .column-container > .column-inner {
+    box-sizing: border-box;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+}
+
+.element {
+    margin-bottom: 20px !important;
+}
+
+.single-img {
+    text-align: left;
 }

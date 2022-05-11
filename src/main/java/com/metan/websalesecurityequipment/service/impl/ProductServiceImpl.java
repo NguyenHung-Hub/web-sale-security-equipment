@@ -30,6 +30,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> findProductsNew() {
+        return productRepository.findProductsNew();
+    }
+
+    @Override
     public Product findProductById(String theId) {
         Optional<Product> result = productRepository.findById(theId);
         Product product;
@@ -106,6 +111,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> findTopNumberRandom(int top) {
         return productRepository.findTopNumberRandom(top);
+    }
+
+    @Override
+    public Page<Product> searchByCategory(List<Integer> cateId, Pageable pageable) {
+        return productRepository.searchByCategory(cateId, pageable);
     }
 
 

@@ -10,6 +10,8 @@ import java.util.List;
 public interface ProductService {
     public List<Product> findAll();
 
+    public List<Product> findProductsNew();
+
     public Product findProductById(String theId);
 
     public Product saveProduct(Product product);
@@ -31,5 +33,5 @@ public interface ProductService {
     public Product findBySlug(String slug);
     public List<Product> findTopNumberRandom(int top);
 
-
+    public Page<Product> searchByCategory(List<Integer> cateId, Pageable pageable);
 }
