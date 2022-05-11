@@ -5,19 +5,22 @@ import com.metan.websalesecurityequipment.model.*;
 import com.metan.websalesecurityequipment.repository.UserRepository;
 import com.metan.websalesecurityequipment.service.CartService;
 import com.metan.websalesecurityequipment.service.OrderService;
+import com.metan.websalesecurityequipment.service.ProductService;
 import com.metan.websalesecurityequipment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 @RestController
 @RequestMapping("/api/cart")
 public class CartRestController {
-
+    @Autowired
+    private ProductService productService;
     @Autowired
     private CartService cartService;
     @Autowired
@@ -56,6 +59,7 @@ public class CartRestController {
     {
 //        User user = userRepository.findById(2L).get();
 //        Cart cart = user.getCart();
+        Product product= productService.findProductById(productId);
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String myUserDetailName = ((MyUserDetails) principal).getUsername();
 
@@ -64,6 +68,19 @@ public class CartRestController {
 
 //        User user = userRepository.findById(3L).get();
 //        Cart cart = user.getCart();
+//        List<CartItem> cartItems= cart.getCartItems();
+
+//        System.out.println(cartItems.size());
+//
+//        CartItem cartItem = new CartItem();
+//        cartItem.setCart(cart);
+//        cartItem.setProduct(product);
+//        cartItems.remove(cartItem);
+//
+//        System.out.println(cartItems.size());
+//
+//        cart.setCartItems(cartItems);
+//        cartService.saveOrUpdateCart(cart);
         cartService.deleteCardItem(new CartItemPK(productId, cart.getCartId()));
         return productId;
     };
