@@ -263,7 +263,7 @@
             <div class="block-product mb-3">
                 <div class="box-title">
                     <h2>Đầu ghi hình</h2>
-                    <a href="#">Xem tất cả</a>
+                    <a th:href="@{/search(category=${DAUGHIHINH_PRODUCTS.get(0).category.category.categoryId})}">Xem tất cả</a>
                 </div>
                 <div class="box-product">
                     <div class="list-product">
@@ -297,7 +297,7 @@
             <div class="block-product mb-3">
                 <div class="box-title">
                     <h2>Thiết bị báo động - báo cháy</h2>
-                    <a href="#">Xem tất cả</a>
+                    <a th:href="@{/search(category=${TBBD_BC_PRODUCTS.get(0).category.category.categoryId})}">Xem tất cả</a>
                 </div>
                 <div class="box-product">
                     <div class="list-product">
@@ -331,7 +331,7 @@
             <div class="block-product mb-3">
                 <div class="box-title">
                     <h2>Chuông, khóa, kiểm soát cửa</h2>
-                    <a href="#">Xem tất cả</a>
+                    <a th:href="@{/search(category=${CKKSC_PRODUCTS.isEmpty() ? 1 : CKKSC_PRODUCTS.get(0).category.category.categoryId})}">Xem tất cả</a>
                 </div>
                 <div class="box-product">
                     <div class="list-product">
@@ -371,7 +371,8 @@
                     </div>
                     <div class="block-list-cate">
                         <div class="list-cate">
-                            <a th:each="category : ${PHU_KIEN_CATEGORIES}" href="#">
+                            <a th:each="category : ${PHU_KIEN_CATEGORIES}"
+                               th:href="@{/search(category=${category.categoryId})}">
                                 <p th:text="${category.name}"></p>
                             </a>
                         </div>
