@@ -39,9 +39,9 @@ class Category {
     private List<Product> products;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_category_id")
-    @JsonManagedReference
+    @JsonBackReference
     private Category category;
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
-    @JsonBackReference
+    @JsonManagedReference
     private List<Category> categories;
 }
