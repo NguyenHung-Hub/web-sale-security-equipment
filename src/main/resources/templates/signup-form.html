@@ -68,11 +68,11 @@
                 <div class="form-card card border-0 shadow my-5">
                     <div class="card-body p-4 p-sm-5">
                         <h5 class="card-title mb-3">Tạo tài khoản mới</h5>
-                        <form class="mb-3" th:action="@{/account/register}" method="post" th:object="${USER}">
+                        <form class="mb-3" th:action="@{/account/register}" method="post" th:object="${user}">
                             <div class="group-form-row card-group mb-3 justify-content-between">
                                 <div class="flex-fill form-floating">
                                     <input name="firstName" type="text" class="form-control  fs-4" id="floatingInputFirstName"
-                                           placeholder="Họ" th:field="*{firstName}" required>
+                                           placeholder="Họ" th:field="*{firstName}">
                                     <label for="floatingInputFirstName">Họ</label>
                                 </div>
                                 <div class="flex-fill form-floating">
@@ -81,33 +81,47 @@
                                     <label for="floatingInputLastName">Tên</label>
                                 </div>
                             </div>
+                            <div th:if="${#fields.hasErrors('firstName')}">
+                                <p class="text-danger" th:errors="*{firstName}"></p>
+                            </div>
+                            <div th:if="${!#fields.hasErrors('firstName') && #fields.hasErrors('lastName')}">
+                                <p class="text-danger" th:errors="*{lastName}"></p>
+                            </div>
                             <div class="form-floating mb-3">
-                                <input name="email" type="email" class="form-control  fs-4" id="floatingInputEmail"
+                                <input name="email" type="text" class="form-control  fs-4" id="floatingInputEmail"
                                        placeholder="Email" th:field="*{email}">
                                 <label for="floatingInputEmail">Email</label>
+                            </div>
+                            <div th:if="${(!#fields.hasErrors('firstName')) && !#fields.hasErrors('lastName') && #fields.hasErrors('email')}">
+                                <p class="text-danger" th:errors="*{email}"></p>
                             </div>
                             <div class="form-floating mb-3">
                                 <input name="phoneNumber" type="tel" class="form-control fs-4" id="floatingInputPhoneNumber"
                                        placeholder="Số điện thoại" th:field="*{phoneNumber}">
                                 <label for="floatingInputPhoneNumber">Số điện thoại</label>
                             </div>
-                            <div class="form-floating form-pass mb-3">
+                            <div th:if="${(!#fields.hasErrors('firstName')) && !#fields.hasErrors('lastName') && !#fields.hasErrors('email') && #fields.hasErrors('phoneNumber')}">
+                                <p class="text-danger" th:errors="*{phoneNumber}"></p>
+                            </div>
+                            <div id="show-hide-password" class="form-floating mb-3">
                                 <input name="password" type="password" class="form-control fs-4" id="floatingPassword"
                                        placeholder="Mật khẩu" th:field="*{password}">
                                 <label for="floatingPassword">Mật khẩu</label>
-                                <a class="show-pass"><i class="fas fa-eye-slash" aria-hidden="true"></i></a>
+                                <a href="" class="show-pass"><i class="fas fa-eye-slash" aria-hidden="true"></i></a>
                             </div>
-                            <div class="form-floating form-pass mb-3">
+                            <div class="form-floating mb-3">
                                 <input name="rePassword" type="password" class="form-control fs-4" id="floatingRePassword"
                                        placeholder="Nhập lại mật khẩu">
                                 <label for="floatingRePassword">Nhập lại mật khẩu</label>
-                                <a class="show-pass"><i class="fas fa-eye-slash" aria-hidden="true"></i></a>
                             </div>
-                            <div th:if="${param.error}">
-                                <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+<!--                            <div th:if="${(!#fields.hasErrors('firstName')) && !#fields.hasErrors('lastName') && !#fields.hasErrors('email') && !#fields.hasErrors('phoneNumber') && #fields.hasErrors('password')}">-->
+<!--                                <p class="text-danger" th:errors="*{password}"></p>-->
+<!--                            </div>-->
+                            <div th:if="${message != null}">
+                                <p class="text-danger" th:text="${message}"></p>
                             </div>
                             <div class="d-grid">
-                                <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Đăng
+                                <button id="signup-btn" class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Đăng
                                     ký
                                 </button>
                             </div>

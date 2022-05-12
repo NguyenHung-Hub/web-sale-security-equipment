@@ -18,7 +18,7 @@ class OrderItem {
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
-    @JsonManagedReference
+    @JsonManagedReference("orderItems")
     private Product product;
     @Id
     @ManyToOne

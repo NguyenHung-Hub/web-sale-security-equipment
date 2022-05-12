@@ -34,6 +34,6 @@ class Brand {
     @Column(name = "modified_at", columnDefinition = "datetime")
     private Date modifiedAt;
     @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
-    @JsonBackReference
+    @JsonBackReference("brand")
     private List<Product> products;
 }

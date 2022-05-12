@@ -1,6 +1,7 @@
 package com.metan.websalesecurityequipment.controller;
 
 import com.metan.websalesecurityequipment.model.Product;
+import com.metan.websalesecurityequipment.model.request.ProductFileRequest;
 import com.metan.websalesecurityequipment.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -35,8 +36,7 @@ public class ProductRestController {
     }
 
     @PostMapping(value = "/products",consumes={"application/json"})
-    @ResponseBody
-    public Product findProductById(@RequestBody Product product) {
+    public Product findProductById(@RequestBody ProductFileRequest product) {
         return productService.findProductById(product.getProductId());
     }
 }

@@ -18,7 +18,21 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "select * from users u where verification_code = :verification_code", nativeQuery = true)
     public User findByVerificationCode(@Param("verification_code") String code);
 
+    @Query(value = " create event ?1 on schedule at current_timestamp + interval 7 day do begin " +
+            "delete from users where email = ?2; " +
+            "drop event ?1; " +
+            "end ", nativeQuery = true)
+    public void registerEvent(String nameEvent, String emailEvent);
+
     @Modifying
-    @Query(value = "update users set enable = true where user_id = :id", nativeQuery = true)
+    @Query(value = "update users set enable = true, verification_code = null where user_id = :id", nativeQuery = true)
     public void enable(@Param("id") long id);
+
+    @Modifying
+    @Query(value = "update users set password = :password where user_id = :id", nativeQuery = true)
+    public void updatePassword(@Param("id") long id, @Param("password") String password);
+
+    @Modifying
+    @Query(value = "update users set verification_code = :verification_code where user_id = :id", nativeQuery = true)
+    public void updateVerificationCode(@Param("verification_code") String code, @Param("id") long id);
 }

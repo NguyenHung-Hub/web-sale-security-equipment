@@ -3,61 +3,59 @@
 # spring boot connection
 #
 spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/web-sale-security-equipment?useUnicode=yes&characterEncoding=UTF-8
-    username: root
-    password: sapassword
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL55Dialect
-        format_sql: false
-    show-sql: true
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id: 278048724465-sro60cm4e4m92fdboc77tjhvj6gdb67q.apps.googleusercontent.com
-            client-secret: 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
-            scope:
-              - email
-              - profile
-          facebook:
-            client-id: 5016197031777780
-            client-secret: a7e76c1866c16b20ce32c33038ee7194
-            scope:
-              - email
-              - public_profile
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: huyhoang14901@gmail.com
-    password: huyhoang123
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
+    datasource:
+        url: jdbc:mysql://localhost:3306/web-sale-security-equipment?useUnicode=yes&characterEncoding=UTF-8
+        username: root
+        password: sapassword
+        driver-class-name: com.mysql.cj.jdbc.Driver
+    jpa:
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.MySQL55Dialect
+                format_sql: false
+        show-sql: true
+    security:
+        oauth2:
+            client:
+                registration:
+                    google:
+                        client-id: 278048724465-sro60cm4e4m92fdboc77tjhvj6gdb67q.apps.googleusercontent.com
+                        client-secret: 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
+                        scope:
+                            - email
+                            - profile
+                    facebook:
+                        client-id: 5016197031777780
+                        client-secret: a7e76c1866c16b20ce32c33038ee7194
+                        scope:
+                            - email
+                            - public_profile
+    mail:
+        host: smtp.gmail.com
+        port: 587
+        username: dohuyhoang.iuh.k15@gmail.com
+        password: huyhoang14901
+        properties:
+            mail:
+                smtp:
+                    auth: true
+                    starttls:
+                        enable: true
 #aws
 access:
-  key:
-    id: AKIAYYHEHMO3LILUQAGD
-    secret: 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
+    key:
+        id: AKIAYYHEHMO3LILUQAGD
+        secret: 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
 s3:
-  region:
-    name: us-east-1
-  bucket:
-    name: chinh1506
+    region:
+        name: us-east-1
+    bucket:
+        name: chinh1506
 #  access.key.id=AKIAYYHEHMO3LILUQAGD
 #  access.key.secret=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
 #  s3.region.name=us-east-1
 #  s3.bucket.name=chinh1506
 server:
-  port: 8080
-
-
+    port: 8080

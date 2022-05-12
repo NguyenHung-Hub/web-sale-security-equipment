@@ -9,7 +9,9 @@ import java.io.UnsupportedEncodingException;
 public interface UserService {
     public User registerUser(User user);
     public void sendVerificationEmail(User user, String siteUrl) throws MessagingException, UnsupportedEncodingException;
+    public void sendVerificationEmailForgotPassword(User user, String siteUrl)  throws MessagingException, UnsupportedEncodingException;
     public User getUserByVerificationCode(String code);
+    public User getUserByVerificationCodeForgotPassword(String code);
     public void updateUser(User user);
     public User getUserByEmail(String email);
     public void createNewUserAfterOAuthLoginSuccess(String email, String name, AuthenticationProvider authProvider);

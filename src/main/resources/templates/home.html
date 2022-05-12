@@ -229,7 +229,7 @@
             <div class="block-product mb-3">
                 <div class="box-title">
                     <h2>CCTV Camera nổi bật nhất</h2>
-                    <a th:href="@{/search(category=${CCTV_CAMERA_PRODUCTS.get(0).category.category.categoryId})}">Xem tất cả</a>
+                    <a th:href="@{/search(category=${CCTV_CAMERA_PRODUCTS != null ? (CCTV_CAMERA_PRODUCTS.isEmpty() ? '' : CCTV_CAMERA_PRODUCTS.get(0).category.category.categoryId) : ''})}">Xem tất cả</a>
                 </div>
                 <div class="box-product">
                     <div class="list-product">
@@ -263,7 +263,7 @@
             <div class="block-product mb-3">
                 <div class="box-title">
                     <h2>Đầu ghi hình</h2>
-                    <a th:href="@{/search(category=${DAUGHIHINH_PRODUCTS.get(0).category.category.categoryId})}">Xem tất cả</a>
+                    <a th:href="@{/search(category=${DAUGHIHINH_PRODUCTS != null ? (DAUGHIHINH_PRODUCTS.isEmpty() ? '' : DAUGHIHINH_PRODUCTS.get(0).category.category.categoryId) : ''})}">Xem tất cả</a>
                 </div>
                 <div class="box-product">
                     <div class="list-product">
@@ -297,7 +297,7 @@
             <div class="block-product mb-3">
                 <div class="box-title">
                     <h2>Thiết bị báo động - báo cháy</h2>
-                    <a th:href="@{/search(category=${TBBD_BC_PRODUCTS.get(0).category.category.categoryId})}">Xem tất cả</a>
+                    <a th:href="@{/search(category=${TBBD_BC_PRODUCTS != null ? (TBBD_BC_PRODUCTS.isEmpty() ? '' : TBBD_BC_PRODUCTS.get(0).category.category.categoryId): ''})}">Xem tất cả</a>
                 </div>
                 <div class="box-product">
                     <div class="list-product">
@@ -331,7 +331,7 @@
             <div class="block-product mb-3">
                 <div class="box-title">
                     <h2>Chuông, khóa, kiểm soát cửa</h2>
-                    <a th:href="@{/search(category=${CKKSC_PRODUCTS.isEmpty() ? 1 : CKKSC_PRODUCTS.get(0).category.category.categoryId})}">Xem tất cả</a>
+                    <a th:href="@{/search(category=${CKKSC_PRODUCTS != null ? (CKKSC_PRODUCTS.isEmpty() ? '' : CKKSC_PRODUCTS.get(0).category.category.categoryId) : ''})}">Xem tất cả</a>
                 </div>
                 <div class="box-product">
                     <div class="list-product">
