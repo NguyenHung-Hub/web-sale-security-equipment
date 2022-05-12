@@ -28,6 +28,7 @@ class ProductAttribute {
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "attribute_id")
+    @JsonManagedReference
     private Attribute attribute;
     @Column(name = "created_at", columnDefinition = "datetime")
     private Date createdAt;

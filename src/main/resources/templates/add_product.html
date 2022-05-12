@@ -275,15 +275,7 @@
                       method="post">
                     <div class="form-group-modify">
                         <label>Mã hàng</label>
-                        <input
-                                id="productId"
-                                type="text"
-                                class="form-control-modify"
-                                aria-describedby="emailHelp"
-                                placeholder="Mã hàng"
-                                name="productId"
-                                th:field="*{productId}"
-                        />
+                        <input  id="productId" type="text" class="form-control-modify" aria-describedby="emailHelp" placeholder="Mã hàng" name="productId" th:value="${product.productId}" disabled="disabled"/>
                     </div>
 
 
@@ -296,7 +288,6 @@
                                 aria-describedby="emailHelp"
                                 placeholder="Tên hàng"
                                 name="name"
-                                th:field="*{name}"
                                 th:value="${product.name}"
                         />
                     </div>
@@ -314,7 +305,7 @@
 
                     <div class="form-group-modify">
                         <label>Giá bán</label>
-                        <input id="price" type="text" class="form-control-modify"  aria-describedby="emailHelp" placeholder="Giá bán" th:field="*{price}" th:value="${product.price}"/>
+                        <input id="price" type="text" class="form-control-modify"  aria-describedby="emailHelp" placeholder="Giá bán" name="price" th:value="${product.price}"/>
                     </div>
 
                     <!--                        <div class="form-group-modify">-->
@@ -329,7 +320,7 @@
                     <!--                        </div>-->
                     <div class="form-group-modify">
                         <label>Tồn kho</label>
-                        <input id="quantity" type="text"  class="form-control-modify" aria-describedby="emailHelp" placeholder="Tồn kho "  th:field="*{quantity}"
+                        <input id="quantity" type="text"  class="form-control-modify" aria-describedby="emailHelp" placeholder="Tồn kho "  name="quantity"
                                 th:value="${product.quantity}"/>
                     </div>
 
@@ -338,8 +329,7 @@
                                 class="font-weight-bold mt-4" >Mô tả ngắn về sản phẩm</label>
                         <textarea
                                 id="shortDesc"
-                                class="form-control" rows="6" th:field="*{shortDesc}" >
-                            [[${product.shortDesc}]]
+                                class="form-control" rows="6" name="shortDesc" th:value="${product.shortDesc}" >
                         </textarea>
                     </div>
 
@@ -372,8 +362,7 @@
 <footer th:replace="fragments :: footer"></footer>
 <th:block th:replace="fragments :: base-js"/>
 <th:block>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script th:inline="javascript">
         let productId="";
         $(function (){
@@ -387,7 +376,7 @@
             let product={
                 productId :productId
             }
-
+            console.log(product)
             let myJSON = JSON.stringify(product);
             $.ajax({
                 url: "product/products",
@@ -403,7 +392,7 @@
                     $("#quantity").val(data.quantity);
                     $("#name").val(data.name);
                     $("#thumbnail").val(data.thumbnail);
-
+                    console.log(data);
                 }
             });
         }

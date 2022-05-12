@@ -90,7 +90,7 @@ public class AddProductController {
             }
             p.setThumbnail("https://chinh1506.s3.amazonaws.com/" + fileName);
         }
-
+        System.out.println(p);
         product.setThumbnail(p.getThumbnail());
         product.setLongDesc(p.getLongDesc());
         product.setShortDesc(p.getShortDesc());
