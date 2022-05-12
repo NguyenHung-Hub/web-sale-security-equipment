@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{dashboard.html}" lang="en">
+
+<head>
+</head>
+
+<body>
+<section class="row" layout:fragment="content">
+    <div class="container">
+        <div
+                class="container-fluid d-flex flex-row justify-content-end my-4"
+        >
+            <div class="col-4">
+                <input
+                        type="search"
+                        class="form-control"
+                        placeholder="Tìm sản phẩm"
+                />
+            </div>
+            <!-- Button trigger modal -->
+            <button
+                    type="button"
+                    class="btn btn-success "
+                    data-toggle="modal"
+                    data-target="#productModal"
+            >
+                <i class="fas fa-plus"></i> Thêm thương hiệu
+            </button>
+        </div>
+
+        <div class="container-fluid col-8">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Mã</th>
+                    <th scope="col">Tên</th>
+                    <th scope="col" class="text-right">Quốc gia</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+
+                    <td>1</td>
+                    <td class="col-6">
+                        KBVISION
+                    </td>
+                    <td class="text-right">USA</td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Modal -->
+        <div
+                class="modal fade"
+                id="productModal"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="productModalLabel"
+                aria-hidden="true"
+        >
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="productModalLabel">
+                            Thêm thương hiệu
+                        </h5>
+                        <button
+                                type="button"
+                                class="close"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                        >
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body modal-body__product">
+                        <form>
+
+
+                            <div class="container">
+                                <button
+                                        type="button"
+                                        class="btn btn-secondary float-right px-4"
+                                        data-dismiss="modal"
+                                >
+                                    Thoát
+                                </button>
+                                <button
+                                        type="button"
+                                        class="btn btn-success float-right px-4 mr-4"
+                                >
+                                    <i class="fas fa-save"></i>
+                                    Lưu
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

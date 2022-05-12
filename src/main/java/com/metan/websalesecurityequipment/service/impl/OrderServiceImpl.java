@@ -6,6 +6,8 @@ import com.metan.websalesecurityequipment.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class OrderServiceImpl implements OrderService {
 
@@ -23,5 +25,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public int getSumQuantity(String productId) {
         return orderRepository.getSumQuantity(productId);
+    }
+
+    @Override
+    public List<Order> findAll() {
+        return orderRepository.findAll();
     }
 }

@@ -1,0 +1,33 @@
+
+html{
+    font-size: 100%;
+}
+
+body{
+    font-size: 16px;
+
+}
+.menu-modify {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    padding: 16px 8px 0 4px;
+
+    width: 200px;
+    height: 100%;
+    background-color: #282a36;
+    z-index: 2;
+}
+
+.nav-link.active {
+    background-color: #44475a !important;
+}
+
+.content-box {
+    position: fixed;
+    right: 0;
+    width: calc(100% - 200px);
+    z-index: 1;
+}

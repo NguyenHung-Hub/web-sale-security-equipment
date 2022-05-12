@@ -44,18 +44,19 @@ public class AddProductController {
         List<Category> categories = categoryService.findAll();
         model.addAttribute("categories", categories);
 
+        List<Category> categories2 = new ArrayList<>();
+
+
         List<Brand> brands = brandService.findAll();
         model.addAttribute("brands", brands);
 
         System.out.println("sub");
-        for (Category c:
-                categories) {
-            for (Category c2:
-                    c.getCategories()) {
-                System.out.println("out:   "+c2.getName());
+        for (Category c : categories) {
+            for (Category c2 : c.getCategories()) {
+                System.out.println("out:   " + c2.getName());
+                categories2.add(c2);
 
             }
-
         }
 
 
@@ -74,21 +75,21 @@ public class AddProductController {
 
         List<Category> categories = categoryService.findAll();
         Category category = categories.get(0);
-        Set<ProductDiscount> discounts = new HashSet<>();
+//        Set<ProductDiscount> discounts = new HashSet<>();
 
         List<Brand> brands = brandService.findAll();
         Brand brand = brands.get(0);
-        Set<OrderItem> orderItems = new HashSet<>();
+//        Set<OrderItem> orderItems = new HashSet<>();
 
-        Set<ProductAttribute> attributes = new HashSet<>();
-        List<ProductReview> reviews = new ArrayList<>();
-        Set<ProductBackdrop> backdrops = new HashSet<>();
-        float disPer=0;
+//        Set<ProductAttribute> attributes = new HashSet<>();
+//        List<ProductReview> reviews = new ArrayList<>();
+//        Set<ProductBackdrop> backdrops = new HashSet<>();
+        float disPer = 0;
 
 
-        Product product = new Product(p.getProductId(),p.getName(), p.getQuantity(),p.getPrice(),p.getShortDesc(),
-                p.getThumbnail(), p.getName(),category, null, disPer, brand,null,toSlug(p.getName()), p.getLongDesc(),
-                new Date(), null,null, null, null);
+        Product product = new Product(p.getProductId(), p.getName(), p.getQuantity(), p.getPrice(), p.getShortDesc(),
+                p.getThumbnail(), p.getName(), category, null, disPer, brand, null, toSlug(p.getName()), p.getLongDesc(),
+                new Date(), null, null, null, null);
 
         productService.saveProduct(product);
         return "redirect:/add-product";

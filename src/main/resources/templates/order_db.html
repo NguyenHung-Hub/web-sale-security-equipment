@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{dashboard.html}" lang="en">
+
+<head>
+</head>
+
+<body>
+<section class="row" layout:fragment="content">
+    <div class="container">
+
+
+        <div class="container-fluid mt-4">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Mã</th>
+                    <th scope="col">Sản phẩm</th>
+                    <th scope="col" class="text-right">Trạng thái</th>
+                    <th scope="col" class="text-right">Tổng tiền</th>
+                    <!--                        <th scope="col" class="text-right"></th>-->
+                    <!--                        <th scope="col" class="text-right"></th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="order:${orders}">
+                    <td>
+                        <div class="col-1">
+                            <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value="true"
+                            />
+                        </div>
+                    </td>
+                    <td>[[${order.orderId}]]</td>
+                    <td class="col-6">
+                        <ol type="1">
+                            <li th:each="p:${order.orderItems}">
+                                [[${p.product.getName()}]]
+                            </li>
+
+                        </ol>
+                    </td>
+                    <td class="text-right">[[${order.orderStatus}]]</td>
+                    <td class="text-right">
+
+                        [[${order.total}]]
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

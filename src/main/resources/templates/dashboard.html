@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout" lang="en">
+<head>
+    <th:block th:replace="fragments :: base ('Quan ly')"/>
+    <th:block th:replace="fragments :: dashboard"/>
+</head>
+<body>
+
+<main>
+    <div th:replace="fragments_dashboard/nav.html :: nav"></div>
+    <div class="content-box">
+        <div layout:fragment="content"></div>
+    </div>
+
+</main>
+
+<th:block th:replace="fragments :: base-js"/>
+</body>
+</html>

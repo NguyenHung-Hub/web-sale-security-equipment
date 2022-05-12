@@ -106,6 +106,16 @@
 
                             </select>
                         </div>
+                        <div class="form-group-modify">
+                            <label>Danh mục con</label>
+                            <select th:field="*{category}" class="form-control form-control-lg form-control-modify" >
+                                <option value="">Chọn</option>
+                                <option th:each="c : ${categories}"
+                                        th:value="${c.categoryId}"
+                                        th:utext="${c.name}"></option>
+
+                            </select>
+                        </div>
 
 
                         <div class="form-group-modify">
@@ -156,16 +166,6 @@
                             />
                         </div>
 
-                        <!--                        <div class="form-group-modify">-->
-                        <!--                            <label >Giảm giá</label>-->
-                        <!--                            <input-->
-                        <!--                                    type="text"-->
-                        <!--                                    class="form-control-modify"-->
-                        <!--                                    aria-describedby="emailHelp"-->
-                        <!--                                    placeholder="Giảm giá %"-->
-                        <!--                                    th:field="*{productDiscount}"-->
-                        <!--                            />-->
-                        <!--                        </div>-->
                         <div class="form-group-modify">
                             <label>Tồn kho</label>
                             <input
@@ -215,17 +215,17 @@
                             />
                         </div>
 
-                        <div class="box-thumbnail">
-                            <img
-                                    src="https://phucanhcdn.com/media/product/32953-camera.jpg"
-                                    class="img-thumbnail m-2 rounded"
-                            />
+<!--                        <div class="box-thumbnail">-->
+<!--                            <img-->
+<!--                                    src="https://phucanhcdn.com/media/product/32953-camera.jpg"-->
+<!--                                    class="img-thumbnail m-2 rounded"-->
+<!--                            />-->
 
-                            <img
-                                    src="https://phucanhcdn.com/media/product/32953-camera.jpg"
-                                    class="img-thumbnail m-2 rounded"
-                            />
-                        </div>
+<!--                            <img-->
+<!--                                    src="https://phucanhcdn.com/media/product/32953-camera.jpg"-->
+<!--                                    class="img-thumbnail m-2 rounded"-->
+<!--                            />-->
+<!--                        </div>-->
 
                         <div class="form-group-modify mt-4 float-right">
                             <button
