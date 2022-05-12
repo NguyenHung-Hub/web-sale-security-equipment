@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
-        helper.setFrom("dohuyhoang.iuh.k15@gmail.com", senderName);
+        helper.setFrom("huyhoang14901@gmail.com", senderName);
         helper.setTo(user.getEmail());
         helper.setSubject(subject);
         helper.setText(mailContent, true);
@@ -90,7 +90,7 @@ public class UserServiceImpl implements UserService {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
-        helper.setFrom("dohuyhoang.iuh.k15@gmail.com", senderName);
+        helper.setFrom("huyhoang14901@gmail.com", senderName);
         helper.setTo(user.getEmail());
         helper.setSubject(subject);
         helper.setText(mailContent, true);
