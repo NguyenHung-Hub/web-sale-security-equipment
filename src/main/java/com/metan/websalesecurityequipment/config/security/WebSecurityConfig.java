@@ -89,6 +89,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/cart/**").authenticated()
                 .antMatchers("/product/reviews").authenticated()
                 .antMatchers("/product/addToCart").authenticated()
+                .antMatchers("/dashboard/**").hasAuthority("ADMIN")
                 .antMatchers("/message").authenticated()
                 .anyRequest().authenticated()
                 .and()
