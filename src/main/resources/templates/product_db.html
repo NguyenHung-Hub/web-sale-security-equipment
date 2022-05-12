@@ -8,11 +8,9 @@
 </head>
 
 <body>
-<section class="row" layout:fragment="content">
+<section  layout:fragment="content">
     <div class="container">
-        <div
-                class="container-fluid d-flex flex-row justify-content-end my-4"
-        >
+        <div class="container-fluid d-flex flex-row justify-content-end my-4">
             <div class="col-4">
                 <input
                         type="search"
@@ -40,10 +38,12 @@
                     <th scope="col">Tên hàng</th>
                     <th scope="col" class="text-right">Giá bán</th>
                     <th scope="col" class="text-right">Tồn kho</th>
+                    <th scope="col" class="text-right"></th>
+                    <th scope="col" class="text-right"></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
+                <tr th:each="product:${products}">
                     <th>
                         <input
                                 class="form-check-input"
@@ -52,79 +52,48 @@
                                 value="true"
                         />
                     </th>
-                    <td>C342</td>
-                    <td class="col-6">
-                        Camera IMOU IPC-A22EP Ranger 2 1080p
+                    <td>[[${product.productId}]]</td>
+                    <td class="col-6">[[${product.title}]]</td>
+                    <td class="text-right">
+                        [[${#numbers.formatDecimal(product.price,
+                        1,'DEFAULT',0, 'DEFAULT')}]] đ
                     </td>
-                    <td class="text-right">890.000đ</td>
-                    <td class="text-right">20</td>
-                </tr>
-                <tr>
-                    <th>
-                        <input
-                                class="form-check-input"
-                                type="checkbox"
-                                name="select-product"
-                                value="true"
-                        />
-                    </th>
-                    <td>C452</td>
-                    <td class="col-6">
-                        Camera ip Wifi Ezviz C3WN CS-CV310 1080P
+                    <td class="text-right">[[${product.quantity}]]</td>
+                    <td class="text-right text-danger">
+                        <i class="fas fa-trash"></i>
                     </td>
-                    <td class="text-right">1.190.000đ</td>
-                    <td class="text-right">5</td>
-                </tr>
-                <tr>
-                    <th>
-                        <input
-                                class="form-check-input"
-                                type="checkbox"
-                                name="select-product"
-                                value="true"
-                        />
-                    </th>
-                    <td>C252</td>
-                    <td class="col-6">
-                        Camera Yoosee ngoài trời C08 26LED 1080p
+                    <td class="text-right text-primary">
+                        <i
+                                class="fas fa-edit"
+                                data-toggle="modal"
+                                th:attr="data-target=${'#editModal'+ product.productId}"
+                                th:data-row="${product}"
+                        ></i>
                     </td>
-                    <td class="text-right">990.000đ</td>
-                    <td class="text-right">3</td>
-                </tr>
-                <tr>
-                    <th>
-                        <input
-                                class="form-check-input"
-                                type="checkbox"
-                                name="select-product"
-                                value="true"
-                        />
-                    </th>
-                    <td>C252</td>
-                    <td class="col-6">
-                        Camera Yoosee ngoài trời C08 26LED 1080p
-                    </td>
-                    <td class="text-right">990.000đ</td>
-                    <td class="text-right">3</td>
-                </tr>
-                <tr>
-                    <th>
-                        <input
-                                class="form-check-input"
-                                type="checkbox"
-                                name="select-product"
-                                value="true"
-                        />
-                    </th>
-                    <td>C252</td>
-                    <td class="col-6">
-                        Camera Yoosee ngoài trời C08 26LED 1080p
-                    </td>
-                    <td class="text-right">990.000đ</td>
-                    <td class="text-right">3</td>
                 </tr>
                 </tbody>
             </table>
+
+            <div class="row">
+                <div style="width: 20%;"></div>
+                <div class="paginationPage mt-5 mb-5" >
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination" id="pagination"></ul>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="row">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
 
         <!-- Modal -->
@@ -139,9 +108,9 @@
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="productModalLabel">
+                        <h3 class="modal-title" id="productModalLabel">
                             Thêm hàng hóa
-                        </h5>
+                        </h3>
                         <button
                                 type="button"
                                 class="close"
@@ -151,97 +120,117 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+
                     <div class="modal-body modal-body__product">
-                        <form>
+                        <form
+                                th:action="@{/dashboard/product/modal}"
+                                th:object="${product}"
+                                enctype="multipart/form-data"
+                                method="post"
+                        >
                             <div class="form-group-modify">
-                                <label
-                                >Mã hàng</label
+                                <label>Danh mục</label>
+                                <select
+                                        th:field="*{category.categoryId}"
+                                        class="form-control form-control-lg form-control-modify"
                                 >
+                                    <!-- <option value="">Chọn</option>-->
+                                    <th:block th:each="c : ${categories}">
+                                        <optgroup
+                                                th:value="${c.categoryId}"
+                                                th:label="${c.name}"
+                                        >
+                                            <option
+                                                    th:value="${c.categoryId}"
+                                                    th:utext="${c.name}"
+                                            ></option>
+                                            <th:block
+                                                    th:each="c1:${c.getCategories()}"
+                                            >
+                                                <option
+                                                        name=""
+                                                        id=""
+                                                        th:value="${c1.categoryId}"
+                                                        th:utext="${c1.name}"
+                                                ></option>
+                                            </th:block>
+                                        </optgroup>
+                                    </th:block>
+                                </select>
+                            </div>
+
+                            <div class="form-group-modify">
+                                <label>Mã hàng</label>
                                 <input
                                         type="text"
                                         class="form-control-modify"
                                         aria-describedby="emailHelp"
                                         placeholder="Mã hàng"
+                                        name="productId"
+                                        th:field="*{productId}"
                                 />
                             </div>
 
                             <div class="form-group-modify">
-                                <label
-                                >Tên hàng</label
-                                >
+                                <label>Tên hàng</label>
                                 <input
                                         type="text"
                                         class="form-control-modify"
                                         aria-describedby="emailHelp"
                                         placeholder="Tên hàng"
-                                />
-                            </div>
-                            <div class="form-group-modify">
-                                <label
-                                >Thương hiệu</label
-                                >
-                                <input
-                                        type="text"
-                                        class="form-control-modify"
-                                        aria-describedby="emailHelp"
-                                        placeholder="Thương hiệu"
-                                />
-                            </div>
-                            <div class="form-group-modify">
-                                <label
-                                >Xuất xứ</label
-                                >
-                                <input
-                                        type="text"
-                                        class="form-control-modify"
-                                        aria-describedby="emailHelp"
-                                        placeholder="Giá bán"
+                                        name="name"
+                                        th:field="*{name}"
                                 />
                             </div>
 
                             <div class="form-group-modify">
-                                <label
-                                >Giá bán</label
+                                <label>Thương hiệu</label>
+                                <select
+                                        th:field="*{brand.brandId}"
+                                        class="form-control form-control-lg form-control-modify"
                                 >
+                                    <option
+                                            th:each="b : ${brands}"
+                                            th:value="${b.brandId}"
+                                            th:utext="${b.name}"
+                                    ></option>
+                                </select>
+                            </div>
+
+                            <div class="form-group-modify">
+                                <label>Giá bán</label>
                                 <input
                                         type="text"
                                         class="form-control-modify"
                                         aria-describedby="emailHelp"
                                         placeholder="Giá bán"
+                                        th:field="*{price}"
                                 />
                             </div>
+
                             <div class="form-group-modify">
-                                <label for="price-product"
-                                >Giá gốc</label
-                                >
+                                <label>Tồn kho</label>
                                 <input
                                         type="text"
                                         class="form-control-modify"
                                         aria-describedby="emailHelp"
-                                        placeholder="Giá gốc"
-                                />
-                            </div>
-                            <div class="form-group-modify">
-                                <label
-                                >Giảm giá</label
-                                >
-                                <input
-                                        type="text"
-                                        class="form-control-modify"
-                                        aria-describedby="emailHelp"
-                                        placeholder="Giảm giá %"
-                                />
-                            </div>
-                            <div class="form-group-modify">
-                                <label
-                                >Tồn kho</label
-                                >
-                                <input
-                                        type="text"
-                                        class="form-control-modify"
-                                        id="price-product"
                                         placeholder="Tồn kho "
+                                        th:field="*{quantity}"
                                 />
+                            </div>
+
+                            <div class="form-group">
+                                <label
+                                        for="shortDescTextarea"
+                                        class="font-weight-bold mt-4"
+                                >Mô tả ngắn về sản phẩm</label
+                                >
+                                <textarea
+                                        class="form-control"
+                                        id="shortDescTextarea"
+                                        rows="6"
+                                        th:field="*{longDesc}"
+                                ></textarea>
                             </div>
 
                             <div class="form-group">
@@ -253,33 +242,208 @@
                                 <textarea
                                         class="form-control"
                                         id="descriptionTextarea"
-                                        rows="10"
+                                        rows="6"
+                                        th:field="*{shortDesc}"
                                 ></textarea>
                             </div>
 
-                            <div class="box-thumbnail">
-                                <img
-                                        src="https://phucanhcdn.com/media/product/32953-camera.jpg"
-                                        class="img-thumbnail m-2 rounded"
-                                />
-
-                                <img
-                                        src="https://phucanhcdn.com/media/product/32953-camera.jpg"
-                                        class="img-thumbnail m-2 rounded"
+                            <div class="form-group-modify">
+                                <label>Chọn ảnh</label>
+                                <input
+                                        accept="image/png, image/jpeg"
+                                        type="file"
+                                        class="form-control"
+                                        name="image"
+                                        multiple="multiple"
                                 />
                             </div>
 
-                            <div class="container">
+                            <div class="form-group-modify mt-4 float-right">
                                 <button
                                         type="button"
-                                        class="btn btn-secondary float-right px-4"
+                                        class="btn btn-secondary px-4 mr-4"
                                         data-dismiss="modal"
                                 >
                                     Thoát
                                 </button>
                                 <button
+                                        type="submit"
+                                        class="btn btn-success px-4"
+                                >
+                                    <i class="fas fa-save"></i>
+                                    Lưu
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Modal edit-->
+        <div
+                class="modal fade"
+                th:each="product : ${products}"
+                th:attr="id=${'editModal' + product.productId}"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="productModalEditLabel"
+                aria-hidden="true"
+        >
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="productModalEditLabel">
+                            Chỉnh sửa hàng hóa
+                        </h5>
+                        <button
+                                type="button"
+                                class="close"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                        >
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body modal-body__product">
+                        <form
+                                th:action="@{/dashboard/product/update}"
+                                th:object="${product}"
+                                enctype="multipart/form-data"
+                                method="post"
+                        >
+                            <div class="form-group-modify">
+                                <label>Mã hàng</label>
+                                <input
+                                        type="text"
+                                        class="form-control-modify"
+                                        aria-describedby="emailHelp"
+                                        placeholder="Mã hàng"
+                                        name="productId"
+                                        th:value="${product.productId}"
+                                />
+                            </div>
+
+                            <div class="form-group-modify">
+                                <label>Tên hàng</label>
+                                <input
+                                        type="text"
+                                        class="form-control-modify"
+                                        aria-describedby="emailHelp"
+                                        placeholder="Tên hàng"
+                                        name="name"
+                                        th:value="${product.name}"
+                                />
+                            </div>
+                            <!--                        <div class="form-group-modify">-->
+                            <!--                            <label >Thương hiệu</label>-->
+                            <!--                            <input-->
+                            <!--                                    type="text"-->
+                            <!--                                    class="form-control-modify"-->
+                            <!--                                    aria-describedby="emailHelp"-->
+                            <!--                                    placeholder="Thương hiệu"-->
+                            <!--                                    th:field="*{brand.brandId}"-->
+                            <!--                            />-->
+                            <!--                        </div>-->
+
+                            <div class="form-group-modify">
+                                <label>Giá bán</label>
+                                <input
+                                        type="text"
+                                        class="form-control-modify"
+                                        aria-describedby="emailHelp"
+                                        placeholder="Giá bán"
+                                        th:value="${product.price}"
+                                />
+                            </div>
+
+                            <!--                        <div class="form-group-modify">-->
+                            <!--                            <label >Giảm giá</label>-->
+                            <!--                            <input-->
+                            <!--                                    type="text"-->
+                            <!--                                    class="form-control-modify"-->
+                            <!--                                    aria-describedby="emailHelp"-->
+                            <!--                                    placeholder="Giảm giá %"-->
+                            <!--                                    th:field="*{productDiscount}"-->
+                            <!--                            />-->
+                            <!--                        </div>-->
+                            <div class="form-group-modify">
+                                <label>Tồn kho</label>
+                                <input
+                                        type="text"
+                                        class="form-control-modify"
+                                        aria-describedby="emailHelp"
+                                        placeholder="Tồn kho "
+                                        th:value="${product.quantity}"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label
+                                        for="shortDescTextarea"
+                                        class="font-weight-bold mt-4"
+                                >Mô tả ngắn về sản phẩm</label
+                                >
+                                <textarea
+                                        class="form-control"
+                                        id="shortDescTextarea_edit"
+                                        rows="6"
+                                >
+                            [[${product.shortDesc}]]
+                        </textarea
+                        >
+                            </div>
+
+                            <div class="form-group">
+                                <label
+                                        for="descriptionTextarea"
+                                        class="font-weight-bold mt-4"
+                                >Mô tả sản phẩm</label
+                                >
+                                <textarea
+                                        class="form-control"
+                                        id="descriptionTextarea_edit"
+                                        rows="6"
+                                >
+[[${product.longDesc}]]</textarea
+                                >
+                            </div>
+
+                            <div class="form-group-modify">
+                                <label>URL tạm</label>
+                                <input
+                                        type="text"
+                                        class="form-control-modify"
+                                        placeholder="url"
+                                        th:value="${product.thumbnail}"
+                                />
+                            </div>
+
+                            <div class="box-thumbnail">
+                                <img
+                                        th:src="${product.thumbnail}"
+                                        class="img-thumbnail m-2 rounded"
+                                />
+                            </div>
+                            <input
+                                    accept="image/png, image/jpeg"
+                                    type="file"
+                                    name="image"
+                                    multiple="multiple"
+                            />
+
+                            <div class="form-group-modify mt-4 float-right">
+                                <button
                                         type="button"
-                                        class="btn btn-success float-right px-4 mr-4"
+                                        class="btn btn-secondary px-4 mr-4"
+                                        data-dismiss="modal"
+                                >
+                                    Thoát
+                                </button>
+                                <button
+                                        type="submit"
+                                        class="btn btn-success px-4"
                                 >
                                     <i class="fas fa-save"></i>
                                     Lưu
@@ -291,7 +455,8 @@
             </div>
         </div>
     </div>
-</section>
 
+
+</section>
 </body>
 </html>

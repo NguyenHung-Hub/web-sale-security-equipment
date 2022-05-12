@@ -49,7 +49,6 @@ public class AddProductController {
 
         List<Category> categories2 = new ArrayList<>();
 
-
         List<Brand> brands = brandService.findAll();
         model.addAttribute("brands", brands);
 
@@ -62,7 +61,6 @@ public class AddProductController {
 
             }
         }
-
 
         return "add_product";
     }

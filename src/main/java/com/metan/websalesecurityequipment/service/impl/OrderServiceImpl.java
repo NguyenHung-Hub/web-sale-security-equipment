@@ -39,6 +39,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> findAll() {
         return orderRepository.findAll();
+    }
     @Override
     public String getLastId() {
         String id="";
