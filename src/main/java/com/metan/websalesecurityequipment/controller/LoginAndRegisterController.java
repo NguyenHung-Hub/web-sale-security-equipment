@@ -65,7 +65,7 @@ public class LoginAndRegisterController {
         } else if(!user.getPassword().equals(rePassword)) {
             model.addAttribute("message", "Nhập lại password không trùng khớp!");
             return "signup-form";
-        } else if (userService.getUserByEmail(user.getEmail()) == null) {
+        } else if (userService.getUserByEmail(user.getEmail()) != null) {
             model.addAttribute("message", "Email đã được sử dụng!");
             return "signup-form";
         } else {
