@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 @Transactional
 public interface OrderRepository extends JpaRepository<Order, String> {
@@ -24,5 +26,7 @@ public interface OrderRepository extends JpaRepository<Order, String> {
     @Modifying
     @Query(value = "update orders set order_status = \"CANCELLED\" where order_id =?1", nativeQuery = true)
     public void deleteById(String id);
+
+    public List<Order> findAll();
 
 }

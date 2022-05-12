@@ -48,6 +48,8 @@ public class AddProductController {
         List<Category> categories = categoryService.findAll();
         model.addAttribute("categories", categories);
 
+        List<Category> categories2 = new ArrayList<>();
+
         List<Brand> brands = brandService.findAll();
         model.addAttribute("brands", brands);
 
@@ -59,7 +61,6 @@ public class AddProductController {
                 System.out.println("out:   " + c2.getName());
 
             }
-
         }
         return "add_product";
     }
