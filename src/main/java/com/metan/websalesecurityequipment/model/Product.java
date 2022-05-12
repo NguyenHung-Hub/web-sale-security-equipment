@@ -43,7 +43,7 @@ class Product {
     private String title;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @JsonBackReference
-//    @JsonIncludeProperties("discountPercent")
+    @JsonIncludeProperties("discountPercent")
     private List<ProductDiscount> productDiscounts;
     private float discountPercentBase;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -63,9 +63,9 @@ class Product {
     private Date modifiedAt;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
-    @JsonManagedReference
     private List<ProductAttribute> productAttributes;
     @OneToMany(mappedBy = "product")
+    @JsonBackReference
     private List<ProductReview> productReviews;
     @OneToMany
     @JoinColumn(name = "product_id")
