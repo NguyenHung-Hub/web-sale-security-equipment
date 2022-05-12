@@ -82,12 +82,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/**").permitAll()
+                .antMatchers("/account/**").permitAll()
                 .antMatchers("/cart/**").authenticated()
                 .antMatchers("/product/reviews").authenticated()
                 .antMatchers("/product/addToCart").authenticated()
                 .antMatchers("/message").authenticated()
-                .antMatchers("/search/products").permitAll()
-                .anyRequest().permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                     .loginPage("/account/login")
