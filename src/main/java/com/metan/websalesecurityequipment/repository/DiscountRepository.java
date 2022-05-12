@@ -2,6 +2,7 @@ package com.metan.websalesecurityequipment.repository;
 
 import com.metan.websalesecurityequipment.model.Discount;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -12,7 +13,7 @@ import java.util.Date;
 @Repository
 @Transactional
 public interface DiscountRepository extends JpaRepository<Discount, String> {
-
+    @Modifying
     @Query(value = "insert into discounts (name, created_at, end_date, modified_at)\n" +
             "    values (:name, :create_at, :end_date, :modified_at);\n" +
             "    create event :name\n" +
