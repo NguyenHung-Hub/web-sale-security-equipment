@@ -65,7 +65,7 @@
                           th:text="${'Giảm ' + #numbers.formatPercent((product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent), 1, 0)}"></span>
                 </div>
                 <div>
-                    <span class="fa fa-star" th:classappend="${rating>=0} ? 'checked-rating'"></span>
+                    <span class="fa fa-star" th:classappend="${rating>=1} ? 'checked-rating'"></span>
                     <span class="fa fa-star" th:classappend="${rating>=2} ? 'checked-rating'"></span>
                     <span class="fa fa-star" th:classappend="${rating>=3} ? 'checked-rating'"></span>
                     <span class="fa fa-star" th:classappend="${rating>=4} ? 'checked-rating'"></span>
@@ -94,6 +94,7 @@
                     </div>
                 </div>
                 <div class="mt-5 font-14">
+                    <p>Số sản phẩm có sẵn: <span id="spQuantity" th:value="${product.quantity}" >[[${product.quantity}]]</span></p>
                     <p>Loại: [[${product.category==null}?'':${product.category.name}]]</p>
                     <p>Từ khóa liên quan:
 
@@ -117,7 +118,6 @@
         </ul>
 
 
-        </script>-->
         <div class="tab-content mt-5">
             <div id="ChiTiet" class="container tab-pane active">
                 <h3 class="bg-light p-3" style="margin-right: 30px">THÔNG TIN CHI TIẾT</h3>
@@ -188,7 +188,6 @@
                         <div class="row mb-3 border-bottom">
                             <div class="col-2">
                                 <img th:src="@{/imgs/images.png}" class="img-fluid w-75" alt="">
-                                <!--&gt;>>>>>> origin/main-->
                             </div>
                             <div class="col-10">
                                 <div>
@@ -203,7 +202,7 @@
                                     <span class="fa fa-star"
                                           th:classappend="${review.rating>=5}? 'checked-rating'"></span>
                                 </div>
-                                <div class="font-14">
+                                <div class="font-14"  th:if="${review.user!=null}">
                                     <h3>[[${review.user.firstName+" "+review.user.lastName}]]</h3>
                                     <span>[[${review.title}]]</span>
                                     <p>[[${review.content}]]</p>
@@ -245,16 +244,16 @@
                     <input type="submit" class="btn btn-dark mt-3 font-14" value="Gửi">
 
                 </form>
-              <!--  <th:block th:if="${param}">
+                <th:block th:if="${param['true']}">
                     <script>
-                        alert("Thêm thành công !!!");
+                        alert("Thêm đánh giá thành công")
                     </script>
                 </th:block>
-                <th:block th:if="${param.success==false}">
+                <th:block th:if="${param['false']}">
                     <script>
-                        alert("Đã xảy lỗi !!!");
+                        alert("Không thể thêm đánh giá, đã xảy ra lỗi!!!")
                     </script>
-                </th:block>-->
+                </th:block>
 
             </div>
         </div>
@@ -301,6 +300,7 @@
         let productId = [[${product.productId}]];
         let totalPages = [[${reviews.getTotalPages()}]];
         let currentPage = [[${reviews.getPageable().getPageNumber()}]];
+
 
         $(function () {
             if ([[${reviews.hasContent}]] == true) {
