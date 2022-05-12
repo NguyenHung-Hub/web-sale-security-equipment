@@ -65,12 +65,12 @@ public class LoginAndRegisterController {
         } else if(!user.getPassword().equals(rePassword)) {
             model.addAttribute("message", "Nhập lại password không trùng khớp!");
             return "signup-form";
-        } else if (userService.registerUser(user) == null) {
+        } else if (userService.getUserByEmail(user.getEmail()) == null) {
             model.addAttribute("message", "Email đã được sử dụng!");
             return "signup-form";
         } else {
             String siteUrl = Utility.getSiteUrl(request);
-            userService.sendVerificationEmail(user, siteUrl);
+            userService.sendVerificationEmail(userService.registerUser(user), siteUrl);
             model.addAttribute("message", "Kiểm tra mail trong email " + user.getEmail());
             return "message";
         }
