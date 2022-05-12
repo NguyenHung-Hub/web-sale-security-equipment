@@ -29,5 +29,16 @@ body{
 .content-box {
     position: absolute;
     right: 0;
+
+
+
     width: calc(100% - 200px);
+    height: 100vh;
+
+}
+.pagination-modify{
+    position: fixed;
+    left: 50%;
+    bottom: 16px;
+
 }

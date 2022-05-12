@@ -10,13 +10,13 @@
     <nav class="nav flex-column nav-pills nav-fill  mx-0 ">
         <li class="nav-item">
             <a class="nav-link text-light text-left py-3 pl-5"
-               th:href="@{../dashboard/product}"
-               th:classappend="${#httpServletRequest.getRequestURI() == '/dashboard/product' ? 'active':''}"
+               th:href="@{/dashboard/product}"
+               th:classappend="${#httpServletRequest.getRequestURI().indexOf('/dashboard/product') != -1 ? 'active':''}"
             >Sản phẩm</a>
         </li>
         <li class="nav-item ">
             <a class="nav-link text-light text-left py-3 pl-5"
-               th:href="@{../dashboard/brand}"
+               th:href="@{/dashboard/brand}"
                th:classappend="${#httpServletRequest.getRequestURI() == '/dashboard/brand' ? 'active':''}"
             >Thương hiệu</a>
         </li>
@@ -25,7 +25,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link text-light text-left py-3 pl-5"
-               th:href="@{../dashboard/order}"
+               th:href="@{/dashboard/order}"
                th:classappend="${#httpServletRequest.getRequestURI() == '/dashboard/order' ? 'active':''}"
             >Hóa đơn</a>
         </li>
