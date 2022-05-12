@@ -118,10 +118,4 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findTopNumberRandom(top);
     }
 
-    @Override
-    public Page<Product> searchByCategory(List<Integer> cateId, Pageable pageable) {
-        return productRepository.searchByCategory(cateId, pageable);
-    }
-
-
 }

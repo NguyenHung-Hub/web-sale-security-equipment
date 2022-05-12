@@ -87,7 +87,7 @@ public class DetailController {
        productReview.setUser(userDetails.getUser());
        ProductReview s = reviewService.save(productReview);
 
-       return "redirect:/product/detail/"+product.getSlug()+"?success="+!(s==null);
+       return "redirect:/product/detail/"+product.getSlug()+"?"+!(s==null);
     }
 
     @PostMapping(value = "/api/productReviews")

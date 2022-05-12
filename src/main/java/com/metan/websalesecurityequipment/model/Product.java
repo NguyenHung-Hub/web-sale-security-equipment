@@ -9,6 +9,8 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -24,11 +26,15 @@ public @Setter
 class Product {
     @Id
     @Column(name = "product_id", columnDefinition = "varchar(20)")
+    @NotNull(message = "Mã không được rỗng")
     private String productId;
     @Column(columnDefinition = "nvarchar(255)")
+    @NotNull(message = "Tên không được rỗng")
     private String name;
+    @NotNull(message = "số lượng không được rỗng")
     private int quantity;
     @Column(columnDefinition = "decimal(13,2)")
+    @NotNull(message = "Giá không được rỗng")
     private Double price;
     @Column(name = "short_desc", columnDefinition = "text")
     private String shortDesc;
@@ -36,11 +42,10 @@ class Product {
     @Column(columnDefinition = "nvarchar(255)")
     private String title;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonBackReference
     @JsonIncludeProperties("discountPercent")
     private List<ProductDiscount> productDiscounts;
     private float discountPercentBase;
-    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brand_id")
     @JsonManagedReference
@@ -58,9 +63,9 @@ class Product {
     private Date modifiedAt;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
-    @JsonBackReference
     private List<ProductAttribute> productAttributes;
     @OneToMany(mappedBy = "product")
+    @JsonBackReference
     private List<ProductReview> productReviews;
     @OneToMany
     @JoinColumn(name = "product_id")
@@ -68,5 +73,6 @@ class Product {
     @ManyToOne
     @JoinColumn(name = "category_id")
     @JsonIgnoreProperties("products")
+    @JsonManagedReference
     private Category category;
 }

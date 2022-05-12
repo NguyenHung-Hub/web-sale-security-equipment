@@ -24,7 +24,6 @@ class Attribute {
     private String name;
     @ManyToOne
     @JoinColumn(name = "category_id")
-    @JsonManagedReference
     private Category category;
 
 }
