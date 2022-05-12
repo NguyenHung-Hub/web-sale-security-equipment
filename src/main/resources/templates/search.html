@@ -166,7 +166,7 @@
                         <span style="width: 130px;line-height: 34px; margin-right: 10px;"><b>Sắp xếp
                             theo</b> </span>
                     <ul id="sort">
-                        <li value="name" class="btnss btn-ss  btn-select btn-ss-active" id="btnLienQuan"><a>Liên
+                        <li value="title" class="btnss btn-ss  btn-select btn-ss-active" id="btnLienQuan"><a>Liên
                             Quan</a></li>
                         <li value="created_at" class="btnss btn-ss btn-select" id="btnMoiNhat"><a>Mới Nhất</a></li>
                         <li value="totalQuan" class="btnss btn-ss btn-select" id="btnBanChay"><a>Bán Chạy</a></li>
@@ -442,7 +442,7 @@
                                 <img src="${product.thumbnail}"
                                      alt="Cinque Terre">
                             </a>
-                            <a class="desc-link text-dark" th:href="/product/detail/'+${product.slug}}">
+                            <a class="desc-link text-dark" href="/product/detail/${product.slug}">
                             <div class="description">
                                 <div class="desc-name">${product.title}</div>
                                 <div class="desc-price">

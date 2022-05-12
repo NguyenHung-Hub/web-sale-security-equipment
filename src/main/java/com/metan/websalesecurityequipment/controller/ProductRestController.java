@@ -20,18 +20,23 @@ public class ProductRestController {
     }
 
     @GetMapping
-    public @ResponseBody
-    List<Product> findAllProducts() {
+    public List<Product> findAllProducts() {
         return productService.findAll();
     }
 
     @GetMapping("/{theId}")
-    public @ResponseBody Product findProductById(@PathVariable String theId) {
+    public Product findProductById(@PathVariable String theId) {
         return productService.findProductById(theId);
     }
 
     @PostMapping
     public Product saveProduct(@Validated @RequestBody Product product) {
         return productService.saveProduct(product);
+    }
+
+    @PostMapping(value = "/products",consumes={"application/json"})
+    @ResponseBody
+    public Product findProductById(@RequestBody Product product) {
+        return productService.findProductById(product.getProductId());
     }
 }
