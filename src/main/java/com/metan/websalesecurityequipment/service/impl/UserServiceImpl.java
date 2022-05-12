@@ -46,6 +46,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void sendVerificationEmail(User user, String siteUrl) throws MessagingException, UnsupportedEncodingException {
+
         String subject = "Please verify your registration";
         String senderName = "Metan team";
         String mailContent = "<p>Dear " + user.getFullName() + ",</p>";
@@ -58,7 +59,38 @@ public class UserServiceImpl implements UserService {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
-        helper.setFrom("huyhoang14901@gmail.com", senderName);
+        helper.setFrom("dohuyhoang.iuh.k15@gmail.com", senderName);
+        helper.setTo(user.getEmail());
+        helper.setSubject(subject);
+        helper.setText(mailContent, true);
+
+        mailSender.send(message);
+
+//        userRepository.registerEvent(user.getVerificationCode(), user.getEmail());
+    }
+
+    @Override
+    public void sendVerificationEmailForgotPassword(User user, String siteUrl) throws MessagingException, UnsupportedEncodingException {
+        String randomCode = RandomString.make(64);
+        user.setVerificationCode(randomCode);
+
+        user.setVerificationCode(randomCode);
+
+        userRepository.updateVerificationCode(user.getVerificationCode(), user.getUserId());
+
+        String subject = "Please verify your registration";
+        String senderName = "Metan team";
+        String mailContent = "<p>Dear " + user.getFullName() + ",</p>";
+        mailContent += "<p>Please click the link below to vefify to your forgot password:</p>";
+
+        String verifyUrl = siteUrl + "/account/verify-forgot-password?code=" + user.getVerificationCode();
+        mailContent += "<h3><a href='" + verifyUrl +"'>VERIFY</a></h3>";
+        mailContent += "<p>Thank you<br>The Metan Team</p>";
+
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+        helper.setFrom("dohuyhoang.iuh.k15@gmail.com", senderName);
         helper.setTo(user.getEmail());
         helper.setSubject(subject);
         helper.setText(mailContent, true);
@@ -79,8 +111,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(User user) {
+    public User getUserByVerificationCodeForgotPassword(String code) {
+        return userRepository.findByVerificationCode(code);
+    }
 
+
+    @Override
+    public void updateUser(User user) {
+        encodePassword(user);
+        userRepository.updatePassword(user.getUserId(), user.getPassword());
     }
 
     @Override
