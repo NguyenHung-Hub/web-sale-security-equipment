@@ -165,6 +165,12 @@ main.mt-home .block-sliding-home .block-sliding-home__box-right a:not(:last-chil
     margin-bottom: 15.5px;
 }
 
+main.mt-home .block-sliding-home .block-sliding-home__box-right a img {
+    object-fit: cover;
+    object-position: center;
+    height: 140px;
+}
+
 main.mt-home .block-sliding-home .sliding-home .slick-list {
     border-radius: 1rem;
     -webkit-box-shadow: rgba(60, 64, 67, .1) 0 1px 2px 0, rgba(60, 64, 67, .15) 0 2px 6px 2px;
@@ -328,11 +334,13 @@ main.mt-home .block-hot-sale .block-hot-sale__box-title {
     float: left;
 }
 
-main.mt-home .block-hot-sale .block-hot-sale__box-title svg {
-    width: 300px;
-    height: 40px;
+main.mt-home .block-hot-sale .block-hot-sale__box-title h2 {
+    font-weight: 600;
     margin-top: 5px;
     margin-left: -5px;
+    color: #FFFFFF;
+    font-size: 1.8rem;
+    text-transform: uppercase;
 }
 
 main.mt-home .block-hot-sale .box-product .list-product {
@@ -395,19 +403,17 @@ main.mt-home .block-hot-sale .box-product:hover .list-product .slick-prev {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
+    justify-content: space-between;
 }
 
 .box-title a {
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
     font-size: 1.8rem;
     font-weight: 700;
     line-height: 22px;
     color: #444444;
 }
 
-.box-title a > h2 {
+.box-title h2 {
     font-size: 2rem;
     font-weight: 700;
     line-height: 22px;

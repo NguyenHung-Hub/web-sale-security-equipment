@@ -75,7 +75,6 @@ public class SearchController {
             ss = "DESC";
             req.setColumnName("price");
         }
-
         if (ss.equals("DESC")) {
             sort = Sort.by(req.getColumnName()).descending();
         } else {
@@ -136,13 +135,7 @@ public class SearchController {
         int pageSize = size.orElse(12);
 
         pageable = PageRequest.of(currentPage, pageSize, Sort.by("name"));
-//        if(cateId!=-1){
-//            System.out.println("cate1");
-//            resultPage = productService.searchByCategory(Arrays.asList(cateId), pageable);
-//        }else{
-            resultPage = getProductByName(name, pageable);
-//        }
-
+        resultPage = getProductByName(name, pageable);
 
         model.addAttribute("brandsFirst", brandsFirst);
         model.addAttribute("brandsLast", brandsLast);
