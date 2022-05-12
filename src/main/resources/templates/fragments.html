@@ -31,6 +31,37 @@
         <link rel="stylesheet" th:href="@{/css/footer.css}">
         <title th:text="${title}"></title>
     </th:block>
+
+    <th:block th:fragment="base_2 (title)">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="noindex,follow">
+        <meta property="og:locale" content="vi_VN">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Metan shop">
+        <meta property="og:site_name" content="Metan shop">
+        <meta property="og:image" content="https://www.w3schools.com/bootstrap/ny.jpg">
+        <link rel="icon"
+              th:href="@{/imgs/logo.png}"
+              type="image/x-icon" />
+        <link rel="stylesheet" th:href="@{/css/font-base.css}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"
+              integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"
+              integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+              integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
+              crossorigin="anonymous">
+        <link rel="stylesheet" th:href="@{/css/base.css}">
+        <title th:text="${title}"></title>
+    </th:block>
+
+
+
     <th:block th:fragment="home">
         <link rel="stylesheet" th:href="@{/css/home.css}">
         <link rel="stylesheet" th:href="@{/css/home-responsive.css}">
@@ -48,6 +79,10 @@
 
     <th:block th:fragment="product-detail">
         <link rel="stylesheet" th:href="@{/css/detail.css}">
+    </th:block>
+
+    <th:block th:fragment="dashboard">
+        <link rel="stylesheet" th:href="@{/css/dashboard.css}">
     </th:block>
 </head>
 
@@ -251,6 +286,9 @@
                                         <li sec:authorize="isAnonymous()"><a th:href="@{/account/register}">Đăng ký</a>
                                         </li>
                                         <li sec:authorize="isAuthenticated()"><a th:href="@{/}">Hồ sơ của tôi</a></li>
+                                        <li sec:authorize="hasAuthority('ADMIN')">
+                                            <a th:href="@{/dashboard/}">Quản lý</a>
+                                        </li>
                                         <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Đăng xuất</a></li>
                                     </ul>
                                 </div>

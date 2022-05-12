@@ -46,19 +46,17 @@ spring:
             enable: true
 #aws
 access:
-  key:
-    id: AKIAYYHEHMO3LILUQAGD
-    secret: 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
+    key:
+        id: AKIAYYHEHMO3LILUQAGD
+        secret: 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
 s3:
-  region:
-    name: us-east-1
-  bucket:
-    name: chinh1506
+    region:
+        name: us-east-1
+    bucket:
+        name: chinh1506
 #  access.key.id=AKIAYYHEHMO3LILUQAGD
 #  access.key.secret=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
 #  s3.region.name=us-east-1
 #  s3.bucket.name=chinh1506
 server:
-  port: 8080
-
-
+    port: 8080
