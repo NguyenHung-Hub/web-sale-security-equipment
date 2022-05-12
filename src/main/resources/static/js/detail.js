@@ -1,7 +1,9 @@
+let quantity= $('#spQuantity').attr('value');
 function add() {
     let i = parseInt(document.getElementById("txtQuantity").value);
-
     i = i + 1;
+    if(i>quantity)
+        i=quantity
     document.getElementById("txtQuantity").value = i;
 }
 
@@ -13,15 +15,34 @@ function sub() {
         i = i - 1;
     document.getElementById("txtQuantity").value = i;
 }
-
-$(document).ready(function () {
-    function testQuantity() {
-        let i = $("#txtQuantity").val();
-        let regex = /^[1-9][0-9]*$/i;
-        if (i.trim() === "" || !regex.test(i)) {
-            document.getElementById("txtQuantity").value = 1;
+function validate(evt) {
+    if (evt.keyCode != 8) {
+        var theEvent = evt || window.event;
+        var key = theEvent.keyCode || theEvent.which;
+        key = String.fromCharCode(key);
+        var regex = /[1-9][0-9]*/;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault)
+                theEvent.preventDefault();
         }
     }
+}
+function testQuantity() {
+    let i = $("#txtQuantity").val();
+    let regex = /^[1-9][0-9]*$/i;
+    if (i.trim() === "" || !regex.test(i)) {
+        document.getElementById("txtQuantity").value = 1;
+    }else if(i> quantity) {
+        document.getElementById("txtQuantity").value = quantity;
+        alert("Số lượng không phù hợp!");
+    }
+}
+
+$(document).ready(function () {
+    $("#txtQuantity").keypress(function(){
+       validate(event);
+    });
 
     $("#txtQuantity").blur(testQuantity);
     $('.collapsible').click(function () {
@@ -38,12 +59,6 @@ $(document).ready(function () {
 
         }
     });
-    /*$('#btnTabDes').mousedown(function (){
-
-    });
-    $('#btnTabDes').mouseup(function (){
-        checkDesHeight();
-    });*/
 });
 
 function checkDesHeight() {
@@ -55,24 +70,17 @@ function checkDesHeight() {
     console.log('chiều cao là: ' + $('#long-desc').height());
 }
 
-/*$('#tabs a').on('click', function (e) {
-    checkDesHeight();
-})*/
-/*$('a[href="#ThemThongTin"]').on('show.bs.tab',function (e) {
-    checkDesHeight();
-})*/
-
 $(function () {
-    /*$("#tabs a").on('click', function (e) {
-        e.preventDefault();
-        $(this).tab('show');
-    })*/
     $('a[data-toggle="tab"]').on('click', function (e) {
         console.log("da chay");
         switch (e.target.id) {
             case "btnTabDes": {
                 $('#ThemThongTin').show();//không, nhờ cái này
                 checkDesHeight();
+                break;
+            }
+            case "danh-gia": {
+                $('#ThemThongTin').hide();//không, nhờ cái này
                 break;
             }
         }

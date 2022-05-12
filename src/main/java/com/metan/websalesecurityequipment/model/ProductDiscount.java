@@ -20,11 +20,12 @@ class ProductDiscount {
     @Id
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
-    @JsonBackReference
+    @JsonManagedReference
     private Product product;
     @Id
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "name_discount")
+    @JsonManagedReference
     private Discount discount;
     private float discountPercent;
 

@@ -41,43 +41,38 @@ public interface ProductRepository extends JpaRepository<Product, String> {
 
     public Page<Product> findAll(Pageable pageable);
 
-    @Query(value = "select p.*, sum(order_items.quantity) as totalQuan from (order_items) right outer join (products p) on p.product_id =order_items.product_id " +
-            "  where p.name like %?1% " +
+    @Query(value = "select p.*, sum(order_items.quantity) as totalQuan from (order_items) right outer join (products p) on p.product_id =order_items.product_id join categories c on c.category_id = p.category_id join brands b on b.brand_id = p.brand_id " +
+            "  where concat(p.name, c.name, b.name) like %?1% " +
             " group by p.product_id ", nativeQuery = true)
     public Page<Product> findByNameContaining(String name, Pageable pageable);
 
-    @Query(value = "select p.*, sum(order_items.quantity) as totalQuan from (order_items) right outer join (products p) on p.product_id =order_items.product_id join product_reviews pr on pr.product_id=p.product_id\n" +
+    @Query(value = "select p.*, sum(order_items.quantity) as totalQuan from (order_items) right outer join (products p) on p.product_id =order_items.product_id join product_reviews pr on pr.product_id=p.product_id " +
+            "join categories c on c.category_id = p.category_id join brands b on b.brand_id = p.brand_id \n" +
             "            where pr.rating >= ?1\n" +
-            "            and (p.price >=?2 and p.price<=?3) and p.name like %?4%\n" +
+            "            and (p.price >=?2 and p.price<=?3) and concat(p.name, c.name, b.name) like %?4%\n" +
             " group by p.product_id ", nativeQuery = true)
     public Page<Product> searchByNameRating(int rating ,double minPrice, double maxPrice,String name,Pageable pageable);
 
     @Query(value = "select distinct(p.product_id), p.*, sum(order_items.quantity) as totalQuan from (order_items) right outer join (products p) on p.product_id =order_items.product_id join (categories c) \n" +
-            "on c.category_id = p.category_id join (product_reviews pr) on pr.product_id=p.product_id \n" +
+            "on c.category_id = p.category_id join (product_reviews pr) on pr.product_id=p.product_id join brands b on b.brand_id = p.brand_id \n" +
             " where (p.brand_id in (?2) \n" +
             "            OR (c.parent_category_id in (?1) or c.category_id in (?1) )) \n" +
             "            and pr.rating >= ?3 " +
-            " and (p.price >=?4 and p.price<=?5) and p.name like %?6% " +
+            " and (p.price >=?4 and p.price<=?5) and concat(p.name, c.name, b.name)  like %?6% " +
             " group by p.product_id ", nativeQuery = true)
     public Page<Product> searchByNameCateBrandRating(List<Integer> cates,List<Integer> brands, int rating,double minPrice, double maxPrice,String name,Pageable pageable);
 
     @Query(value = "select p.*, sum(order_items.quantity) as totalQuan from (order_items) right outer join (products p) on p.product_id =order_items.product_id join (categories c) \n" +
-            "on c.category_id = p.category_id \n" +
+            "on c.category_id = p.category_id join brands b on b.brand_id = p.brand_id  \n" +
             " where (p.brand_id in ?2 \n" +
             "            OR( c.parent_category_id in ?1 or c.category_id in ?1)) \n" +
-            " and (p.price >=?3 and p.price<=?4) and p.name like %?5% " +
+            " and (p.price >=?3 and p.price<=?4) and concat(p.name, c.name, b.name) like %?5% " +
             "group by p.product_id ", nativeQuery = true)
     public Page<Product> searchByNameCateBrand(List<Integer> cates,List<Integer> brands,double minPrice, double maxPrice,String name,Pageable pageable);
 
-    @Query(value = "select products.*, sum(order_items.quantity) as totalQuan from (order_items) right outer join (products) on products.product_id =order_items.product_id \n" +
-            "where (products.price >=?1 and products.price<=?2) and products.name like %?3% " +
+    @Query(value = "select products.*, sum(order_items.quantity) as totalQuan from (order_items) right outer join (products) on products.product_id =order_items.product_id join categories c on c.category_id = products.category_id join brands b on b.brand_id = products.brand_id \n" +
+            "where (products.price >=?1 and products.price<=?2) and concat(products.name, c.name, b.name) like %?3% " +
             "group by products.product_id ", nativeQuery = true)
     public Page<Product> searchByPrice(double minPrice, double maxPrice, String name, Pageable pageable);
-
-    @Query(value = "select p.*, sum(order_items.quantity) as totalQuan from (order_items) right outer join (products p) on p.product_id =order_items.product_id join (categories c) \n" +
-            "on c.category_id = p.category_id \n" +
-            " where c.parent_category_id in ?1 or c.category_id in ?1 \n" +
-            " group by p.product_id ", nativeQuery = true)
-    public Page<Product> searchByCategory(List<Integer> cateId, Pageable pageable);
 
 }
