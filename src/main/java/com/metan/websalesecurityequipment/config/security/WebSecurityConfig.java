@@ -82,24 +82,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/**").permitAll()
+                .antMatchers("/account/**").permitAll()
+                .antMatchers("/search/**").permitAll()
+                .antMatchers("/product/detail/**").permitAll()
                 .antMatchers("/cart/**").authenticated()
                 .antMatchers("/product/reviews").authenticated()
                 .antMatchers("/product/addToCart").authenticated()
                 .antMatchers("/message").authenticated()
-                .antMatchers("/search/products").permitAll()
-                .anyRequest().permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                     .loginPage("/account/login")
                     .usernameParameter("email")
                     .passwordParameter("password")
                     .loginProcessingUrl("/account/authenticateTheUser")
-                    .failureHandler(new AuthenticationFailureHandler() {
-                        @Override
-                        public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-                            System.out.println(exception.getMessage());
-                        }
-                    })
                     .permitAll()
                     .defaultSuccessUrl("/")
                 .and()
