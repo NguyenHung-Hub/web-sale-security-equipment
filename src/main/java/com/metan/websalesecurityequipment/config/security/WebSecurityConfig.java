@@ -94,12 +94,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .usernameParameter("email")
                     .passwordParameter("password")
                     .loginProcessingUrl("/account/authenticateTheUser")
-                    .failureHandler(new AuthenticationFailureHandler() {
-                        @Override
-                        public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-                            System.out.println(exception.getMessage());
-                        }
-                    })
                     .permitAll()
                     .defaultSuccessUrl("/")
                 .and()
