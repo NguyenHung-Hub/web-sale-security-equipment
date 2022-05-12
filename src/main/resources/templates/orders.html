@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <th:block th:replace="fragments :: base ('Đơn mua')"/>
+    <link rel="stylesheet" th:href="@{/css/orders.css}">
+    <link rel="stylesheet" th:href="@{/css/cart.css}">
+</head>
+
+<body>
+<div th:replace="fragments :: header (categories=${CATEGORIES})"></div>
+<div class="container" style="min-height: 500px">
+    <nav class="navMenu">
+        <a href="/cart/order/ALL" class="text-center">Tất cả</a>
+        <a href="/cart/order/PROCESSING" class="text-center">Chờ xác nhận</a>
+        <a href="/cart/order/SHIPPING" class="text-center">Đang vận chuyển</a>
+        <a href="/cart/order/CANCELLED" class="text-center">Đã hủy</a>
+        <a href="/cart/order/COMPLETED" class="text-center">Đã giao</a>
+        <div class="dot"></div>
+    </nav>
+
+    <div th:if="${LIST_ORDER != null}" class="mb-5" style="margin-top: 100px;" th:with="user=${CUSTOMER}">
+        <div class="card mt-50">
+            <div class="row">
+                <div class="col-md-12 cart">
+                    <div class="title">
+                        <div class="row border-bottom">
+                            <div class="row main align-items-center">
+                                <div class="col-3">
+                                    <h4><b>Sản phẩm</b></h4>
+                                </div>
+                                <div class="col-4">
+                                </div>
+                                <div class="col d-flex">
+                                    <div class="d-flex flex-column">
+                                        <span>Đơn giá</span>
+                                    </div>
+                                </div>
+                                <div class="col d-flex">
+                                    <span>Số lượng</span>
+                                </div>
+                                <div class="col-2 d-flex">
+                                    <span>Thành tiền</span>
+                                </div>
+                                <div class="col d-flex">
+                                    <span>Tình trạng</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="List-product" id="style-7">
+                        <th:block th:each="Order :${LIST_ORDER}">
+                            <div class="border-bottom" th:id="'rowOf'+${Order.orderId}">
+                            <button th:if="${type != null}" type="button" class="btn btn-danger delete" th:deleteId="${Order.orderId}">Hủy đơn</button>
+                                <Span th:if="${type == null}"  th:text="'Mã đơn hàng: ' + ${Order.orderId}"></Span>
+                            <th:block th:each="ItemOrder :${Order.orderItems}">
+                                <div class="row" th:id="'rowOf'+${ItemOrder.product.productId}">
+                                    <div class="row main align-items-center">
+                                        <div class="col-3 d-flex ">
+                                            <img class="img-product" th:src="${ItemOrder.product.thumbnail}">
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="row text-muted">[[${ItemOrder.product.title}]]</div>
+                                            <div class="row">[[${ItemOrder.product.category.name}]]</div>
+                                        </div>
+                                        <div class="col d-flex">
+                                            <div class="d-flex flex-column">
+                                                <span class="old-price">[[${ItemOrder.product.price}]] ₫</span>
+                                                <span class="new-price"
+                                                      th:id="'newPrice'+${ItemOrder.product.productId}">[[${ItemOrder.product.price}]] ₫</span>
+                                            </div>
+                                        </div>
+                                        <div class="col d-flex">
+                                            <span type="text">[[${ItemOrder.quantity}]]</span>
+                                        </div>
+                                        <div class="col-2 d-flex justify-content-between">
+                                            <span th:id="'subtotal'+${ItemOrder.product.productId}"
+                                                  th:with="result=${ItemOrder.product.price * ItemOrder.quantity}">
+                                                <span th:text="${result}  + ' ₫'"
+                                                      th:id="'subTotalPrice'+${ItemOrder.product.productId}"
+                                                      class="subTotal-product"></span>
+                                            </span>
+                                        </div>
+                                        <div class="col d-flex">
+                                            <span type="text">[[${Order.getOrderStatus.getStatus}]]</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th:block>
+                            </div>
+                        </th:block>
+
+                    </div>
+                    <div class="back-to-shop"><a th:href="@{/}">&leftarrow;</a><span
+                            class="text-muted">Back to shop</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+<th:block th:replace="fragments :: base-js"/>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script th:src="@{/js/order.js}"></script>
+</body>
+</html>

@@ -21,11 +21,10 @@ class ProductReview {
     private Float rating;
     @Column(columnDefinition = "nvarchar(255)")
     private String title;
-    @Column(columnDefinition = "nvarchar(255)")
+    @Column(columnDefinition = "LONGTEXT")
     private String content;
     @ManyToOne
     @JoinColumn(name = "product_id")
-    @JsonManagedReference
     private Product product;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

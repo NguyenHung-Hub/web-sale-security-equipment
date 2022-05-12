@@ -40,7 +40,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void deleteCardItem(CartItemPK pk) {
-        cartItemRepository.deleteById(pk);
+        cartItemRepository.deleteById(pk.getProduct(),pk.getCart());
     }
 
     @Override
@@ -56,5 +56,10 @@ public class CartServiceImpl implements CartService {
         cart.setModifiedAt(new Date());
         cart.setUser(user);
         cartRepository.save(cart);
+    }
+
+    @Override
+    public Cart saveOrUpdateCart(Cart cart) {
+        return cartRepository.save(cart);
     }
 }

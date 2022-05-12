@@ -9,8 +9,13 @@ import java.util.List;
 
 
 public interface OrderService {
+    public Integer getSumQuantity(String productId);
+
     void save(Order order);
     public int getSumQuantity(String productId);
     public List<Order> findAll();
+
+    void deleteOrder(String order);
+    String getLastId();
 }
 

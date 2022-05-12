@@ -107,6 +107,7 @@ label {
 }
 
 .filter-evaluate {
+    height: 16px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -276,7 +277,7 @@ div.filter-evaluate > .checked {
 }
 
 .select-price-item{
-    margin-left: -40px;
+    margin-left: 0px;
     text-align: center;
 }
 
@@ -444,7 +445,6 @@ div.desc-address {
     display: flex;
     justify-content: center;
     width: 80%;
-
 }
 
 .page-link {
@@ -485,6 +485,8 @@ a.page-link, span.page-link {
 
 /* thiết lập style cho class active */
 .pagination li.active > .current {
+    width:30px;
+    height: 30px;
     background-color: #ff9999;
     color: black;
     font-size: 14px;

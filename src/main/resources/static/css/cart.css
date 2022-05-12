@@ -9,10 +9,22 @@
 .card, .card-empty-wrap {
     margin: 20px auto 0;
     max-width: 100%;
-    width: 95%;
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.19);
     border-radius: 1rem;
     border: transparent
+}
+
+.input-group-sm>.btn, .input-group-sm>.form-control, .input-group-sm>.form-select, .input-group-sm>.input-group-text {
+    padding: 1.2rem 0.5rem;
+    font-size: 1.875rem;
+    border-radius: 0.2rem;
+}
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 800px;
+        margin: 1.75rem auto;
+    }
 }
 
 .card-empty-wrap{

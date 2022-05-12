@@ -3,10 +3,7 @@ package com.metan.websalesecurityequipment.controller;
 import com.metan.websalesecurityequipment.model.*;
 import com.metan.websalesecurityequipment.model.request.ProductRequestPageable;
 import com.metan.websalesecurityequipment.repository.OrderRepository;
-import com.metan.websalesecurityequipment.service.BrandService;
-import com.metan.websalesecurityequipment.service.CategoryService;
-import com.metan.websalesecurityequipment.service.ProductReviewService;
-import com.metan.websalesecurityequipment.service.ProductService;
+import com.metan.websalesecurityequipment.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,10 +15,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -41,16 +35,17 @@ public class SearchController {
     private ProductReviewService productReviewService;
 
     @Autowired
-    private OrderRepository orderRepository;
+    private OrderService orderService;
 
     public SearchController() {
     }
 
 
     @GetMapping(value = "search")
-    public String showSearch1(ModelMap model, @RequestParam(name = "name", required = false) String name,
+    public String showSearch1(ModelMap model,  @RequestParam(name = "name",defaultValue = "",required = false) String name,
                               @RequestParam("page") Optional<Integer> page,
                               @RequestParam("size") Optional<Integer> size) {
+
         this.name = name;
         List<Brand> brands = brandService.findAll();
         List<Category> categories = categoryService.findAll();
@@ -68,6 +63,7 @@ public class SearchController {
                                            @RequestParam("size") Optional<Integer> size) {
         int currentPage = page.orElse(req.getPage());
         int pageSize = size.orElse(12);
+        Sort sort;
         System.out.println(req);
         String ss = "DESC";
         if (req.getColumnName().equals("ascPrice")) {
@@ -78,20 +74,13 @@ public class SearchController {
         } else if (req.getColumnName().equals("descPrice")) {
             ss = "DESC";
             req.setColumnName("price");
-        } else if (req.getColumnName().equals("BanChay")) {
-            return productService.sortByOrderDetail(req,name,PageRequest.of(currentPage, pageSize));
         }
-
-        Sort sort;
-
         if (ss.equals("DESC")) {
             sort = Sort.by(req.getColumnName()).descending();
         } else {
             sort = Sort.by(req.getColumnName()).ascending();
         }
-
         pageable = PageRequest.of(currentPage, pageSize, sort);
-        //pageable = PageRequest.of(currentPage, pageSize);
         Page<Product> productPage = productService.searchByNameCateBrand(req, name, pageable);
         return productPage;
     }
@@ -115,7 +104,6 @@ public class SearchController {
             for (ProductReview pr : reviews) {
                 avgRating += pr.getRating();
             }
-
             listRating.put(p.getProductId(), avgRating / (reviews.size() == 0 ? 1 : reviews.size()));
         }
         return listRating;
@@ -129,17 +117,17 @@ public class SearchController {
 
         List<Category> categoriesFirst = null;
         List<Category> categoriesLast = null;
-        if (brands.size() <= 4) {
+        if (brands.size() <= 5) {
             model.addAttribute("brandsFirst", brands);
         } else {
-            brandsFirst = brands.subList(0, 4);
-            brandsLast = brands.subList(4, brands.size());
+            brandsFirst = brands.subList(0, 5);
+            brandsLast = brands.subList(5, brands.size());
         }
-        if (categories.size() <= 4) {
+        if (categories.size() <= 5) {
             model.addAttribute("categoriesFirst", categories);
         } else {
-            categoriesFirst = categories.subList(0, 4);
-            categoriesLast = categories.subList(4, categories.size());
+            categoriesFirst = categories.subList(0, 5);
+            categoriesLast = categories.subList(5, categories.size());
         }
 
         //Nếu nguoi dung khong nhap
@@ -147,16 +135,23 @@ public class SearchController {
         int pageSize = size.orElse(12);
 
         pageable = PageRequest.of(currentPage, pageSize, Sort.by("name"));
-        //pageable = PageRequest.of(currentPage, pageSize);
         resultPage = getProductByName(name, pageable);
-//        System.out.println("my detail"+resultPage.getContent().get(0).getOrderItems());
+
         model.addAttribute("brandsFirst", brandsFirst);
         model.addAttribute("brandsLast", brandsLast);
         model.addAttribute("categoriesFirst", categoriesFirst);
         model.addAttribute("categoriesLast", categoriesLast);
         model.addAttribute("productPage", resultPage);
-
+        model.addAttribute("listQuan", getSumQuan(productService.findAll()));
         model.addAttribute("listRating", getAvgRating(productService.findAll()));
+    }
+
+    public HashMap<String, Integer> getSumQuan(List<Product> products) {
+        HashMap<String, Integer> listQuantity = new HashMap<>();
+        for (Product p : products) {
+            listQuantity.put(p.getProductId(),(orderService.getSumQuantity(p.getProductId())==null)?0:orderService.getSumQuantity(p.getProductId()));
+        }
+        return listQuantity;
     }
 
 }
