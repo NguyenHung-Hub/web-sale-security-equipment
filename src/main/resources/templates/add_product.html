@@ -275,7 +275,8 @@
                       method="post">
                     <div class="form-group-modify">
                         <label>Mã hàng</label>
-                        <input  id="productId" type="text" class="form-control-modify" aria-describedby="emailHelp" placeholder="Mã hàng" name="productId" th:value="${product.productId}" disabled="disabled"/>
+                        <input disabled="disabled" class="form-control-modify" th:value="${product.productId}">
+                        <input  id="productId" type="hidden"  aria-describedby="emailHelp" placeholder="Mã hàng" name="productId" th:value="${product.productId}" />
                     </div>
 
 

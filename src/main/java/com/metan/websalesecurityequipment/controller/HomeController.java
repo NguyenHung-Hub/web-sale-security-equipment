@@ -39,6 +39,7 @@ public class HomeController {
         List<Product> newProducts = productService.findProductsNew();
         List<Category> categories = categoryService.findAll();
         Discount discount = discountService.findDiscountByName("Khuyến mãi hot").get();
+
         List<Product> cctvCameraProducts = productService.findProductByNameParentCategory("Camera", "Camera", 10);
         List<Product> dauGhiHinhProducts = productService.findProductByNameParentCategory("Hệ thống báo động", "Hệ thống báo động", 10);
         List<Product> tbbdbcProducts = productService.findProductByNameParentCategory("Tem từ an ninh", "Tem từ an ninh", 10);
