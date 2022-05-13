@@ -44,7 +44,7 @@
 
 .filter-body {
     width: 100%;
-    border-bottom: 1px solid rgba(209, 19, 19, 0.09);
+    border-bottom: 1px solid rgb(215, 0 ,24, .5);
     padding-left: 5px;
     padding-right: 5px;
 }
@@ -136,7 +136,7 @@ div.filter-evaluate > .checked {
     width: 48%;
     height: 34px;
     margin-left: 0;
-    border-radius: 0.125rem;
+    border-radius: 4px;
     box-shadow: inset 0 1px 0 0 rgb(0 0 0 / 5%);
     border: 1px solid rgba(0, 0, 0, .26);
 }
@@ -150,12 +150,12 @@ div.filter-evaluate > .checked {
     width: 100%;
     height: 34px;
     margin-top: 10px;
-    background-color: #ff9999;
+    background-color: rgb(215, 0 ,24, 1);
     font-weight: 400;
     cursor: pointer;
     font-size: 16px;
     color: #fff;
-    border-radius: 2px;
+    border-radius: 4px;
     text-transform: uppercase;
     box-shadow: 0 1px 1px 0 rgba(31, 31, 31, 0.001);
     display: flex;
@@ -181,7 +181,7 @@ div.filter-evaluate > .checked {
 }
 
 .result-bar > p > span {
-    color: #ff9999;
+    color: rgb(215, 0 ,24, 1);
 }
 
 .sort-bar {
@@ -225,7 +225,7 @@ div.filter-evaluate > .checked {
 }
 
 #sort li:hover {
-    background-color: #ff9999;
+    color: rgb(215, 0 ,24, .7);
 }
 
 #sort li:hover ul {
@@ -251,7 +251,7 @@ div.filter-evaluate > .checked {
 
 #sort li ul li:hover {
     background-color: white;
-    color: red;
+    color: rgb(215, 0 ,24, 1);
     cursor: pointer;
 }
 
@@ -259,15 +259,18 @@ div.filter-evaluate > .checked {
     width: 100px;
     margin-right: 10px;
     text-align: center;
+    border-radius: 4px;
 }
 
 #sort li.btn-ss-active {
-    background-color: #ff9999;
+    background-color: rgb(215, 0 ,24, .7);
+    color: white;
 }
 
 #btnGia {
     display: block;
     width: 150px;
+    border-radius: 4px;
 }
 
 #btnGia>a {
@@ -335,8 +338,9 @@ div.gallery {
     width: 218px;
     color: #000000DE;
     height: 290px;
-    border-radius: 2px;
-    box-shadow: 0 3px 5px rgb(0 0 0 / 15%);
+    border-radius: 4px;
+    -webkit-box-shadow: rgba(60, 64, 67, .15) 0 1px 2px 0, rgba(60, 64, 67, .15) 0 2px 6px 2px;
+    box-shadow: rgba(60, 64, 67, .15) 0 1px 2px 0, rgba(60, 64, 67, .15) 0 2px 6px 2px;
 }
 
 .desc-link:hover {
@@ -349,14 +353,14 @@ div.gallery {
 
 div.gallery:hover {
     transform: translateY(-2px);
-    border: 1px solid #ff9999;
+    border: 1px solid rgb(215, 0 ,24, .5);
 }
 
 div.gallery img {
     width: 100%;
     height: 180px;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 }
 
 div.description {
@@ -487,8 +491,8 @@ a.page-link, span.page-link {
 .pagination li.active > .current {
     width:30px;
     height: 30px;
-    background-color: #ff9999;
-    color: black;
+    background-color: rgb(215, 0 ,24, .7);
+    color: white;
     font-size: 14px;
     text-decoration: none;
 }
@@ -499,13 +503,15 @@ a.page-link, span.page-link {
 }
 
 .pagination li.disabled > .current {
-    color: #ff9999;
+    background-color: rgb(215, 0 ,24, .7);
+    color: white;
 }
 
 /* thêm màu nền khi người dùng hover vào class không active */
 .pagination li:hover:not(.active) > .page-link {
-    color: #ff9999;
+    background-color: rgb(215, 0 ,24, .7);
     text-decoration: none;
+    color: white;
 }
 
 
