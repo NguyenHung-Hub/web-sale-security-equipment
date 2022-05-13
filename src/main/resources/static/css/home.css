@@ -553,6 +553,21 @@ main.mt-home .block-hot-sale .box-product:hover .list-product .slick-prev {
 .box-product .list-product .item-product .item-product__box-price > *:last-child {
     margin-bottom: 1rem!important;
 }
+
+.box-product .list-product .item-product .item-product__box-rating {
+    float: left;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.box-product .list-product .item-product .item-product__box-rating i.fa-star {
+    color: #707070;
+}
+
+.box-product .list-product .item-product .item-product__box-rating i.fa-star.checked {
+    color: #F59E0B;
+}
+
 .scroll {
     overflow-x: auto;
 }

@@ -53,7 +53,7 @@ public class Dashboard {
         List<Product> products = productService.findAll();
         model.addAttribute("products", products);
 
-        List<Category> categories = categoryService.findAll();
+        List<Category> categories = categoryService.findAllParentCategory();
         model.addAttribute("categories", categories);
 
         List<Category> categories2 = new ArrayList<>();
@@ -88,7 +88,7 @@ public class Dashboard {
         List<Product> products = productService.findAll();
         model.addAttribute("products", products);
 
-        List<Category> categories = categoryService.findAll();
+        List<Category> categories = categoryService.findAllParentCategory();
         model.addAttribute("categories", categories);
 
         List<Category> categories2 = new ArrayList<>();
@@ -159,7 +159,9 @@ public class Dashboard {
                               @RequestParam("image") MultipartFile img) {
         String fileName = awsService.save(img);
         p.setThumbnail("https://chinh1506.s3.amazonaws.com/" + fileName);
-        p.setTitle(p.getName() + " " + p.getProductId());
+        p.setCategory(categoryService.findCategoryByCategoryId(p.getCategory().getCategoryId()));
+        p.setTitle(p.getCategory().getName() + " " + p.getName());
+        System.out.println(p.getCategory().getCategoryId());
         p.setCreatedAt(new Date());
         p.setModifiedAt(new Date());
         p.setSlug(toSlug(p.getTitle()));
@@ -196,6 +198,8 @@ public class Dashboard {
         String nowhitespace = WHITESPACE.matcher(input).replaceAll("-");
         String normalized = Normalizer.normalize(nowhitespace, Normalizer.Form.NFD);
         String slug = NONLATIN.matcher(normalized).replaceAll("");
+        String minute = String.valueOf(new Date().getMinutes());
+        slug += "-" + minute;
         return slug.toLowerCase(Locale.ENGLISH);
     }
 
