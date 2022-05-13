@@ -84,6 +84,11 @@
     <th:block th:fragment="dashboard">
         <link rel="stylesheet" th:href="@{/css/dashboard.css}">
     </th:block>
+
+    <th:block th:fragment="richtext">
+        <link rel="stylesheet" th:href="@{/richtext/richtext.min.css}">
+
+    </th:block>
 </head>
 
 </head >
@@ -488,6 +493,9 @@
 <th:block th:fragment="product-detail-js">
     <script th:src="@{/js/detail.js}"></script>
     <script type="text/javascript" th:src="@{/js/jquery.simplePagination.js}"></script>
+</th:block>
+<th:block th:fragment="richtext-js">
+    <script  th:src="@{/richtext/jquery.richtext.min.js}"></script>
 </th:block>
 </body>
 </html>

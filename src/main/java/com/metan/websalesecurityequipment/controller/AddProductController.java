@@ -45,7 +45,7 @@ public class AddProductController {
         List<Product> products = productService.findAll();
         model.addAttribute("products", products);
 
-        List<Category> categories = categoryService.findAll();
+        List<Category> categories = categoryService.findAllParentCategory();
         model.addAttribute("categories", categories);
 
         List<Category> categories2 = new ArrayList<>();
@@ -70,7 +70,7 @@ public class AddProductController {
                               @RequestParam("image") MultipartFile img) {
         String fileName = awsService.save(img);
         p.setThumbnail("https://chinh1506.s3.amazonaws.com/" + fileName);
-        p.setTitle(p.getName() + " " + p.getProductId());
+        p.setTitle(p.getCategory().getName() + " " + p.getName());
         p.setCreatedAt(new Date());
         p.setModifiedAt(new Date());
         p.setSlug(toSlug(p.getTitle()));

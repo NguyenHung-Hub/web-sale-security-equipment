@@ -225,117 +225,16 @@
                 </div>
             </div>
         </section>
-        <section class="container p-xl-0">
+        <section th:each="element : ${categoryListMap}" th:if="${element.getValue().size() > 0}" class="container p-xl-0">
             <div class="block-product mb-3">
                 <div class="box-title">
-                    <h2>CCTV Camera nổi bật nhất</h2>
-                    <a th:href="@{/search(category=${CCTV_CAMERA_PRODUCTS != null ? (CCTV_CAMERA_PRODUCTS.isEmpty() ? '' : CCTV_CAMERA_PRODUCTS.get(0).category.category.categoryId) : ''})}">Xem tất cả</a>
+                    <h2 th:text="${element.getKey().name}"></h2>
+                    <a th:href="@{/search(category=${element.getKey().categoryId})}">Xem
+                        tất cả</a>
                 </div>
                 <div class="box-product">
                     <div class="list-product">
-                        <div th:each="product: ${CCTV_CAMERA_PRODUCTS}" class="item-product">
-                            <div class="item-product__box-img">
-                                <a th:href="@{'/product/detail/'+${product.slug}}">
-                                    <img src="" th:src="${product.thumbnail}" th:alt="${product.name}" alt="">
-                                </a>
-                            </div>
-                            <div th:if="${(product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent) != 0}"
-                                 class="item-product__sticker-percent">
-                                <p th:text="${'Giảm ' + #numbers.formatPercent((product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent), 1, 0)}"></p>
-                            </div>
-                            <div class="item-product__box-name">
-                                <a th:href="@{'/product/detail/'+${product.slug}}">
-                                    <p th:text="${product.title}"></p>
-                                </a>
-                            </div>
-                            <div class="item-product__box-price">
-                                <p class="special-price"
-                                   th:text="${#numbers.formatDecimal(product.price - (product.price * (product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent)),3,'POINT',0,'POINT') + '&nbsp;₫'}"></p>
-                                <p class="old-price"
-                                   th:text="${#numbers.formatDecimal(product.price,3,'POINT',0,'POINT') + '&nbsp;₫'}"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="container p-xl-0">
-            <div class="block-product mb-3">
-                <div class="box-title">
-                    <h2>Đầu ghi hình</h2>
-                    <a th:href="@{/search(category=${DAUGHIHINH_PRODUCTS != null ? (DAUGHIHINH_PRODUCTS.isEmpty() ? '' : DAUGHIHINH_PRODUCTS.get(0).category.category.categoryId) : ''})}">Xem tất cả</a>
-                </div>
-                <div class="box-product">
-                    <div class="list-product">
-                        <div th:each="product: ${DAUGHIHINH_PRODUCTS}" class="item-product">
-                            <div class="item-product__box-img">
-                                <a th:href="@{'/product/detail/'+${product.slug}}">
-                                    <img src="" th:src="${product.thumbnail}" th:alt="${product.name}" alt="">
-                                </a>
-                            </div>
-                            <div th:if="${(product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent) != 0}"
-                                 class="item-product__sticker-percent">
-                                <p th:text="${'Giảm ' + #numbers.formatPercent((product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent), 1, 0)}"></p>
-                            </div>
-                            <div class="item-product__box-name">
-                                <a th:href="@{'/product/detail/'+${product.slug}}">
-                                    <p th:text="${product.title}"></p>
-                                </a>
-                            </div>
-                            <div class="item-product__box-price">
-                                <p class="special-price"
-                                   th:text="${#numbers.formatDecimal(product.price - (product.price * (product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent)),3,'POINT',0,'POINT') + '&nbsp;₫'}"></p>
-                                <p class="old-price"
-                                   th:text="${#numbers.formatDecimal(product.price,3,'POINT',0,'POINT') + '&nbsp;₫'}"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="container p-xl-0">
-            <div class="block-product mb-3">
-                <div class="box-title">
-                    <h2>Thiết bị báo động - báo cháy</h2>
-                    <a th:href="@{/search(category=${TBBD_BC_PRODUCTS != null ? (TBBD_BC_PRODUCTS.isEmpty() ? '' : TBBD_BC_PRODUCTS.get(0).category.category.categoryId): ''})}">Xem tất cả</a>
-                </div>
-                <div class="box-product">
-                    <div class="list-product">
-                        <div th:each="product: ${TBBD_BC_PRODUCTS}" class="item-product">
-                            <div class="item-product__box-img">
-                                <a th:href="@{'/product/detail/'+${product.slug}}">
-                                    <img src="" th:src="${product.thumbnail}" th:alt="${product.name}" alt="">
-                                </a>
-                            </div>
-                            <div th:if="${(product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent) != 0}"
-                                 class="item-product__sticker-percent">
-                                <p th:text="${'Giảm ' + #numbers.formatPercent((product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent), 1, 0)}"></p>
-                            </div>
-                            <div class="item-product__box-name">
-                                <a th:href="@{'/product/detail/'+${product.slug}}">
-                                    <p th:text="${product.title}"></p>
-                                </a>
-                            </div>
-                            <div class="item-product__box-price">
-                                <p class="special-price"
-                                   th:text="${#numbers.formatDecimal(product.price - (product.price * (product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent)),3,'POINT',0,'POINT') + '&nbsp;₫'}"></p>
-                                <p class="old-price"
-                                   th:text="${#numbers.formatDecimal(product.price,3,'POINT',0,'POINT') + '&nbsp;₫'}"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="container p-xl-0">
-            <div class="block-product mb-3">
-                <div class="box-title">
-                    <h2>Chuông, khóa, kiểm soát cửa</h2>
-                    <a th:href="@{/search(category=${CKKSC_PRODUCTS != null ? (CKKSC_PRODUCTS.isEmpty() ? '' : CKKSC_PRODUCTS.get(0).category.category.categoryId) : ''})}">Xem tất cả</a>
-                </div>
-                <div class="box-product">
-                    <div class="list-product">
-                        <div th:each="product: ${CKKSC_PRODUCTS}" class="item-product">
+                        <div th:each="product: ${element.getValue()}" class="item-product">
                             <div class="item-product__box-img">
                                 <a th:href="@{'/product/detail/'+${product.slug}}">
                                     <img src="" th:src="${product.thumbnail}" th:alt="${product.name}" alt="">

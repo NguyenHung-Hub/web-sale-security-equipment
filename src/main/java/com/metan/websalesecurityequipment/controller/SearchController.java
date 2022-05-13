@@ -48,7 +48,7 @@ public class SearchController {
 
         this.name = name;
         List<Brand> brands = brandService.findAll();
-        List<Category> categories = categoryService.findAll();
+        List<Category> categories = categoryService.findAllParentCategory();
         display(model, name, page, size, brands, categories);
         model.addAttribute("CATEGORIES", categories);
 

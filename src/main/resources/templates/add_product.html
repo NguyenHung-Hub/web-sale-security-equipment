@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
     <head>
         <th:block th:replace="fragments :: base ('Thêm sản phẩm')" />
+
         <th:block th:replace="fragments :: add_product" />
     </head>
     <body>
@@ -215,7 +216,7 @@
                                     class="form-control"
                                     id="shortDescTextarea"
                                     rows="6"
-                                    th:field="*{longDesc}"
+                                    th:field="*{shortDesc}"
                                 ></textarea>
                             </div>
 
@@ -229,7 +230,7 @@
                                     class="form-control"
                                     id="descriptionTextarea"
                                     rows="6"
-                                    th:field="*{shortDesc}"
+                                    th:field="*{longDesc}"
                                 ></textarea>
                             </div>
 
@@ -590,46 +591,52 @@
                 src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
             ></script>
             <script th:inline="javascript">
-                let productId = "";
-                $(function () {
-                    $(".edit-product").click(function () {
-                        console.log(productId);
-                        productId = $(this).attr("value");
-                        openModel();
+                $(document).read(function () {
+                    $('#shortDescTextarea').richText();
+                    $('#descriptionTextarea').richText()
+
+
+                    let productId = "";
+                    $(function () {
+                        $(".edit-product").click(function () {
+                            console.log(productId);
+                            productId = $(this).attr("value");
+                            openModel();
+                        });
                     });
-                });
-                function openModel() {
-                    let product = {
-                        productId: productId,
-                    };
-                    console.log(product);
-                    let myJSON = JSON.stringify(product);
-                    $.ajax({
-                        url: "product/products",
-                        type: "POST",
-                        data: myJSON,
-                        dataType: "json",
-                        contentType: "application/json;charset=utf-8",
-                        success: function (data) {
-                            $("#productId").val(data.productId);
-                            $("#price").val(data.price);
-                            $("#longDesc").val(data.longDesc);
-                            $("#shortDesc").val(data.shortDesc);
-                            $("#quantity").val(data.quantity);
-                            $("#name").val(data.name);
-                            $("#thumbnail").val(data.thumbnail);
-                            console.log(data);
-                        },
-                    });
-                }
+                    function openModel() {
+                        let product = {
+                            productId: productId,
+                        };
+                        console.log(product);
+                        let myJSON = JSON.stringify(product);
+                        $.ajax({
+                            url: "product/products",
+                            type: "POST",
+                            data: myJSON,
+                            dataType: "json",
+                            contentType: "application/json;charset=utf-8",
+                            success: function (data) {
+                                $("#productId").val(data.productId);
+                                $("#price").val(data.price);
+                                $("#longDesc").val(data.longDesc);
+                                $("#shortDesc").val(data.shortDesc);
+                                $("#quantity").val(data.quantity);
+                                $("#name").val(data.name);
+                                $("#thumbnail").val(data.thumbnail);
+                                console.log(data);
+                            },
+                        });
+                    }
+                })
             </script>
         </th:block>
         <!-- bootstrap -->
-        <!--        <script-->
-        <!--                src="https://code.jquery.com/jquery-3.3.1.slim.min.js"-->
-        <!--                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"-->
-        <!--                crossorigin="anonymous"-->
-        <!--        ></script>-->
+<!--                <script-->
+<!--                        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"-->
+<!--                        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"-->
+<!--                        crossorigin="anonymous"-->
+<!--                ></script>-->
         <!--        <script-->
         <!--                src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"-->
         <!--                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"-->
