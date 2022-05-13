@@ -82,6 +82,9 @@ public class DetailController {
     public String addReview(@ModelAttribute("productReview") ProductReview productReview){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+        if (productReview.getContent()==null){
+            productReview.setContent("");
+        }
        Product product= productService.findProductById(productId);
        productReview.setProduct(product);
        productReview.setUser(userDetails.getUser());

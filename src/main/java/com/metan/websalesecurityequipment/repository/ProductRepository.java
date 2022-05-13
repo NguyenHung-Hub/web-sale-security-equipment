@@ -55,7 +55,7 @@ public interface ProductRepository extends JpaRepository<Product, String> {
             " group by p.product_id ", nativeQuery = true)
     public Page<Product> searchByNameRating(int rating ,double minPrice, double maxPrice,String name,Pageable pageable);
 
-    @Query(value = "select distinct(p.product_id), p.*, sum(order_items.quantity) as totalQuan from (order_items) right outer join (products p) on p.product_id =order_items.product_id join (categories c) \n" +
+    @Query(value = "select p.*, sum(order_items.quantity) as totalQuan from (order_items) right outer join (products p) on p.product_id =order_items.product_id join (categories c) \n" +
             "on c.category_id = p.category_id join (product_reviews pr) on pr.product_id=p.product_id join brands b on b.brand_id = p.brand_id \n" +
             " where (p.brand_id in (?2) \n" +
             "            OR (c.parent_category_id in (?1) or c.category_id in (?1) )) \n" +

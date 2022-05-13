@@ -38,6 +38,7 @@ public class HomeController {
         List<Product> newProducts = productService.findProductsNew();
         List<Category> categories = categoryService.findAllParentCategory();
         Discount discount = discountService.findDiscountByName("Khuyến mãi hot").get();
+
         List<Category> phuKienCategories = categoryService.findSubCategoriesByNameParentCategory("Phụ kiện");
 
         Map<Category, List<Product>> categoryListMap = new LinkedHashMap<>();
