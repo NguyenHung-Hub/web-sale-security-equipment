@@ -97,7 +97,8 @@ public class AddProductController {
         product.setShortDesc(p.getShortDesc());
         product.setName(p.getName());
         product.setPrice(p.getPrice());
-
+        product.setQuantity(p.getQuantity());
+        product.setTitle(p.getName()+" "+ p.getProductId());
         productService.saveProduct(product);
         System.out.println("Da sua");
         return "redirect:/add-product";
