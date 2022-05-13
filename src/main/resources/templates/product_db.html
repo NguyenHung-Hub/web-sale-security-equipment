@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-      xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{dashboard.html}" lang="en">
-
-<head>
-</head>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+        xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{dashboard.html}"
+        lang="en"
+>
+<head></head>
 
 <body>
 <section layout:fragment="content">
-    <div class="container ">
-        <div class="container-fluid d-flex flex-row justify-content-end my-4">
+    <div class="container">
+        <div
+                class="container-fluid d-flex flex-row justify-content-end my-4"
+        >
             <div class="col-4">
                 <input
                         type="search"
@@ -29,7 +32,7 @@
             </button>
         </div>
 
-        <div class="container-fluid  col-8">
+        <div class="container-fluid col-8">
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -43,7 +46,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="product, iter:${productsPage.pageList}">
+                <tr
+                        th:each="product, iter:${productsPage.pageList}"
+                >
                     <th>
                         <input
                                 class="form-check-input"
@@ -58,10 +63,14 @@
                         [[${#numbers.formatDecimal(product.price,
                         1,'DEFAULT',0, 'DEFAULT')}]] đ
                     </td>
-                    <td class="text-right">[[${product.quantity}]]</td>
+                    <td class="text-right">
+                        [[${product.quantity}]]
+                    </td>
                     <td class="text-right text-danger">
-                        <a th:href="@{'/dashboard/product/' + ${product.productId} + '/delete'}"><i
-                                class="fas fa-trash"></i></a>
+                        <a
+                                th:href="@{'/dashboard/product/' + ${product.productId} + '/delete'}"
+                        ><i class="fas fa-trash"></i
+                        ></a>
                     </td>
                     <td class="text-right text-primary">
                         <i
@@ -74,37 +83,56 @@
                 </tr>
                 </tbody>
             </table>
-
-
         </div>
 
-        <ul class="pagination pagination-modify mt-2 ">
+        <ul class="pagination pagination-modify mt-2">
             <li
-                    th:class="${currentIndex == 1}? 'page-item disabled' : 'page-item'">
-                <a class="page-link" th:href="@{/dashboard/product}">First</a>
+                    th:class="${currentIndex == 1}? 'page-item disabled' : 'page-item'"
+            >
+                <a class="page-link" th:href="@{/dashboard/product}"
+                >First</a
+                >
             </li>
             <li
-                    th:class="${currentIndex == 1}? 'page-item disabled': 'page-item' ">
-                <a class="page-link" aria-label="Previous"
-                   th:href="@{|${baseUrl}${currentIndex - 1}|}"
-                   title='Go to previous page'><span aria-hidden="true">«</span>
-                    <span class="sr-only">Previous</span></a>
+                    th:class="${currentIndex == 1}? 'page-item disabled': 'page-item' "
+            >
+                <a
+                        class="page-link"
+                        aria-label="Previous"
+                        th:href="@{|${baseUrl}${currentIndex - 1}|}"
+                        title="Go to previous page"
+                ><span aria-hidden="true">«</span>
+                    <span class="sr-only">Previous</span></a
+                >
             </li>
-            <li th:each="item : ${#numbers.sequence(beginIndex,endIndex)}"
-                th:class="${item == currentIndex ? 'page-item active' :'page-item' }">
-                <a class="page-link" th:href="@{|${baseUrl}${item}|}"> <span
-                        th:text='${item}'>1</span>
+            <li
+                    th:each="item : ${#numbers.sequence(beginIndex,endIndex)}"
+                    th:class="${item == currentIndex ? 'page-item active' :'page-item' }"
+            >
+                <a class="page-link" th:href="@{|${baseUrl}${item}|}">
+                    <span th:text="${item}">1</span>
                 </a>
             </li>
             <li
-                    th:class="${currentIndex == totalPageCount}? 'page-item disabled': 'page-item'">
-                <a class="page-link" aria-label="Next"
-                   th:href="@{|${baseUrl}${currentIndex + 1}|}" title='Go to next page'><span
-                        aria-hidden="true">»</span> <span class="sr-only">Next</span></a>
+                    th:class="${currentIndex == totalPageCount}? 'page-item disabled': 'page-item'"
+            >
+                <a
+                        class="page-link"
+                        aria-label="Next"
+                        th:href="@{|${baseUrl}${currentIndex + 1}|}"
+                        title="Go to next page"
+                ><span aria-hidden="true">»</span>
+                    <span class="sr-only">Next</span></a
+                >
             </li>
             <li
-                    th:class="${currentIndex == totalPageCount}? 'page-item disabled':'page-item'">
-                <a class="page-link" th:href="@{|${baseUrl}${totalPageCount}|}">Last</a>
+                    th:class="${currentIndex == totalPageCount}? 'page-item disabled':'page-item'"
+            >
+                <a
+                        class="page-link"
+                        th:href="@{|${baseUrl}${totalPageCount}|}"
+                >Last</a
+                >
             </li>
         </ul>
 
@@ -147,7 +175,9 @@
                                         class="form-control form-control-lg form-control-modify"
                                 >
                                     <!-- <option value="">Chọn</option>-->
-                                    <th:block th:each="c : ${categories}">
+                                    <th:block
+                                            th:each="c : ${categories}"
+                                    >
                                         <optgroup
                                                 th:value="${c.categoryId}"
                                                 th:label="${c.name}"
@@ -219,6 +249,16 @@
                                         th:field="*{price}"
                                 />
                             </div>
+                            <div class="form-group-modify">
+                                <label>Giảm giá %</label>
+                                <input
+                                        type="number"
+                                        value="0"
+                                        class="form-control-modify"
+                                        placeholder="Giảm giá %"
+                                        th:field="*{discountPercentBase}"
+                                />
+                            </div>
 
                             <div class="form-group-modify">
                                 <label>Tồn kho</label>
@@ -270,7 +310,9 @@
                                 />
                             </div>
 
-                            <div class="form-group-modify mt-4 float-right">
+                            <div
+                                    class="form-group-modify mt-4 float-right"
+                            >
                                 <button
                                         type="button"
                                         class="btn btn-secondary px-4 mr-4"
@@ -305,7 +347,10 @@
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="productModalEditLabel">
+                        <h5
+                                class="modal-title"
+                                id="productModalEditLabel"
+                        >
                             Chỉnh sửa hàng hóa
                         </h5>
                         <button
@@ -392,19 +437,23 @@
                             </div>
 
                             <div class="form-group">
-                                <label
-                                        class="font-weight-bold mt-4"
-                                >Mô tả ngắn về sản phẩm</label>
+                                <label class="font-weight-bold mt-4"
+                                >Mô tả ngắn về sản phẩm</label
+                                >
                                 <textarea
                                         class="form-control shortDescTextarea_edit"
-                                        rows="6">[[${product.shortDesc}]]</textarea>
+                                        rows="6"
+                                >[[${product.shortDesc}]]</textarea>
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold mt-4">Mô tả sản phẩm</label>
+                                <label class="font-weight-bold mt-4"
+                                >Mô tả sản phẩm</label
+                                >
                                 <textarea
                                         class="form-control descriptionTextarea_edit"
-                                        rows="6">[[${product.longDesc}]]</textarea>
+                                        rows="6"
+                                >[[${product.longDesc}]]</textarea>
                             </div>
 
                             <div class="form-group-modify">
@@ -413,12 +462,15 @@
                                         type="text"
                                         class="form-control-modify"
                                         placeholder="url"
-                                        th:value="${product.thumbnail}"/>
+                                        th:value="${product.thumbnail}"
+                                />
                             </div>
 
                             <div class="box-thumbnail">
-                                <img th:src="${product.thumbnail}"
-                                        class="img-thumbnail m-2 rounded"/>
+                                <img
+                                        th:src="${product.thumbnail}"
+                                        class="img-thumbnail m-2 rounded"
+                                />
                             </div>
                             <input
                                     accept="image/png, image/jpeg"
@@ -427,7 +479,9 @@
                                     multiple="multiple"
                             />
 
-                            <div class="form-group-modify mt-4 float-right">
+                            <div
+                                    class="form-group-modify mt-4 float-right"
+                            >
                                 <button
                                         type="button"
                                         class="btn btn-secondary px-4 mr-4"
@@ -449,9 +503,6 @@
             </div>
         </div>
     </div>
-
-
 </section>
-
 </body>
 </html>
