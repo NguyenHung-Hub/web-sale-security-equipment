@@ -60,7 +60,8 @@
                     </td>
                     <td class="text-right">[[${product.quantity}]]</td>
                     <td class="text-right text-danger">
-                        <a th:href="@{'/dashboard/product/' + ${product.productId} + '/delete'}"><i class="fas fa-trash"></i></a>
+                        <a th:href="@{'/dashboard/product/' + ${product.productId} + '/delete'}"><i
+                                class="fas fa-trash"></i></a>
                     </td>
                     <td class="text-right text-primary">
                         <i
@@ -240,7 +241,7 @@
                                         class="form-control"
                                         id="shortDescTextarea"
                                         rows="6"
-                                        th:field="*{longDesc}"
+                                        th:field="*{shortDesc}"
                                 ></textarea>
                             </div>
 
@@ -254,7 +255,7 @@
                                         class="form-control"
                                         id="descriptionTextarea"
                                         rows="6"
-                                        th:field="*{shortDesc}"
+                                        th:field="*{longDesc}"
                                 ></textarea>
                             </div>
 
@@ -392,33 +393,18 @@
 
                             <div class="form-group">
                                 <label
-                                        for="shortDescTextarea"
                                         class="font-weight-bold mt-4"
-                                >Mô tả ngắn về sản phẩm</label
-                                >
+                                >Mô tả ngắn về sản phẩm</label>
                                 <textarea
-                                        class="form-control"
-                                        id="shortDescTextarea_edit"
-                                        rows="6"
-                                >
-                            [[${product.shortDesc}]]
-                        </textarea
-                        >
+                                        class="form-control shortDescTextarea_edit"
+                                        rows="6">[[${product.shortDesc}]]</textarea>
                             </div>
 
                             <div class="form-group">
-                                <label
-                                        for="descriptionTextarea"
-                                        class="font-weight-bold mt-4"
-                                >Mô tả sản phẩm</label
-                                >
+                                <label class="font-weight-bold mt-4">Mô tả sản phẩm</label>
                                 <textarea
-                                        class="form-control"
-                                        id="descriptionTextarea_edit"
-                                        rows="6"
-                                >
-[[${product.longDesc}]]</textarea
-                                >
+                                        class="form-control descriptionTextarea_edit"
+                                        rows="6">[[${product.longDesc}]]</textarea>
                             </div>
 
                             <div class="form-group-modify">
@@ -427,15 +413,12 @@
                                         type="text"
                                         class="form-control-modify"
                                         placeholder="url"
-                                        th:value="${product.thumbnail}"
-                                />
+                                        th:value="${product.thumbnail}"/>
                             </div>
 
                             <div class="box-thumbnail">
-                                <img
-                                        th:src="${product.thumbnail}"
-                                        class="img-thumbnail m-2 rounded"
-                                />
+                                <img th:src="${product.thumbnail}"
+                                        class="img-thumbnail m-2 rounded"/>
                             </div>
                             <input
                                     accept="image/png, image/jpeg"

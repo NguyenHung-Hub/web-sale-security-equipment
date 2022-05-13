@@ -14,7 +14,7 @@
     <!-- ảnh và thông tin cơ bản -->
     <div id="Detail" class="row">
         <!-- ảnh -->
-        <div class="col-6">
+        <div class="col-6 border-content-img">
             <div id="CarouselDetail" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#CarouselDetail" data-slide-to="0" class="active"></li>
@@ -54,7 +54,7 @@
         <div class="col-6 desc">
 
             <div>
-                <h2>[[${product.name}]]</h2>
+                <h2>[[${product.title}]]</h2>
                 <div class="font-14">
                     <span class="text-dark"><del
                             th:text="${#numbers.formatDecimal(product.price, 1,'DEFAULT',0, 'DEFAULT')}+ đ"></del></span>
@@ -73,7 +73,7 @@
                     <span th:text="'(' +${product.productReviews.size()}+ ' đánh giá)'"></span>
                 </div>
                 <div class="mt-5 font-14">
-                    <p>[[${product.shortDesc}]]</p>
+                    <p th:utext="${product.shortDesc}"></p>
                 </div>
                 <div class="row" style="margin-left: 0px">
                     <form class="form-inline" th:action="@{/product/addToCart}" method="post">
@@ -120,7 +120,7 @@
 
         <div class="tab-content mt-5">
             <div id="ChiTiet" class="container tab-pane active">
-                <h3 class="bg-light p-3" style="margin-right: 30px">THÔNG TIN CHI TIẾT</h3>
+                <h3 class="p-3 tab-bg-light" style="margin-right: 30px">THÔNG TIN CHI TIẾT</h3>
                 <table class="table table-light font-14" style="padding-left: 30px; padding-right: 30px">
                     <tbody>
                     <th:block th:each="attribute:${product.getProductAttributes()}">
@@ -134,9 +134,9 @@
                 </table>
             </div>
             <div id="ThemThongTin" class="container tab-pane fade">
-                <h3 class="bg-light p-3" style="margin-right: 30px">MÔ TẢ SẢN PHẨM</h3>
+                <h3 class="p-3 tab-bg-light" style="margin-right: 30px">MÔ TẢ SẢN PHẨM</h3>
                 <div class="mt-3 long-desc font-14" style="padding-left: 30px; padding-right: 30px" id="long-desc"
-                     th:text="${product.longDesc}">
+                     th:utext="${product.longDesc}">
                     Lưu ý: Nhiều trường hợp do dùng thẻ nhớ không chính hãng nên camera không nhận thẻ nhớ, trong trường
                     hợp đó shop không hỗ trợ lỗi đọc thẻ nhớ. Để được hỗ trợ tốt nhất hay mua kèm thẻ nhớ của shop.
                     Camera Wifi C6N sử dụng trong nhà: Tùy vào phân loại thẻ
@@ -172,20 +172,20 @@
                     Nẵng. Hãy liên hệ với shop để được
                     hướng dẫn bảo hành.
                 </div>
-                <button id="btnDes" type="button" class="btn btn-outline-danger collapsible">Xem thêm <i
-                        class="fas fa-angle-down"></i></button>
+                <button id="btnDes" type="button" class="btn btn-outline-danger collapsible" style="font-size: 1.4rem;">Xem thêm <i
+                        class="fas fa-angle-down" ></i></button>
             </div>
             <!-- đánh giá -->
             <div id="DanhGia" class="container tab-pane fade mt-1">
-                <h2 class="bg-light p-3" style="margin-right: 30px">ĐÁNH GIÁ SẢN PHẨM</h2>
+                <h2 class="p-3 tab-bg-light" style="margin-right: 30px">ĐÁNH GIÁ SẢN PHẨM</h2>
                 <div id="no-review" class="no-review text-center mt-5" style="padding-left: 30px; padding-right: 30px;">
                     <img th:src="@{/imgs/no-review.png}" class="img-fluid h-25 w-25">
                     <p class="mt-3 font-20 mau-ten-thong-tin">Sản phẩm chưa có đánh giá</p>
                 </div>
 
-                <div id="danh-sach-danh-gia" style="padding-left: 30px; padding-right: 30px">
+                <div id="danh-sach-danh-gia" style="padding-left: 30px; padding-right: 30px; margin-right: 30px;">
                     <th:block th:each="review:${reviews}">
-                        <div class="row mb-3 border-bottom">
+                        <div class="row mb-3 red-border">
                             <div class="col-2">
                                 <img th:src="@{/imgs/images.png}" class="img-fluid w-75" alt="">
                             </div>
@@ -221,7 +221,7 @@
             </div>
             <!-- form đánh giá -->
             <div id="FormDanhGia" class="mt-5">
-                <h2>THÊM ĐÁNH GIÁ MỚI</h2>
+                <h2 class="background-red p-3">THÊM ĐÁNH GIÁ MỚI</h2>
 
                 <form class="form-group" method="post" th:action="@{/product/reviews}" th:object="${reviewProduct} ">
                     <div class="rating mt-5 mb-5">
@@ -261,15 +261,15 @@
     </div>
     <!--    sanr phamr lien quan-->
     <div class="mt-5">
-        <h3 class="text-center bg-light p-2">CÓ THỂ BẠN QUAN TÂM</h3>
+        <h3 class="text-center p-3 background-red">CÓ THỂ BẠN QUAN TÂM</h3>
         <div class="row mt-5">
             <th:block th:each="elm:${rand4Product}">
-                <a class="col-3" th:href="@{'/product/detail/'+${elm.slug}}">
-                    <div class="border text-center text-dark translate position-relative font-14">
+                <a class="col-3 link-relate-product" th:href="@{'/product/detail/'+${elm.slug}}">
+                    <div class="border text-center text-dark translate position-relative font-14 relate-product">
                         <span class="position-absolute discount bg-warning text-danger">Giảm<br
                                 th:text="${#numbers.formatPercent((product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent), 1, 0)}"></span>
                         <img th:src="${elm.thumbnail}"
-                             class="img-fluid" style="height: 200px"
+                             class="img-fluid img-relate-product" style="height: 200px"
                              alt="">
                         <p class="mt-3 ba-cham">[[${elm.name}]]</p>
                         <p class="text-danger">[[${#numbers.formatDecimal(elm.price,1,'DEFAULT',0,'DEFAULT')}]] đ</p>
@@ -296,6 +296,8 @@
 <th:block th:replace="fragments :: base-js"/>
 <th:block th:replace="fragments :: product-detail-js"/>
 <th:block>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+    <script type="text/javascript" th:src="@{/js/jquery.simplePagination.js}"></script>
     <script th:inline="javascript">
         let productId = [[${product.productId}]];
         let totalPages = [[${reviews.getTotalPages()}]];
@@ -371,7 +373,7 @@
                     for (review of reviews) {
                         html += ` <div class="row mb-3 border-bottom">
                         <div class="col-2">
-                            <img src="" class="img-fluid w-75" alt="">
+                            <img src=[[@{/imgs/images.png}]] class="img-fluid w-75" alt="">
                         </div>
                         <div class="col-10">
                             <div>

@@ -32,6 +32,9 @@ public interface ProductRepository extends JpaRepository<Product, String> {
     @Query(value = "select p.* from products p join categories c on p.category_id = c.category_id join categories cp on c.parent_category_id = cp.category_id where cp.name = :name or cp.name = :other_name order by rand() limit :limit", nativeQuery = true)
     public List<Product> findProductByNameParentCategory(@Param("name") String name, @Param("other_name") String otherName, @Param("limit") int limit);
 
+    @Query(value = "select p.* from products p join categories c on p.category_id = c.category_id left join categories cp on cp.category_id = c.parent_category_id where cp.category_id = :id order by rand()", nativeQuery = true)
+    public List<Product> findProductsByCategory(@Param("id") long id);
+
     @Query(value = "SELECT * FROM products ORDER BY RAND() LIMIT ?1", nativeQuery = true)
     public List<Product> findTopNumberRandom(int top);
 
