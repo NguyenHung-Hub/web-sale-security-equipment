@@ -18,7 +18,7 @@ class ProductReview {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_id")
     private long reviewId;
-    private Float rating;
+    private float rating;
     @Column(columnDefinition = "nvarchar(255)")
     private String title;
     @Column(columnDefinition = "LONGTEXT")
