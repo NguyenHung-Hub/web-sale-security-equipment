@@ -91,10 +91,17 @@
     </th:block>
 </head>
 
-</head >
-
 <head th:fragment="headC">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex,follow">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Metan shop">
+    <meta property="og:site_name" content="Metan shop">
+    <meta property="og:image" content="https://www.w3schools.com/bootstrap/ny.jpg">
+    <link rel="icon"
+          th:href="@{/imgs/logo.png}"
+          type="image/x-icon" />
     <script src="https://kit.fontawesome.com/845e26e92f.js" crossorigin="anonymous"></script>
     <!--    bootstrap-->
 
@@ -107,7 +114,7 @@
     <link rel="stylesheet" th:href="@{/css/header.css}" >
     <link rel="stylesheet" th:href="@{/css/home.css}" >
     <link rel="stylesheet" th:href="@{/css/footer.css}" >
-
+</head >
 <body>
 <!--/*@thymesVar id="categories" type="java.util.List<com.metan.websalesecurityequipment.model.Category>"*/-->
 <th:block th:fragment="header" th:with="categories=${categories} ? 2 : null">

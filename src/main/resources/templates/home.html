@@ -96,13 +96,16 @@
                 </div>
                 <div class="block-sliding-home__box-right d-xl-block d-none">
                     <a href="#">
-                        <img alt="A001" src="https://vuhoangtelecom.vn/wp-content/uploads/2021/01/banner-tinh-dung-luong-luu-tru-camera.jpg">
+                        <img alt="A001"
+                             src="https://vuhoangtelecom.vn/wp-content/uploads/2021/01/banner-tinh-dung-luong-luu-tru-camera.jpg">
                     </a>
                     <a href="#">
-                        <img alt="A002" src="https://vuhoangtelecom.vn/wp-content/uploads/2020/11/banner-lap-dat-camera-wifi-gia-re-thang-11.jpg">
+                        <img alt="A002"
+                             src="https://vuhoangtelecom.vn/wp-content/uploads/2020/11/banner-lap-dat-camera-wifi-gia-re-thang-11.jpg">
                     </a>
                     <a href="#">
-                        <img alt="A003" src="https://vuhoangtelecom.vn/wp-content/uploads/2021/11/banner-may-xit-khu-khuan-247x.jpg">
+                        <img alt="A003"
+                             src="https://vuhoangtelecom.vn/wp-content/uploads/2021/11/banner-may-xit-khu-khuan-247x.jpg">
                     </a>
                 </div>
             </div>
@@ -187,6 +190,19 @@
                                 <p class="old-price"
                                    th:text="${#numbers.formatDecimal(product.price,3,'POINT',0,'POINT') + '&nbsp;₫'}"></p>
                             </div>
+                            <div class="item-product__box-rating">
+                                <i class="fas fa-star"
+                                   th:classappend="${#aggregates.avg(product.productReviews.![rating]) >= 1}? checked"></i>
+                                <i class="fas fa-star"
+                                   th:classappend="${#aggregates.avg(product.productReviews.![rating]) >= 2}? checked"></i>
+                                <i class="fas fa-star"
+                                   th:classappend="${#aggregates.avg(product.productReviews.![rating]) >= 3}? checked"></i>
+                                <i class="fas fa-star"
+                                   th:classappend="${#aggregates.avg(product.productReviews.![rating]) >= 4}? checked"></i>
+                                <i class="fas fa-star"
+                                   th:classappend="${#aggregates.avg(product.productReviews.![rating]) >= 5}? checked"></i>
+                                &nbsp;[[${#lists.size(product.productReviews)}]] đánh giá
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -220,12 +236,26 @@
                                 <p class="old-price"
                                    th:text="${#numbers.formatDecimal(product.price,3,'POINT',0,'POINT') + '&nbsp;₫'}"></p>
                             </div>
+                            <div class="item-product__box-rating">
+                                <i class="fas fa-star"
+                                   th:classappend="${#aggregates.avg(product.productReviews.![rating]) >= 1}? checked"></i>
+                                <i class="fas fa-star"
+                                   th:classappend="${#aggregates.avg(product.productReviews.![rating]) >= 2}? checked"></i>
+                                <i class="fas fa-star"
+                                   th:classappend="${#aggregates.avg(product.productReviews.![rating]) >= 3}? checked"></i>
+                                <i class="fas fa-star"
+                                   th:classappend="${#aggregates.avg(product.productReviews.![rating]) >= 4}? checked"></i>
+                                <i class="fas fa-star"
+                                   th:classappend="${#aggregates.avg(product.productReviews.![rating]) >= 5}? checked"></i>
+                                &nbsp;[[${#lists.size(product.productReviews)}]] đánh giá
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <section th:each="element : ${categoryListMap}" th:if="${element.getValue().size() > 0}" class="container p-xl-0">
+        <section th:each="element : ${categoryListMap}" th:if="${element.getValue().size() > 0}"
+                 class="container p-xl-0">
             <div class="block-product mb-3">
                 <div class="box-title">
                     <h2 th:text="${element.getKey().name}"></h2>
@@ -254,6 +284,19 @@
                                    th:text="${#numbers.formatDecimal(product.price - (product.price * (product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent)),3,'POINT',0,'POINT') + '&nbsp;₫'}"></p>
                                 <p class="old-price"
                                    th:text="${#numbers.formatDecimal(product.price,3,'POINT',0,'POINT') + '&nbsp;₫'}"></p>
+                            </div>
+                            <div class="item-product__box-rating">
+                                <i class="fas fa-star"
+                                   th:classappend="${#aggregates.avg(product.productReviews.![rating]) >= 1}? checked"></i>
+                                <i class="fas fa-star"
+                                   th:classappend="${#aggregates.avg(product.productReviews.![rating]) >= 2}? checked"></i>
+                                <i class="fas fa-star"
+                                   th:classappend="${#aggregates.avg(product.productReviews.![rating]) >= 3}? checked"></i>
+                                <i class="fas fa-star"
+                                   th:classappend="${#aggregates.avg(product.productReviews.![rating]) >= 4}? checked"></i>
+                                <i class="fas fa-star"
+                                   th:classappend="${#aggregates.avg(product.productReviews.![rating]) >= 5}? checked"></i>
+                                &nbsp;[[${#lists.size(product.productReviews)}]] đánh giá
                             </div>
                         </div>
                     </div>
