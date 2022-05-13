@@ -73,7 +73,7 @@
                     <span th:text="'(' +${product.productReviews.size()}+ ' đánh giá)'"></span>
                 </div>
                 <div class="mt-5 font-14">
-                    <p>[[${product.shortDesc}]]</p>
+                    <p th:utext="${product.shortDesc}"></p>
                 </div>
                 <div class="row" style="margin-left: 0px">
                     <form class="form-inline" th:action="@{/product/addToCart}" method="post">
@@ -136,7 +136,7 @@
             <div id="ThemThongTin" class="container tab-pane fade">
                 <h3 class="bg-light p-3" style="margin-right: 30px">MÔ TẢ SẢN PHẨM</h3>
                 <div class="mt-3 long-desc font-14" style="padding-left: 30px; padding-right: 30px" id="long-desc"
-                     th:text="${product.longDesc}">
+                     th:utext="${product.longDesc}">
                     Lưu ý: Nhiều trường hợp do dùng thẻ nhớ không chính hãng nên camera không nhận thẻ nhớ, trong trường
                     hợp đó shop không hỗ trợ lỗi đọc thẻ nhớ. Để được hỗ trợ tốt nhất hay mua kèm thẻ nhớ của shop.
                     Camera Wifi C6N sử dụng trong nhà: Tùy vào phân loại thẻ

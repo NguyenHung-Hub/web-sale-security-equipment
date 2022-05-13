@@ -53,7 +53,7 @@ public class Dashboard {
         List<Product> products = productService.findAll();
         model.addAttribute("products", products);
 
-        List<Category> categories = categoryService.findAll();
+        List<Category> categories = categoryService.findAllParentCategory();
         model.addAttribute("categories", categories);
 
         List<Category> categories2 = new ArrayList<>();
@@ -88,7 +88,7 @@ public class Dashboard {
         List<Product> products = productService.findAll();
         model.addAttribute("products", products);
 
-        List<Category> categories = categoryService.findAll();
+        List<Category> categories = categoryService.findAllParentCategory();
         model.addAttribute("categories", categories);
 
         List<Category> categories2 = new ArrayList<>();
