@@ -6,6 +6,7 @@
     <th:block th:replace="fragments :: base_2 ('Quan ly')"/>
     <th:block th:replace="fragments :: dashboard"/>
     <th:block th:replace="fragments :: search"/>
+    <th:block th:replace="fragments :: richtext"/>
     <th:block th:replace="fragments :: add_product" />
 </head>
 <body>
@@ -19,5 +20,13 @@
 </main>
 
 <th:block th:replace="fragments :: base-js"/>
+<th:block th:replace="fragments :: richtext-js" />
+<script lang="javascript">
+
+    $('#shortDescTextarea').richText()
+    $('#descriptionTextarea').richText()
+    $('.shortDescTextarea_edit').richText()
+    $('.descriptionTextarea_edit').richText()
+</script>
 </body>
 </html>
