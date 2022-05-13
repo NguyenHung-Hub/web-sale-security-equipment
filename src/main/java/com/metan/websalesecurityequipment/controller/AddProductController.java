@@ -72,6 +72,7 @@ public class AddProductController {
         String fileName = awsService.save(img);
         p.setThumbnail("https://chinh1506.s3.amazonaws.com/" + fileName);
         p.setTitle(p.getCategory().getName() + " " + p.getName());
+        System.out.println(p.getCategory().getName() + " " + p.getName());
         p.setCreatedAt(new Date());
         p.setModifiedAt(new Date());
         p.setSlug(toSlug(p.getTitle()));

@@ -29,4 +29,9 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryRepository.findSubCategoriesByNameParentCategory(name);
     }
 
+    @Override
+    public Category findCategoryByCategoryId(long id) {
+        return categoryRepository.findCategoryByCategoryId(id);
+    }
+
 }
