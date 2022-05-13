@@ -71,7 +71,8 @@ public class LoginAndRegisterController {
         } else {
             String siteUrl = Utility.getSiteUrl(request);
             userService.sendVerificationEmail(userService.registerUser(user), siteUrl);
-            model.addAttribute("message", "Kiểm tra mail trong email " + user.getEmail());
+            model.addAttribute("title", "Xác thực tài khoản của bạn");
+            model.addAttribute("message", "Vui lòng kiểm tra trong email của bạn. Chúng tôi đã gửi cho bạn đến: <br><b>" + user.getEmail() + "</b></p>");
             return "message";
         }
     }
@@ -80,10 +81,12 @@ public class LoginAndRegisterController {
     public String verifyAccount(@Param("code") String code, Model model) {
         User userVerified = userService.getUserByVerificationCode(code);
         if (userVerified == null) {
+            model.addAttribute("title", "Thông báo");
             model.addAttribute("message", "Đã hết thời gian xác thực vui lòng đăng ký lại!");
         } else {
             cartService.createCartNewUser(userVerified);
-            model.addAttribute("message", "Xác thực thành công");
+            model.addAttribute("title", "Thông báo");
+            model.addAttribute("message", "<div style='text-center'>Xác thực thành công</div>");
         }
         return "message";
     }
@@ -99,10 +102,11 @@ public class LoginAndRegisterController {
         if (user != null) {
             String siteUrl = Utility.getSiteUrl(request);
             userService.sendVerificationEmailForgotPassword(user, siteUrl);
-            model.addAttribute("message", "Kiểm tra mail trong email " + user.getEmail());
+            model.addAttribute("title", "Xác thực tài khoản của bạn");
+            model.addAttribute("message", "Vui lòng kiểm tra trong email của bạn. Chúng tôi đã gửi cho bạn đến: <br><b>" + user.getEmail() + "</b></p>");
             return "message";
         } else {
-            model.addAttribute("message", "Không tìm thấy người dùng này!");
+            model.addAttribute("message", "Tìm kiếm không trả về kết quả nào. Vui lòng thử lại với thông tin khác.");
             return "forgot-password";
         }
     }
@@ -112,7 +116,8 @@ public class LoginAndRegisterController {
         User userVerified = userService.getUserByVerificationCodeForgotPassword(code);
         System.out.println(userVerified);
         if (userVerified == null) {
-            model.addAttribute("message", "Xác thực thất bại");
+            model.addAttribute("title", "Thông báo");
+            model.addAttribute("message", "<div style='text-center'>Xác thực thành công</div>");
             return "message";
         } else {
             model.addAttribute("user", userVerified);
@@ -136,6 +141,7 @@ public class LoginAndRegisterController {
             return "verify-forgot-pass";
         } else {
             userService.updateUser(user);
+            model.addAttribute("title", "Thông báo");
             model.addAttribute("message", "Đổi mật khẩu thành công!");
             return "message";
         }
