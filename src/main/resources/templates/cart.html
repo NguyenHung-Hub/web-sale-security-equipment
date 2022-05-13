@@ -185,6 +185,9 @@
                                     <li sec:authorize="isAnonymous()"><a th:href="@{/account/register}">Đăng ký</a>
                                     </li>
                                     <li sec:authorize="isAuthenticated()"><a th:href="@{/}">Hồ sơ của tôi</a></li>
+                                    <li sec:authorize="hasAuthority('ADMIN')">
+                                        <a th:href="@{/dashboard/}">Quản lý</a>
+                                    </li>
                                     <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Đăng xuất</a></li>
                                 </ul>
                             </div>
