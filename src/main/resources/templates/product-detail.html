@@ -296,6 +296,8 @@
 <th:block th:replace="fragments :: base-js"/>
 <th:block th:replace="fragments :: product-detail-js"/>
 <th:block>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+    <script type="text/javascript" th:src="@{/js/jquery.simplePagination.js}"></script>
     <script th:inline="javascript">
         let productId = [[${product.productId}]];
         let totalPages = [[${reviews.getTotalPages()}]];
@@ -371,7 +373,7 @@
                     for (review of reviews) {
                         html += ` <div class="row mb-3 border-bottom">
                         <div class="col-2">
-                            <img src="" class="img-fluid w-75" alt="">
+                            <img src=[[@{/imgs/images.png}]] class="img-fluid w-75" alt="">
                         </div>
                         <div class="col-10">
                             <div>
