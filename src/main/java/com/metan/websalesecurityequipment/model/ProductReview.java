@@ -29,7 +29,6 @@ class ProductReview {
     private Product product;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @JsonManagedReference
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private User user;
 }

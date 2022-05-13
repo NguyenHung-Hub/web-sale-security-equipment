@@ -12,8 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class HomeController {
@@ -37,26 +36,23 @@ public class HomeController {
         List<Product> products = productService.findAll();
         List<Product> topProducts = productService.findTopProduct();
         List<Product> newProducts = productService.findProductsNew();
-        List<Category> categories = categoryService.findAll();
+        List<Category> categories = categoryService.findAllParentCategory();
         Discount discount = discountService.findDiscountByName("Khuyến mãi hot").get();
-        List<Product> cctvCameraProducts = productService.findProductByNameParentCategory("Camera", "CCTV Camera", 10);
-        List<Product> dauGhiHinhProducts = productService.findProductByNameParentCategory("Đầu ghi hình", "Đầu ghi hình", 10);
-        List<Product> tbbdbcProducts = productService.findProductByNameParentCategory("Hệ thống báo động", "Thiết bị báo cháy", 10);
-        List<Product> ckkscProducts = productService.findProductByNameParentCategory("Chuông cửa", "Chuông cửa", 10);
         List<Category> phuKienCategories = categoryService.findSubCategoriesByNameParentCategory("Phụ kiện");
 
+        Map<Category, List<Product>> categoryListMap = new LinkedHashMap<>();
 
-        model.addAttribute("PRODUCT_LIST", products);
+        for(Category category: categories) {
+            categoryListMap.put(category, productService.findProductsByCategory(category.getCategoryId()));
+        }
+
         model.addAttribute("TOP_PRODUCT_LIST", topProducts);
         model.addAttribute("NEW_PRODUCT_LIST", newProducts);
         model.addAttribute("CATEGORIES", categories);
         model.addAttribute("discount", discount);
-        model.addAttribute("CCTV_CAMERA_PRODUCTS", cctvCameraProducts);
-        model.addAttribute("DAUGHIHINH_PRODUCTS", dauGhiHinhProducts);
-        model.addAttribute("TBBD_BC_PRODUCTS", tbbdbcProducts);
-        model.addAttribute("CKKSC_PRODUCTS", ckkscProducts);
+        model.addAttribute("categoryListMap", categoryListMap);
         model.addAttribute("PHU_KIEN_CATEGORIES", phuKienCategories);
+
         return "home";
     }
-
 }

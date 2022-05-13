@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.text.Normalizer;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -45,7 +46,7 @@ public class AddProductController {
         List<Product> products = productService.findAll();
         model.addAttribute("products", products);
 
-        List<Category> categories = categoryService.findAll();
+        List<Category> categories = categoryService.findAllParentCategory();
         model.addAttribute("categories", categories);
 
         List<Category> categories2 = new ArrayList<>();
@@ -70,7 +71,8 @@ public class AddProductController {
                               @RequestParam("image") MultipartFile img) {
         String fileName = awsService.save(img);
         p.setThumbnail("https://chinh1506.s3.amazonaws.com/" + fileName);
-        p.setTitle(p.getName() + " " + p.getProductId());
+        p.setTitle(p.getCategory().getName() + " " + p.getName());
+        System.out.println(p.getCategory().getName() + " " + p.getName());
         p.setCreatedAt(new Date());
         p.setModifiedAt(new Date());
         p.setSlug(toSlug(p.getTitle()));
@@ -97,7 +99,8 @@ public class AddProductController {
         product.setShortDesc(p.getShortDesc());
         product.setName(p.getName());
         product.setPrice(p.getPrice());
-
+        product.setQuantity(p.getQuantity());
+        product.setTitle(p.getName()+" "+ p.getProductId());
         productService.saveProduct(product);
         System.out.println("Da sua");
         return "redirect:/add-product";
@@ -107,6 +110,8 @@ public class AddProductController {
         String nowhitespace = WHITESPACE.matcher(input).replaceAll("-");
         String normalized = Normalizer.normalize(nowhitespace, Normalizer.Form.NFD);
         String slug = NONLATIN.matcher(normalized).replaceAll("");
+        String minute = String.valueOf(new Date().getMinutes());
+        slug += "-" + minute;
         return slug.toLowerCase(Locale.ENGLISH);
     }
 }
