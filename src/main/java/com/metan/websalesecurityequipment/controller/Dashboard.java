@@ -164,6 +164,10 @@ public class Dashboard {
         System.out.println(p.getCategory().getCategoryId());
         p.setCreatedAt(new Date());
         p.setModifiedAt(new Date());
+
+        float discount = p.getDiscountPercentBase()/100;
+        p.setDiscountPercentBase(discount);
+
         p.setSlug(toSlug(p.getTitle()));
         productService.saveProduct(p);
         System.out.println("Da them");
