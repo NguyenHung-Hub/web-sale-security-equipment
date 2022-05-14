@@ -222,7 +222,6 @@
             <!-- form đánh giá -->
             <div id="FormDanhGia" class="mt-5">
                 <h2 class="background-red p-3">THÊM ĐÁNH GIÁ MỚI</h2>
-
                 <form class="form-group" method="post" th:action="@{/product/reviews}" th:object="${reviewProduct} ">
                     <div class="rating mt-5 mb-5">
                         <input th:field="*{rating}" type="radio" id="star5" name="rate" value="5"/>
@@ -240,8 +239,8 @@
                     <input type="hidden" name="title" id="title" th:value="${product.title}"
                            class="form-control mt-3 font-14" placeholder="Tiêu đề">
                     <textarea th:field="*{content}" type="text" class="form-control mt-3 font-14"
-                              placeholder="Đánh giá chi tiết"></textarea>
-                    <input type="submit" class="btn btn-dark mt-3 font-14" value="Gửi">
+                              placeholder="Thêm đánh giá của bạn."></textarea>
+                    <input type="submit" class="btn btn-dark mt-3 font-14 " style="height: 36px;width: 80px" value="Gửi">
 
                 </form>
                 <th:block th:if="${param['true']}">
