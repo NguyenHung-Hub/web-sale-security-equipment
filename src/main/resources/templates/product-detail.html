@@ -89,9 +89,9 @@
                             </button>
                         </div>
                     </form>
-                    <div class="ml-2 ">
-                        <a id="btnTym" type="button" class="btn btn-dark btn-cart"><span class="fa fa-heart tym"></span></a>
-                    </div>
+<!--                    <div class="ml-2 ">-->
+<!--                        <a id="btnTym" type="button" class="btn btn-dark btn-cart"><span class="fa fa-heart tym"></span></a>-->
+<!--                    </div>-->
                 </div>
                 <div class="mt-5 font-14">
                     <p>Số sản phẩm có sẵn: <span id="spQuantity" th:value="${product.quantity}" >[[${product.quantity}]]</span></p>
@@ -251,6 +251,11 @@
                 <th:block th:if="${param['false']}">
                     <script>
                         alert("Không thể thêm đánh giá, đã xảy ra lỗi!!!")
+                    </script>
+                </th:block>
+                <th:block th:if="${param['nopay']}">
+                    <script>
+                        alert("Để đánh giá bạn phải mua sản phẩm trước !!!")
                     </script>
                 </th:block>
 
