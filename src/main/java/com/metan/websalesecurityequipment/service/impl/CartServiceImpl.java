@@ -30,7 +30,11 @@ public class CartServiceImpl implements CartService {
     public double updateQuantity(Integer quantity, String productId, Long cartId) {
         cartRepository.updateQuantity(quantity, productId, cartId);
         Product product = productRepository.findById(productId).get();
-        return quantity*product.getPrice();
+        double afterUpdate = quantity *
+        (product.getPrice() - (product.getPrice() * (product.getProductDiscounts().isEmpty()
+                ? product.getDiscountPercentBase()
+                : product.getProductDiscounts().get(product.getProductDiscounts().size() - 1).getDiscountPercent())));
+        return afterUpdate;
     }
 
     public CartItem findByProductAndCart(String productId,Long cartId){

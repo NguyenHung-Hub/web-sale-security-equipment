@@ -116,8 +116,11 @@
                                 </div>
                                 <div class="col d-flex">
                                     <div class="d-flex flex-column">
-                                        <span class="old-price">[[${ItemCart.product.price}]] ₫</span>
-                                        <span class="new-price" th:id="'newPrice'+${ItemCart.product.productId}">[[${ItemCart.product.price}]] ₫</span>
+                                        <span class="old-price" th:text="${#numbers.formatDecimal(ItemCart.product.price,3,'POINT',0,'POINT') + '&nbsp;₫'}" ></span>
+                                        <span class="new-price" th:id="'newPrice'+${ItemCart.product.productId}"
+                                              th:text="${#numbers.formatDecimal(ItemCart.product.price - (ItemCart.product.price * (ItemCart.product.productDiscounts.isEmpty()
+                                                  ? ItemCart.product.discountPercentBase
+                                                  : ItemCart.product.productDiscounts.get(ItemCart.product.productDiscounts.size() - 1).discountPercent)),3,'POINT',0,'POINT') + '&nbsp;₫'}"></span>
                                     </div>
                                 </div>
                                 <div class="col-1 d-flex">
@@ -125,8 +128,10 @@
                                 </div>
                                 <div class="col d-flex">
                                     <span th:id="'subtotal'+${ItemCart.product.productId}"
-                                          th:with="result=${ItemCart.product.price * ItemCart.quantity}">
-                                        <span th:text="${result}  + ' ₫'"
+                                          th:with="result=${(ItemCart.product.price - (ItemCart.product.price * (ItemCart.product.productDiscounts.isEmpty()
+                                          ? ItemCart.product.discountPercentBase
+                                          : ItemCart.product.productDiscounts.get(ItemCart.product.productDiscounts.size() - 1).discountPercent))) * ItemCart.quantity}">
+                                        <span th:text="${#numbers.formatDecimal(result,3,'POINT',0,'POINT') + '&nbsp;₫'}"
                                               th:id="'subTotalPrice'+${ItemCart.product.productId}"
                                               class="subTotal-product">
                                       </span>
@@ -179,7 +184,7 @@
                         <input type="radio" name="payment" id="zalo"/>
                         <span class="radio-btn"><i class="las la-check"></i>
                                 <div class="hobbies-icon">
-                                    <img class="logo-pay" th:src="@{/image/cart/zalo-pay.jpg}">
+                                    <img class="logo-pay" th:src="@{/imgs/cart/zalo-pay.jpg}">
                                     <h3>Ví ZaloPay</h3>
                                 </div>
                             </span>
@@ -188,7 +193,7 @@
                         <input type="radio" name="payment" id="cash"/>
                         <span class="radio-btn"><i class="las la-check"></i>
                                 <div class="hobbies-icon">
-                                    <img class="logo-pay" th:src="@{/image/cart/truc-tiep.png}">
+                                    <img class="logo-pay" th:src="@{/imgs/cart/truc-tiep.png}">
                                     <h3>Tiền mặt</h3>
                                 </div>
                             </span>
@@ -197,7 +202,7 @@
                         <input type="radio" name="payment" id="momo"/>
                         <span class="radio-btn"><i class="las la-check"></i>
                                 <div class="hobbies-icon">
-                                    <img class="logo-pay" th:src="@{/image/cart/momo.jpg}">
+                                    <img class="logo-pay" th:src="@{/imgs/cart/momo.jpg}">
                                     <h3>Ví Momo</h3>
                                 </div>
                             </span>

@@ -334,8 +334,12 @@
                                     </div>
                                     <div class="col d-flex">
                                         <div class="d-flex flex-column">
-                                            <span class="old-price">[[${ItemCart.product.price}]] ₫</span>
-                                            <span class="new-price" th:id="'newPrice'+${ItemCart.product.productId}">[[${ItemCart.product.price}]] ₫</span>
+                                            <span class="old-price" th:text="${#numbers.formatDecimal(ItemCart.product.price,3,'POINT',0,'POINT') + '&nbsp;₫'}" ></span>
+                                            <span class="new-price" th:id="'newPrice'+${ItemCart.product.productId}"
+                                                  th:text="${#numbers.formatDecimal(ItemCart.product.price - (ItemCart.product.price * (ItemCart.product.productDiscounts.isEmpty()
+                                                  ? ItemCart.product.discountPercentBase
+                                                  : ItemCart.product.productDiscounts.get(ItemCart.product.productDiscounts.size() - 1).discountPercent)),3,'POINT',0,'POINT') + '&nbsp;₫'}"
+                                            ></span>
                                         </div>
                                     </div>
                                     <div class="col d-flex">
@@ -347,8 +351,10 @@
                                     </div>
                                     <div class="col-2 d-flex justify-content-between">
                                     <span th:id="'subtotal'+${ItemCart.product.productId}"
-                                          th:with="result=${ItemCart.product.price * ItemCart.quantity}">
-                                        <span th:text="${result}  + ' ₫'"
+                                          th:with="result=${(ItemCart.product.price - (ItemCart.product.price * (ItemCart.product.productDiscounts.isEmpty()
+                                          ? ItemCart.product.discountPercentBase
+                                          : ItemCart.product.productDiscounts.get(ItemCart.product.productDiscounts.size() - 1).discountPercent))) * ItemCart.quantity}">
+                                        <span th:text="${#numbers.formatDecimal(result,3,'POINT',0,'POINT') + '&nbsp;₫'}"
                                               th:id="'subTotalPrice'+${ItemCart.product.productId}"
                                               class="subTotal-product"></span>
                                     </span>
