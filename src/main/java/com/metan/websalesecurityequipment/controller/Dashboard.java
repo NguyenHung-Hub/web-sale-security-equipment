@@ -147,8 +147,9 @@ public class Dashboard {
         List<Brand> brands = brandService.findAll();
         model.addAttribute("brands", brands);
 
-        long lastId = brandService.getLastId();
-        model.addAttribute("newId", (lastId+1));
+        long newId = brandService.getLastId() + 1;
+        model.addAttribute("newId", newId);
+        System.out.println("\n\nnewId: "+ newId);
 
 
         return "brand_db";
