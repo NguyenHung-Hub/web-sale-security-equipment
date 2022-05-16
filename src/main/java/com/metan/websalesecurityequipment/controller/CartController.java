@@ -98,31 +98,26 @@ public class CartController {
         List<Category> categories = null;
         model.addAttribute("CATEGORIES", categories);
 
-//        final String uri = "http://localhost:8080/api/cart/order/"+type;
-//
-//        RestTemplate restTemplate = new RestTemplate();
-//        ResponseEntity<Order[]> responseEntity = restTemplate.getForEntity(uri, Order[].class);
-//        Order[] orders = responseEntity.getBody();
-
         List<Order> Oders = user.getOrders();
         List<Order> NewOders = new ArrayList<>();
-        for(int i = 0 ;i< Oders.size();i++){
-            if(Oders.get(i).getOrderStatus().getStatus().equalsIgnoreCase(type)){
-                NewOders.add(Oders.get(i));
+        if(type.equalsIgnoreCase("ALL")){
+            NewOders = Oders;
+        }else{
+            for(int i = 0 ;i< Oders.size();i++){
+                if(Oders.get(i).getOrderStatus().getStatus().equalsIgnoreCase(type)){
+                    NewOders.add(Oders.get(i));
+                }
             }
         }
 
         model.addAttribute("CUSTOMER", user);
-
-        if(!type.equalsIgnoreCase("PROCESSING")){
-            model.addAttribute("type",null);
-        }
 
         if (NewOders.size() <= 0){
             model.addAttribute("LIST_ORDER",null);
         }else{
             model.addAttribute("LIST_ORDER",NewOders);
         }
+
         return "orders";
     };
 
@@ -196,26 +191,8 @@ public class CartController {
                 body += (String.valueOf(orderItem.getQuantity()) + " " + orderItem.getProduct().getTitle() +"\n");
 
                 cartService.deleteCardItem(new CartItemPK(product.getProductId(), cart.getCartId()));
-            };
+            }
         }
-//        cart.getCartItems().forEach(cartItem -> {
-//            if(listItemSelected.contains(cartItem.getProduct().getProductId())){
-//                Product product = cartItem.getProduct();
-//
-//                OrderItem orderItem = new OrderItem();
-//                orderItem.setCreatedAt(new Date());
-//                orderItem.setModifiedAt(new Date());
-//                orderItem.setQuantity(cartItem.getQuantity());
-//                orderItem.setProduct(product);
-//                orderItem.setOrder(order);
-//                orderItems.add(orderItem);
-//
-//                body += (String.valueOf(orderItem.getQuantity()) + " " + orderItem.getProduct().getTitle() +"\n");
-//
-//                cartService.deleteCardItem(new CartItemPK(product.getProductId(), cart.getCartId()));
-//            };
-//
-//        });
 
         order.setOrderItems(orderItems);
         order.setTotal(total);
