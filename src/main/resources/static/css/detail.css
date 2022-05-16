@@ -11,10 +11,23 @@
 .font-20{
      font-size: 20px;
 }
+.background-red{
+    background-color: rgb(215, 0 ,24, 1);
+    color: white;
+    font-size: 20px;
+}
+
+.tab-bg-light{
+    background-color: #f2f2f2;
+    border-left: 5px solid #D70018;
+
+}
 .checked-rating {
     color: orange;
 }
-
+.border-content-img{
+    border-right: 1px solid #D70018;
+}
 @import url(//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css);
 .desc{
     margin-left: 0px;
@@ -75,6 +88,24 @@
     vertical-align: middle;
 }
 
+.relate-product{
+    border-radius: 4px;
+    -webkit-box-shadow: rgba(60, 64, 67, .15) 0 1px 2px 0, rgba(60, 64, 67, .15) 0 2px 6px 2px;
+    box-shadow: rgba(60, 64, 67, .15) 0 1px 2px 0, rgba(60, 64, 67, .15) 0 2px 6px 2px;
+}
+
+.img-relate-product{
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.link-relate-product:hover{
+    text-decoration: none;
+}
+
+.red-border{
+    border-bottom: 2px solid #D70018;
+}
 
 /*reset css*/
 
@@ -222,8 +253,14 @@ h1 {
     display: flex;
     justify-content: center;
 }*/
+a.text-dark:focus{
+    color: white!important;
+}
 .nav-tabs .nav-link.active{
-    background-color: #ff9999;
+    background-color: rgb(215, 0 ,24, .7);
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    color: white!important;
 }
 .paginationPage {
     width: 100%;
@@ -268,8 +305,8 @@ a.page-link, span.page-link {
 
 /* thiết lập style cho class active */
 .pagination li.active > .current {
-    background-color: #ff9999;
-    color: black;
+    background-color: rgb(215, 0 ,24, .7);
+    color: white;
     font-size: 14px;
     text-decoration: none;
 }
@@ -280,12 +317,12 @@ a.page-link, span.page-link {
 }
 
 .pagination li.disabled > .current {
-    color: #ff9999;
+    background-color: rgb(215, 0 ,24, .7);
 }
 
 /* thêm màu nền khi người dùng hover vào class không active */
 .pagination li:hover:not(.active) > .page-link {
-    color: #ff9999;
+    background-color: rgb(215, 0 ,24, .7);
     text-decoration: none;
 }
 .no-review{

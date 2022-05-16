@@ -18,4 +18,19 @@ public class BrandServiceImpl implements BrandService {
         System.out.println(brandRepository.findAll());
         return brandRepository.findAll();
     }
+
+    @Override
+    public long getLastId() {
+        long id = 1;
+        try {
+//            String formatId = orderRepository.getLastId().getOrderId();
+            id = brandRepository.getLastId().getBrandId();
+//            int so = Integer.parseInt(formatId.split("MT-M")[1]) + 1;
+//            id = "MT-M"+String.valueOf(so);
+        } catch (Exception e) {
+//            id = "MT-M1";
+        }
+
+        return id;
+    }
 }

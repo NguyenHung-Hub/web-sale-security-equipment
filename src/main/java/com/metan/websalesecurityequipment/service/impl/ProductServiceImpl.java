@@ -40,6 +40,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> findProductsByCategory(long id) {
+        return productRepository.findProductsByCategory(id);
+    }
+
+    @Override
     public Product findProductById(String theId) {
         Optional<Product> result = productRepository.findById(theId);
         Product product;
@@ -116,6 +121,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> findTopNumberRandom(int top) {
         return productRepository.findTopNumberRandom(top);
+    }
+
+    @Override
+    public boolean checkBuyCompletedProductByUser(String productId, long userId) {
+        Product product= productRepository.checkBuyCompletedProductByUser(productId,userId);
+        return product!=null;
     }
 
 }

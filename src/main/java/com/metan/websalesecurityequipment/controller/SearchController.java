@@ -2,7 +2,6 @@ package com.metan.websalesecurityequipment.controller;
 
 import com.metan.websalesecurityequipment.model.*;
 import com.metan.websalesecurityequipment.model.request.ProductRequestPageable;
-import com.metan.websalesecurityequipment.repository.OrderRepository;
 import com.metan.websalesecurityequipment.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,14 +9,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping
@@ -48,7 +44,7 @@ public class SearchController {
 
         this.name = name;
         List<Brand> brands = brandService.findAll();
-        List<Category> categories = categoryService.findAll();
+        List<Category> categories = categoryService.findAllParentCategory();
         display(model, name, page, size, brands, categories);
         model.addAttribute("CATEGORIES", categories);
 

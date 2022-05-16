@@ -18,7 +18,7 @@ class ProductReview {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_id")
     private long reviewId;
-    private Float rating;
+    private float rating;
     @Column(columnDefinition = "nvarchar(255)")
     private String title;
     @Column(columnDefinition = "LONGTEXT")
@@ -29,7 +29,6 @@ class ProductReview {
     private Product product;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @JsonManagedReference
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private User user;
 }

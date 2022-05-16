@@ -42,7 +42,6 @@ public class OAuth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSu
                 userService.updateUserAfterOAuthLoginSuccess(user, name, AuthenticationProvider.FACEBOOK);
         }
 
-        System.out.println("User's email " + email);
         super.onAuthenticationSuccess(request, response, authentication);
     }
 }

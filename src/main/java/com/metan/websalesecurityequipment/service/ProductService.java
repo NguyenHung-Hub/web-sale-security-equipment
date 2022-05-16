@@ -14,6 +14,8 @@ public interface ProductService {
 
     public List<Product> findProductByNameParentCategory(String name, String otherName, int limit);
 
+    public List<Product> findProductsByCategory(long id);
+
     public Product findProductById(String theId);
 
     public Product saveProduct(Product product);
@@ -34,5 +36,7 @@ public interface ProductService {
 
     public Product findBySlug(String slug);
     public List<Product> findTopNumberRandom(int top);
+
+    public boolean checkBuyCompletedProductByUser(String productId, long userId);
 
 }

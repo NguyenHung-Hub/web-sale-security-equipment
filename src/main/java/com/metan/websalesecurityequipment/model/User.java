@@ -1,5 +1,7 @@
 package com.metan.websalesecurityequipment.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,7 +13,8 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 public
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "userId")
@@ -41,8 +44,10 @@ class User implements Serializable {
 //    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", message = "Tối thiểu 8 ký tự, ít nhất một chữ cái và một số")
     private String password;
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonBackReference
     private Cart cart;
     @OneToMany(mappedBy = "user")
+    @JsonBackReference
     private List<Order> orders;
     @Column(name = "verification_code",length = 64)
     private String verificationCode;

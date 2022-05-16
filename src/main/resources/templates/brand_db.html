@@ -8,7 +8,7 @@
 </head>
 
 <body>
-<section  layout:fragment="content">
+<section layout:fragment="content">
     <div class="container">
         <div
                 class="container-fluid d-flex flex-row justify-content-end my-4"
@@ -17,7 +17,7 @@
                 <input
                         type="search"
                         class="form-control"
-                        placeholder="Tìm sản phẩm"
+                        placeholder="Tìm kiếm"
                 />
             </div>
             <!-- Button trigger modal -->
@@ -37,17 +37,19 @@
                 <tr>
                     <th scope="col">Mã</th>
                     <th scope="col">Tên</th>
-                    <th scope="col" class="text-right">Quốc gia</th>
+                    <th scope="col" class="text-left">Quốc gia</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
+                <tr th:each="brand:${brands}">
 
-                    <td>1</td>
+                    <td>[[${brand.brandId}]]</td>
                     <td class="col-6">
-                        KBVISION
+                        [[${brand.name}]]
                     </td>
-                    <td class="text-right">USA</td>
+                    <td class="text-left">
+                        [[${brand.country}]]
+                    </td>
                 </tr>
 
                 </tbody>
@@ -79,7 +81,39 @@
                         </button>
                     </div>
                     <div class="modal-body modal-body__product">
-                        <form>
+                        <form
+                                th:action="@{/dashboard/brand/modal}"
+                                th:object="${brand}"
+                                enctype="multipart/form-data"
+                                method="post">
+
+                            <div class="form-group-modify">
+                                <label>Mã</label>
+                                <input
+                                        type="text"
+                                        class="form-control-modify"
+                                        placeholder="Mã"
+                                        th:field="*{brandId}"
+                                />
+                            </div>
+                            <div class="form-group-modify">
+                                <label>Tên </label>
+                                <input
+                                        type="text"
+                                        class="form-control-modify"
+                                        placeholder="Tên thương hiệu"
+                                        th:field="*{name}"
+                                />
+                            </div>
+                            <div class="form-group-modify">
+                                <label>Quốc gia </label>
+                                <input
+                                        type="text"
+                                        class="form-control-modify"
+                                        placeholder="Quốc gia"
+                                        th:field="*{country}"
+                                />
+                            </div>
 
 
                             <div class="container">
