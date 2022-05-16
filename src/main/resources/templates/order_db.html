@@ -10,52 +10,163 @@
 <body>
 <section layout:fragment="content">
     <div class="container">
-
-
-        <div class="container-fluid mt-4">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th scope="col"></th>
-                    <th scope="col">Mã</th>
-                    <th scope="col">Sản phẩm</th>
-                    <th scope="col" class="text-right">Trạng thái</th>
-                    <th scope="col" class="text-right">Tổng tiền</th>
-                    <!--                        <th scope="col" class="text-right"></th>-->
-                    <!--                        <th scope="col" class="text-right"></th>-->
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="order:${orders}">
-                    <td>
-                        <div class="col-1">
-                            <input
-                                    class="form-check-input"
-                                    type="checkbox"
-                                    value="true"
-                            />
-                        </div>
-                    </td>
-                    <td>[[${order.orderId}]]</td>
-                    <td class="col-6">
-                        <ol type="1">
-                            <li th:each="p:${order.orderItems}">
-                                [[${p.product.getName()}]]
-                            </li>
-
-                        </ol>
-                    </td>
-                    <td class="text-right">[[${order.orderStatus}]]</td>
-                    <td class="text-right">
-
-                        [[${order.total}]]
-                    </td>
-
-                </tr>
-                </tbody>
-            </table>
+        <ul class="nav nav-tabs bg-dark" role="tablist">
+            <li class="nav-item">
+                <a value="PROCESSING" class="nav-link text-light active order-status" data-toggle="tab"
+                   href="#ChuaXacNhan">Chưa xác nhận</a>
+            </li>
+            <li class="nav-item ">
+                <a value="SHIPPING" class="nav-link text-light order-status" data-toggle="tab" href="#DangGiaoHang">Đang
+                    giao hàng</a>
+            </li>
+            <li class="nav-item">
+                <a value="COMPLETED" class="nav-link text-light order-status" data-toggle="tab" href="#DaHoanThanh">Đã
+                    hoàn thành</a>
+            </li>
+            <li class="nav-item">
+                <a value="CANCELLED" class="nav-link text-light order-status" data-toggle="tab" href="#DaHuy">Đã hủy</a>
+            </li>
+        </ul>
+        <div class="">
+            <div id="danh-muc" class="container-fluid tab-pane active mt-4">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Mã</th>
+                        <th scope="col">Sản phẩm</th>
+                        <th scope="col" class="text-right">Trạng thái</th>
+                        <th scope="col" class="text-right">Tổng tiền</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbl-danh-muc">
+                    <tr th:each="order:${orders}">
+                        <td>[[${order.orderId}]]</td>
+                        <td class="col-6">
+                            <ol type="1">
+                                <li th:each="orderItem:${order.orderItems}">[[${orderItem.product.getName()}]]</li>
+                            </ol>
+                        </td>
+                        <td class="text-right">[[${order.orderStatus}]]</td>
+                        <td class="text-right">[[${order.total}]]</td>
+                        <td class="text-center">
+                            <a th:href="@{'/dashboard/orders/SHIPPING/'+${order.orderId}}" class="btn btn-primary">Xác nhận</a>
+                            <a th:href="@{'/dashboard/orders/CANCELLED/'+${order.orderId}}" class="btn btn-danger mt-2">Hủy Đơn</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="paginationPage mt-5 mb-5">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination" id="pagination"></ul>
+                </nav>
+            </div>
         </div>
     </div>
+
+    <th:block>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script th:src="@{/js/jquery.simplePagination.js}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+        <script th:inline="javascript">
+            let totalPages = [[${orders.getTotalPages()}]];
+            let currentPage = [[${orders.getPageable().getPageNumber()}]] + 1;
+            let orderStatus = "PROCESSING";
+            $(function () {
+                pagination();
+                $('.order-status').click(function () {
+                    orderStatus = $(this).attr('value');
+                    getOrder();
+                });
+
+            });
+
+            function pagination() {
+                if (totalPages >= 0) {
+                    $('#pagination').show();
+                    $('#pagination').pagination({
+                        pages: totalPages,
+                        currentPage: currentPage,
+                        cssStyle: '',
+                        prevText: '<span class="active-link" aria-hidden="true">&laquo;</span>',
+                        nextText: '<span class="active-link" aria-hidden="true">&raquo;</span>',
+                        onInit: function () {
+
+                        },
+                        onPageClick: function (page, evt) {
+                            currentPage = page;
+                            getOrder();
+                            $('body,html').animate({scrollTop: 0}, 800);
+                        }
+
+                    });
+                    $('#pagination .active .current').addClass('page-link');
+                    $('#pagination .ellipse .clickable').addClass('page-link');
+                    $('#pagination .disabled .current.prev').addClass('page-link');
+                    $('#pagination .disabled .current.next').addClass('page-link');
+                } else {
+                    $('#pagination').hide();
+                }
+            }
+
+            function getOrder() {
+                const req = {
+                    status: orderStatus,
+                    currentPage: currentPage - 1
+                }
+                const myJSON = JSON.stringify(req);
+                $.ajax({
+                    url: "/dashboard/orders",
+                    type: "POST",
+                    data: myJSON,
+                    dataType: "json",
+                    contentType: "application/json;charset=utf-8",
+                    success: function (orders) {
+                        createData(orders.content);
+                        currentPage = orders.pageable.pageNumber + 1;
+                        totalPages = orders.totalPages;
+                        console.log("Tong page hien tai khi nhan link page:" + totalPages);
+                        console.log("page hien tai khi nhan link page:" + currentPage);
+                        pagination();
+                        console.log(orders.content);
+                    }
+                })
+            }
+
+            function createData(orders) {
+                let html = '';
+                if (orders.length > 0) {
+                    for (order of orders) {
+                        html += ` <tr>
+                        <td>${order.orderId}</td>
+                        <td class="col-6">
+                             <ol type="1">`
+                        for (oi of order.orderItems) {
+                            html += `<li>${oi.product.name}</li>`;
+                        }
+                        html += `     </ol>
+                        </td>
+                        <td class="text-right">${order.orderStatus}</td>
+                        <td class="text-right">${new Intl.NumberFormat('vi-VN', {maximumSignificantDigits: 3}).format(order.total)}</td>
+                        <td class="text-center">`;
+                        if (orderStatus === 'PROCESSING')
+                            html += `<a id="btnXacNhan" href="/dashboard/orders/SHIPPING/${order.orderId}" class="btn btn-primary">Xác nhận</a>
+                            <a id="btnHuyDon" href="/dashboard/orders/CANCELLED/${order.orderId}" class="btn btn-danger mt-2">Hủy Đơn</a>`;
+                        html += `</td>
+                    </tr>`;
+                    }
+                    $("#tbl-danh-muc").html("");
+                    /* $('#no-review').css('display', 'none');*/
+                    $("#tbl-danh-muc").html(html);
+                } else {
+                    $("#tbl-danh-muc").html("");
+                    /*$('#no-review').css('display', 'flex');*/
+                }
+            }
+        </script>
+
+    </th:block>
 </section>
 
 </body>

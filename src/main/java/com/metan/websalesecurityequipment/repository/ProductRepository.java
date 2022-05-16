@@ -47,7 +47,7 @@ public interface ProductRepository extends JpaRepository<Product, String> {
      * @return product if the user's purchased order is completed, not valid return null
      */
     @Query(value = "select p.product_id,oi.order_id,o.order_id,u.user_id from products p join order_items oi on p.product_id=oi.product_id join orders o on o.order_id= oi.order_id join users u on u.user_id= o.user_id\n" +
-            "where p.product_id=?1 and u.user_id=?2 and o.order_status='completed'", nativeQuery = true)
+            "where p.product_id=?1 and u.user_id=?2 and o.order_status='COMPLETED'", nativeQuery = true)
     public Product checkBuyCompletedProductByUser(String productId, long userId);
 
     //Hao

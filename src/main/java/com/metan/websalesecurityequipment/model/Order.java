@@ -30,7 +30,7 @@ class Order {
     @Column(name = "modified_at", columnDefinition = "datetime")
     private Date modifiedAt;
     @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonManagedReference
     private List<OrderItem> orderItems;
     @ManyToOne
     @JoinColumn(name = "user_id")
