@@ -26,7 +26,7 @@
     color: orange;
 }
 .border-content-img{
-    border-right: 1px solid rgb(215, 0 ,24, .3);
+    border-right: 1px solid #D70018;
 }
 @import url(//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css);
 .desc{
@@ -253,8 +253,14 @@ h1 {
     display: flex;
     justify-content: center;
 }*/
+a.text-dark:focus{
+    color: white!important;
+}
 .nav-tabs .nav-link.active{
     background-color: rgb(215, 0 ,24, .7);
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    color: white!important;
 }
 .paginationPage {
     width: 100%;
@@ -300,7 +306,7 @@ a.page-link, span.page-link {
 /* thiết lập style cho class active */
 .pagination li.active > .current {
     background-color: rgb(215, 0 ,24, .7);
-    color: black;
+    color: white;
     font-size: 14px;
     text-decoration: none;
 }

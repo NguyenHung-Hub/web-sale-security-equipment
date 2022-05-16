@@ -37,4 +37,6 @@ public interface ProductService {
     public Product findBySlug(String slug);
     public List<Product> findTopNumberRandom(int top);
 
+    public boolean checkBuyCompletedProductByUser(String productId, long userId);
+
 }

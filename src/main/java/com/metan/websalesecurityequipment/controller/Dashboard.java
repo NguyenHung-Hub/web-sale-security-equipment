@@ -141,6 +141,17 @@ public class Dashboard {
     @GetMapping("/brand")
     public String brand(Model model) {
 
+        Brand brand = new Brand();
+        model.addAttribute("brand", brand);
+
+        List<Brand> brands = brandService.findAll();
+        model.addAttribute("brands", brands);
+
+        long newId = brandService.getLastId() + 1;
+        model.addAttribute("newId", newId);
+        System.out.println("\n\nnewId: "+ newId);
+
+
         return "brand_db";
     }
 
@@ -179,6 +190,7 @@ public class Dashboard {
                                 @RequestParam(name = "image", required = false) MultipartFile img) {
         Product product = productService.findProductById(p.getProductId());
         System.out.println("\t\t\t\t hinh ne:" + img.getOriginalFilename());
+
         if (!img.getOriginalFilename().trim().equals("")) {
             String fileName = awsService.save(img);
             if (product.getThumbnail()!= null && !product.getThumbnail().trim().equals("")) {
@@ -192,7 +204,8 @@ public class Dashboard {
         product.setShortDesc(p.getShortDesc());
         product.setName(p.getName());
         product.setPrice(p.getPrice());
-
+        product.setQuantity(p.getQuantity());
+        product.setTitle(p.getName()+" "+ p.getProductId());
         productService.saveProduct(product);
         System.out.println("Da sua");
         return "redirect:/dashboard/product";
