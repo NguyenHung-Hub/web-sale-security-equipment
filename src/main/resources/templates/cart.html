@@ -3,7 +3,8 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
 
 <!--th:replace="fragments :: headC"-->
-<head th:replace="fragments :: headC">
+<head>
+    <th:block th:replace="fragments :: base3 ('Giỏ hàng')"/>
 </head>
 <body>
 <header class="mt-header d-lg-block d-none">
@@ -301,7 +302,7 @@
                         <div class="row border-bottom">
                             <div class="row main align-items-center">
                                 <div class="col-3">
-                                    <h4><b>Shopping Cart</b></h4>
+                                    <h4><b>Giỏ hàng</b></h4>
                                 </div>
                                 <div class="col-4">
                                 </div>
@@ -367,7 +368,7 @@
 
                     </div>
                     <div class="back-to-shop"><a th:href="@{/}">&leftarrow;</a><span
-                            class="text-muted">Back to shop</span>
+                            class="text-muted">Mua hàng</span>
                     </div>
                 </div>
                 <div class="col-md-4 summary" th:with="ItemCard=${LIST_ITEMCART}">
@@ -432,10 +433,9 @@
                         <div class="col-sm-12 empty-cart-cls text-center">
                             <img th:src="@{/imgs/cart/cart-empty.jpg}"
                                  class="img-fluid mb-4 mr-3">
-                            <h2><strong>Your Cart is Empty</strong></h2>
+                            <h2><strong>Giỏ hàng của bạn đang trống</strong></h2>
                             <h3>Add something to make me happy :)</h3>
-                            <a th:href="@{/}" class="btn btn-primary cart-btn-transform m-3" data-abc="true">continue
-                                shopping</a>
+                            <a th:href="@{/}" class="btn btn-primary cart-btn-transform m-3" data-abc="true">Tiếp tục mua hàng</a>
                         </div>
                     </div>
                 </div>

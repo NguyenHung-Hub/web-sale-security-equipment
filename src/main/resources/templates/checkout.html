@@ -4,7 +4,6 @@
 <head>
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <title>Shopping Cart</title>
 
     <!-- font-awesome -->
     <script src="https://kit.fontawesome.com/845e26e92f.js" crossorigin="anonymous"></script>
@@ -16,6 +15,10 @@
     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <link rel="stylesheet" th:href="@{/css/checkout.css}"/>
     <link rel="stylesheet" th:href="@{/css/base.css}"/>
+    <link rel="icon"
+          th:href="@{/imgs/logo.png}"
+          type="image/x-icon" />
+    <title>Thanh Toán</title>
 </head>
 
 <body>
@@ -116,7 +119,8 @@
                                 </div>
                                 <div class="col d-flex">
                                     <div class="d-flex flex-column">
-                                        <span class="old-price" th:text="${#numbers.formatDecimal(ItemCart.product.price,3,'POINT',0,'POINT') + '&nbsp;₫'}" ></span>
+                                        <span class="old-price"
+                                              th:text="${#numbers.formatDecimal(ItemCart.product.price,3,'POINT',0,'POINT') + '&nbsp;₫'}" ></span>
                                         <span class="new-price" th:id="'newPrice'+${ItemCart.product.productId}"
                                               th:text="${#numbers.formatDecimal(ItemCart.product.price - (ItemCart.product.price * (ItemCart.product.productDiscounts.isEmpty()
                                                   ? ItemCart.product.discountPercentBase
