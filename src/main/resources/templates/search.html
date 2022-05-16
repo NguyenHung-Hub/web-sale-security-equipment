@@ -216,15 +216,15 @@
                                 </div>
                                 <div class="desc-eval">
                                 <span class="fa fa-star"
-                                      th:classappend="${listRating.get(product.productId)>=1}? checked"></span>
+                                      th:classappend="${#aggregates.avg(product.productReviews.![rating]) >= 1}? checked"></span>
                                     <span class="fa fa-star"
-                                          th:classappend="${listRating.get(product.productId)>=2}? checked"></span>
+                                          th:classappend="${#aggregates.avg(product.productReviews.![rating]) >= 2}? checked"></span>
                                     <span class="fa fa-star"
-                                          th:classappend="${listRating.get(product.productId)>=3}? checked"></span>
+                                          th:classappend="${#aggregates.avg(product.productReviews.![rating]) >= 3}? checked"></span>
                                     <span class="fa fa-star"
-                                          th:classappend="${listRating.get(product.productId)>=4}? checked"></span>
+                                          th:classappend="${#aggregates.avg(product.productReviews.![rating]) >= 4}? checked"></span>
                                     <span class="fa fa-star"
-                                          th:classappend="${listRating.get(product.productId)>=5}? checked"></span>
+                                          th:classappend="${#aggregates.avg(product.productReviews.![rating]) >= 5}? checked"></span>
 
 
                                     <span class="da-ban"
@@ -430,7 +430,7 @@
                 }
             })
         }
-        let listRating = [[${listRating}]];
+        // let listRating = [[${listRating}]];
         let listQuantity = [[${listQuan}]];
         console.log(listRating);
         function createData(products) {
@@ -460,11 +460,11 @@
                                     </span>
                                 </div>
                                 <div class="desc-eval">
-                                    <span class="fa fa-star ${listRating[product.productId] >= 1 ? 'checked' : ''}"></span>
-                                    <span class="fa fa-star ${listRating[product.productId] >= 2 ? 'checked' : ''}"></span>
-                                    <span class="fa fa-star ${listRating[product.productId] >= 3 ? 'checked' : ''}"></span>
-                                    <span class="fa fa-star ${listRating[product.productId] >= 4 ? 'checked' : ''}"></span>
-                                    <span class="fa fa-star ${listRating[product.productId] >= 5 ? 'checked' : ''}"></span>
+                                    <span class="fa fa-star ${(product.productReviews.map(reviews=>((avg)=>(avg+reviews.rating)))/products.productReviews.length)>=1?'checked':''}"></span>
+                                    <span class="fa fa-star ${(product.productReviews.map(reviews=>((avg)=>(avg+reviews.rating)))/products.productReviews.length)>=2?'checked':''}"></span>
+                                    <span class="fa fa-star ${(product.productReviews.map(reviews=>((avg)=>(avg+reviews.rating)))/products.productReviews.length)>=3?'checked':''}"></span>
+                                    <span class="fa fa-star ${(product.productReviews.map(reviews=>((avg)=>(avg+reviews.rating)))/products.productReviews.length)>=4?'checked':''}"></span>
+                                    <span class="fa fa-star ${(product.productReviews.map(reviews=>((avg)=>(avg+reviews.rating)))/products.productReviews.length)>=5?'checked':''}"></span>
                                     <span class="da-ban"> Đã bán ${listQuantity[product.productId] ? listQuantity[product.productId] : '0'}</span>
                                 </div>
                                 <div class="desc-address" style="color: #000000A6;">
