@@ -19,6 +19,7 @@ public interface OrderService {
     void deleteOrder(String order);
     String getLastId();
 
+    void completeOrder(String orderId);
     public Page<Order> findOrderByStatus(String status, Pageable pageable);
     public Order findById(String id);
 }

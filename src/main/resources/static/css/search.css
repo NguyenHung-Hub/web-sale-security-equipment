@@ -10,7 +10,7 @@
 .search-nav-filter {
     width: 20%;
     height: 100%;
-    font-size: 14px;
+    font-size: 16px;
     color: rgba(0, 0, 0, .8);
 }
 
@@ -26,16 +26,17 @@
 }
 
 .fa-solid {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .fa-filter {
     padding: 5px;
+    margin: 1px;
     font-size: 16px;
 }
 
 .filter-title > p {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 700;
     color: rgba(0, 0, 0, .8);
     text-transform: uppercase;
@@ -44,31 +45,34 @@
 
 .filter-body {
     width: 100%;
-    border-bottom: 1px solid rgb(215, 0 ,24, .5);
+    border-bottom: 1px solid rgb(215, 0, 24, .5);
     padding-left: 5px;
     padding-right: 5px;
 }
 
 .group-filter {
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
     padding-left: 2px;
 }
 
 .group-filter-header {
     text-align: start;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    font-size: 16px;
 }
 
 .hidden {
     cursor: pointer;
     margin-left: 20px;
     display: none;
+    color: rgb(215, 0, 24, 1);
 }
 
 .add {
     cursor: pointer;
     margin-left: 20px;
+    color: rgb(215, 0, 24, 1);
 }
 
 .add > i {
@@ -107,7 +111,7 @@ label {
 }
 
 .filter-evaluate {
-    height: 16px;
+    height: 18px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -124,7 +128,7 @@ label {
 
 .filter-evaluate > .up {
     margin-left: 5px;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 div.filter-evaluate > .checked {
@@ -150,7 +154,7 @@ div.filter-evaluate > .checked {
     width: 100%;
     height: 34px;
     margin-top: 10px;
-    background-color: rgb(215, 0 ,24, 1);
+    background-color: rgb(215, 0, 24, 1);
     font-weight: 400;
     cursor: pointer;
     font-size: 16px;
@@ -175,14 +179,14 @@ div.filter-evaluate > .checked {
 }
 
 .result-bar > p {
-    font-size: 14px;
+    font-size: 16px;
     display: inline-block;
     line-height: 40px;
     margin-left: 5px;
 }
 
 .result-bar > p > span {
-    color: rgb(215, 0 ,24, 1);
+    color: rgb(215, 0, 24, 1);
 }
 
 .sort-bar {
@@ -191,10 +195,10 @@ div.filter-evaluate > .checked {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    font-size: 14px;
+    font-size: 16px;
     border-radius: 4px;
-    -webkit-box-shadow: rgba(215, 0 ,24, .05) 0 1px 1px 0, rgba(215, 0 ,24, .05) 0 1px 1px 1px;
-    box-shadow: rgba(215, 0 ,24, .05) 0 1px 1px 0, rgba(215, 0 ,24, .05) 0 1px 1px 1px;
+    -webkit-box-shadow: rgba(215, 0, 24, .05) 0 1px 1px 0, rgba(215, 0, 24, .05) 0 1px 1px 1px;
+    box-shadow: rgba(215, 0, 24, .05) 0 1px 1px 0, rgba(215, 0, 24, .05) 0 1px 1px 1px;
 }
 
 .sort-bar > div {
@@ -231,7 +235,7 @@ div.filter-evaluate > .checked {
 }
 
 #sort li:hover {
-    color: rgb(215, 0 ,24, 1);
+    color: rgb(215, 0, 24, 1);
 }
 
 #sort li:hover ul {
@@ -258,7 +262,7 @@ div.filter-evaluate > .checked {
 
 #sort li ul li:hover {
     background-color: white;
-    color: rgb(215, 0 ,24, 1);
+    color: rgb(215, 0, 24, 1);
     cursor: pointer;
 }
 
@@ -270,7 +274,7 @@ div.filter-evaluate > .checked {
 }
 
 #sort li.btn-ss-active {
-    background-color: rgb(215, 0 ,24, .7);
+    background-color: rgb(215, 0, 24, .7);
     color: white;
 }
 
@@ -280,13 +284,13 @@ div.filter-evaluate > .checked {
     border-radius: 4px;
 }
 
-#btnGia>a {
+#btnGia > a {
     display: block;
     padding-left: 10px;
     padding-right: 10px;
 }
 
-.select-price-item{
+.select-price-item {
     margin-left: 0px;
     text-align: center;
 }
@@ -300,6 +304,7 @@ div.filter-evaluate > .checked {
     padding-left: 10px;
     padding-right: 10px;
 }
+
 .next-page {
     display: inline;
     height: 34px;
@@ -334,12 +339,14 @@ div.filter-evaluate > .checked {
     flex-wrap: wrap;
     justify-content: flex-start;
 }
+
 #list-product > div.content {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
 }
+
 div.gallery {
     margin: 10px;
     width: 218px;
@@ -360,7 +367,7 @@ div.gallery {
 
 div.gallery:hover {
     transform: translateY(-2px);
-    border: 1px solid rgb(215, 0 ,24, .5);
+    border: 1px solid rgb(215, 0, 24, .5);
 }
 
 div.gallery img {
@@ -489,16 +496,17 @@ a.page-link, span.page-link {
     transition: background-color .3s;
     border-radius: 2px;
 }
-.pagination > a,.pagination > li, .pagination >span{
-    width:30px;
+
+.pagination > a, .pagination > li, .pagination > span {
+    width: 30px;
     height: 30px;
 }
 
 /* thiết lập style cho class active */
 .pagination li.active > .current {
-    width:30px;
+    width: 30px;
     height: 30px;
-    background-color: rgb(215, 0 ,24, .7);
+    background-color: rgb(215, 0, 24, .7);
     color: white;
     font-size: 14px;
     text-decoration: none;
@@ -510,13 +518,13 @@ a.page-link, span.page-link {
 }
 
 .pagination li.disabled > .current {
-    background-color: rgb(215, 0 ,24, .7);
+    background-color: rgb(215, 0, 24, .7);
     color: white;
 }
 
 /* thêm màu nền khi người dùng hover vào class không active */
 .pagination li:hover:not(.active) > .page-link {
-    background-color: rgb(215, 0 ,24, .7);
+    background-color: rgb(215, 0, 24, .7);
     text-decoration: none;
     color: white;
 }

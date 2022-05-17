@@ -10,7 +10,7 @@
     <div class="row">
         <div class="search-nav-filter">
             <div class=" filter-title">
-                <p><i class="fas fa-filter icon"></i>Bộ lọc tìm kiếm</p>
+                <p><i style="color: rgb(215, 0, 24, .5);" class="fas fa-filter icon"></i>Bộ lọc tìm kiếm</p>
             </div>
             <div class="filter-body">
                 <div class="group-filter">
@@ -158,7 +158,7 @@
 
         <div class="search-content">
             <div class="result-bar">
-                <span><i style="font-size: 14px;" class="fas fa-lightbulb"></i></span>
+                <span><i style="font-size: 16px; color: rgb(215, 0, 24, .5);" class="fas fa-lightbulb"></i></span>
                 <p>Kết quả tìm kiếm cho '<span th:text="${param.keyword}"></span>'</p>
             </div>
             <div class="sort-bar" style="height: 60px; background-color: #00000008;">
@@ -225,8 +225,6 @@
                                           th:classappend="${#aggregates.avg(product.productReviews.![rating]) >= 4}? checked"></span>
                                     <span class="fa fa-star"
                                           th:classappend="${#aggregates.avg(product.productReviews.![rating]) >= 5}? checked"></span>
-
-
                                     <span class="da-ban"
                                           th:text=" 'Đã bán '+ (${listQuan.get(product.productId)== null}?'0':${listQuan.get(product.productId)})">Đã bán 216</span>
                                 </div>
@@ -430,7 +428,6 @@
                 }
             })
         }
-        // let listRating = [[${listRating}]];
         let listQuantity = [[${listQuan}]];
         function createData(products) {
             let html = '';

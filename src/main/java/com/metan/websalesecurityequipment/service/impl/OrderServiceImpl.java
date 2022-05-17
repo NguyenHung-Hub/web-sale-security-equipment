@@ -57,6 +57,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public void completeOrder(String orderId) {
+        orderRepository.completeOrder(orderId);
+    }
     public Page<Order> findOrderByStatus(String status, Pageable pageable) {
         return orderRepository.findOrderByStatus(status,pageable);
     }
