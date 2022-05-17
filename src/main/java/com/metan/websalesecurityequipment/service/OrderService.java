@@ -16,5 +16,7 @@ public interface OrderService {
 
     void deleteOrder(String order);
     String getLastId();
+
+    void completeOrder(String orderId);
 }
 

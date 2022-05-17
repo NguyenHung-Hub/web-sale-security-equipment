@@ -105,6 +105,11 @@
                                             style="background:#D70018;color:#fff !important;"
                                             th:deleteId="${Order.orderId}">Hủy đơn
                                     </button>
+                                    <button th:if="${#strings.toString(Order.orderStatus) == 'SHIPPING'}"
+                                            type="button" class="mb-3 btn complete btn-danger"
+                                            style="background:#D70018;color:#fff !important;"
+                                            th:completeId="${Order.orderId}">Đã nhận hàng
+                                    </button>
                                 </div>
                             </div>
                         </th:block>

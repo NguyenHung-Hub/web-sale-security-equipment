@@ -44,7 +44,6 @@ public class CartRestController {
 
         User user = userService.getUserByEmail(myUserDetailName);
         Cart cart = user.getCart();;
-//        User user = userRepository.findById(3L).get();
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setPhoneNumber(phoneNumber);
@@ -57,8 +56,6 @@ public class CartRestController {
     public String delete(
             @PathVariable("productId") String productId)
     {
-//        User user = userRepository.findById(2L).get();
-//        Cart cart = user.getCart();
         Product product= productService.findProductById(productId);
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String myUserDetailName = ((MyUserDetails) principal).getUsername();
@@ -89,16 +86,26 @@ public class CartRestController {
     public String deleteOrder(
             @PathVariable("orderId") String orderId)
     {
-//        User user = userRepository.findById(2L).get();
-//        Cart cart = user.getCart();
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String myUserDetailName = ((MyUserDetails) principal).getUsername();
 
         User user = userService.getUserByEmail(myUserDetailName);
-
-//        User user = userRepository.findById(3L).get();
-//        Cart cart = user.getCart();
         orderService.deleteOrder(orderId);
+        return orderId;
+    };
+
+    @PostMapping("/complete/order/{orderId}")
+    public String completeOrder(
+            @PathVariable("orderId") String orderId)
+    {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String myUserDetailName = ((MyUserDetails) principal).getUsername();
+
+        User user = userService.getUserByEmail(myUserDetailName);
+        orderService.completeOrder(orderId);
+
+        System.out.println(orderId);
+
         return orderId;
     };
 
@@ -113,8 +120,6 @@ public class CartRestController {
 
         User user = userService.getUserByEmail(myUserDetailName);
         Cart cart = user.getCart();
-//        User user = userRepository.findById(3L).get();
-//        Cart cart = user.getCart();
         double subtotal = cartService.updateQuantity(quantity,productId,cart.getCartId());
         return subtotal;
     };

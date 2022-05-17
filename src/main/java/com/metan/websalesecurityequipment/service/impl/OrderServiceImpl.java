@@ -53,4 +53,9 @@ public class OrderServiceImpl implements OrderService {
 
         return id;
     }
+
+    @Override
+    public void completeOrder(String orderId) {
+        orderRepository.completeOrder(orderId);
+    }
 }

@@ -28,5 +28,8 @@ public interface OrderRepository extends JpaRepository<Order, String> {
     public void deleteById(String id);
 
     public List<Order> findAll();
+    @Modifying
+    @Query(value = "update orders set order_status = \"COMPLETED\" where order_id =?1", nativeQuery = true)
+    void completeOrder(String orderId);
 
 }

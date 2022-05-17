@@ -17,10 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "/cart")
@@ -100,6 +98,23 @@ public class CartController {
 
         List<Order> Oders = user.getOrders();
         List<Order> NewOders = new ArrayList<>();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+
+        for(int i = 0 ;i< Oders.size();i++){
+            Date dateAfter7Days = Oders.get(i).getDueDate();
+            Calendar c = Calendar.getInstance();
+            c.setTime(dateAfter7Days);
+            c.add(Calendar.DATE, 7);
+            dateAfter7Days = c.getTime();
+
+            if(dateAfter7Days.before(new Date())){
+                Oders.get(i).setOrderStatus(OrderStatus.COMPLETED);
+            }
+
+            orderService.save(Oders.get(i));
+        }
+
         if(type.equalsIgnoreCase("ALL")){
             NewOders = Oders;
         }else{
@@ -130,8 +145,6 @@ public class CartController {
 
         User user = userService.getUserByEmail(myUserDetailName);
         Cart cart = cartService.findByUser(user.getUserId());
-//        User user = userRepository.findById(3L).get();
-//        Cart cart = user.getCart();
         if(selected==""){
             return "redirect:/cart";
         }
@@ -159,8 +172,6 @@ public class CartController {
 
         User user = userService.getUserByEmail(myUserDetailName);
         Cart cart = cartService.findByUser(user.getUserId());
-//        User user = userRepository.findById(3L).get();
-//        Cart cart = user.getCart();
         String body ="Đơn hàng của bạn bao gồm : \n";
 
         String id = orderService.getLastId();
@@ -198,7 +209,6 @@ public class CartController {
         order.setTotal(total);
         orderService.save(order);
 
-        System.out.println(body);
         emailSenderService.sendEmail(
                 user.getEmail(),
                 "Đơn hàng " + order.getOrderId() + " đã được đặt",
