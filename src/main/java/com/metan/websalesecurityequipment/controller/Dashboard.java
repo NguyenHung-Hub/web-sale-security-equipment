@@ -216,21 +216,26 @@ public class Dashboard {
 
     @PostMapping(value = "/product/update")
     public String updateProduct(@ModelAttribute("product") Product p, @RequestParam(name = "thumbnail-image", required = false) MultipartFile thumbnail, @RequestParam(name = "backdrops", required = false) MultipartFile[] backdrops, @RequestParam(name = "discount") String discount) {
-        Product product = productService.findProductById(p.getProductId());
+        System.out.println("id la :"+p.getProductId());
 
-        if (!thumbnail.getOriginalFilename().trim().equals("")) {
+        Product product = productService.findProductById(p.getProductId());
+        System.out.println("Ảnh thumbnail: " + thumbnail.getOriginalFilename().trim());
+
+        if (!thumbnail.getOriginalFilename().trim().isBlank()) {
+            System.out.println(thumbnail.getOriginalFilename().trim().isBlank());
             String fileName = awsService.save(thumbnail);
             if (product.getThumbnail() != null && !product.getThumbnail().trim().equals("")) {
                 awsService.delete(product.getThumbnail().replace("https://chinh1506.s3.amazonaws.com/", "").trim());
             }
             p.setThumbnail("https://chinh1506.s3.amazonaws.com/" + fileName);
+            product.setThumbnail(p.getThumbnail());
         }
 
         List<ProductBackdrop> productBackdrops = product.getProductBackdrops();
         for (int i = 0; i < backdrops.length; i++) {
             if (!backdrops[i].getOriginalFilename().trim().equals("")) {
                 String fileName = awsService.save(backdrops[i]);
-                if (productBackdrops.get(i) != null) {
+                if (productBackdrops.size()-1>=i  && productBackdrops.get(i) != null) {
                     if (productBackdrops.get(i).getFilePath() != null && !productBackdrops.get(i).getFilePath().trim().equals("")) {
                         awsService.delete(productBackdrops.get(i).getFilePath().replace("https://chinh1506.s3.amazonaws.com/", "").trim());
                     }
@@ -244,7 +249,6 @@ public class Dashboard {
         }
         String[] discountP = discount.split("%");
         int discountT = Integer.parseInt(discountP[0]);
-        product.setThumbnail(p.getThumbnail());
         product.setLongDesc(p.getLongDesc());
         product.setShortDesc(p.getShortDesc());
         product.setName(p.getName());

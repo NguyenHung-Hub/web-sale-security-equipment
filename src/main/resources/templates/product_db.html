@@ -127,12 +127,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group-modify">
-                                    <label>Mã sản phẩm</label>
-                                    <input type="text" class="form-control" name="productId" th:value="${product.productId}" readonly disabled>
+                                    <label >Mã sản phẩm</label>
+                                    <input type="text" th:value="${product.productId}" class="form-control" disabled="disabled">
+                                    <input type="hidden" class="form-control" id="productId" name="productId" th:value="${product.productId}" >
                                 </div>
                                 <div class="form-group-modify">
-                                    <label>Tên sản phẩm</label>
-                                    <input type="text" class="form-control" name="name" th:value="${product.name}" readonly disabled>
+                                    <label >Tên sản phẩm</label>
+                                    <input type="text" class="form-control" name="name" th:value="${product.name}" readonly>
                                 </div>
                                 <div class="form-group-modify">
                                     <label>Tiêu đề</label>
