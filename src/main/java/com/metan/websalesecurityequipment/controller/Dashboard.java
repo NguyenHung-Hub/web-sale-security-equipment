@@ -216,6 +216,8 @@ public class Dashboard {
 
     @PostMapping(value = "/product/update")
     public String updateProduct(@ModelAttribute("product") Product p, @RequestParam(name = "thumbnail-image", required = false) MultipartFile thumbnail, @RequestParam(name = "backdrops", required = false) MultipartFile[] backdrops, @RequestParam(name = "discount") String discount) {
+        System.out.println("id la :"+p.getProductId());
+
         Product product = productService.findProductById(p.getProductId());
 
         if (!thumbnail.getOriginalFilename().trim().equals("")) {
@@ -230,7 +232,7 @@ public class Dashboard {
         for (int i = 0; i < backdrops.length; i++) {
             if (!backdrops[i].getOriginalFilename().trim().equals("")) {
                 String fileName = awsService.save(backdrops[i]);
-                if (productBackdrops.get(i) != null) {
+                if (productBackdrops.size()-1>=i  && productBackdrops.get(i) != null) {
                     if (productBackdrops.get(i).getFilePath() != null && !productBackdrops.get(i).getFilePath().trim().equals("")) {
                         awsService.delete(productBackdrops.get(i).getFilePath().replace("https://chinh1506.s3.amazonaws.com/", "").trim());
                     }

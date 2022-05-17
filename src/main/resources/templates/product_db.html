@@ -122,18 +122,18 @@
                                     </div>
                                     <div class="col-6">
                                         <input th:id="${'load-thumbnail-' + product.productId}" hidden type="file"
-                                               accept="image/gif, image/jpeg, image/png" name="thumbnail-image"
-                                               required>
+                                               accept="image/gif, image/jpeg, image/png" name="thumbnail-image">
                                         <label th:for="${'load-thumbnail-' + product.productId}" class="link">Sửa hình ảnh</label>
                                     </div>
                                 </div>
                                 <div class="form-group-modify">
-                                    <label for="">Mã sản phẩm</label>
-                                    <input type="text" class="form-control" name="productId" th:value="${product.productId}" readonly disabled>
+                                    <label >Mã sản phẩm</label>
+                                    <input type="text" th:value="${product.productId}" class="form-control" disabled="disabled">
+                                    <input type="hidden" class="form-control" id="productId" name="productId" th:value="${product.productId}" >
                                 </div>
                                 <div class="form-group-modify">
-                                    <label for="">Tên sản phẩm</label>
-                                    <input type="text" class="form-control" name="name" th:value="${product.name}" readonly disabled>
+                                    <label >Tên sản phẩm</label>
+                                    <input type="text" class="form-control" name="name" th:value="${product.name}" readonly>
                                 </div>
                                 <div class="form-group-modify">
                                     <label for="title">Tiêu đề</label>
