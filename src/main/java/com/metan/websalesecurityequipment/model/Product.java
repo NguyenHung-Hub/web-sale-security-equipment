@@ -45,11 +45,11 @@ class Product {
     @JsonIncludeProperties("discountPercent")
     private List<ProductDiscount> productDiscounts;
     private float discountPercentBase;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "brand_id")
     @JsonManagedReference
     private Brand brand;
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @JsonBackReference
     private List<OrderItem> orderItems;
     @Column(nullable = false, unique = true)
@@ -63,9 +63,9 @@ class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductAttribute> productAttributes = new ArrayList<>();
     @OneToMany(mappedBy = "product")
-    @JsonBackReference
+    @JsonManagedReference
     private List<ProductReview> productReviews;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     private List<ProductBackdrop> productBackdrops;
     @ManyToOne

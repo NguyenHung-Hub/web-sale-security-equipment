@@ -9,7 +9,7 @@
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" th:href="@{/}">Metan team</a>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-            <a class="nav-link" href="#">Đăng xuất</a>
+            <a class="nav-link" th:href="@{/logout}">Đăng xuất</a>
         </li>
     </ul>
 </nav>
@@ -31,8 +31,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/dashboard/order}"
-                   th:classappend="${#httpServletRequest.getRequestURI() == '/dashboard/order' ? 'active':''}">
+                <a class="nav-link" th:href="@{/dashboard/orders}"
+                   th:classappend="${#httpServletRequest.getRequestURI() == '/dashboard/orders' ? 'active':''}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                          stroke-linejoin="round" class="feather feather-file">

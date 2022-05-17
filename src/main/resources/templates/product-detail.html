@@ -15,39 +15,45 @@
     <div id="Detail" class="row">
         <!-- ảnh -->
         <div class="col-6 border-content-img">
-            <div id="CarouselDetail" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#CarouselDetail" data-slide-to="0" class="active"></li>
-                    <li data-target="#CarouselDetail" data-slide-to="1"></li>
-                    <li data-target="#CarouselDetail" data-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner scale">
+<!--            <div id="CarouselDetail" class="carousel slide" data-ride="carousel">-->
+<!--                <ol class="carousel-indicators">-->
+<!--                    <li data-target="#CarouselDetail" data-slide-to="0" class="active"></li>-->
+<!--                    <li data-target="#CarouselDetail" data-slide-to="1"></li>-->
+<!--                    <li data-target="#CarouselDetail" data-slide-to="2"></li>-->
+<!--                </ol>-->
+<!--                <div class="carousel-inner scale">-->
 
-                    <div class="carousel-item active w-75">
-                        <img th:src="${product.thumbnail}"
-                             class="img-fluid position-relative " alt="Los Angeles" style="width:100%;">
-                    </div>
+<!--                    <div class="carousel-item active w-75">-->
+<!--                        <img th:src="${product.thumbnail}"-->
+<!--                             class="img-fluid position-relative " alt="Los Angeles" style="width:100%;">-->
+<!--                    </div>-->
 
-                    <div class="carousel-item w-75">
-                        <img th:src="${product.thumbnail}"
-                             class="img-fluid  position-relative " alt="Chicago" style="width:100%;">
-                    </div>
+<!--                    <div class="carousel-item w-75">-->
+<!--                        <img th:src="${product.thumbnail}"-->
+<!--                             class="img-fluid  position-relative " alt="Chicago" style="width:100%;">-->
+<!--                    </div>-->
 
-                    <div class="carousel-item w-75">
-                        <img th:src="${product.thumbnail}"
-                             class="img-fluid position-relative" alt="New York" style="width:100%;">
+<!--                    <div class="carousel-item w-75">-->
+<!--                        <img th:src="${product.thumbnail}"-->
+<!--                             class="img-fluid position-relative" alt="New York" style="width:100%;">-->
 
-                    </div>
+<!--                    </div>-->
 
-                </div>
+<!--                </div>-->
 
-                <!-- Left and right controls -->
-                <a class="left carousel-control" href="#CarouselDetail" data-slide="prev">
-                    <span class="carousel-control-prev-icon"></span>
-                </a>
-                <a class="right carousel-control" href="#CarouselDetail" data-slide="next">
-                    <span class="carousel-control-next-icon"></span>
-                </a>
+<!--                &lt;!&ndash; Left and right controls &ndash;&gt;-->
+<!--                <a class="left carousel-control" href="#CarouselDetail" data-slide="prev">-->
+<!--                    <span class="carousel-control-prev-icon"></span>-->
+<!--                </a>-->
+<!--                <a class="right carousel-control" href="#CarouselDetail" data-slide="next">-->
+<!--                    <span class="carousel-control-next-icon"></span>-->
+<!--                </a>-->
+<!--            </div>-->
+            <div class="backdrops">
+                <img th:each="productBackdrop : ${product.productBackdrops}" th:src="${productBackdrop.filePath}" src="" alt="">
+            </div>
+            <div class="thumbnail-backdrops mt-4">
+                <img th:each="productBackdrop : ${product.productBackdrops}" class="img-thumbnail" th:src="${productBackdrop.filePath}" src="" alt="">
             </div>
         </div>
         <!-- thông tin cơ bản -->
@@ -89,9 +95,9 @@
                             </button>
                         </div>
                     </form>
-                    <div class="ml-2 ">
-                        <a id="btnTym" type="button" class="btn btn-dark btn-cart"><span class="fa fa-heart tym"></span></a>
-                    </div>
+<!--                    <div class="ml-2 ">-->
+<!--                        <a id="btnTym" type="button" class="btn btn-dark btn-cart"><span class="fa fa-heart tym"></span></a>-->
+<!--                    </div>-->
                 </div>
                 <div class="mt-5 font-14">
                     <p>Số sản phẩm có sẵn: <span id="spQuantity" th:value="${product.quantity}" >[[${product.quantity}]]</span></p>
@@ -222,7 +228,6 @@
             <!-- form đánh giá -->
             <div id="FormDanhGia" class="mt-5">
                 <h2 class="background-red p-3">THÊM ĐÁNH GIÁ MỚI</h2>
-
                 <form class="form-group" method="post" th:action="@{/product/reviews}" th:object="${reviewProduct} ">
                     <div class="rating mt-5 mb-5">
                         <input th:field="*{rating}" type="radio" id="star5" name="rate" value="5"/>
@@ -240,8 +245,8 @@
                     <input type="hidden" name="title" id="title" th:value="${product.title}"
                            class="form-control mt-3 font-14" placeholder="Tiêu đề">
                     <textarea th:field="*{content}" type="text" class="form-control mt-3 font-14"
-                              placeholder="Đánh giá chi tiết"></textarea>
-                    <input type="submit" class="btn btn-dark mt-3 font-14" value="Gửi">
+                              placeholder="Thêm đánh giá của bạn."></textarea>
+                    <input type="submit" class="btn btn-dark mt-3 font-14 " style="height: 36px;width: 80px" value="Gửi">
 
                 </form>
                 <th:block th:if="${param['true']}">
@@ -252,6 +257,11 @@
                 <th:block th:if="${param['false']}">
                     <script>
                         alert("Không thể thêm đánh giá, đã xảy ra lỗi!!!")
+                    </script>
+                </th:block>
+                <th:block th:if="${param['nopay']}">
+                    <script>
+                        alert("Để đánh giá bạn phải mua sản phẩm trước !!!")
                     </script>
                 </th:block>
 

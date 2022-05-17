@@ -74,7 +74,7 @@ public class DetailController {
         productReview.setProduct(product);
 
         //review
-        model.addAttribute("reviewProduct",productReview);
+        model.addAttribute("reviewProduct", productReview);
         model.addAttribute("reviews", reviewService.findByProductId(productId, pageable));
         model.addAttribute("rating", (double) rating / ((productReviews.size() == 0) ? 1 : productReviews.size()));
         model.addAttribute("product", product);
@@ -82,19 +82,24 @@ public class DetailController {
         return "product-detail";
 
     }
+
     @PostMapping(value = "/reviews")
-    public String addReview(@ModelAttribute("productReview") ProductReview productReview){
+    public String addReview(@ModelAttribute("productReview") ProductReview productReview) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
-        if (productReview.getContent()==null){
+        if (productReview.getContent() == null) {
             productReview.setContent("");
         }
-       Product product= productService.findProductById(productId);
-       productReview.setProduct(product);
-       productReview.setUser(userDetails.getUser());
-       ProductReview s = reviewService.save(productReview);
+        Product product = productService.findProductById(productId);
+        if (productService.checkBuyCompletedProductByUser(product.getProductId(), userDetails.getUser().getUserId())) {
+            productReview.setProduct(product);
+            productReview.setUser(userDetails.getUser());
+            ProductReview s = reviewService.save(productReview);
+            return "redirect:/product/detail/" + product.getSlug() + "?" + !(s == null);
+        }
+        return "redirect:/product/detail/" + product.getSlug() + "?nopay";
 
-       return "redirect:/product/detail/"+product.getSlug()+"?"+!(s==null);
+
     }
 
     @PostMapping(value = "/api/productReviews")
@@ -105,20 +110,22 @@ public class DetailController {
         Pageable pageable = PageRequest.of(req.getPage(), 5, sortable);
         return reviewService.findByProductId(productId, pageable);
     }
-    @PostMapping(value = "/addToCart")
-    public String addToCart(@RequestParam("quantity") int quantity){Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
-        MyUserDetails userDetails= (MyUserDetails) authentication.getPrincipal();
-        User user= userDetails.getUser();
-        Product product= productService.findProductById(productId);
 
-        Cart cart= user.getCart();
-        if(cart == null){
+    @PostMapping(value = "/addToCart")
+    public String addToCart(@RequestParam("quantity") int quantity) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+        User user = userDetails.getUser();
+        Product product = productService.findProductById(productId);
+
+        Cart cart = user.getCart();
+        if (cart == null) {
             cartService.createCartNewUser(user);
-            cart= cartService.findByUser(user.getUserId());
+            cart = cartService.findByUser(user.getUserId());
         }
 //        List<CartItem> cartItems = cart.getCartItems();
         List<CartItem> cartItems2 = new ArrayList<>();
-        CartItem cartItem= new CartItem();
+        CartItem cartItem = new CartItem();
         cartItem.setCart(cart);
         cartItem.setProduct(product);
         cartItem.setQuantity(quantity);
@@ -128,7 +135,7 @@ public class DetailController {
         cartItems2.add(cartItem);
         cart.setCartItems(cartItems2);
 
-        cart=cartService.saveOrUpdateCart(cart);
+        cart = cartService.saveOrUpdateCart(cart);
         return "redirect:/cart";
     }
 }

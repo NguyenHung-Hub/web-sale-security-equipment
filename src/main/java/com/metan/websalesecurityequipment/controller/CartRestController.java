@@ -103,7 +103,7 @@ public class CartRestController {
     };
 
     @PostMapping("/update/{productId}/{quantity}")
-    public String update(
+    public double update(
             @PathVariable("productId") String productId,
             @PathVariable("quantity") int quantity)
     {
@@ -116,7 +116,7 @@ public class CartRestController {
 //        User user = userRepository.findById(3L).get();
 //        Cart cart = user.getCart();
         double subtotal = cartService.updateQuantity(quantity,productId,cart.getCartId());
-        return String.valueOf(subtotal);
+        return subtotal;
     };
 
     @GetMapping("/order/{type}")

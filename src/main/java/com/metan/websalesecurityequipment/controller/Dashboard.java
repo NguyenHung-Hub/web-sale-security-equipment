@@ -1,8 +1,13 @@
 package com.metan.websalesecurityequipment.controller;
 
 import com.metan.websalesecurityequipment.model.*;
+import com.metan.websalesecurityequipment.model.request.OrderRequest;
 import com.metan.websalesecurityequipment.service.*;
 import org.springframework.beans.support.PagedListHolder;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -149,42 +154,63 @@ public class Dashboard {
         List<Brand> brands = brandService.findAll();
         model.addAttribute("brands", brands);
 
-        long lastId = brandService.getLastId();
-        model.addAttribute("newId", (lastId+1));
+        long newId = brandService.getLastId() + 1;
+        model.addAttribute("newId", newId);
+        System.out.println("\n\nnewId: " + newId);
 
 
         return "brand_db";
     }
 
-    @GetMapping("/order")
-    public String order(Model model) {
-
-        List<Order> orders = orderService.findAll();
-//        System.out.println(orders.get(0).getContent());
+    @GetMapping("/orders")
+    public String showOrderPage(Model model,
+                                @RequestParam(name = "status", required = false, defaultValue = "PROCESSING") String status,
+                                @RequestParam(value = "page", required = false, defaultValue = "0") int page) {
+        Sort sort = Sort.by("modified_at").descending();
+        Pageable pageable = PageRequest.of(page, 10, sort);
+        Page<Order> orders = orderService.findOrderByStatus(status, pageable);
         model.addAttribute("orders", orders);
         return "order_db";
     }
 
-
-    @PostMapping(value = "/product/modal")
-    public String saveProduct(@ModelAttribute("product") Product p,
-                              @RequestParam("image") MultipartFile img) {
-        String fileName = awsService.save(img);
-        p.setThumbnail("https://chinh1506.s3.amazonaws.com/" + fileName);
-        p.setCategory(categoryService.findCategoryByCategoryId(p.getCategory().getCategoryId()));
-        p.setTitle(p.getCategory().getName() + " " + p.getName());
-        System.out.println(p.getCategory().getCategoryId());
-        p.setCreatedAt(new Date());
-        p.setModifiedAt(new Date());
-
-        float discount = p.getDiscountPercentBase()/100;
-        p.setDiscountPercentBase(discount);
-
-        p.setSlug(toSlug(p.getTitle()));
-        productService.saveProduct(p);
-        System.out.println("Da them");
-        return "redirect:/dashboard/product";
+    @PostMapping("/orders")
+    @ResponseBody
+    public Page<Order> order(Model model, @RequestBody OrderRequest req) {
+        Sort sort = Sort.by("modified_at").descending();
+        Pageable pageable = PageRequest.of(req.getCurrentPage(), 10, sort);
+        Page<Order> orders = orderService.findOrderByStatus(req.getStatus(), pageable);
+        return orders;
     }
+
+    @GetMapping("/orders/{status}/{id}")
+    public String setStatusOrder(@PathVariable(name = "status") String status,
+                                 @PathVariable(name = "id") String id) {
+        System.out.println("hehe chinh ne"+OrderStatus.valueOf(status));
+        Order order= orderService.findById(id);
+        order.setOrderStatus(OrderStatus.valueOf(status));
+        orderService.save(order);
+        return "redirect:/dashboard/orders";
+    }
+
+//    @PostMapping(value = "/product/modal")
+//    public String saveProduct(@ModelAttribute("product") Product p,
+//                              @RequestParam("image") MultipartFile img) {
+//        String fileName = awsService.save(img);
+//        p.setThumbnail("https://chinh1506.s3.amazonaws.com/" + fileName);
+//        p.setCategory(categoryService.findCategoryByCategoryId(p.getCategory().getCategoryId()));
+//        p.setTitle(p.getCategory().getName() + " " + p.getName());
+//        System.out.println(p.getCategory().getCategoryId());
+//        p.setCreatedAt(new Date());
+//        p.setModifiedAt(new Date());
+//
+//        float discount = p.getDiscountPercentBase() / 100;
+//        p.setDiscountPercentBase(discount);
+//
+//        p.setSlug(toSlug(p.getTitle()));
+//        productService.saveProduct(p);
+//        System.out.println("Da them");
+//        return "redirect:/dashboard/product";
+//    }
 
     @PostMapping(value = "/product/update")
     public String updateProduct(@ModelAttribute("product") Product p,
@@ -194,7 +220,7 @@ public class Dashboard {
 
         if (!img.getOriginalFilename().trim().equals("")) {
             String fileName = awsService.save(img);
-            if (product.getThumbnail()!= null && !product.getThumbnail().trim().equals("")) {
+            if (product.getThumbnail() != null && !product.getThumbnail().trim().equals("")) {
                 awsService.delete(product.getThumbnail().replace("https://chinh1506.s3.amazonaws.com/", "").trim());
             }
             p.setThumbnail("https://chinh1506.s3.amazonaws.com/" + fileName);
@@ -206,19 +232,19 @@ public class Dashboard {
         product.setName(p.getName());
         product.setPrice(p.getPrice());
         product.setQuantity(p.getQuantity());
-        product.setTitle(p.getName()+" "+ p.getProductId());
+        product.setTitle(p.getName() + " " + p.getProductId());
         productService.saveProduct(product);
         System.out.println("Da sua");
         return "redirect:/dashboard/product";
     }
 
-    @GetMapping(value = "/product/{id}/delete")
-    public String deleteProduct(@PathVariable("id") String id) {
-        System.out.println("\n\n\n delete: " + id);
-
-        productService.deleteProduct(productService.findProductById(id));
-        return "redirect:/dashboard/product";
-    }
+//    @GetMapping(value = "/product/{id}/delete")
+//    public String deleteProduct(@PathVariable("id") String id) {
+//        System.out.println("\n\n\n delete: " + id);
+//
+//        productService.deleteProduct(productService.findProductById(id));
+//        return "redirect:/dashboard/product";
+//    }
 
     @GetMapping("/product/category")
     public String showAddProductDemo(@ModelAttribute Product product, Model model) {
@@ -255,15 +281,25 @@ public class Dashboard {
     }
 
     @PostMapping("/product/add-product")
-    public String addProduct(@ModelAttribute Product product, @RequestParam(value = "thumbnail-image", required = false) MultipartFile thumbnail) {
+    public String addProduct(@ModelAttribute Product product, @RequestParam(value = "thumbnail-image", required = false) MultipartFile thumbnail, @RequestParam(value = "backdrops", required = false) MultipartFile[] backdrops, @RequestParam("discount") int discount) {
         String fileName = awsService.save(thumbnail);
         product.setThumbnail("https://chinh1506.s3.amazonaws.com/" + fileName);
         product.setBrand(brandService.findBrandById(product.getBrand().getBrandId()));
         product.setCreatedAt(new Date());
         product.setModifiedAt(new Date());
+        product.setDiscountPercentBase(discount * 1f / 100);
         for (ProductAttribute productAttribute: product.getProductAttributes()) {
             productAttribute.setProduct(product);
         }
+
+        List<ProductBackdrop> productBackdrops = new ArrayList<>();
+        for (MultipartFile multipartFile: backdrops) {
+            ProductBackdrop productBackdrop = new ProductBackdrop();
+            String fileNameBackdrop = awsService.save(multipartFile);
+            productBackdrop.setFilePath("https://chinh1506.s3.amazonaws.com/" + fileNameBackdrop);
+            productBackdrops.add(productBackdrop);
+        }
+        product.setProductBackdrops(productBackdrops);
         productService.saveProduct(product);
         return "redirect:/dashboard/product";
     }

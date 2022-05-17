@@ -2,7 +2,6 @@ package com.metan.websalesecurityequipment.controller;
 
 import com.metan.websalesecurityequipment.model.*;
 import com.metan.websalesecurityequipment.model.request.ProductRequestPageable;
-import com.metan.websalesecurityequipment.repository.OrderRepository;
 import com.metan.websalesecurityequipment.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,14 +9,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping
@@ -42,7 +38,7 @@ public class SearchController {
 
 
     @GetMapping(value = "search")
-    public String showSearch1(ModelMap model,  @RequestParam(name = "name",defaultValue = "",required = false) String name,
+    public String showSearch1(ModelMap model,  @RequestParam(name = "keyword",defaultValue = "",required = false) String name,
                               @RequestParam("page") Optional<Integer> page,
                               @RequestParam("size") Optional<Integer> size) {
 
@@ -95,19 +91,6 @@ public class SearchController {
         return resultPage;
     }
 
-    public HashMap<String, Double> getAvgRating(List<Product> products) {
-        HashMap<String, Double> listRating = new HashMap<>();
-        List<ProductReview> reviews = new ArrayList<>();
-        for (Product p : products) {
-            Double avgRating = 0.0;
-            reviews = productReviewService.findByProductId(p.getProductId());
-            for (ProductReview pr : reviews) {
-                avgRating += pr.getRating();
-            }
-            listRating.put(p.getProductId(), avgRating / (reviews.size() == 0 ? 1 : reviews.size()));
-        }
-        return listRating;
-    }
 
     public void display(ModelMap model, String name,
                         Optional<Integer> page, Optional<Integer> size,
@@ -143,7 +126,6 @@ public class SearchController {
         model.addAttribute("categoriesLast", categoriesLast);
         model.addAttribute("productPage", resultPage);
         model.addAttribute("listQuan", getSumQuan(productService.findAll()));
-        model.addAttribute("listRating", getAvgRating(productService.findAll()));
     }
 
     public HashMap<String, Integer> getSumQuan(List<Product> products) {

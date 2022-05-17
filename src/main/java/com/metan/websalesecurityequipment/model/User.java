@@ -1,6 +1,7 @@
 package com.metan.websalesecurityequipment.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,8 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 public
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "userId")
@@ -46,6 +46,7 @@ class User implements Serializable {
     @JsonBackReference
     private Cart cart;
     @OneToMany(mappedBy = "user")
+    @JsonBackReference
     private List<Order> orders;
     @Column(name = "verification_code",length = 64)
     private String verificationCode;
@@ -55,7 +56,6 @@ class User implements Serializable {
     private AuthenticationProvider authProvider;
     @Embedded
     private Address address;
-
     @Transient
     public String getFullName() {
         return getFirstName() + " " + getLastName();
