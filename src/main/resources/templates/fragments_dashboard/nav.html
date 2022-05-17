@@ -1,184 +1,182 @@
 <!DOCTYPE html>
-<html
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-    xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
-    lang="en"
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en">
+<head></head>
+<body>
+<nav
+        th:fragment="header"
+        class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow justify-content-between"
 >
-    <head> </head>
-    <body>
-        <nav
-            th:fragment="header"
-            class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow justify-content-between"
-        >
-            <a
-                class="navbar-brand col-sm-3 col-md-2 mr-0"
-                th:href="@{/dashboard}"
-                >Metan team</a
-            >
-            <ul class="navbar-nav px-3">
-                <li class="nav-item text-nowrap">
-                    <a class="nav-link" th:href="@{/logout}">Đăng xuất</a>
-                </li>
-            </ul>
-        </nav>
+    <a
+            class="navbar-brand col-sm-3 col-md-2 mr-0"
+            th:href="@{/dashboard}"
+    >Metan team</a
+    >
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" th:href="@{/logout}">Đăng xuất</a>
+        </li>
+    </ul>
+</nav>
 
-        <nav
-            th:fragment="sidebar"
-            class="col-md-2 d-none d-md-block bg-light sidebar"
-        >
-            <div class="sidebar-sticky">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a
-                            class="nav-link"
-                            th:href="@{/dashboard/product}"
-                            th:classappend="${#httpServletRequest.getRequestURI().indexOf('/dashboard/product') != -1 ? 'active':''}"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="feather feather-home"
-                            >
-                                <path
-                                    d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
-                                ></path>
-                                <polyline
-                                    points="9 22 9 12 15 12 15 22"
-                                ></polyline>
-                            </svg>
-                            Sản phẩm
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a
-                            class="nav-link"
-                            th:href="@{/dashboard/orders}"
-                            th:classappend="${#httpServletRequest.getRequestURI() == '/dashboard/orders' ? 'active':''}"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="feather feather-file"
-                            >
-                                <path
-                                    d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"
-                                ></path>
-                                <polyline points="13 2 13 9 20 9"></polyline>
-                            </svg>
-                            Hóa đơn
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a
-                            class="nav-link"
-                            th:href="@{/dashboard/brand}"
-                            th:classappend="${#httpServletRequest.getRequestURI() == '/dashboard/brand' ? 'active':''}"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="feather feather-shopping-cart"
-                            >
-                                <circle cx="9" cy="21" r="1"></circle>
-                                <circle cx="20" cy="21" r="1"></circle>
-                                <path
-                                    d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
-                                ></path>
-                            </svg>
-                            Thương hiệu
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="feather feather-users"
-                            >
-                                <path
-                                    d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
-                                ></path>
-                                <circle cx="9" cy="7" r="4"></circle>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                            </svg>
-                            Khách hàng
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" target="_blank" th:href="@{/}">
-                            <i class="fab fa-browser"></i>
-                            Website
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+<nav
+        th:fragment="sidebar"
+        class="col-md-2 d-none d-md-block bg-light sidebar"
+>
+    <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a
+                        class="nav-link"
+                        th:href="@{/dashboard/product}"
+                        th:classappend="${#httpServletRequest.getRequestURI().indexOf('/dashboard/product') != -1 ? 'active':''}"
+                >
+                    <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="feather feather-home"
+                    >
+                        <path
+                                d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+                        ></path>
+                        <polyline
+                                points="9 22 9 12 15 12 15 22"
+                        ></polyline>
+                    </svg>
+                    Sản phẩm
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a
+                        class="nav-link"
+                        th:href="@{/dashboard/orders}"
+                        th:classappend="${#httpServletRequest.getRequestURI() == '/dashboard/orders' ? 'active':''}"
+                >
+                    <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="feather feather-file"
+                    >
+                        <path
+                                d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"
+                        ></path>
+                        <polyline points="13 2 13 9 20 9"></polyline>
+                    </svg>
+                    Hóa đơn
+                </a>
+            </li>
+            <li class="nav-item">
+                <a
+                        class="nav-link"
+                        th:href="@{/dashboard/brand}"
+                        th:classappend="${#httpServletRequest.getRequestURI() == '/dashboard/brand' ? 'active':''}"
+                >
+                    <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="feather feather-shopping-cart"
+                    >
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path
+                                d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                        ></path>
+                    </svg>
+                    Thương hiệu
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="feather feather-users"
+                    >
+                        <path
+                                d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
+                        ></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    Khách hàng
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" target="_blank" th:href="@{/}">
+                    <i class="fab fa-browser"></i>
+                    Website
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
-        <!--<div th:fragment="nav" class="menu-modify">-->
-        <!--    <nav class="nav flex-column nav-pills nav-fill  mx-0 ">-->
-        <!--        <li class="nav-item">-->
-        <!--            <a class="nav-link text-light text-left py-3 pl-5"-->
-        <!--               th:href="@{/dashboard/product}"-->
-        <!--               th:classappend="${#httpServletRequest.getRequestURI().indexOf('/dashboard/product') != -1 ? 'active':''}"-->
-        <!--            >Sản phẩm</a>-->
-        <!--        </li>-->
-        <!--        <li class="nav-item ">-->
-        <!--            <a class="nav-link text-light text-left py-3 pl-5"-->
-        <!--               th:href="@{/dashboard/brand}"-->
-        <!--               th:classappend="${#httpServletRequest.getRequestURI() == '/dashboard/brand' ? 'active':''}"-->
-        <!--            >Thương hiệu</a>-->
-        <!--        </li>-->
-        <!--        <li class="nav-item">-->
-        <!--            <a class="nav-link text-light text-left py-3 pl-5" href="#">Danh mục</a>-->
-        <!--        </li>-->
-        <!--        <li class="nav-item">-->
-        <!--            <a class="nav-link text-light text-left py-3 pl-5"-->
-        <!--               th:href="@{/dashboard/order}"-->
-        <!--               th:classappend="${#httpServletRequest.getRequestURI() == '/dashboard/order' ? 'active':''}"-->
-        <!--            >Hóa đơn</a>-->
-        <!--        </li>-->
-        <!--        <li class="nav-item">-->
-        <!--            <a class="nav-link text-light text-left  py-3 pl-5" href="#">Khách hàng</a>-->
-        <!--        </li>-->
-        <!--        <li class="nav-item">-->
-        <!--            <a class="nav-link text-light text-left  py-3 pl-5" href="/" target="_blank">Website</a>-->
-        <!--        </li>-->
+<!--<div th:fragment="nav" class="menu-modify">-->
+<!--    <nav class="nav flex-column nav-pills nav-fill  mx-0 ">-->
+<!--        <li class="nav-item">-->
+<!--            <a class="nav-link text-light text-left py-3 pl-5"-->
+<!--               th:href="@{/dashboard/product}"-->
+<!--               th:classappend="${#httpServletRequest.getRequestURI().indexOf('/dashboard/product') != -1 ? 'active':''}"-->
+<!--            >Sản phẩm</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item ">-->
+<!--            <a class="nav-link text-light text-left py-3 pl-5"-->
+<!--               th:href="@{/dashboard/brand}"-->
+<!--               th:classappend="${#httpServletRequest.getRequestURI() == '/dashboard/brand' ? 'active':''}"-->
+<!--            >Thương hiệu</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--            <a class="nav-link text-light text-left py-3 pl-5" href="#">Danh mục</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--            <a class="nav-link text-light text-left py-3 pl-5"-->
+<!--               th:href="@{/dashboard/order}"-->
+<!--               th:classappend="${#httpServletRequest.getRequestURI() == '/dashboard/order' ? 'active':''}"-->
+<!--            >Hóa đơn</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--            <a class="nav-link text-light text-left  py-3 pl-5" href="#">Khách hàng</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--            <a class="nav-link text-light text-left  py-3 pl-5" href="/" target="_blank">Website</a>-->
+<!--        </li>-->
 
-        <!--        <li class="nav-item ">-->
-        <!--            <a class="nav-link text-light text-left py-3 pl-5" href="#" >Đăng xuất</a>-->
-        <!--        </li>-->
-        <!--    </nav>-->
-        <!--</div>-->
-    </body>
+<!--        <li class="nav-item ">-->
+<!--            <a class="nav-link text-light text-left py-3 pl-5" href="#" >Đăng xuất</a>-->
+<!--        </li>-->
+<!--    </nav>-->
+<!--</div>-->
+</body>
 </html>
