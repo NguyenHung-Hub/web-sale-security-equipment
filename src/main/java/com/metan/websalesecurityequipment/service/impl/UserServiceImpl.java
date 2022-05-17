@@ -17,6 +17,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.List;
 
 @Service
 @Transactional
@@ -145,6 +146,11 @@ public class UserServiceImpl implements UserService {
         user.setAuthProvider(authProvider);
 
         userRepository.save(user);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 
     private void encodePassword(User user) {

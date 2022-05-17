@@ -328,12 +328,33 @@ public class Dashboard {
         return "redirect:/dashboard/product";
     }
 
+<<<<<<< HEAD
     private String toSlug(String input) {
         String nowhitespace = WHITESPACE.matcher(input).replaceAll("-");
         String normalized = Normalizer.normalize(nowhitespace, Normalizer.Form.NFD);
         String slug = NONLATIN.matcher(normalized).replaceAll("");
         return slug.toLowerCase(Locale.ENGLISH);
     }
+=======
+    @GetMapping(value = "/user")
+    public String showUser(Model model) {
+
+        List<User> userList = userService.findAll();
+        model.addAttribute("users", userList);
+
+        return "user_db.html";
+    }
+
+    @GetMapping(value = "/category")
+    public String showCategory(Model model) {
+
+        List<Category> categories = categoryService.findAllParentCategory();
+        model.addAttribute("categories", categories);
+
+        return "category_db.html";
+    }
+
+>>>>>>> hung2
 
     private String generateId(String idCurrent, String role) {
         int i = role.length();
