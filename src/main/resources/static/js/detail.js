@@ -109,7 +109,11 @@ $(function () {
             case "danh-gia": {
                 $('#ThemThongTin').hide();//không, nhờ cái này
                 break;
+            } case "information": {
+                $('#ThemThongTin').hide();//không, nhờ cái này
+                break;
             }
+
         }
     })
 })
