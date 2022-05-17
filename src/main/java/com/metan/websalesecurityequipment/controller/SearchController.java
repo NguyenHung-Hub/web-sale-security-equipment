@@ -91,7 +91,6 @@ public class SearchController {
         return resultPage;
     }
 
-
     public void display(ModelMap model, String name,
                         Optional<Integer> page, Optional<Integer> size,
                         List<Brand> brands, List<Category> categories) {
