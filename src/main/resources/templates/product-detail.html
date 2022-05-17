@@ -60,17 +60,17 @@
         <div class="col-6 desc">
 
             <div>
-                <h2>[[${product.title}]]</h2>
-                <div class="font-14">
-                    <span class="text-dark"><del
+                <h1>[[${product.title}]]</h1>
+                <div class="font-20">
+                    <span class="text-dark font-20"><del
                             th:text="${#numbers.formatDecimal(product.price, 1,'DEFAULT',0, 'DEFAULT')}+ đ"></del></span>
-                    <span class="text-danger ml-1"
+                    <span class="text-danger ml-1 font-20"
                           th:text="${#numbers.formatDecimal(product.price - (product.price * (product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent)),3,'POINT',0,'POINT') + '&nbsp;₫'}"
                     >2.199.000 đ</span>
-                    <span class="bg-warning ml-1"
+                    <span class="bg-warning ml-1 font-20"
                           th:text="${'Giảm ' + #numbers.formatPercent((product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent), 1, 0)}"></span>
                 </div>
-                <div>
+                <div class="font-20">
                     <span class="fa fa-star" th:classappend="${rating>=1} ? 'checked-rating'"></span>
                     <span class="fa fa-star" th:classappend="${rating>=2} ? 'checked-rating'"></span>
                     <span class="fa fa-star" th:classappend="${rating>=3} ? 'checked-rating'"></span>
@@ -78,7 +78,7 @@
                     <span class="fa fa-star" th:classappend="${rating>=5} ? 'checked-rating'"></span>
                     <span th:text="'(' +${product.productReviews.size()}+ ' đánh giá)'"></span>
                 </div>
-                <div class="mt-5 font-14">
+                <div class="mt-5 font-16">
                     <p th:utext="${product.shortDesc}"></p>
                 </div>
                 <div class="row" style="margin-left: 0px">
@@ -99,7 +99,7 @@
 <!--                        <a id="btnTym" type="button" class="btn btn-dark btn-cart"><span class="fa fa-heart tym"></span></a>-->
 <!--                    </div>-->
                 </div>
-                <div class="mt-5 font-14">
+                <div class="mt-5 font-16">
                     <p>Số sản phẩm có sẵn: <span id="spQuantity" th:value="${product.quantity}" >[[${product.quantity}]]</span></p>
                     <p>Loại: [[${product.category==null}?'':${product.category.name}]]</p>
                     <p>Từ khóa liên quan:
@@ -178,8 +178,8 @@
                     Nẵng. Hãy liên hệ với shop để được
                     hướng dẫn bảo hành.
                 </div>
-                <button id="btnDes" type="button" class="btn btn-outline-danger collapsible" style="font-size: 1.4rem;">Xem thêm <i
-                        class="fas fa-angle-down" ></i></button>
+<!--                <button id="btnDes" type="button" class="btn btn-outline-danger collapsible" style="font-size: 1.4rem;">Xem thêm <i-->
+<!--                        class="fas fa-angle-down" ></i></button>-->
             </div>
             <!-- đánh giá -->
             <div id="DanhGia" class="container tab-pane fade mt-1">
@@ -208,7 +208,7 @@
                                     <span class="fa fa-star"
                                           th:classappend="${review.rating>=5}? 'checked-rating'"></span>
                                 </div>
-                                <div class="font-14"  th:if="${review.user!=null}">
+                                <div class="font-16"  th:if="${review.user!=null}">
                                     <h3>[[${review.user.firstName+" "+review.user.lastName}]]</h3>
                                     <span>[[${review.title}]]</span>
                                     <p>[[${review.content}]]</p>
@@ -246,7 +246,7 @@
                            class="form-control mt-3 font-14" placeholder="Tiêu đề">
                     <textarea th:field="*{content}" type="text" class="form-control mt-3 font-14"
                               placeholder="Thêm đánh giá của bạn."></textarea>
-                    <input type="submit" class="btn btn-dark mt-3 font-14 " style="height: 36px;width: 80px" value="Gửi">
+                    <input type="submit" class="btn btn-dark mt-3 font-16 " style="height: 36px;width: 80px" value="Gửi">
 
                 </form>
                 <th:block th:if="${param['true']}">
