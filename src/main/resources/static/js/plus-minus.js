@@ -57,7 +57,7 @@ function updateQuantity(productID, newQty) {
         type: "POST",
         url: url
     }).done(function (subtotal){
-        $("#subTotalPrice" + productID).html(subtotal + " ₫");
+        $("#subTotalPrice" + productID).html(MonneyToString(subtotal));
         var discount = StringToMonney($("#discount").html());
         console.log(discount);
         initTotal(discount);
@@ -149,11 +149,11 @@ function initClickCheckbox(){
 
 
 function StringToMonney(string) {
-    return parseFloat(string.split(" ")[0]);
+    return parseFloat(string.split(" ")[0].replace(/\./g,""));
 }
 
 function MonneyToString(Monney) {
-    return Monney + " ₫";
+    return format2(Monney, " ₫");
 }
 
 function buy() {
@@ -183,3 +183,7 @@ function buy() {
 }
 
 buy()
+
+function format2(n, currency) {
+    return n.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + currency ;
+}

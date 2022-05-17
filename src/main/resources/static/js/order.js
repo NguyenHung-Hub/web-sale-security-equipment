@@ -15,5 +15,6 @@ function deleteProduct(link) {
         url: url
     }).done(function (orderId){
         $("#rowOf" + orderId).remove();
+        window.location.reload();
     });
 }

@@ -159,7 +159,7 @@
         <div class="search-content">
             <div class="result-bar">
                 <span><i style="font-size: 14px;" class="fas fa-lightbulb"></i></span>
-                <p>Kết quả tìm kiếm cho '<span th:text="${param.name}"></span>'</p>
+                <p>Kết quả tìm kiếm cho '<span th:text="${param.keyword}"></span>'</p>
             </div>
             <div class="sort-bar" style="height: 60px; background-color: #00000008;">
                 <div class="sort-button">
@@ -206,7 +206,7 @@
                                 <span class="desc-price-hidden">
                                     <del>
                                         <span class="desc-price-hidden-d">đ</span>
-                                        <span th:text="${#numbers.formatDecimal(product.price,1,'DEFAULT',0,'DEFAULT')}"></span>
+                                        <span th:text="${#numbers.formatDecimal(product.price,1,'POINT',0,'POINT')}"></span>
                                     </del>
                                 </span>
                                     <span class="desc-price-display">
@@ -216,15 +216,15 @@
                                 </div>
                                 <div class="desc-eval">
                                 <span class="fa fa-star"
-                                      th:classappend="${listRating.get(product.productId)>=1}? checked"></span>
+                                      th:classappend="${#aggregates.avg(product.productReviews.![rating]) >= 1}? checked"></span>
                                     <span class="fa fa-star"
-                                          th:classappend="${listRating.get(product.productId)>=2}? checked"></span>
+                                          th:classappend="${#aggregates.avg(product.productReviews.![rating]) >= 2}? checked"></span>
                                     <span class="fa fa-star"
-                                          th:classappend="${listRating.get(product.productId)>=3}? checked"></span>
+                                          th:classappend="${#aggregates.avg(product.productReviews.![rating]) >= 3}? checked"></span>
                                     <span class="fa fa-star"
-                                          th:classappend="${listRating.get(product.productId)>=4}? checked"></span>
+                                          th:classappend="${#aggregates.avg(product.productReviews.![rating]) >= 4}? checked"></span>
                                     <span class="fa fa-star"
-                                          th:classappend="${listRating.get(product.productId)>=5}? checked"></span>
+                                          th:classappend="${#aggregates.avg(product.productReviews.![rating]) >= 5}? checked"></span>
 
 
                                     <span class="da-ban"
@@ -430,9 +430,8 @@
                 }
             })
         }
-        let listRating = [[${listRating}]];
+        // let listRating = [[${listRating}]];
         let listQuantity = [[${listQuan}]];
-        console.log(listRating);
         function createData(products) {
             let html = '';
             if (products.length > 0) {
@@ -460,11 +459,11 @@
                                     </span>
                                 </div>
                                 <div class="desc-eval">
-                                    <span class="fa fa-star ${listRating[product.productId] >= 1 ? 'checked' : ''}"></span>
-                                    <span class="fa fa-star ${listRating[product.productId] >= 2 ? 'checked' : ''}"></span>
-                                    <span class="fa fa-star ${listRating[product.productId] >= 3 ? 'checked' : ''}"></span>
-                                    <span class="fa fa-star ${listRating[product.productId] >= 4 ? 'checked' : ''}"></span>
-                                    <span class="fa fa-star ${listRating[product.productId] >= 5 ? 'checked' : ''}"></span>
+                                    <span class="fa fa-star ${(product.productReviews.reduce((sum,review)=>(sum+review.rating),0)/(product.productReviews.length==0?1:product.productReviews.length))>=1?'checked':''}"></span>
+                                    <span class="fa fa-star ${(product.productReviews.reduce((sum,review)=>(sum+review.rating),0)/(product.productReviews.length==0?1:product.productReviews.length))>=2?'checked':''}"></span>
+                                    <span class="fa fa-star ${(product.productReviews.reduce((sum,review)=>(sum+review.rating),0)/(product.productReviews.length==0?1:product.productReviews.length))>=3?'checked':''}"></span>
+                                    <span class="fa fa-star ${(product.productReviews.reduce((sum,review)=>(sum+review.rating),0)/(product.productReviews.length==0?1:product.productReviews.length))>=4?'checked':''}"></span>
+                                    <span class="fa fa-star ${(product.productReviews.reduce((sum,review)=>(sum+review.rating),0)/(product.productReviews.length==0?1:product.productReviews.length))>=5?'checked':''}"></span>
                                     <span class="da-ban"> Đã bán ${listQuantity[product.productId] ? listQuantity[product.productId] : '0'}</span>
                                 </div>
                                 <div class="desc-address" style="color: #000000A6;">
