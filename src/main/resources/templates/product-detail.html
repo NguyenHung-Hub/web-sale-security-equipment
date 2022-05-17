@@ -78,10 +78,10 @@
                     <span class="fa fa-star" th:classappend="${rating>=5} ? 'checked-rating'"></span>
                     <span th:text="'(' +${product.productReviews.size()}+ ' đánh giá)'"></span>
                 </div>
-                <div class="mt-5 font-16">
+                <div class="mt-5 font-16 h-auto">
                     <p th:utext="${product.shortDesc}"></p>
                 </div>
-                <div class="row" style="margin-left: 0px">
+                <div class="row mt-5" style="margin-left: 0px">
                     <form class="form-inline" th:action="@{/product/addToCart}" method="post">
                         <div class="group-add">
                             <button id="btnSub" type="button" onclick="sub()" class="w-50px">-</button>
