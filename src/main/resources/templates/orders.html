@@ -26,7 +26,7 @@
                         <div class="row border-bottom">
                             <div class="row main align-items-center">
                                 <div class="col-3">
-                                    <h4><b>Sản phẩm</b></h4>
+                                    <h4><b>Đơn hàng</b></h4>
                                 </div>
                                 <div class="col-4">
                                 </div>
@@ -41,51 +41,71 @@
                                 <div class="col-2 d-flex">
                                     <span>Thành tiền</span>
                                 </div>
-                                <div class="col d-flex">
-                                    <span>Tình trạng</span>
-                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="List-product" id="style-7">
                         <th:block th:each="Order :${LIST_ORDER}">
                             <div class="border-bottom" th:id="'rowOf'+${Order.orderId}">
-                            <button th:if="${type != null}" type="button" class="btn btn-danger delete" th:deleteId="${Order.orderId}">Hủy đơn</button>
-                                <Span th:if="${type == null}"  th:text="'Mã đơn hàng: ' + ${Order.orderId}"></Span>
-                            <th:block th:each="ItemOrder :${Order.orderItems}">
-                                <div class="row" th:id="'rowOf'+${ItemOrder.product.productId}">
-                                    <div class="row main align-items-center">
-                                        <div class="col-3 d-flex ">
-                                            <img class="img-product" th:src="${ItemOrder.product.thumbnail}">
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="row text-muted">[[${ItemOrder.product.title}]]</div>
-                                            <div class="row">[[${ItemOrder.product.category.name}]]</div>
-                                        </div>
-                                        <div class="col d-flex">
-                                            <div class="d-flex flex-column">
-                                                <span class="old-price">[[${ItemOrder.product.price}]] ₫</span>
-                                                <span class="new-price"
-                                                      th:id="'newPrice'+${ItemOrder.product.productId}">[[${ItemOrder.product.price}]] ₫</span>
+                                <div class="row mt-3">
+                                    <div class="col flex-column d-flex">
+                                        <Span th:text="'Mã đơn hàng: ' + ${Order.orderId}"></Span>
+                                        <Span th:text="'Tình trạng đơn hàng: ' + ${#strings.toString(Order.orderStatus)}"></Span>
+                                    </div>
+
+                                </div>
+                                <th:block th:each="ItemOrder :${Order.orderItems}">
+                                    <div class="row" th:id="'rowOf'+${ItemOrder.product.productId}">
+                                        <div class="row main align-items-center">
+                                            <div class="col-3 d-flex ">
+                                                <img class="img-product" style="height: 100px !important;"
+                                                     th:src="${ItemOrder.product.thumbnail}">
                                             </div>
-                                        </div>
-                                        <div class="col d-flex">
-                                            <span type="text">[[${ItemOrder.quantity}]]</span>
-                                        </div>
-                                        <div class="col-2 d-flex justify-content-between">
+                                            <div class="col-4">
+                                                <div class="row text-muted">[[${ItemOrder.product.title}]]</div>
+                                                <div class="row">[[${ItemOrder.product.category.name}]]</div>
+                                            </div>
+                                            <div class="col d-flex">
+                                                <div class="d-flex flex-column">
+                                                    <span class="old-price"
+                                                          th:text="${#numbers.formatDecimal(ItemOrder.product.price,3,'POINT',0,'POINT') + '&nbsp;₫'}"></span>
+                                                    <span class="new-price"
+                                                          th:id="'newPrice'+${ItemOrder.product.productId}"
+                                                          th:text="${#numbers.formatDecimal(ItemOrder.product.price - (ItemOrder.product.price * (ItemOrder.product.productDiscounts.isEmpty()
+                                                          ? ItemOrder.product.discountPercentBase
+                                                          : ItemOrder.product.productDiscounts.get(ItemOrder.product.productDiscounts.size() - 1).discountPercent)),3,'POINT',0,'POINT') + '&nbsp;₫'}"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col d-flex">
+                                                <span type="text">[[${ItemOrder.quantity}]]</span>
+                                            </div>
+                                            <div class="col-2 d-flex justify-content-between">
                                             <span th:id="'subtotal'+${ItemOrder.product.productId}"
-                                                  th:with="result=${ItemOrder.product.price * ItemOrder.quantity}">
-                                                <span th:text="${result}  + ' ₫'"
+                                                  th:with="result=${(ItemOrder.product.price - (ItemOrder.product.price * (ItemOrder.product.productDiscounts.isEmpty()
+                                                    ? ItemOrder.product.discountPercentBase
+                                                    : ItemOrder.product.productDiscounts.get(ItemOrder.product.productDiscounts.size() - 1).discountPercent))) * ItemOrder.quantity}">
+                                                <span th:text="${#numbers.formatDecimal(result,3,'POINT',0,'POINT') + '&nbsp;₫'}"
                                                       th:id="'subTotalPrice'+${ItemOrder.product.productId}"
                                                       class="subTotal-product"></span>
                                             </span>
-                                        </div>
-                                        <div class="col d-flex">
-                                            <span type="text">[[${Order.getOrderStatus.getStatus}]]</span>
+                                            </div>
                                         </div>
                                     </div>
+                                </th:block>
+                                <div class="row align-items-center mt-2">
+                                    <div class="col">
+                                        <span>Tổng cộng(đã bao gồm phí vận chuyển):
+                                            <span style="color: rgb(255, 64, 64);font-size: 2rem"
+                                                  th:text="${#numbers.formatDecimal(Order.total,3,'POINT',0,'POINT') + '&nbsp;₫'}"></span>
+                                        </span>
+                                    </div>
+                                    <button th:if="${#strings.toString(Order.orderStatus) == 'PROCESSING'}"
+                                            type="button" class="mb-3 btn delete btn-danger"
+                                            style="background:#D70018;color:#fff !important;"
+                                            th:deleteId="${Order.orderId}">Hủy đơn
+                                    </button>
                                 </div>
-                            </th:block>
                             </div>
                         </th:block>
 

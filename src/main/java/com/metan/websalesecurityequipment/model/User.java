@@ -1,6 +1,7 @@
 package com.metan.websalesecurityequipment.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -46,6 +47,7 @@ class User implements Serializable {
     @JsonBackReference
     private Cart cart;
     @OneToMany(mappedBy = "user")
+    @JsonBackReference
     private List<Order> orders;
     @Column(name = "verification_code",length = 64)
     private String verificationCode;

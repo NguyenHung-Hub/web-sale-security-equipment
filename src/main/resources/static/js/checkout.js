@@ -65,8 +65,10 @@ function showSelected(){
 
 function buy() {
     var StringSelected = "";
+
     $("#btn-buy").click(function (){
-        var productRow = $(".line")
+        var total = $("#total").html();
+        var productRow = $(".line");
         productRow.each(function (){
             if(StringSelected === ""){
                 StringSelected +=  $(this).attr("id")
@@ -84,6 +86,18 @@ function buy() {
                     .attr("name", "selected")
                     .attr("value",StringSelected)
                     .appendTo("#sel");
+                $("<input />").attr("type", "hidden")
+                    .attr("name", "totalOrder")
+                    .attr("value",StringToMonney(total))
+                    .appendTo("#sel");
+                $("<input />").attr("type", "hidden")
+                    .attr("name", "content")
+                    .attr("value",deliver + " " + payment)
+                    .appendTo("#sel");
+                $("<input />").attr("type", "hidden")
+                    .attr("name", "dueDate")
+                    .attr("value",deliverDateTo.html())
+                    .appendTo("#sel");
                 return true;
             }).submit();
         }
@@ -100,9 +114,14 @@ function initTotal(tempt,cost,promotion,discount) {
 }
 
 function StringToMonney(string) {
-    return parseFloat(string.split(" ")[0]);
+    return parseFloat(string.split(" ")[0].replace(/\./g,""));
 }
 
 function MonneyToString(Monney) {
-    return Monney + " ₫";
+    return format2(Monney, " ₫");
 }
+
+function format2(n, currency) {
+    return n.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + currency ;
+}
+

@@ -65,7 +65,7 @@ class Product {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<ProductAttribute> productAttributes;
     @OneToMany(mappedBy = "product")
-    @JsonBackReference
+    @JsonManagedReference
     private List<ProductReview> productReviews;
     @OneToMany
     @JoinColumn(name = "product_id")

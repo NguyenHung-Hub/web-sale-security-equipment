@@ -157,7 +157,8 @@ div.filter-evaluate > .checked {
     color: #fff;
     border-radius: 4px;
     text-transform: uppercase;
-    box-shadow: 0 1px 1px 0 rgba(31, 31, 31, 0.001);
+    -webkit-box-shadow: rgba(60, 64, 67, .15) 0 1px 2px 0, rgba(60, 64, 67, .1) 0 2px 2px 2px;
+    box-shadow: rgba(60, 64, 67, .15) 0 1px 2px 0, rgba(60, 64, 67, .1) 0 2px 2px 2px;
     display: flex;
     border: none;
     align-items: center;
@@ -191,6 +192,9 @@ div.filter-evaluate > .checked {
     align-items: center;
     justify-content: space-around;
     font-size: 14px;
+    border-radius: 4px;
+    -webkit-box-shadow: rgba(215, 0 ,24, .05) 0 1px 1px 0, rgba(215, 0 ,24, .05) 0 1px 1px 1px;
+    box-shadow: rgba(215, 0 ,24, .05) 0 1px 1px 0, rgba(215, 0 ,24, .05) 0 1px 1px 1px;
 }
 
 .sort-bar > div {
@@ -220,12 +224,14 @@ div.filter-evaluate > .checked {
 
 #sort li {
     background-color: white;
+    -webkit-box-shadow: rgba(60, 64, 67, .15) 0 1px 1px 0, rgba(60, 64, 67, .15) 0 1px 1px 1px;
+    box-shadow: rgba(60, 64, 67, .15) 0 1px 1px 0, rgba(60, 64, 67, .15) 0 1px 1px 1px;
     display: inline-block;
     cursor: pointer;
 }
 
 #sort li:hover {
-    color: rgb(215, 0 ,24, .7);
+    color: rgb(215, 0 ,24, 1);
 }
 
 #sort li:hover ul {
@@ -235,6 +241,7 @@ div.filter-evaluate > .checked {
 #sort li ul {
     position: absolute;
     background-color: white;
+    color: black;
     width: 100px;
     display: none;
 }

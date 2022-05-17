@@ -123,4 +123,10 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findTopNumberRandom(top);
     }
 
+    @Override
+    public boolean checkBuyCompletedProductByUser(String productId, long userId) {
+        Product product= productRepository.checkBuyCompletedProductByUser(productId,userId);
+        return product!=null;
+    }
+
 }

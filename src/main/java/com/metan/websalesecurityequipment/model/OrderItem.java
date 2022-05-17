@@ -1,5 +1,6 @@
 package com.metan.websalesecurityequipment.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,12 +19,12 @@ class OrderItem {
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
-    @JsonManagedReference("orderItems")
+    @JsonManagedReference
     private Product product;
     @Id
     @ManyToOne
     @JoinColumn(name = "order_id")
-    @JsonManagedReference
+    @JsonBackReference
     private Order order;
     private int quantity;
     @Column(columnDefinition = "decimal(13,2)")
