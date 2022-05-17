@@ -15,7 +15,6 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public List<Brand> findAll() {
-        System.out.println(brandRepository.findAll());
         return brandRepository.findAll();
     }
 
@@ -32,5 +31,10 @@ public class BrandServiceImpl implements BrandService {
         }
 
         return id;
+    }
+
+    @Override
+    public Brand findBrandById(long id) {
+        return brandRepository.getById(id);
     }
 }

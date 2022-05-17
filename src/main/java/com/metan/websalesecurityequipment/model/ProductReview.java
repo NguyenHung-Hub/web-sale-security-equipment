@@ -10,10 +10,11 @@ import javax.persistence.*;
 @Entity
 @Table(name = "product_reviews")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public @Getter
-@Setter
+public
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(of = {"reviewId"})
 class ProductReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +29,7 @@ class ProductReview {
     @JoinColumn(name = "product_id")
     @JsonBackReference
     private Product product;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private User user;

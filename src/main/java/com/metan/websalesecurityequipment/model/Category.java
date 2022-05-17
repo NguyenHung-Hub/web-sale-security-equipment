@@ -14,11 +14,12 @@ import java.util.Set;
 @Entity
 @Table(name = "categories")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public @Getter
-@Setter
+public
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = {"categoryId"})
+@ToString(exclude = {"products", "categories"})
 class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,11 +38,11 @@ class Category {
     @OneToMany(mappedBy = "category")
     @JsonBackReference
     private List<Product> products;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "parent_category_id")
     @JsonBackReference
     private Category category;
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category")
     @JsonManagedReference
     private List<Category> categories;
 }

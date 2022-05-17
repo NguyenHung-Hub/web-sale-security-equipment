@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <th:block th:replace="fragments :: base ('Thêm sản phẩm')"/>
+    <th:block th:replace="fragments :: richtext"/>
+    <link rel="stylesheet" th:href="@{/css/add-product.css}">
+</head>
+
+<body>
+<div id="wrapper">
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow justify-content-between">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Metan team</a>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="#">Đăng xuất</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <main role="main" class="col-md-12 col-lg-12 px-4">
+                <div class="d-flex flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1>Thêm mới 1 sản phẩm</h1>
+                </div>
+                <form th:action="@{/dashboard/product/add-product}" th:object="${product}" method="get">
+                    <div class="d-flex flex-wrap align-items-center pt-3 pb-2">
+                        <input type="text" placeholder="Tên sản phẩm" th:field="*{name}" class="form-control mb-5">
+                        <div class="row category no-gutters">
+                            <div class="nav flex-column flex-nowrap col-4" id="v-pills-tab" role="tablist"
+                                 aria-orientation="vertical">
+                                <a th:each="category : ${categories}" class="nav-link" data-toggle="tab"
+                                   th:href="@{'#tab-' + ${category.categoryId}}"
+                                   role="tab" th:aria-controls="${'tab-' + category.categoryId}"
+                                   aria-selected="false"
+                                   th:text="${category.name}"></a>
+                            </div>
+                            <div class="tab-content col-8">
+                                <div th:each="category : ${categories}" th:id="${'tab-' + category.categoryId}"
+                                     class="tab-pane">
+                                    <nav class="nav flex-column flex-nowrap">
+                                        <a th:each="subCategory : ${category.categories}" th:href="@{/dashboard/product/{categoryId}(categoryId = ${subCategory.categoryId})}" class="nav-link"
+                                           data-toggle="tab" href="#">
+                                            [[${subCategory.name}]]
+                                            <input class="input-name" type="text" hidden
+                                                   th:value="${subCategory.name}">
+                                            <input class="input-id" type="text" hidden
+                                                   th:value="${subCategory.categoryId}">
+                                        </a>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row p-4 align-items-center">
+                            <label for="category-selected" class="mb-0" style="line-height: 1.5;">Đã chọn:</label>
+                            <input type="text" class="col-9 input-display ml-2" id="category-selected" disabled
+                                   value="Chưa chọn ngành hàng nào">
+                            <input th:field="*{category.categoryId}" id="categoryId-selected" hidden />
+                        </div>
+                        <div class="btn-toogle float-right">
+                            <button id="continue" type="submit" class="btn btn-primary not-allowed" disabled>Tiếp tục</button>
+                        </div>
+                    </div>
+
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+<th:block th:replace="fragments :: base-js"/>
+<th:block th:replace="fragments :: richtext-js"/>
+<script type="text/javascript">
+    $('#wrapper main .category .tab-content .tab-pane .nav a.nav-link').click(function () {
+        let categoryName = $('#wrapper main .category .tab-content .tab-pane .nav a.nav-link.active input.input-name').val()
+        let categoryId = $('#wrapper main .category .tab-content .tab-pane .nav a.nav-link.active input.input-id').val()
+        $('#category-selected').val(categoryName)
+        $('#categoryId-selected').val(categoryId)
+        $('#continue').removeAttr('disabled')
+        $('#continue').removeClass('not-allowed')
+    })
+</script>
+</body>
+</html>

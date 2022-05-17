@@ -1,9 +1,8 @@
 package com.metan.websalesecurityequipment.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,18 +11,19 @@ import java.util.Date;
 @Table(name = "order_items")
 @IdClass(OrderItemPK.class)
 public @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(of = {"product", "order"})
-@ToString
 class OrderItem {
     @Id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "product_id")
-    @JsonManagedReference("orderItems")
+    @JsonManagedReference
     private Product product;
     @Id
     @ManyToOne
     @JoinColumn(name = "order_id")
-    @JsonManagedReference
+    @JsonBackReference
     private Order order;
     private int quantity;
     @Column(columnDefinition = "decimal(13,2)")

@@ -1,4 +1,4 @@
-package com.metan.websalesecurityequipment.controller;
+package com.metan.websalesecurityequipment.rest;
 
 import com.metan.websalesecurityequipment.model.Product;
 import com.metan.websalesecurityequipment.model.request.ProductFileRequest;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/api/products")
 public class ProductRestController {
 
     private final ProductService productService;
@@ -35,8 +35,4 @@ public class ProductRestController {
         return productService.saveProduct(product);
     }
 
-    @PostMapping(value = "/products",consumes={"application/json"})
-    public Product findProductById(@RequestBody ProductFileRequest product) {
-        return productService.findProductById(product.getProductId());
-    }
 }

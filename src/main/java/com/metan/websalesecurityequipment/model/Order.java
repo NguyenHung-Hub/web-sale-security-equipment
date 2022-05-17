@@ -14,6 +14,7 @@ import java.util.List;
 @Table(name = "orders")
 public @Data
 @EqualsAndHashCode(of = "orderId")
+@ToString(exclude = {"orderItems"})
 class Order {
     @Id
     @Column(name = "order_id", length = 20)
@@ -30,7 +31,7 @@ class Order {
     @Column(name = "modified_at", columnDefinition = "datetime")
     private Date modifiedAt;
     @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonManagedReference
     private List<OrderItem> orderItems;
     @ManyToOne
     @JoinColumn(name = "user_id")

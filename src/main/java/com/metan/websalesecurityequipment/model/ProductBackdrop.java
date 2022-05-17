@@ -2,9 +2,7 @@ package com.metan.websalesecurityequipment.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,6 +10,8 @@ import javax.persistence.*;
 @Table(name = "product_backdrops")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(of = "backdropId")
 class ProductBackdrop {
     @Id

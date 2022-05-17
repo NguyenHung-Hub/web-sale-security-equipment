@@ -25,5 +25,4 @@ class Attribute {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-
 }

@@ -331,3 +331,11 @@ a.page-link, span.page-link {
     flex-direction: column;
 }
 
+.thumbnail-backdrops .slick-slide {
+    opacity: 0.6;
+}
+
+.thumbnail-backdrops .slick-slide.slick-current {
+    opacity: 1;
+}
+

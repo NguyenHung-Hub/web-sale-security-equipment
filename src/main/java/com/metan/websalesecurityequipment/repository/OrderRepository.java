@@ -1,6 +1,9 @@
 package com.metan.websalesecurityequipment.repository;
 
 import com.metan.websalesecurityequipment.model.Order;
+import com.metan.websalesecurityequipment.model.OrderStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -29,4 +32,10 @@ public interface OrderRepository extends JpaRepository<Order, String> {
 
     public List<Order> findAll();
 
+    @Modifying
+    @Query(value = "update orders set order_status = \"COMPLETED\" where order_id =?1", nativeQuery = true)
+    void completeOrder(String orderId);
+
+    @Query(value = "select * from orders where order_status = ?1", nativeQuery = true)
+    public  Page<Order> findOrderByStatus(String status, Pageable pageable);
 }

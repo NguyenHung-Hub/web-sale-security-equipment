@@ -25,7 +25,7 @@ class Discount {
     private Date modifiedAt;
     @Column(name = "end_date", columnDefinition = "timestamp")
     private Date endDate;
-    @OneToMany(mappedBy = "discount", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "discount", cascade = CascadeType.ALL)
     @JsonBackReference
     private List<ProductDiscount> productDiscounts;
 
