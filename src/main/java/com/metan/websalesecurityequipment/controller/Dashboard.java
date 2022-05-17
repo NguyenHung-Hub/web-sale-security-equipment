@@ -15,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.text.Normalizer;
 import java.util.*;
 import java.util.regex.Pattern;
@@ -34,9 +33,10 @@ public class Dashboard {
     private final BrandService brandService;
     private final AttributeService attributeService;
     private final ProductBackdropService productBackdropService;
+    private final  UserService userService;
 
     public Dashboard(OrderService orderService, AwsService awsService, ProductService productService,
-                     CategoryService categoryService, BrandService brandService, AttributeService attributeService, ProductBackdropService productBackdropService) {
+                     CategoryService categoryService, BrandService brandService, AttributeService attributeService, ProductBackdropService productBackdropService, UserService userService) {
         this.orderService = orderService;
         this.awsService = awsService;
         this.productService = productService;
@@ -44,6 +44,7 @@ public class Dashboard {
         this.brandService = brandService;
         this.attributeService = attributeService;
         this.productBackdropService = productBackdropService;
+        this.userService = userService;
     }
 
     @GetMapping
@@ -328,14 +329,12 @@ public class Dashboard {
         return "redirect:/dashboard/product";
     }
 
-<<<<<<< HEAD
     private String toSlug(String input) {
         String nowhitespace = WHITESPACE.matcher(input).replaceAll("-");
         String normalized = Normalizer.normalize(nowhitespace, Normalizer.Form.NFD);
         String slug = NONLATIN.matcher(normalized).replaceAll("");
         return slug.toLowerCase(Locale.ENGLISH);
     }
-=======
     @GetMapping(value = "/user")
     public String showUser(Model model) {
 
@@ -354,7 +353,6 @@ public class Dashboard {
         return "category_db.html";
     }
 
->>>>>>> hung2
 
     private String generateId(String idCurrent, String role) {
         int i = role.length();
