@@ -40,31 +40,33 @@
             <td th:text="${product.quantity}"></td>
             <td th:text="${#numbers.formatDecimal(product.price,3,'POINT',0,'POINT') + '&nbsp;₫'}"></td>
             <td>
-                <a href="#">
-                    <i class="fas fa-edit" data-toggle="modal" th:attr="data-target=${'#editModal'+ product.productId}" th:data-row="${product}"></i>
-                </a>
+                <i class="fas fa-edit" data-toggle="modal" th:attr="data-target=${'#editModal'+ product.productId}"
+                   th:data-row="${product}"></i>
             </td>
         </tr>
         </tbody>
     </table>
     <div class="d-flex justify-content-center align-items-center">
         <ul class="pagination pagination-modify mt-2">
-            <li th:class="${currentIndex == 1}? 'page-item disabled' : 'page-item'" >
+            <li th:class="${currentIndex == 1}? 'page-item disabled' : 'page-item'">
                 <a class="page-link" th:href="@{/dashboard/product}">First</a>
             </li>
             <li th:class="${currentIndex == 1}? 'page-item disabled': 'page-item' ">
-                <a class="page-link" aria-label="Previous" th:href="@{|${baseUrl}${currentIndex - 1}|}" title="Go to previous page">
+                <a class="page-link" aria-label="Previous" th:href="@{|${baseUrl}${currentIndex - 1}|}"
+                   title="Go to previous page">
                     <span aria-hidden="true">«</span>
                     <span class="sr-only">Previous</span>
                 </a>
             </li>
-            <li th:each="item : ${#numbers.sequence(beginIndex,endIndex)}" th:class="${item == currentIndex ? 'page-item active' :'page-item' }">
+            <li th:each="item : ${#numbers.sequence(beginIndex,endIndex)}"
+                th:class="${item == currentIndex ? 'page-item active' :'page-item' }">
                 <a class="page-link" th:href="@{|${baseUrl}${item}|}">
                     <span th:text="${item}">1</span>
                 </a>
             </li>
             <li th:class="${currentIndex == totalPageCount}? 'page-item disabled': 'page-item'">
-                <a class="page-link" aria-label="Next" th:href="@{|${baseUrl}${currentIndex + 1}|}" title="Go to next page"><span aria-hidden="true">»</span>
+                <a class="page-link" aria-label="Next" th:href="@{|${baseUrl}${currentIndex + 1}|}"
+                   title="Go to next page"><span aria-hidden="true">»</span>
                     <span class="sr-only">Next</span>
                 </a>
             </li>
@@ -75,11 +77,11 @@
     </div>
 
     <div class="modal fade" th:each="product : ${products}" th:attr="id=${'editModal' + product.productId}"
-            tabindex="-1" role="dialog" aria-labelledby="productModalEditLabel" aria-hidden="true" >
+         tabindex="-1" role="dialog" aria-labelledby="productModalEditLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title fw-bold" id="productModalEditLabel" >
+                    <h3 class="modal-title fw-bold" id="productModalEditLabel">
                         Chỉnh sửa hàng hóa
                     </h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -87,59 +89,82 @@
                     </button>
                 </div>
 
-                <div class="modal-body modal-body__product">
-                    <form th:action="@{/product/update}" th:object="${product}" enctype="multipart/form-data"
+                <div class="modal-body modal-body__product" style="overflow-y: auto; overflow-x: hidden; height: 800px;">
+                    <form th:action="@{/dashboard/product/update}" th:object="${product}" enctype="multipart/form-data"
                           method="post">
-                        <div class="form-group-modify">
-                            <label>Mã hàng</label>
-                            <input disabled="disabled" class="form-control" th:value="${product.productId}">
-                            <input id="productId" type="hidden" aria-describedby="emailHelp" placeholder="Mã hàng"
-                                   name="productId" th:value="${product.productId}"/>
+                        <div class="row no-gutters">
+                            <div class="col-8">
+                                <div class="d-flex flex-wrap flex-md-nowrap align-items-center p-2">
+                                    <div class="btn-toolbar mb-2 mb-md-0">
+                                        <input th:id="${'file-input-' + product.productId}" hidden multiple type="file"
+                                               accept="image/gif, image/jpeg, image/png" name="backdrops">
+                                        <label class="btn btn-primary" th:for="${'file-input-' + product.productId}">
+                                            <i class="fas fa-upload"></i>
+                                            &nbsp;
+                                            Chọn ảnh
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+                                    <div th:id="${'images-' + product.productId}" class="row">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 attachment-detail border-left p-3">
+                                <div class="d-flex flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+                                    <h5 class="fw-bold">Chi tiết sản phẩm</h5>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <img th:id="${'thumbnail-' + product.productId}"
+                                             th:src="${product.thumbnail}"
+                                             class="img-thumnail" alt="">
+                                    </div>
+                                    <div class="col-6">
+                                        <input th:id="${'load-thumbnail-' + product.productId}" hidden type="file"
+                                               accept="image/gif, image/jpeg, image/png" name="thumbnail-image"
+                                               required>
+                                        <label th:for="${'load-thumbnail-' + product.productId}" class="link">Sửa hình ảnh</label>
+                                    </div>
+                                </div>
+                                <div class="form-group-modify">
+                                    <label for="">Mã sản phẩm</label>
+                                    <input type="text" class="form-control" name="productId" th:value="${product.productId}" readonly disabled>
+                                </div>
+                                <div class="form-group-modify">
+                                    <label for="">Tên sản phẩm</label>
+                                    <input type="text" class="form-control" name="name" th:value="${product.name}" readonly disabled>
+                                </div>
+                                <div class="form-group-modify">
+                                    <label for="title">Tiêu đề</label>
+                                    <input id="title" type="text" name="title" th:value="${product.title}" class="form-control">
+                                </div>
+                                <div class="form-group-modify">
+                                    <label for="price">Giá bán</label>
+                                    <input type="number" th:value="${product.price}" name="price" id="price" class="form-control">
+                                </div>
+                                <div class="form-group-modify">
+                                    <label for="discount">Giảm giá</label>
+                                    <input name="discount" th:value="${#numbers.formatPercent(product.discountPercentBase, 1, 0)}" id="discount" type="text" max="100" min="0" class="form-control">
+                                </div>
+                                <div class="form-group-modify">
+                                    <label for="quantity">Tồn kho</label>
+                                    <input name="quantity" th:value="${product.quantity}" id="quantity" type="number" min="0" class="form-control">
+                                </div>
+                            </div>
                         </div>
-
-
-                        <div class="form-group-modify">
-                            <label>Tên hàng</label>
-                            <input id="name" type="text" class="form-control" aria-describedby="emailHelp"
-                                   placeholder="Tên hàng" name="name"
-                                   th:value="${product.name}"/>
-                        </div>
-                        <div class="form-group-modify">
-                            <label>Giá bán</label>
-                            <input id="price" type="text" class="form-control" aria-describedby="emailHelp"
-                                   placeholder="Giá bán" name="price" th:value="${product.price}"/>
-                        </div>
-                        <div class="form-group-modify">
-                            <label>Tồn kho</label>
-                            <input id="quantity" type="text" class="form-control"
-                                   aria-describedby="emailHelp"
-                                   placeholder="Tồn kho " name="quantity"
-                                   th:value="${product.quantity}"/>
+                        <div class="form-group">
+                            <label th:for="${'shortDesc-' + product.productId}" class="font-weight-bold mt-4">Mô tả ngắn về sản phẩm</label>
+                            <textarea  name="shortDesc" th:id="${'shortDesc-' + product.productId}" class="form-control" rows="6"
+                                      th:utext="${product.shortDesc}"></textarea >
                         </div>
 
                         <div class="form-group">
-                            <label for="shortDesc" class="font-weight-bold mt-4">Mô tả ngắn về sản phẩm</label>
-                            <textarea id="shortDesc" name="shortDesc" class="form-control descRT" rows="6">[[${product.shortDesc}]]</textarea>
+                            <label th:for="${'shortDesc-' + product.productId}" class="font-weight-bold mt-4">Mô tả sản phẩm</label>
+                            <textarea class="form-control" th:id="${'longDesc-' + product.productId}" rows="6" name="longDesc"
+                                      th:utext="${product.longDesc}"></textarea>
                         </div>
-
-                        <div class="form-group">
-                            <label for="longDesc" class="font-weight-bold mt-4">Mô tả sản phẩm</label>
-                            <textarea id="longDesc" class="form-control descRT" rows="6" name="longDesc">[[${product.longDesc}]]</textarea>
-                        </div>
-
-<!--                        <div class="form-group-modify">-->
-<!--                            <label>URL tạm</label>-->
-<!--                            <input id="thumbnail" type="hidden" class="form-control-modify" placeholder="url"-->
-<!--                                   name="thumbnail" th:value="${product.thumbnail}"/>-->
-<!--                        </div>-->
-
-<!--                        <div class="box-thumbnail">-->
-<!--                            <img th:src="${product.thumbnail}"-->
-<!--                                 class="img-thumbnail m-2 rounded"/>-->
-<!--                        </div>-->
-<!--                        <input accept="image/png, image/jpeg" type="file" name="image" multiple="multiple">-->
-
-                        <div class="form-group-modify mt-4 float-right">
+                        <div class="form-group-modify mt-4 mb-4 float-right">
                             <button type="button" class="btn btn-secondary px-4 mr-4" data-dismiss="modal">Hủy</button>
                             <button type="submit" class="btn btn-success px-4"><i class="fas fa-save"></i>Lưu</button>
                         </div>

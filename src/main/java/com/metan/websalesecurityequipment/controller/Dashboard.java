@@ -33,15 +33,17 @@ public class Dashboard {
     private final CategoryService categoryService;
     private final BrandService brandService;
     private final AttributeService attributeService;
+    private final ProductBackdropService productBackdropService;
 
     public Dashboard(OrderService orderService, AwsService awsService, ProductService productService,
-                     CategoryService categoryService, BrandService brandService, AttributeService attributeService) {
+                     CategoryService categoryService, BrandService brandService, AttributeService attributeService, ProductBackdropService productBackdropService) {
         this.orderService = orderService;
         this.awsService = awsService;
         this.productService = productService;
         this.categoryService = categoryService;
         this.brandService = brandService;
         this.attributeService = attributeService;
+        this.productBackdropService = productBackdropService;
     }
 
     @GetMapping
@@ -185,8 +187,8 @@ public class Dashboard {
     @GetMapping("/orders/{status}/{id}")
     public String setStatusOrder(@PathVariable(name = "status") String status,
                                  @PathVariable(name = "id") String id) {
-        System.out.println("hehe chinh ne"+OrderStatus.valueOf(status));
-        Order order= orderService.findById(id);
+        System.out.println("hehe chinh ne" + OrderStatus.valueOf(status));
+        Order order = orderService.findById(id);
         order.setOrderStatus(OrderStatus.valueOf(status));
         orderService.save(order);
         return "redirect:/dashboard/orders";
@@ -213,28 +215,46 @@ public class Dashboard {
 //    }
 
     @PostMapping(value = "/product/update")
-    public String updateProduct(@ModelAttribute("product") Product p,
-                                @RequestParam(name = "image", required = false) MultipartFile img) {
+    public String updateProduct(@ModelAttribute("product") Product p, @RequestParam(name = "thumbnail-image", required = false) MultipartFile thumbnail, @RequestParam(name = "backdrops", required = false) MultipartFile[] backdrops, @RequestParam(name = "discount") String discount) {
         Product product = productService.findProductById(p.getProductId());
-        System.out.println("\t\t\t\t hinh ne:" + img.getOriginalFilename());
 
-        if (!img.getOriginalFilename().trim().equals("")) {
-            String fileName = awsService.save(img);
+        if (!thumbnail.getOriginalFilename().trim().equals("")) {
+            String fileName = awsService.save(thumbnail);
             if (product.getThumbnail() != null && !product.getThumbnail().trim().equals("")) {
                 awsService.delete(product.getThumbnail().replace("https://chinh1506.s3.amazonaws.com/", "").trim());
             }
             p.setThumbnail("https://chinh1506.s3.amazonaws.com/" + fileName);
         }
-        System.out.println(p);
+
+        List<ProductBackdrop> productBackdrops = product.getProductBackdrops();
+        for (int i = 0; i < backdrops.length; i++) {
+            if (!backdrops[i].getOriginalFilename().trim().equals("")) {
+                String fileName = awsService.save(backdrops[i]);
+                if (productBackdrops.get(i) != null) {
+                    if (productBackdrops.get(i).getFilePath() != null && !productBackdrops.get(i).getFilePath().trim().equals("")) {
+                        awsService.delete(productBackdrops.get(i).getFilePath().replace("https://chinh1506.s3.amazonaws.com/", "").trim());
+                    }
+                    productBackdrops.get(i).setFilePath("https://chinh1506.s3.amazonaws.com/" + fileName);
+                } else {
+                    ProductBackdrop productBackdrop = new ProductBackdrop();
+                    productBackdrop.setFilePath("https://chinh1506.s3.amazonaws.com/" + fileName);
+                    productBackdrops.add(productBackdrop);
+                }
+            }
+        }
+        String[] discountP = discount.split("%");
+        int discountT = Integer.parseInt(discountP[0]);
         product.setThumbnail(p.getThumbnail());
         product.setLongDesc(p.getLongDesc());
         product.setShortDesc(p.getShortDesc());
         product.setName(p.getName());
         product.setPrice(p.getPrice());
+        product.setDiscountPercentBase(discountT * 1f / 100);
         product.setQuantity(p.getQuantity());
-        product.setTitle(p.getName() + " " + p.getProductId());
+        product.setTitle(product.getCategory().getName() + " " + p.getName());
+        product.setProductBackdrops(productBackdrops);
+        product.setSlug(toSlug(product.getTitle()));
         productService.saveProduct(product);
-        System.out.println("Da sua");
         return "redirect:/dashboard/product";
     }
 
@@ -268,7 +288,7 @@ public class Dashboard {
         product.setSlug(toSlug(product.getTitle() + " " + product.getProductId()));
         List<ProductAttribute> productAttributes = new ArrayList<>();
 
-        for (Attribute attribute: attributeService.findAttributesByCategoryCategoryId(product.getCategory().getCategory().getCategoryId())) {
+        for (Attribute attribute : attributeService.findAttributesByCategoryCategoryId(product.getCategory().getCategory().getCategoryId())) {
             ProductAttribute productAttribute = new ProductAttribute();
             productAttribute.setAttribute(attribute);
             productAttributes.add(productAttribute);
@@ -288,12 +308,12 @@ public class Dashboard {
         product.setCreatedAt(new Date());
         product.setModifiedAt(new Date());
         product.setDiscountPercentBase(discount * 1f / 100);
-        for (ProductAttribute productAttribute: product.getProductAttributes()) {
+        for (ProductAttribute productAttribute : product.getProductAttributes()) {
             productAttribute.setProduct(product);
         }
 
         List<ProductBackdrop> productBackdrops = new ArrayList<>();
-        for (MultipartFile multipartFile: backdrops) {
+        for (MultipartFile multipartFile : backdrops) {
             ProductBackdrop productBackdrop = new ProductBackdrop();
             String fileNameBackdrop = awsService.save(multipartFile);
             productBackdrop.setFilePath("https://chinh1506.s3.amazonaws.com/" + fileNameBackdrop);

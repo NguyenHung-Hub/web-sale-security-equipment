@@ -10,21 +10,21 @@
 <body>
 <section layout:fragment="content">
     <div class="container">
-        <ul class="nav nav-tabs bg-dark" role="tablist">
+        <ul class="nav nav-tabs bg-light" role="tablist">
             <li class="nav-item">
-                <a value="PROCESSING" class="nav-link text-light active order-status" data-toggle="tab"
+                <a value="PROCESSING" class="nav-link text-dark active order-status" data-toggle="tab"
                    href="#ChuaXacNhan">Chưa xác nhận</a>
             </li>
             <li class="nav-item ">
-                <a value="SHIPPING" class="nav-link text-light order-status" data-toggle="tab" href="#DangGiaoHang">Đang
+                <a value="SHIPPING" class="nav-link text-dark order-status" data-toggle="tab" href="#DangGiaoHang">Đang
                     giao hàng</a>
             </li>
             <li class="nav-item">
-                <a value="COMPLETED" class="nav-link text-light order-status" data-toggle="tab" href="#DaHoanThanh">Đã
+                <a value="COMPLETED" class="nav-link text-dark order-status" data-toggle="tab" href="#DaHoanThanh">Đã
                     hoàn thành</a>
             </li>
             <li class="nav-item">
-                <a value="CANCELLED" class="nav-link text-light order-status" data-toggle="tab" href="#DaHuy">Đã hủy</a>
+                <a value="CANCELLED" class="nav-link text-dark order-status" data-toggle="tab" href="#DaHuy">Đã hủy</a>
             </li>
         </ul>
         <div class="">
@@ -44,15 +44,15 @@
                         <td>[[${order.orderId}]]</td>
                         <td class="col-6">
                             <ol type="1">
-                                <li th:each="orderItem:${order.orderItems}">[[${orderItem.product.getName()}]]</li>
+                                <li th:each="orderItem:${order.orderItems}">[[${orderItem.product.getName()}]] ([[${orderItem.quantity}]])</li>
                             </ol>
                         </td>
                         <td class="text-right">[[${order.orderStatus}]]</td>
                         <td class="text-right">[[${order.total}]]</td>
                         <td class="text-center">
-                            <a th:href="@{'/dashboard/orders/SHIPPING/'+${order.orderId}}" class="btn btn-primary">Xác
+                            <a th:href="@{'/dashboard/orders/SHIPPING/'+${order.orderId}}" class="btn btn-primary text-light">Xác
                                 nhận</a>
-                            <a th:href="@{'/dashboard/orders/CANCELLED/'+${order.orderId}}" class="btn btn-danger mt-2">Hủy
+                            <a th:href="@{'/dashboard/orders/CANCELLED/'+${order.orderId}}" class="btn btn-danger text-light">Hủy
                                 Đơn</a>
                         </td>
                     </tr>
@@ -153,7 +153,7 @@
                         <td class="col-6">
                              <ol type="1">`
                         for (oi of order.orderItems) {
-                            html += `<li>${oi.product.name}(${oi.quantity})</li>`;
+                            html += `<li>${oi.product.name} (${oi.quantity})</li>`;
                         }
                         html += `
                              </ol>
@@ -163,11 +163,8 @@
                         <td class="text-right">${new Intl.NumberFormat('vi-VN', {maximumSignificantDigits: 3}).format(order.total)}</td>
                         <td class="text-center">`;
                         if (orderStatus === 'PROCESSING')
-                            html += `<a id="btnXacNhan" href="/dashboard/orders/SHIPPING/${order.orderId}" class="btn btn-primary">Xác nhận</a>
-                            <a id="btnHuyDon" href="/dashboard/orders/CANCELLED/${order.orderId}" class="btn btn-danger mt-2">Hủy Đơn</a>`;
-                        else if(orderStatus === 'SHIPPING') {
-                            html += ` <a id="btnHuyDon" href="/dashboard/orders/CANCELLED/${order.orderId}" class="btn btn-danger mt-2">Hủy Đơn</a>`;
-                        }
+                            html += `<a id="btnXacNhan" href="/dashboard/orders/SHIPPING/${order.orderId}" class="btn btn-primary text-light">Xác nhận</a>
+                            <a id="btnHuyDon" href="/dashboard/orders/CANCELLED/${order.orderId}" class="btn btn-danger mt-2 text-light">Hủy Đơn</a>`;
                         html += `</td>
                     </tr>`;
                     }
