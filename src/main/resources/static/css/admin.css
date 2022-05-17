@@ -148,6 +148,14 @@
     margin-right: 10px;
 }
 
+label.link {
+    color: #2C7EAE;
+}
+
+label.link:hover {
+    text-decoration: underline;
+}
+
 
 
 
