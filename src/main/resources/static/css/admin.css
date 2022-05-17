@@ -147,6 +147,69 @@
 .form-group-modify .select-attribute .item:not(:nth-child(3)) {
     margin-right: 10px;
 }
+.paginationPage {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.page-link {
+    margin-left: 1px;
+    display: inline-block;
+    color: #777;
+    font-size: 14px;
+}
+
+a.page-link, span.page-link {
+    display: inline-block;
+    color: #777;
+    font-size: 14px;
+}
+
+.paginationPage ul {
+    list-style-type: none;
+}
+
+.pagination li {
+    display: inline-block;
+    text-align: center;
+    transition: background-color .3s;
+    border-radius: 2px;
+}
+
+.pagination > .page-link {
+    width: 43px;
+    height: 34px;
+    text-align: center;
+    padding: 4px 16px;
+    margin: 3px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border-radius: 2px;
+}
+
+/* thiết lập style cho class active */
+.pagination li.active > .current {
+    background-color: rgb(215, 0 ,24, .7);
+    color: white;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.page-link:active {
+    font-size: 14px;
+
+}
+
+.pagination li.disabled > .current {
+    background-color: rgb(215, 0 ,24, .7);
+}
+
+/* thêm màu nền khi người dùng hover vào class không active */
+.pagination li:hover:not(.active) > .page-link {
+    background-color: rgb(215, 0 ,24, .7);
+    text-decoration: none;
+}
 
 
 

@@ -97,26 +97,26 @@ function checkDesHeight() {
     console.log('chiều cao là: ' + $('#long-desc').height());
 }
 
-$(function () {
-    $('a[data-toggle="tab"]').on('click', function (e) {
-        console.log("da chay");
-        switch (e.target.id) {
-            case "btnTabDes": {
-                $('#ThemThongTin').show();//không, nhờ cái này
-                checkDesHeight();
-                break;
-            }
-            case "danh-gia": {
-                $('#ThemThongTin').hide();//không, nhờ cái này
-                break;
-            } case "information": {
-                $('#ThemThongTin').hide();//không, nhờ cái này
-                break;
-            }
-
-        }
-    })
-})
+// $(function () {
+//     $('a[data-toggle="tab"]').on('click', function (e) {
+//         console.log("da chay");
+//         switch (e.target.id) {
+//             case "btnTabDes": {
+//                 $('#ThemThongTin').show();//không, nhờ cái này
+//                 checkDesHeight();
+//                 break;
+//             }
+//             case "danh-gia": {
+//                 $('#ThemThongTin').hide();//không, nhờ cái này
+//                 break;
+//             } case "information": {
+//                 $('#ThemThongTin').hide();//không, nhờ cái này
+//                 break;
+//             }
+//
+//         }
+//     })
+// })
 
 
 
