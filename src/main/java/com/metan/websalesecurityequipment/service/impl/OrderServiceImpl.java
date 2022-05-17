@@ -4,6 +4,8 @@ import com.metan.websalesecurityequipment.model.Order;
 import com.metan.websalesecurityequipment.repository.OrderRepository;
 import com.metan.websalesecurityequipment.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -57,5 +59,13 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void completeOrder(String orderId) {
         orderRepository.completeOrder(orderId);
+    }
+    public Page<Order> findOrderByStatus(String status, Pageable pageable) {
+        return orderRepository.findOrderByStatus(status,pageable);
+    }
+
+    @Override
+    public Order findById(String id) {
+        return orderRepository.getById(id);
     }
 }

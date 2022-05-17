@@ -32,13 +32,16 @@ public interface ProductRepository extends JpaRepository<Product, String> {
     @Query(value = "select p.* from products p join categories c on p.category_id = c.category_id join categories cp on c.parent_category_id = cp.category_id where cp.name = :name or cp.name = :other_name order by rand() limit :limit", nativeQuery = true)
     public List<Product> findProductByNameParentCategory(@Param("name") String name, @Param("other_name") String otherName, @Param("limit") int limit);
 
-    @Query(value = "select p.* from products p join categories c on p.category_id = c.category_id left join categories cp on cp.category_id = c.parent_category_id where cp.category_id = :id order by rand()", nativeQuery = true)
+    @Query(value = "select p.* from products p left join categories c1 on p.category_id = c1.category_id left join categories c2 on c1.parent_category_id = c2.category_id where c1.category_id = :id or c2.category_id = :id order by rand()", nativeQuery = true)
     public List<Product> findProductsByCategory(@Param("id") long id);
 
     @Query(value = "SELECT * FROM products ORDER BY RAND() LIMIT ?1", nativeQuery = true)
     public List<Product> findTopNumberRandom(int top);
 
     public Product findBySlug(String slug);
+
+    @Query(value = "select max(product_id) from products", nativeQuery = true)
+    public String findMaxProductId();
 
     /**
      *
@@ -47,7 +50,7 @@ public interface ProductRepository extends JpaRepository<Product, String> {
      * @return product if the user's purchased order is completed, not valid return null
      */
     @Query(value = "select p.product_id,oi.order_id,o.order_id,u.user_id from products p join order_items oi on p.product_id=oi.product_id join orders o on o.order_id= oi.order_id join users u on u.user_id= o.user_id\n" +
-            "where p.product_id=?1 and u.user_id=?2 and o.order_status='completed'", nativeQuery = true)
+            "where p.product_id=?1 and u.user_id=?2 and o.order_status='COMPLETED'", nativeQuery = true)
     public Product checkBuyCompletedProductByUser(String productId, long userId);
 
     //Hao

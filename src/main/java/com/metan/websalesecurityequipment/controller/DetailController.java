@@ -24,13 +24,17 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "product")
 public class DetailController {
-    @Autowired
-    private ProductService productService;
-    @Autowired
-    private ProductReviewService reviewService;
-    @Autowired
-    private CartService cartService;
+    private final ProductService productService;
+    private final ProductReviewService reviewService;
+    private final CartService cartService;
     private String productId;
+
+    @Autowired
+    public DetailController(ProductService productService, ProductReviewService reviewService, CartService cartService) {
+        this.productService = productService;
+        this.reviewService = reviewService;
+        this.cartService = cartService;
+    }
 
     @GetMapping(value = "/detail/{slug}")
     public String getRequest(Model model, @PathVariable(name = "slug", required = true) String slug,

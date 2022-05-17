@@ -11,13 +11,12 @@ import java.util.Date;
 @IdClass(CartItemPK.class)
 public @Getter
 @Data
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = {"product", "cart"})
 class CartItem {
     @Id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
     @Id

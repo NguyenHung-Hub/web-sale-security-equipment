@@ -73,7 +73,6 @@
 
 
     <th:block th:fragment="search">
-       <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>-->
         <link rel="stylesheet" th:href="@{/css/search.css}">
     </th:block>
 
@@ -139,8 +138,8 @@
                                 <div class="input-group-append align-items-center float-left">
                                     <i class="fas fa-search"></i>
                                 </div>
-                                <input name="name" type="text" class="mt-input" placeholder="Bạn cần tìm gì?"
-                                       aria-label="Bạn cần tìm gì?" th:value="${#request.getParameter('name')}">
+                                <input name="keyword" type="text" class="mt-input" placeholder="Bạn cần tìm gì?"
+                                       aria-label="Bạn cần tìm gì?" th:value="${#request.getParameter('keyword')}">
                             </div>
                         </div>
                     </form>
@@ -336,7 +335,7 @@
                         <div class="input-group-append align-items-center float-left">
                             <i class="fas fa-search"></i>
                         </div>
-                        <input type="text" name="name" class="mt-input" placeholder="Bạn cần tìm gì?" aria-label="Bạn cần tìm gì?" th:value="${#request.getParameter('name')}">
+                        <input type="text" name="keyword" class="mt-input" placeholder="Bạn cần tìm gì?" aria-label="Bạn cần tìm gì?" th:value="${#request.getParameter('keyword')}">
                     </div>
                 </div>
             </form>
@@ -499,6 +498,8 @@
 </th:block>
 <th:block th:fragment="richtext-js">
     <script  th:src="@{/richtext/jquery.richtext.min.js}"></script>
+
+
 </th:block>
 </body>
 </html>

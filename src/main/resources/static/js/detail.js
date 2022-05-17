@@ -1,3 +1,30 @@
+$('.backdrops').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    asNavFor: '.thumbnail-backdrops',
+    autoplay: true,
+    autoplaySpeed: 10000,
+    speed: 300
+})
+
+$('.thumbnail-backdrops').slick({
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    arrows: false,
+    asNavFor: '.backdrops',
+    focusOnSelect: true,
+    responsive: [
+        {
+            breakpoint: 1199,
+            settings: {
+                slidesToShow: 4,
+                slidesToScroll: 4
+            },
+        },
+    ],
+});
+
 let quantity= $('#spQuantity').attr('value');
 function add() {
     let i = parseInt(document.getElementById("txtQuantity").value);
@@ -82,7 +109,11 @@ $(function () {
             case "danh-gia": {
                 $('#ThemThongTin').hide();//không, nhờ cái này
                 break;
+            } case "information": {
+                $('#ThemThongTin').hide();//không, nhờ cái này
+                break;
             }
+
         }
     })
 })

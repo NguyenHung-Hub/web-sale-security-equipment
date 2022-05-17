@@ -13,8 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 public
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "userId")
@@ -57,7 +56,6 @@ class User implements Serializable {
     private AuthenticationProvider authProvider;
     @Embedded
     private Address address;
-
     @Transient
     public String getFullName() {
         return getFirstName() + " " + getLastName();

@@ -74,6 +74,13 @@ html{
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
 }
+
+.form-group-modify .select-attribute .item:not(:nth-child(3)) {
+    margin-right: 10px;
+}
+
+.
+
 /*table > tbody > tr > th {*/
 /*    display: block;*/
 /*    margin-left: 50%;*/

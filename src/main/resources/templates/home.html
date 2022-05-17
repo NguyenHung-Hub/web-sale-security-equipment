@@ -187,7 +187,7 @@
                             <div class="item-product__box-price">
                                 <p class="special-price"
                                    th:text="${#numbers.formatDecimal(product.price - (product.price * (product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent)),3,'POINT',0,'POINT') + '&nbsp;₫'}"></p>
-                                <p class="old-price"
+                                <p th:if="${(product.productDiscounts.isEmpty() ? product.discountPercentBase : product.productDiscounts.get(product.productDiscounts.size() - 1).discountPercent) != 0}" class="old-price"
                                    th:text="${#numbers.formatDecimal(product.price,3,'POINT',0,'POINT') + '&nbsp;₫'}"></p>
                             </div>
                             <div class="item-product__box-rating">

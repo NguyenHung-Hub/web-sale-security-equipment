@@ -15,7 +15,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL55Dialect
         format_sql: false
-    show-sql: true
+    show-sql: false
   security:
     oauth2:
       client:

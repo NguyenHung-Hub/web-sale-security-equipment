@@ -78,6 +78,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public String findMaxProductId() {
+        return productRepository.findMaxProductId();
+    }
+
+    @Override
     public List<Product> findByNameContaining(String name) {
         return productRepository.findByNameContaining(name);
     }
