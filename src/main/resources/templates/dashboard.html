@@ -24,8 +24,63 @@
 
 <th:block th:replace="fragments :: base-js"/>
 <th:block th:replace="fragments :: richtext-js"/>
-<script lang="javascript">
-    $('.descRT').richText()
+<script th:inline="javascript">
+    let products = [[${products}]];
+    for (const product of products) {
+        console.log(product.productId)
+        $('#shortDesc-' + product.productId).richText()
+        $('#longDesc-' + product.productId).richText()
+
+        let images = document.getElementById("images-" + product.productId);
+        images.innerHTML = "";
+
+        const productBackdrops = product.productBackdrops;
+        for (const productBackdrop of productBackdrops) {
+            let figure = document.createElement("figure");
+            let col = document.createElement("div");
+            col.classList.add('col-lg-3');
+            col.classList.add('col-md-6');
+            col.classList.add('col-12');
+            images.appendChild(col);
+            let img = document.createElement("img");
+            img.setAttribute("src", productBackdrop.filePath);
+            figure.appendChild(img);
+            col.appendChild(figure);
+        }
+
+        $('#file-input-' + product.productId).change(function () {
+            let fileInput = document.getElementById('file-input-' + product.productId);
+            images.innerHTML = "";
+
+            for (i of fileInput.files) {
+                let reader = new FileReader();
+                let figure = document.createElement("figure");
+                let col = document.createElement("div");
+                col.classList.add('col-lg-3');
+                col.classList.add('col-md-6');
+                col.classList.add('col-12');
+                images.appendChild(col);
+                reader.onload = () => {
+                    let img = document.createElement("img");
+                    img.setAttribute("src", reader.result);
+                    figure.appendChild(img);
+                }
+                col.appendChild(figure);
+                reader.readAsDataURL(i);
+            }
+        })
+
+        $('#load-thumbnail-' + product.productId).change(function () {
+            let fileInput = document.getElementById('load-thumbnail-' + product.productId);
+            let file = fileInput.files[0];
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                $('#thumbnail-' + product.productId).attr('src', e.target.result);
+            }
+            reader.readAsDataURL(file);
+        })
+    }
+
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" th:src="@{/js/jquery.simplePagination.js}"></script>

@@ -211,6 +211,14 @@ a.page-link, span.page-link {
     text-decoration: none;
 }
 
+label.link {
+    color: #2C7EAE;
+}
+
+label.link:hover {
+    text-decoration: underline;
+}
+
 
 
 
