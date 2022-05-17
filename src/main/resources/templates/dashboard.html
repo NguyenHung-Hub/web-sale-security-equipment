@@ -3,30 +3,31 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout" lang="en">
 <head>
-    <th:block th:replace="fragments :: base_2 ('Quan ly')"/>
-    <th:block th:replace="fragments :: dashboard"/>
-    <th:block th:replace="fragments :: search"/>
+    <th:block th:replace="fragments :: base ('Admin')" />
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+<!--    <th:block th:replace="fragments :: search"/>-->
     <th:block th:replace="fragments :: richtext"/>
-    <th:block th:replace="fragments :: add_product" />
 </head>
 <body>
 
-<main>
-    <div th:replace="fragments_dashboard/nav.html :: nav"></div>
-    <div class="content-box">
-        <div layout:fragment="content"></div>
+<div id="wrapper">
+    <nav th:replace="fragments_dashboard/nav :: header"></nav>
+    <div class="container-fluid">
+        <div class="row">
+            <nav th:replace="fragments_dashboard/nav :: sidebar"></nav>
+            <div layout:fragment="content"></div>
+        </div>
     </div>
-
-</main>
+</div>
 
 <th:block th:replace="fragments :: base-js"/>
 <th:block th:replace="fragments :: richtext-js" />
 <script lang="javascript">
 
-    $('#shortDescTextarea').richText()
-    $('#descriptionTextarea').richText()
-    $('.shortDescTextarea_edit').richText()
-    $('.descriptionTextarea_edit').richText()
+    // $('#shortDescTextarea').richText()
+    // $('#descriptionTextarea').richText()
+    // $('.shortDescTextarea_edit').richText()
+    $('.descRT').richText()
 </script>
 </body>
 </html>

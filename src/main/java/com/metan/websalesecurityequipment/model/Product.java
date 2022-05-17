@@ -11,18 +11,17 @@ import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "products")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, ignoreUnknown = true)
-public @Setter
-@Getter
+public
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "productId")
+@ToString(exclude = {"productDiscounts", "orderItems", "productAttributes", "productReviews", "productBackdrops"})
 class Product {
     @Id
     @Column(name = "product_id", columnDefinition = "varchar(20)")
@@ -62,8 +61,7 @@ class Product {
     @Column(name = "modified_at", columnDefinition = "datetime")
     private Date modifiedAt;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<ProductAttribute> productAttributes;
+    private List<ProductAttribute> productAttributes = new ArrayList<>();
     @OneToMany(mappedBy = "product")
     @JsonBackReference
     private List<ProductReview> productReviews;

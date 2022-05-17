@@ -13,7 +13,6 @@ import java.util.Date;
 @IdClass(OrderItemPK.class)
 public @Data
 @EqualsAndHashCode(of = {"product", "order"})
-@ToString
 class OrderItem {
     @Id
     @ManyToOne(fetch = FetchType.LAZY)

@@ -9,10 +9,11 @@ import javax.persistence.*;
 @Entity
 @Table(name = "product_reviews")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public @Getter
-@Setter
+public
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(of = {"reviewId"})
 class ProductReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

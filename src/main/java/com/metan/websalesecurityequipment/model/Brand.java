@@ -15,11 +15,12 @@ import java.util.List;
 @Entity
 @Table(name = "brands")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public @Getter
-@Setter
+public
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = {"brandId"})
+@ToString(exclude = {"products"})
 class Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -13,12 +13,10 @@ import java.util.Date;
 @IdClass(ProductAttributePK.class)
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = {"product", "attribute"})
-
 class ProductAttribute {
     @Id
     @ManyToOne(cascade = CascadeType.ALL)
@@ -26,7 +24,7 @@ class ProductAttribute {
     @JsonBackReference
     private Product product;
     @Id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "attribute_id")
     @JsonManagedReference
     private Attribute attribute;

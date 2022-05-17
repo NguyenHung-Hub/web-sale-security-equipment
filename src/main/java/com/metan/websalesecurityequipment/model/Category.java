@@ -14,11 +14,12 @@ import java.util.Set;
 @Entity
 @Table(name = "categories")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public @Getter
-@Setter
+public
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = {"categoryId"})
+@ToString(exclude = {"products", "categories"})
 class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

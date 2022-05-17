@@ -32,13 +32,16 @@ public interface ProductRepository extends JpaRepository<Product, String> {
     @Query(value = "select p.* from products p join categories c on p.category_id = c.category_id join categories cp on c.parent_category_id = cp.category_id where cp.name = :name or cp.name = :other_name order by rand() limit :limit", nativeQuery = true)
     public List<Product> findProductByNameParentCategory(@Param("name") String name, @Param("other_name") String otherName, @Param("limit") int limit);
 
-    @Query(value = "select p.* from products p join categories c on p.category_id = c.category_id left join categories cp on cp.category_id = c.parent_category_id where cp.category_id = :id order by rand()", nativeQuery = true)
+    @Query(value = "select p.* from products p left join categories c1 on p.category_id = c1.category_id left join categories c2 on c1.parent_category_id = c2.category_id where c1.category_id = :id or c2.category_id = :id order by rand()", nativeQuery = true)
     public List<Product> findProductsByCategory(@Param("id") long id);
 
     @Query(value = "SELECT * FROM products ORDER BY RAND() LIMIT ?1", nativeQuery = true)
     public List<Product> findTopNumberRandom(int top);
 
     public Product findBySlug(String slug);
+
+    @Query(value = "select max(product_id) from products", nativeQuery = true)
+    public String findMaxProductId();
     //Hao
     public List<Product> findByNameContaining(String name);
 
@@ -55,7 +58,7 @@ public interface ProductRepository extends JpaRepository<Product, String> {
             " group by p.product_id ", nativeQuery = true)
     public Page<Product> searchByNameRating(int rating ,double minPrice, double maxPrice,String name,Pageable pageable);
 
-    @Query(value = "select distinct(p.product_id), p.*, sum(order_items.quantity) as totalQuan from (order_items) right outer join (products p) on p.product_id =order_items.product_id join (categories c) \n" +
+    @Query(value = "select p.*, sum(order_items.quantity) as totalQuan from (order_items) right outer join (products p) on p.product_id =order_items.product_id join (categories c) \n" +
             "on c.category_id = p.category_id join (product_reviews pr) on pr.product_id=p.product_id join brands b on b.brand_id = p.brand_id \n" +
             " where (p.brand_id in (?2) \n" +
             "            OR (c.parent_category_id in (?1) or c.category_id in (?1) )) \n" +

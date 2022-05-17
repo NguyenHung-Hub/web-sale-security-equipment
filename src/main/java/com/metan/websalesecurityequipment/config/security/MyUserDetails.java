@@ -49,12 +49,13 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return user.isEnable();
     }
 
     public String getFullName() {
         return user.getFullName();
     }
+
     public User getUser(){
         return this.user;
     }

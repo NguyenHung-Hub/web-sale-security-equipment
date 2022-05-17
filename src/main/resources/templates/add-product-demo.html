@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <th:block th:replace="fragments :: base ('Thêm sản phẩm')"/>
+    <th:block th:replace="fragments :: richtext"/>
+    <link rel="stylesheet" th:href="@{/css/add-product.css}">
+</head>
+<body>
+<div id="wrapper">
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow justify-content-between">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Metan team</a>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="#">Đăng xuất</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <main role="main" class="col-md-12 col-lg-12 px-4">
+                <form th:action="@{/dashboard/product/add-product}" th:object="${product}" class="tab-content"
+                      enctype="multipart/form-data" method="post">
+                    <div id="add-product-1" class="tab-pane fade show active">
+                        <div
+                                class="d-flex flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                            <h3>Chọn thuộc tính</h3>
+                        </div>
+                        <table class="table table-striped bg-white w-auto">
+                            <thead class="thead-inverse">
+                            <tr>
+                                <th style="width: 300px;">Tên thuộc tính</th>
+                                <th style="width: 250px;">Giá trị</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="productAttribute, stat : ${product.productAttributes}">
+                                    <td th:text="${productAttribute.attribute.name}"></td>
+                                    <td>
+                                        <input th:field="*{productAttributes[__${stat.index}__].value}" type="text" class="form-control">
+                                        <input th:field="*{productAttributes[__${stat.index}__].attribute}" type="text" hidden>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div
+                                class="d-flex flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                            <h3>Chọn thương hiệu</h3>
+
+                        </div>
+                        <div class="d-flex flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+                            <div class="btn-toolbar mb-2 mb-md-0">
+                                <select class="custom-select" th:field="*{brand.brandId}">
+                                    <option th:each="brand : ${brands}" th:value="${brand.brandId}"
+                                            th:text="${brand.name}"></option>
+                                </select>
+                                <button class="btn btn-primary">Thêm thương hiệu</button>
+                            </div>
+                        </div>
+                        <div
+                                class="d-flex flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                            <h3>Mô tả ngắn về sản phẩm</h3>
+                        </div>
+                        <div class="form-group">
+                                <textarea class="form-control desc" id="shortDesc" name="shortDesc" cols="30"
+                                          rows="6"></textarea>
+                        </div>
+                        <div
+                                class="d-flex flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                            <h3>Mô tả sản phẩm</h3>
+                        </div>
+                        <div class="form-group">
+                                <textarea class="form-control desc" cols="30" id="longDesc" name="longDesc"
+                                          rows="6"></textarea>
+                        </div>
+                        <!-- <div id="menu1" class="tab-pane fade"><br>
+                                <div
+                                    class="d-flex flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                                    <h3>Thêm thuộc tích</h3>
+                                </div>
+                                <form action="">
+                                    <input type="text" class="form-control mb-3">
+                                    <p class="mb-3">Ví dụ: Nếu bạn muốn thêm thuộc tính không có sẵn, bạn có thể
+                                        nhập tên thuộc tính ở đây</p>
+                                    <input type="text" class="form-control mb-3">
+                                    <p>Ví dụ: Đỏ, xanh vàng cho thuộc tính màu sắc.</p>
+                                </form>
+                            </div> -->
+                        <div class="btn-toogle float-right">
+                            <a th:href="@{'/dashboard/product/category?name=' + ${product.name} + '&categoryId=' + ${product.category.categoryId}}" class="btn btn-return">Quay lại</a>
+                            <button type="button" class="btn btn-primary btn-continue">Tiếp tục</button>
+                        </div>
+                    </div>
+                    <div id="add-product-2" class="tab-pane fade">
+                        <div class="d-flex flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+                            <h3>Thêm bộ sưu tập ảnh cho sản phẩm</h3>
+                        </div>
+                        <div class="row no-gutters border mb-3">
+                            <div class="col-8">
+                                <div class="d-flex flex-wrap flex-md-nowrap align-items-center p-2">
+                                    <div class="btn-toolbar mb-2 mb-md-0">
+                                        <input id="file-input" hidden multiple type="file"
+                                               accept="image/gif, image/jpeg, image/png" name="backdrops">
+                                        <label class="btn btn-primary" for="file-input">
+                                            <i class="fas fa-upload"></i>
+                                            &nbsp;
+                                            Chọn ảnh
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+                                    <div id="images" class="row">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 attachment-detail border-left p-3">
+                                <div class="d-flex flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+                                    <h5 class="fw-bold">Chi tiết sản phẩm</h5>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <img id="thumbnail"
+                                             src="https://doosanvietnam.com.vn/wp-content/uploads/2019/03/default-image-400x300.png"
+                                             class="img-thumnail" alt="">
+                                    </div>
+                                    <div class="col-6">
+                                        <input id="load-thumbnail" hidden type="file"
+                                               accept="image/gif, image/jpeg, image/png" name="thumbnail-image">
+                                        <label for="load-thumbnail" class="link">Sửa hình ảnh</label>
+                                    </div>
+                                </div>
+                                <div class="form-group-modify">
+                                    <label for="">Mã sản phẩm</label>
+                                    <input th:field="*{productId}" type="text" class="form-control" readonly disabled>
+                                    <input type="text" hidden th:field="*{name}">
+                                </div>
+                                <div class="form-group-modify">
+                                    <label for="">Slug</label>
+                                    <input type="text" class="form-control" th:value="${'/product/' + product.slug}" readonly disabled>
+                                    <input th:field="*{slug}" type="text" class="form-control" hidden>
+                                </div>
+                                <div class="form-group-modify">
+                                    <label for="">Tiêu đề</label>
+                                    <input th:field="*{title}" type="text" class="form-control">
+                                </div>
+                                <div class="form-group-modify">
+                                    <label for="">Giá bán</label>
+                                    <input th:field="*{price}" type="text" class="form-control">
+                                </div>
+                                <div class="form-group-modify">
+                                    <label for="">Giảm giá</label>
+                                    <input th:field="*{discountPercentBase}" type="text" class="form-control">
+                                </div>
+                                <div class="form-group-modify">
+                                    <label for="">Tồn kho</label>
+                                    <input th:field="*{quantity}" type="number" class="form-control">
+                                </div>
+                                <input type="text" hidden th:field="*{category}">
+                                <input type="text" hidden  th:field="*{productId}">
+                            </div>
+                        </div>
+                        <div class="btn-toogle float-right">
+                            <button type="button" class="btn btn-return">Quay lại</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+<th:block th:replace="fragments :: base-js"/>
+<th:block th:replace="fragments :: richtext-js"/>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.desc').richText()
+
+        $(".btn-continue").click(function () {
+            if ($('#add-product-1').hasClass("active")) {
+                $('#add-product-2').addClass('active show')
+                $('#add-product-1').removeClass('active show')
+            }
+        })
+
+        $('.btn-return').click(function () {
+            if ($('#add-product-2').hasClass("active")) {
+                $('#add-product-1').addClass('active show')
+                $('#add-product-2').removeClass('active show')
+            }
+        })
+
+
+
+        $('#file-input').change(function () {
+            let fileInput = document.getElementById('file-input');
+            let images = document.getElementById('images');
+            images.innerHTML = "";
+
+            for (i of fileInput.files) {
+                let reader = new FileReader();
+                let figure = document.createElement("figure");
+                let col = document.createElement("div");
+                col.classList.add('col-lg-3');
+                col.classList.add('col-md-6');
+                col.classList.add('col-12');
+                images.appendChild(col);
+                reader.onload = () => {
+                    let img = document.createElement("img");
+                    img.setAttribute("src", reader.result);
+                    figure.appendChild(img);
+                }
+                col.appendChild(figure);
+                reader.readAsDataURL(i);
+            }
+        })
+
+        $('#load-thumbnail').change(function () {
+            let fileInput = document.getElementById('load-thumbnail');
+            let file = fileInput.files[0];
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                $('#thumbnail').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(file);
+        })
+    })
+</script>
+</body>
+</html>

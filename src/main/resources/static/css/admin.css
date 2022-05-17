@@ -1,0 +1,120 @@
+
+.custom-select {
+    font-size: 1.3rem;
+    width: auto;
+    background: #fff url('../imgs/caret-down-solid.svg') right 0.75rem center/8px 10px no-repeat;
+}
+
+.form-control {
+    font-size: 1.3rem;
+}
+
+.table {
+    border: 1px solid #ddd;
+}
+
+.table img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.table a {
+    color: #666;
+}
+
+.richText a {
+    color: #333;
+}
+
+.btn {
+    font-size: 1.3rem;
+}
+
+#wrapper .navbar {
+    min-height: 45px;
+}
+
+#wrapper .navbar .navbar-brand {
+    font-size: 1.6rem;
+}
+
+#wrapper .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    padding: 48px 0 0;
+    box-shadow: inset -1px 0 0 rgb(0 0 0 / 10%);
+}
+
+#wrapper .sidebar .sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: 0.5rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+@supports ((position: -webkit-sticky) or (position: sticky)) {
+    #wrapper .sidebar .sidebar-sticky {
+        position: -webkit-sticky;
+        position: sticky;
+    }
+}
+
+#wrapper .sidebar .sidebar-sticky li.nav-item a.nav-link {
+    font-weight: 500;
+    color: #333;
+    padding: 1rem 1.5rem;
+}
+
+#wrapper .sidebar .sidebar-sticky li.nav-item a.nav-link.active {
+    color: #007bff;
+}
+
+#wrapper .sidebar .sidebar-sticky li.nav-item a.nav-link svg {
+    margin-right: 4px;
+    color: #999;
+}
+
+.feather {
+    width: 16px;
+    height: 16px;
+    vertical-align: text-bottom;
+}
+
+
+#wrapper .sidebar .sidebar-sticky li.nav-item a.nav-link.active svg {
+    color: inherit;
+}
+
+#wrapper [role="main"] {
+
+    padding-top: 45px;
+    height: 100%;
+}
+
+#wrapper [role="main"] a.btn.btn-add-product {
+    padding: 0.25rem 0.5rem;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    font-weight: 700;
+    color: #2C7EAE;
+    border-radius: 0.2rem;
+    background-color: #E4E3E2;
+}
+
+#wrapper [role="main"] .btn-toolbar>*:not(:last-child) {
+    margin-right: 10px;
+}
+
+
+
+
+
+
+

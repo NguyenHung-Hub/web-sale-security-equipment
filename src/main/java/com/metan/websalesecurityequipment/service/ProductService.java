@@ -26,6 +26,8 @@ public interface ProductService {
 
     public List<Product> findTopProduct();
 
+    public String findMaxProductId();
+
     //Hao
     List<Product> findByNameContaining(String name);
 
