@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{dashboard.html}" lang="en">
+
+<head>
+</head>
+
+<body>
+<section layout:fragment="content">
+    <div class="container">
+        <div
+                class="container-fluid d-flex flex-row justify-content-end my-4"
+        >
+            <div class="col-4">
+                <input
+                        type="search"
+                        class="form-control"
+                        placeholder="Tìm kiếm"
+                />
+            </div>
+
+        </div>
+
+        <div class="container-fluid col-8">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Mã</th>
+                    <th scope="col">Họ</th>
+                    <th scope="col">Tên</th>
+                    <th scope="col" class="text-left">Email</th>
+                    <th scope="col" class="text-left">Số điện thoại</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                    <tr th:each="user:${users}">
+
+                        <td>[[${user.userId}]]</td>
+                        <td class="col-6">
+                            [[${user.firstName}]]
+                        </td>
+                        <td class="col-6">
+                            [[${user.lastName}]]
+                        </td>
+                        <td class="text-left">
+                            [[${user.email}]]
+                        </td>
+                        <td class="text-left">
+                            [[${user.phoneNumber}]]
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

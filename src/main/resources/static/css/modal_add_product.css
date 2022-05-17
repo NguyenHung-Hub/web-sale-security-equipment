@@ -52,8 +52,9 @@ html{
     justify-content: left;
     align-items: center;
     height: calc(1.5em + 0.75rem + 2px);
-    min-width: 100px;
+    min-width: 120px;
     padding: 0;
+    margin-right: 4px;
 
     font-weight: bold;
 }

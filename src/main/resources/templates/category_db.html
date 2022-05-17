@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{dashboard.html}" lang="en">
+
+<head>
+</head>
+
+<body>
+<section layout:fragment="content">
+    <div class="container">
+        <div
+                class="container-fluid d-flex flex-row justify-content-end my-4"
+        >
+            <div class="col-4">
+                <input
+                        type="search"
+                        class="form-control"
+                        placeholder="Tìm kiếm"
+                />
+            </div>
+            <button
+                    type="button"
+                    class="btn btn-success "
+                    data-toggle="modal"
+                    data-target="#productModal"
+            >
+                <i class="fas fa-plus"></i> Thêm
+            </button>
+        </div>
+
+        <div class="container-fluid col-8">
+            <table class="table ">
+                <thead>
+                <tr>
+                    <th scope="col">Mã</th>
+                    <th scope="col-6 ">Danh mục</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="c:${categories}">
+
+                    <td>[[${c.categoryId}]]</td>
+                    <td class="col-10">
+                        [[${c.name}]]
+                        <ul>
+                            <li style="width: 500px;margin: 8px; display:flex; justify-content: space-between"
+                                th:each="c1:${c.getCategories()}">
+                                <span>[[${c1.getCategoryId()}]] . [[${c1.getName()}]]</span>
+                                <span>
+                                    <button type="button" class="btn btn-sm btn-success ">
+                                        Sửa
+                                    </button>
+                                </span>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div
+            class="modal fade"
+            id="productModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="productModalLabel"
+            aria-hidden="true"
+    >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="productModalLabel">
+                        Thêm danh mục
+                    </h3>
+                    <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                    >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form
+                            th:action="@{/dashboard/product/modal}"
+                            enctype="multipart/form-data"
+                            method="post">
+
+
+                        <div class="form-group-modify">
+                            <label>Mã </label>
+                            <input
+                                    type="text"
+                                    class="form-control-modify"
+                                    placeholder="Mã"
+                            />
+                        </div>
+                        <div class="form-group-modify">
+                            <label>Tên </label>
+                            <input
+                                    type="text"
+                                    class="form-control-modify"
+                                    placeholder="Tên"
+                            />
+                        </div>
+                        <div class="form-group-modify">
+                            <label>Danh mục cha </label>
+                            <select
+                                    class="form-control form-control-lg form-control-modify"
+                            >
+                                <option value="null">Không có</option>
+                                <th:block  th:each="c : ${categories}">
+                                    <option
+                                            th:value="${c.categoryId}"
+                                            th:utext="${c.name}"
+                                    ></option>
+                                </th:block>
+                            </select>
+                        </div>
+                        <div class="form-group-modify">
+                            <label>Chọn ảnh</label>
+                            <input
+                                    accept="image/png, image/jpeg"
+                                    type="file"
+                                    class="form-control"
+                                    name="image"
+                                    multiple="multiple"
+                            />
+                        </div>
+
+
+                        <div class="form-group-modify mt-4 float-right">
+                            <button
+                                    type="button"
+                                    class="btn btn-secondary px-4 mr-4"
+                                    data-dismiss="modal"
+                            > Thoát
+                            </button>
+                            <button type="submit" class="btn btn-success px-4">
+                                <i class="fas fa-save"></i>
+                                Lưu
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

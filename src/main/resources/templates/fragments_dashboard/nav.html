@@ -21,16 +21,22 @@
             >Thương hiệu</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-light text-left py-3 pl-5" href="#">Danh mục</a>
+            <a class="nav-link text-light text-left py-3 pl-5"
+               th:href="@{/dashboard/category}"
+               th:classappend="${#httpServletRequest.getRequestURI().indexOf('/dashboard/category') != -1 ? 'active':''}"
+            >Danh mục</a>
         </li>
         <li class="nav-item">
             <a class="nav-link text-light text-left py-3 pl-5"
-               th:href="@{/dashboard/order}"
+               th:href="@{/dashboard/orders}"
                th:classappend="${#httpServletRequest.getRequestURI() == '/dashboard/order' ? 'active':''}"
             >Hóa đơn</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-light text-left  py-3 pl-5" href="#">Khách hàng</a>
+            <a class="nav-link text-light text-left  py-3 pl-5"
+               th:href="@{/dashboard/user}"
+               th:classappend="${#httpServletRequest.getRequestURI().indexOf('/dashboard/user') != -1 ? 'active':''}"
+            >Khách hàng</a>
         </li>
         <li class="nav-item">
             <a class="nav-link text-light text-left  py-3 pl-5" href="/" target="_blank">Website</a>

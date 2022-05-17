@@ -31,14 +31,17 @@ public class Dashboard {
     private final ProductService productService;
     private final CategoryService categoryService;
     private final BrandService brandService;
+    private final UserService userService;
+
 
     public Dashboard(OrderService orderService, AwsService awsService, ProductService productService,
-                     CategoryService categoryService, BrandService brandService) {
+                     CategoryService categoryService, BrandService brandService, UserService userService) {
         this.orderService = orderService;
         this.awsService = awsService;
         this.productService = productService;
         this.categoryService = categoryService;
         this.brandService = brandService;
+        this.userService = userService;
     }
 
     @GetMapping
@@ -180,8 +183,8 @@ public class Dashboard {
     @GetMapping("/orders/{status}/{id}")
     public String setStatusOrder(@PathVariable(name = "status") String status,
                                  @PathVariable(name = "id") String id) {
-        System.out.println("hehe chinh ne"+OrderStatus.valueOf(status));
-        Order order= orderService.findById(id);
+        System.out.println("hehe chinh ne" + OrderStatus.valueOf(status));
+        Order order = orderService.findById(id);
         order.setOrderStatus(OrderStatus.valueOf(status));
         orderService.save(order);
         return "redirect:/dashboard/orders";
@@ -248,6 +251,24 @@ public class Dashboard {
 
         productService.deleteProduct(productService.findProductById(id));
         return "redirect:/dashboard/product";
+    }
+
+    @GetMapping(value = "/user")
+    public String showUser(Model model) {
+
+        List<User> userList = userService.findAll();
+        model.addAttribute("users", userList);
+
+        return "user_db.html";
+    }
+
+    @GetMapping(value = "/category")
+    public String showCategory(Model model) {
+
+        List<Category> categories = categoryService.findAllParentCategory();
+        model.addAttribute("categories", categories);
+
+        return "category_db.html";
     }
 
 

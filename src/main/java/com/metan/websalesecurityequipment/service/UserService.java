@@ -5,6 +5,7 @@ import com.metan.websalesecurityequipment.model.User;
 
 import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 public interface UserService {
     public User registerUser(User user);
@@ -16,4 +17,5 @@ public interface UserService {
     public User getUserByEmail(String email);
     public void createNewUserAfterOAuthLoginSuccess(String email, String name, AuthenticationProvider authProvider);
     public void updateUserAfterOAuthLoginSuccess(User user, String name, AuthenticationProvider authProvider);
+    public List<User> findAll();
 }
