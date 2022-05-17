@@ -50,8 +50,10 @@
                         <td class="text-right">[[${order.orderStatus}]]</td>
                         <td class="text-right">[[${order.total}]]</td>
                         <td class="text-center">
-                            <a th:href="@{'/dashboard/orders/SHIPPING/'+${order.orderId}}" class="btn btn-primary">Xác nhận</a>
-                            <a th:href="@{'/dashboard/orders/CANCELLED/'+${order.orderId}}" class="btn btn-danger mt-2">Hủy Đơn</a>
+                            <a th:href="@{'/dashboard/orders/SHIPPING/'+${order.orderId}}" class="btn btn-primary">Xác
+                                nhận</a>
+                            <a th:href="@{'/dashboard/orders/CANCELLED/'+${order.orderId}}" class="btn btn-danger mt-2">Hủy
+                                Đơn</a>
                         </td>
                     </tr>
                     </tbody>
@@ -80,8 +82,16 @@
                     getOrder();
                 });
 
+
             });
 
+            /* function cancelNotify(orderId){
+                 if(confirm("Bạn có muốn hủy")){
+                     $("btnHuyDon").href=`/dashboard/orders/CANCELLED/${orderId}`;
+                 }
+                 else $("btnHuyDon").href="";
+             }
+ */
             function pagination() {
                 if (totalPages >= 0) {
                     $('#pagination').show();
@@ -143,16 +153,21 @@
                         <td class="col-6">
                              <ol type="1">`
                         for (oi of order.orderItems) {
-                            html += `<li>${oi.product.name}</li>`;
+                            html += `<li>${oi.product.name}(${oi.quantity})</li>`;
                         }
-                        html += `     </ol>
+                        html += `
+                             </ol>
                         </td>
+
                         <td class="text-right">${order.orderStatus}</td>
                         <td class="text-right">${new Intl.NumberFormat('vi-VN', {maximumSignificantDigits: 3}).format(order.total)}</td>
                         <td class="text-center">`;
                         if (orderStatus === 'PROCESSING')
                             html += `<a id="btnXacNhan" href="/dashboard/orders/SHIPPING/${order.orderId}" class="btn btn-primary">Xác nhận</a>
                             <a id="btnHuyDon" href="/dashboard/orders/CANCELLED/${order.orderId}" class="btn btn-danger mt-2">Hủy Đơn</a>`;
+                        else if(orderStatus === 'SHIPPING') {
+                            html += ` <a id="btnHuyDon" href="/dashboard/orders/CANCELLED/${order.orderId}" class="btn btn-danger mt-2">Hủy Đơn</a>`;
+                        }
                         html += `</td>
                     </tr>`;
                     }
