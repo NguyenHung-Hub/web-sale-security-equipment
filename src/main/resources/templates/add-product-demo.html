@@ -8,10 +8,10 @@
 <body>
 <div id="wrapper">
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow justify-content-between">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Metan team</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" th:href="@{/dashboard}">Metan team</a>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-                <a class="nav-link" href="#">Đăng xuất</a>
+                <a class="nav-link" th:href="@{/logout}">Đăng xuất</a>
             </li>
         </ul>
     </nav>
