@@ -30,5 +30,6 @@ public class Awss3Config {
                 .withRegion(regionName)
                 .build();
 	}
-	Hello
+
+	Xin chào
 }
